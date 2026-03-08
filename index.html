@@ -338,6 +338,36 @@
     opacity: 0.4;
   }
 
+  /* ===== PROMO BANNER ===== */
+  .promo-banner {
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    color: #fff;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: transform 0.4s;
+  }
+
+  .promo-banner a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .promo-banner.hidden {
+    transform: translateY(-100%);
+  }
+
   /* NAV */
   nav {
     display: flex;
@@ -345,7 +375,8 @@
     justify-content: space-between;
     padding: 1.5rem 4rem;
     position: fixed;
-    top: 0;
+    top: 38px;
+    /* Offset for promo banner */
     left: 0;
     right: 0;
     z-index: 100;
@@ -354,6 +385,7 @@
   }
 
   nav.scrolled {
+    top: 0;
     background: rgba(10, 10, 15, 0.85);
     backdrop-filter: blur(20px);
     border-color: var(--border);
@@ -1465,6 +1497,48 @@
     font-size: 0.78rem;
   }
 
+  /* ===== MAP SECTION ===== */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 4rem;
+    align-items: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(100%);
+  }
+
+  @media (max-width: 900px) {
+    .contact-wrap {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    nav {
+      padding: 1rem 1.5rem;
+      top: 44px;
+      /* Adjustment for mobile banner height */
+    }
+
+    .promo-banner {
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+
   /* ===== BLOG / ACTIVITIES SECTION ===== */
   .blog-grid {
     display: grid;
@@ -1645,6 +1719,13 @@
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner" id="promoBanner">
+    🎉 Diskon 20% untuk 3 Klien Pertama Bulan Ini!
+    <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20mau%20klaim%20diskon%2020%25"
+      target="_blank">Klaim Sekarang →</a>
+  </div>
 
   <!-- NAV -->
   <nav id="navbar">
@@ -2083,16 +2164,27 @@
 
   <!-- CTA SECTION -->
   <section id="contact" class="cta-section">
-    <h2 class="section-title reveal">Siap Wujudkan Ide Digitalmu?</h2>
-    <p class="reveal">Hubungi Nexus Diji hari ini dan dapatkan konsultasi gratis untuk mengembangkan solusi digital
-      impianmu.</p>
-    <a href="https://wa.me/6281234567890" class="btn-primary reveal" rel="noopener"
-      aria-label="Hubungi Nexus Diji via WhatsApp">
-      Hubungi Kami Sekarang
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M5 12h14M12 5l7 7-7 7" />
-      </svg>
-    </a>
+    <div class="contact-wrap">
+      <div class="reveal">
+        <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Siap Wujudkan Ide Digitalmu?</h2>
+        <p style="margin-bottom:2rem;">Hubungi Nexus Diji hari ini dan dapatkan konsultasi gratis untuk mengembangkan
+          solusi digital impianmu.</p>
+        <a href="https://wa.me/6281234567890" class="btn-primary" rel="noopener"
+          aria-label="Hubungi Nexus Diji via WhatsApp">
+          Hubungi Kami Sekarang
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="map-container reveal">
+        <!-- Google Maps Embed — Jakarta Area (Placeholder) -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.24090288258!2d106.78915598688476!3d-6.229746452243883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e0594391e9%3A0x600c010c79ca8ac2!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1709890000000!5m2!1sid!2sid"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
   </section>
 
   <!-- ===== HIDDEN SEO CONTENT — Target Indexing Keywords ===== -->
@@ -2181,9 +2273,14 @@
 
     // NAV SCROLL EFFECT
     const navbar = document.getElementById('navbar');
+    const promoBanner = document.getElementById('promoBanner');
+    const backToTop = document.getElementById('backToTop');
+
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-      document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+      const isScrolled = window.scrollY > 50;
+      navbar.classList.toggle('scrolled', isScrolled);
+      if (promoBanner) promoBanner.classList.toggle('hidden', isScrolled);
+      if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 400);
     });
 
     // REVEAL ANIMATIONS
