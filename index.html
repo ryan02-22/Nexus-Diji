@@ -1265,11 +1265,35 @@
   }
 
   /* ===== PORTFOLIO SECTION ===== */
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  /* ===== PORTFOLIO MARQUEE ===== */
+  .portfolio-marquee-wrapper {
+    overflow: hidden;
     margin-top: 3rem;
+    position: relative;
+    /* fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
+  .portfolio-marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marquee-scroll 30s linear infinite;
+  }
+
+  .portfolio-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .portfolio-card {
@@ -1278,6 +1302,9 @@
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s, border-color 0.3s;
+    flex-shrink: 0;
+    width: 300px;
+    cursor: default;
   }
 
   .portfolio-card:hover {
@@ -1860,56 +1887,109 @@
     <h2 class="section-title reveal">Portfolio Kami</h2>
     <p class="section-desc reveal">Beberapa proyek yang telah kami selesaikan dengan kualitas terbaik.</p>
 
-    <div class="portfolio-grid">
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">🛍️</div>
-        <div class="portfolio-info">
-          <h3>Toko Online Fashion</h3>
-          <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
-          <span class="portfolio-tag">E-Commerce</span>
+    <div class="portfolio-marquee-wrapper">
+      <div class="portfolio-marquee-track">
+        <!-- Set 1 -->
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🛍️</div>
+          <div class="portfolio-info">
+            <h3>Toko Online Fashion</h3>
+            <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
+            <span class="portfolio-tag">E-Commerce</span>
+          </div>
         </div>
-      </div>
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">🏢</div>
-        <div class="portfolio-info">
-          <h3>Company Profile PT XYZ</h3>
-          <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
-          <span class="portfolio-tag">Company Profile</span>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🏢</div>
+          <div class="portfolio-info">
+            <h3>Company Profile PT XYZ</h3>
+            <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
+            <span class="portfolio-tag">Company Profile</span>
+          </div>
         </div>
-      </div>
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">📊</div>
-        <div class="portfolio-info">
-          <h3>Dashboard Manajemen</h3>
-          <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
-          <span class="portfolio-tag">Web App</span>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">📊</div>
+          <div class="portfolio-info">
+            <h3>Dashboard Manajemen</h3>
+            <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
+            <span class="portfolio-tag">Web App</span>
+          </div>
         </div>
-      </div>
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">🍔</div>
-        <div class="portfolio-info">
-          <h3>Aplikasi Pesan Makanan</h3>
-          <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
-          <span class="portfolio-tag">Mobile App</span>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🍔</div>
+          <div class="portfolio-info">
+            <h3>Aplikasi Pesan Makanan</h3>
+            <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
+            <span class="portfolio-tag">Mobile App</span>
+          </div>
         </div>
-      </div>
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">🎓</div>
-        <div class="portfolio-info">
-          <h3>Platform E-Learning</h3>
-          <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
-          <span class="portfolio-tag">Web App</span>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🎓</div>
+          <div class="portfolio-info">
+            <h3>Platform E-Learning</h3>
+            <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
+            <span class="portfolio-tag">Web App</span>
+          </div>
         </div>
-      </div>
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">💻</div>
-        <div class="portfolio-info">
-          <h3>Landing Page SaaS</h3>
-          <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
-          <span class="portfolio-tag">Landing Page</span>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">💻</div>
+          <div class="portfolio-info">
+            <h3>Landing Page SaaS</h3>
+            <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
+            <span class="portfolio-tag">Landing Page</span>
+          </div>
+        </div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🛍️</div>
+          <div class="portfolio-info">
+            <h3>Toko Online Fashion</h3>
+            <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
+            <span class="portfolio-tag">E-Commerce</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🏢</div>
+          <div class="portfolio-info">
+            <h3>Company Profile PT XYZ</h3>
+            <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
+            <span class="portfolio-tag">Company Profile</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">📊</div>
+          <div class="portfolio-info">
+            <h3>Dashboard Manajemen</h3>
+            <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
+            <span class="portfolio-tag">Web App</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🍔</div>
+          <div class="portfolio-info">
+            <h3>Aplikasi Pesan Makanan</h3>
+            <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
+            <span class="portfolio-tag">Mobile App</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">🎓</div>
+          <div class="portfolio-info">
+            <h3>Platform E-Learning</h3>
+            <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
+            <span class="portfolio-tag">Web App</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">💻</div>
+          <div class="portfolio-info">
+            <h3>Landing Page SaaS</h3>
+            <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
+            <span class="portfolio-tag">Landing Page</span>
+          </div>
         </div>
       </div>
     </div>
+
   </section>
 
   <!-- PRICING -->
