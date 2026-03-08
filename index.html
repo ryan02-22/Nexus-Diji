@@ -1077,6 +1077,417 @@
     .cursor-ring {
       display: none;
     }
+
+    /* HAMBURGER MOBILE */
+    .hamburger {
+      display: flex !important;
+    }
+
+    .nav-mobile-menu {
+      display: none;
+    }
+
+    .nav-mobile-menu.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 10, 15, 0.97);
+      backdrop-filter: blur(20px);
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      z-index: 200;
+    }
+
+    .nav-mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* PORTFOLIO MOBILE */
+    .portfolio-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* PRICING MOBILE */
+    .pricing-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* TESTIMONIAL MOBILE */
+    .testimonial-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* ===== HAMBURGER BUTTON ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ===== PORTFOLIO SECTION ===== */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .portfolio-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+
+  .portfolio-thumb {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(124, 58, 237, 0.12) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .portfolio-info {
+    padding: 1.25rem;
+  }
+
+  .portfolio-info h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .portfolio-info p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .portfolio-tag {
+    display: inline-block;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.12);
+    color: var(--accent);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    margin-top: 0.6rem;
+  }
+
+  /* ===== PRICING SECTION ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .pricing-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .pricing-card.popular {
+    border-color: var(--accent);
+    background: linear-gradient(145deg, #13131f, #101025);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.9rem;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .pricing-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-desc {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .pricing-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-price span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .pricing-cta:hover,
+  .pricing-card.popular .pricing-cta {
+    background: var(--accent);
+    color: #000;
+  }
+
+  /* ===== TESTIMONIALS SECTION ===== */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testimonial-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: border-color 0.3s;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+  }
+
+  .stars {
+    color: #fbbf24;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #000;
+    flex-shrink: 0;
+  }
+
+  .author-info strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .author-info span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  /* ===== FLOATING WA BUTTON ===== */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 56px;
+    height: 56px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    animation: pulse-wa 2.5s infinite;
+  }
+
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+  }
+
+  .wa-float svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  @keyframes pulse-wa {
+
+    0%,
+    100% {
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    50% {
+      box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 8px rgba(37, 211, 102, 0.1);
+    }
+  }
+
+  .wa-tooltip {
+    position: absolute;
+    right: 68px;
+    background: #111118;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .wa-float:hover .wa-tooltip {
+    opacity: 1;
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    z-index: 998;
+    width: 42px;
+    height: 42px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, border-color 0.2s;
+    color: var(--muted);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .back-to-top:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 </style>
 </head>
@@ -1092,12 +1503,29 @@
       <img src="./assets/images/logo.png" alt="Nexus Diji Logo" class="logo-img">
     </a>
     <ul class="nav-links">
+      <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#services">Layanan</a></li>
+      <li><a href="#pricing">Harga</a></li>
       <li><a href="#why">Kenapa Kami</a></li>
-      <li><a href="#process">Proses</a></li>
       <li><a href="#contact" class="nav-cta">Mulai Proyek</a></li>
     </ul>
+    <!-- HAMBURGER BUTTON -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu Navigasi">
+    <button class="close-menu" id="closeMenu" aria-label="Tutup Menu">&times;</button>
+    <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
+    <a href="#services" onclick="closeMobileMenu()">Layanan</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Harga</a>
+    <a href="#why" onclick="closeMobileMenu()">Kenapa Kami</a>
+    <a href="#process" onclick="closeMobileMenu()">Proses</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Testimoni</a>
+    <a href="#contact" onclick="closeMobileMenu()" style="color:var(--accent);">Mulai Proyek →</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1175,13 +1603,129 @@
       </div>
       <div class="service-card">
         <div class="service-icon">🔧</div>
-        <h3>Servis PC & Laptop</h3>
+        <h3>Servis PC &amp; Laptop</h3>
         <p>Perangkat lemot, rusak, atau kena virus? Kami tangani dengan cepat dan profesional. Instalasi, upgrade,
           hingga troubleshooting siap kami bantu.</p>
         <span class="service-tag">Instalasi OS</span>
         <span class="service-tag">Upgrade Hardware</span>
         <span class="service-tag">Virus Removal</span>
         <span class="service-tag">Recovery Data</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <span class="section-label reveal">Hasil Kerja Nyata</span>
+    <h2 class="section-title reveal">Portfolio Kami</h2>
+    <p class="section-desc reveal">Beberapa proyek yang telah kami selesaikan dengan kualitas terbaik.</p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">🛍️</div>
+        <div class="portfolio-info">
+          <h3>Toko Online Fashion</h3>
+          <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
+          <span class="portfolio-tag">E-Commerce</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">🏢</div>
+        <div class="portfolio-info">
+          <h3>Company Profile PT XYZ</h3>
+          <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
+          <span class="portfolio-tag">Company Profile</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">📊</div>
+        <div class="portfolio-info">
+          <h3>Dashboard Manajemen</h3>
+          <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
+          <span class="portfolio-tag">Web App</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">🍔</div>
+        <div class="portfolio-info">
+          <h3>Aplikasi Pesan Makanan</h3>
+          <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
+          <span class="portfolio-tag">Mobile App</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">🎓</div>
+        <div class="portfolio-info">
+          <h3>Platform E-Learning</h3>
+          <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
+          <span class="portfolio-tag">Web App</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">💻</div>
+        <div class="portfolio-info">
+          <h3>Landing Page SaaS</h3>
+          <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
+          <span class="portfolio-tag">Landing Page</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <span class="section-label reveal">Transparan & Terjangkau</span>
+    <h2 class="section-title reveal">Paket Harga</h2>
+    <p class="section-desc reveal">Pilih paket yang sesuai kebutuhanmu. Semua paket sudah termasuk revisi dan support.
+    </p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-desc">Untuk kamu yang baru mulai dan butuh kehadiran online yang profesional.</div>
+        <div class="pricing-price">Rp 500rb<span>/proyek</span></div>
+        <ul class="pricing-features">
+          <li>Landing Page 1 halaman</li>
+          <li>Desain responsif mobile</li>
+          <li>Kontak via WhatsApp</li>
+          <li>Gratis 2x revisi</li>
+          <li>Selesai 3-5 hari kerja</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20paket%20Starter"
+          class="pricing-cta" rel="noopener" target="_blank">Pilih Paket Ini</a>
+      </div>
+      <div class="pricing-card popular reveal">
+        <div class="pricing-badge">⭐ Paling Populer</div>
+        <div class="pricing-name">Profesional</div>
+        <div class="pricing-desc">Solusi lengkap untuk bisnis yang ingin tampil maksimal secara online.</div>
+        <div class="pricing-price">Rp 2jt<span>/proyek</span></div>
+        <ul class="pricing-features">
+          <li>Website multi-halaman</li>
+          <li>Desain custom premium</li>
+          <li>CMS / panel kelola konten</li>
+          <li>SEO on-page optimasi</li>
+          <li>Gratis 5x revisi</li>
+          <li>Selesai 7-14 hari kerja</li>
+          <li>Support 1 bulan</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20paket%20Profesional"
+          class="pricing-cta" rel="noopener" target="_blank">Pilih Paket Ini</a>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">Untuk kebutuhan kompleks: sistem, aplikasi, atau platform skala besar.</div>
+        <div class="pricing-price">Custom<span>/hubungi kami</span></div>
+        <ul class="pricing-features">
+          <li>Web app / mobile app custom</li>
+          <li>Integrasi API & database</li>
+          <li>Sistem manajemen lengkap</li>
+          <li>Revisi unlimited</li>
+          <li>Timeline fleksibel</li>
+          <li>Support 3 bulan</li>
+          <li>Dokumentasi teknis</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20butuh%20konsultasi%20Enterprise"
+          class="pricing-cta" rel="noopener" target="_blank">Konsultasi Gratis</a>
       </div>
     </div>
   </section>
@@ -1274,8 +1818,54 @@
       </div>
       <div class="step reveal">
         <div class="step-num">4</div>
-        <h4>Delivery & Support</h4>
+        <h4>Delivery &amp; Support</h4>
         <p>Project selesai dengan dokumentasi lengkap dan support pasca-launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <span class="section-label reveal">Kata Mereka</span>
+    <h2 class="section-title reveal">Testimoni Klien</h2>
+    <p class="section-desc reveal">Kepercayaan klien adalah motivasi terbesar kami untuk terus berkembang.</p>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Website toko online saya selesai dalam 5 hari, desain keren banget dan langsung
+          bisa jualan. Tim Nexus Diji responsif dan sabar menjelaskan."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AR</div>
+          <div class="author-info">
+            <strong>Andi Rahman</strong>
+            <span>Pemilik Toko Fashion Online</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Dashboard management yang dibuat sangat membantu operasional bisnis kami. Highly
+          recommended untuk yang butuh solusi digital profesional!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SR</div>
+          <div class="author-info">
+            <strong>Siti Rahayu</strong>
+            <span>Manager Operasional PT Maju Jaya</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Laptop saya yang lemot banget berhasil dioptimasi dan sekarang ngebut lagi.
+          Servisnya cepat, profesional, dan harganya terjangkau."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">BP</div>
+          <div class="author-info">
+            <strong>Budi Pratama</strong>
+            <span>Mahasiswa Teknik Informatika</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1337,10 +1927,10 @@
     <p>&copy; 2025 <a href="https://nexus-diji.com" rel="author" style="color:inherit;text-decoration:none;">Nexus
         Diji</a>. Semua hak cipta dilindungi.</p>
     <div class="footer-links">
+      <a href="#portfolio" rel="nofollow">Portfolio</a>
+      <a href="#pricing" rel="nofollow">Harga</a>
       <a href="#" rel="nofollow">Privacy Policy</a>
-      <a href="#" rel="nofollow">Terms of Service</a>
       <a href="#contact" rel="nofollow">Contact</a>
-      <!-- High-Quality Backlink References -->
       <a href="https://wa.me/6281234567890" rel="noopener" target="_blank" aria-label="WhatsApp Nexus Diji"
         title="Hubungi Nexus Diji via WhatsApp" style="display:none;">WhatsApp</a>
       <a href="https://github.com/ryan02-22" rel="noopener me" target="_blank" aria-label="GitHub Nexus Diji"
@@ -1350,11 +1940,27 @@
     </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20ingin%20konsultasi" class="wa-float"
+    rel="noopener" target="_blank" aria-label="Chat WhatsApp Nexus Diji">
+    <span class="wa-tooltip">Chat Sekarang!</span>
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
   <script>
     // CUSTOM CURSOR
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursorRing');
-
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX - 5 + 'px';
       cursor.style.top = e.clientY - 5 + 'px';
@@ -1365,28 +1971,53 @@
     // NAV SCROLL EFFECT
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
     });
 
     // REVEAL ANIMATIONS
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // HAMBURGER MENU
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    closeMenu.addEventListener('click', closeMobileMenu);
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobileMenu(); });
+
+    // BACK TO TOP
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- Tawk.to Live Chat -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/YOUR_TAWK_ID/default';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
   </script>
 
 </body>
