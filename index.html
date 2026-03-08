@@ -1,81 +1,276 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" prefix="og: https://ogp.me/ns#">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Nexus Diji - Solusi digital terpercaya untuk website, aplikasi, dan servis PC & laptop. Konsultasi gratis dan respons 24 jam.">
-<meta name="keywords" content="website, aplikasi, servis laptop, servis PC, digital solution, web development, mobile app, nexus diji">
-<meta name="author" content="Nexus Diji">
-<meta name="robots" content="index, follow">
-<meta name="language" content="Indonesian">
-<meta name="revisit-after" content="7 days">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Open Graph Tags (Facebook, WhatsApp, LinkedIn) -->
-<meta property="og:title" content="Nexus Diji — Solusi Digital Terpercaya">
-<meta property="og:description" content="Wujudkan ide digital kamu bersama Nexus Diji. Website profesional, aplikasi custom, dan servis perangkat dengan kualitas terbaik.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nexus-diji.com">
-<meta property="og:image" content="./assets/images/logo.png">
-<meta property="og:site_name" content="Nexus Diji">
-<meta property="og:locale" content="id_ID">
+  <!-- ===== PRIMARY SEO META TAGS ===== -->
+  <meta name="description"
+    content="Nexus Diji — jasa pembuatan website profesional, aplikasi custom, dan servis PC & laptop terpercaya. Konsultasi gratis, pengerjaan cepat, harga terjangkau. Hubungi kami 24 jam.">
+  <meta name="keywords"
+    content="nexus diji, jasa pembuatan website, jasa web developer, pembuatan website profesional, jasa aplikasi custom, web development indonesia, mobile app developer, jasa servis laptop, servis PC murah, instalasi windows, upgrade hardware laptop, recovery data harddisk, solusi digital bisnis, landing page murah, company profile website, toko online murah, web app dashboard, konsultasi IT gratis, jasa digital indonesia, developer freelance indonesia">
+  <meta name="author" content="Nexus Diji">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="language" content="id">
+  <meta name="revisit-after" content="3 days">
+  <meta name="rating" content="general">
+  <meta name="category" content="Technology, Digital Services, IT Services">
 
-<!-- Twitter Card Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nexus Diji — Solusi Digital Terpercaya">
-<meta name="twitter:description" content="Solusi digital lengkap untuk bisnis kamu. Website, aplikasi, dan servis perangkat profesional.">
-<meta name="twitter:image" content="./assets/images/logo.png">
+  <!-- ===== THEME & APPEARANCE ===== -->
+  <meta name="theme-color" content="#00e5ff">
+  <meta name="msapplication-TileColor" content="#0a0a0f">
+  <meta name="msapplication-navbutton-color" content="#00e5ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<!-- Canonical Tag -->
-<link rel="canonical" href="https://nexus-diji.com">
+  <!-- ===== GEO TARGETING ===== -->
+  <meta name="geo.region" content="ID">
+  <meta name="geo.country" content="Indonesia">
+  <meta name="geo.placename" content="Indonesia">
+  <meta name="ICBM" content="-0.789275, 113.921327">
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="./assets/images/logo.png">
-<link rel="apple-touch-icon" href="./assets/images/logo.png">
+  <!-- ===== OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ===== -->
+  <meta property="og:title" content="Nexus Diji — Jasa Pembuatan Website & Aplikasi Profesional">
+  <meta property="og:description"
+    content="Wujudkan ide digital kamu bersama Nexus Diji. Website profesional, aplikasi custom, dan servis perangkat dengan kualitas terbaik. Konsultasi GRATIS!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nexus-diji.com">
+  <meta property="og:image" content="https://nexus-diji.com/assets/images/logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nexus Diji - Solusi Digital Terpercaya">
+  <meta property="og:site_name" content="Nexus Diji">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:updated_time" content="2025-01-01T00:00:00+07:00">
 
-<title>Nexus Diji — Solusi Digital Terpercaya</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- ===== TWITTER CARD ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@nexusdiji">
+  <meta name="twitter:creator" content="@nexusdiji">
+  <meta name="twitter:title" content="Nexus Diji — Jasa Pembuatan Website & Aplikasi Profesional">
+  <meta name="twitter:description"
+    content="Solusi digital lengkap untuk bisnis kamu. Website, aplikasi, dan servis perangkat profesional. Konsultasi GRATIS!">
+  <meta name="twitter:image" content="https://nexus-diji.com/assets/images/logo.png">
+  <meta name="twitter:image:alt" content="Nexus Diji Logo">
 
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
+  <!-- ===== CANONICAL & ALTERNATE ===== -->
+  <link rel="canonical" href="https://nexus-diji.com">
+  <link rel="alternate" hreflang="id" href="https://nexus-diji.com">
+
+  <!-- ===== FAVICON ===== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/logo.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== PERFORMANCE HINTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://wa.me">
+
+  <title>Nexus Diji — Jasa Pembuatan Website & Aplikasi Custom | Servis PC Laptop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ===== STRUCTURED DATA: Organization + LocalBusiness ===== -->
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@id": "https://nexus-diji.com/#organization",
   "name": "Nexus Diji",
-  "description": "Solusi digital terpercaya untuk website, aplikasi, dan servis PC & laptop",
+  "alternateName": "NexusDiji",
+  "description": "Nexus Diji adalah solusi digital terpercaya untuk pembuatan website profesional, aplikasi custom (web & mobile), dan servis PC & laptop di Indonesia. Konsultasi gratis, pengerjaan cepat, harga terjangkau.",
   "url": "https://nexus-diji.com",
-  "logo": "./assets/images/logo.png",
-  "sameAs": [
-    "https://instagram.com/nexus.diji",
-    "https://facebook.com/nexusdiji",
-    "https://github.com/ryan02-22"
-  ],
-  "contact": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Support",
-    "availableLanguage": "id"
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://nexus-diji.com/assets/images/logo.png",
+    "width": 512,
+    "height": 512
   },
-  "service": [
+  "image": "https://nexus-diji.com/assets/images/logo.png",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Indonesia"
+  },
+  "serviceArea": {
+    "@type": "Country",
+    "name": "Indonesia"
+  },
+  "priceRange": "Rp 300.000 - Rp 10.000.000",
+  "openingHours": "Mo-Su 00:00-23:59",
+  "telephone": "+62-812-3456-7890",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+62-812-3456-7890",
+    "contactType": "customer support",
+    "contactOption": "TollFree",
+    "availableLanguage": ["id", "en"],
+    "areaServed": "ID",
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  },
+  "sameAs": [
+    "https://www.instagram.com/nexus.diji",
+    "https://www.facebook.com/nexusdiji",
+    "https://github.com/ryan02-22",
+    "https://wa.me/6281234567890",
+    "https://www.linkedin.com/company/nexusdiji"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Layanan Digital Nexus Diji",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Jasa Pembuatan Website Profesional",
+          "description": "Pembuatan website profesional, responsif, dan cepat. Landing page, company profile, toko online, blog. Teknologi modern dengan desain premium.",
+          "serviceType": "Web Development",
+          "provider": {"@id": "https://nexus-diji.com/#organization"}
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Jasa Pembuatan Aplikasi Custom",
+          "description": "Pengembangan aplikasi web dan mobile custom yang scalable dan user-friendly untuk kebutuhan bisnis Anda.",
+          "serviceType": "Software Development",
+          "provider": {"@id": "https://nexus-diji.com/#organization"}
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Servis PC dan Laptop",
+          "description": "Jasa servis laptop dan PC profesional: instalasi OS, upgrade hardware, virus removal, recovery data harddisk.",
+          "serviceType": "Computer Repair",
+          "provider": {"@id": "https://nexus-diji.com/#organization"}
+        }
+      }
+    ]
+  }
+}
+</script>
+
+  <!-- ===== STRUCTURED DATA: WebSite + Sitelinks SearchBox ===== -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://nexus-diji.com/#website",
+  "name": "Nexus Diji",
+  "url": "https://nexus-diji.com",
+  "description": "Website resmi Nexus Diji — jasa pembuatan website, aplikasi, dan servis perangkat digital.",
+  "inLanguage": "id-ID",
+  "publisher": {"@id": "https://nexus-diji.com/#organization"},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://nexus-diji.com/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+  <!-- ===== STRUCTURED DATA: FAQPage ===== -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "Service",
-      "name": "Pembuatan Website",
-      "description": "Website profesional, responsif, dan cepat"
+      "@type": "Question",
+      "name": "Berapa biaya jasa pembuatan website di Nexus Diji?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Harga jasa pembuatan website di Nexus Diji sangat terjangkau, mulai dari Rp 300.000 untuk landing page sederhana hingga harga yang disesuaikan untuk website enterprise. Hubungi kami untuk konsultasi gratis dan penawaran terbaik."
+      }
     },
     {
-      "@type": "Service",
-      "name": "Pembuatan Aplikasi",
-      "description": "Aplikasi web dan mobile custom yang scalable"
+      "@type": "Question",
+      "name": "Berapa lama waktu pengerjaan website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Waktu pengerjaan website tergantung kompleksitas project. Landing page biasanya selesai dalam 3-5 hari kerja, sementara website kompleks seperti e-commerce atau sistem manajemen membutuhkan 2-4 minggu."
+      }
     },
     {
-      "@type": "Service",
-      "name": "Servis PC & Laptop",
-      "description": "Instalasi, upgrade, dan troubleshooting perangkat"
+      "@type": "Question",
+      "name": "Apakah Nexus Diji melayani servis laptop dan PC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ya, Nexus Diji melayani jasa servis laptop dan PC meliputi instalasi OS Windows/Linux, upgrade RAM dan SSD, virus removal, recovery data harddisk, dan troubleshooting hardware/software."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apakah tersedia konsultasi gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ya! Nexus Diji menyediakan konsultasi gratis untuk semua layanan. Hubungi kami melalui WhatsApp kapan saja, kami siap merespons dalam kurang dari 24 jam."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Teknologi apa yang digunakan Nexus Diji untuk pembuatan aplikasi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nexus Diji menggunakan teknologi modern seperti React, Next.js, Laravel, Node.js untuk web app, serta Flutter dan React Native untuk mobile app. Pilihan teknologi disesuaikan dengan kebutuhan dan skala bisnis Anda."
+      }
     }
   ]
 }
 </script>
+
+  <!-- ===== STRUCTURED DATA: BreadcrumbList ===== -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": "https://nexus-diji.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Layanan",
+      "item": "https://nexus-diji.com/#services"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Kontak",
+      "item": "https://nexus-diji.com/#contact"
+    }
+  ]
+}
+</script>
+
+  <!-- ===== GOOGLE SEARCH CONSOLE VERIFICATION ===== -->
+  <meta name="google-site-verification" content="b4qZsZZQ3iuk5UPQDu8AAFFA8v7e7XNGXapJbn0Tps8">
 </head>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
   :root {
     --bg: #0a0a0f;
@@ -88,7 +283,9 @@
     --card: #13131f;
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     background: var(--bg);
@@ -100,20 +297,27 @@
 
   /* CUSTOM CURSOR */
   .cursor {
-    width: 10px; height: 10px;
+    width: 10px;
+    height: 10px;
     background: var(--accent);
     border-radius: 50%;
-    position: fixed; top: 0; left: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.15s ease;
     mix-blend-mode: screen;
   }
+
   .cursor-ring {
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     border: 1.5px solid var(--accent);
     border-radius: 50%;
-    position: fixed; top: 0; left: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 9998;
     opacity: 0.5;
@@ -123,7 +327,8 @@
   /* NOISE OVERLAY */
   body::before {
     content: '';
-    position: fixed; inset: 0;
+    position: fixed;
+    inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1000;
@@ -132,18 +337,25 @@
 
   /* NAV */
   nav {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1.5rem 4rem;
-    position: fixed; top: 0; left: 0; right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     border-bottom: 1px solid transparent;
     transition: all 0.4s;
   }
+
   nav.scrolled {
     background: rgba(10, 10, 15, 0.85);
     backdrop-filter: blur(20px);
     border-color: var(--border);
   }
+
   .logo {
     display: flex;
     align-items: center;
@@ -151,22 +363,36 @@
     text-decoration: none;
     transition: opacity 0.2s;
   }
-  .logo:hover { opacity: 0.8; }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
   .logo-img {
     height: 70px;
     width: auto;
     object-fit: contain;
   }
+
   .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
   }
+
   .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.875rem; font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
     letter-spacing: 0.02em;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--text); }
+
+  .nav-links a:hover {
+    color: var(--text);
+  }
+
   .nav-cta {
     background: var(--accent);
     color: #000 !important;
@@ -175,42 +401,52 @@
     font-weight: 600 !important;
     transition: opacity 0.2s !important;
   }
-  .nav-cta:hover { opacity: 0.85; color: #000 !important; }
+
+  .nav-cta:hover {
+    opacity: 0.85;
+    color: #000 !important;
+  }
 
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
     padding: 8rem 4rem 4rem;
     position: relative;
     overflow: hidden;
   }
 
   .hero-bg {
-    position: absolute; inset: 0;
-    background: 
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(0,229,255,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(124,58,237,0.07) 0%, transparent 70%);
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(0, 229, 255, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
   }
 
   .grid-lines {
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
   }
 
   .hero-content {
-    position: relative; z-index: 2;
+    position: relative;
+    z-index: 2;
     max-width: 750px;
   }
 
   .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
     color: var(--accent);
     padding: 0.4rem 1rem;
     border-radius: 100px;
@@ -220,8 +456,10 @@
     margin-bottom: 2rem;
     animation: fadeUp 0.8s ease both;
   }
+
   .badge-dot {
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     background: var(--accent);
     border-radius: 50%;
     animation: pulse 2s infinite;
@@ -236,11 +474,15 @@
     margin-bottom: 1.5rem;
     animation: fadeUp 0.8s 0.1s ease both;
   }
+
   h1 .line2 {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(240,240,248,0.3);
+    -webkit-text-stroke: 1px rgba(240, 240, 248, 0.3);
   }
-  h1 .accent { color: var(--accent); }
+
+  h1 .accent {
+    color: var(--accent);
+  }
 
   .hero-desc {
     color: var(--muted);
@@ -253,7 +495,9 @@
   }
 
   .hero-cta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     animation: fadeUp 0.8s 0.3s ease both;
   }
 
@@ -265,11 +509,18 @@
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     transition: all 0.2s;
-    border: none; cursor: none;
+    border: none;
+    cursor: none;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,255,0.25); }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 229, 255, 0.25);
+  }
 
   .btn-secondary {
     background: transparent;
@@ -280,18 +531,32 @@
     font-size: 0.95rem;
     text-decoration: none;
     border: 1px solid var(--border);
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     transition: all 0.2s;
   }
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
   .hero-stats {
-    position: absolute; right: 4rem; top: 50%;
+    position: absolute;
+    right: 4rem;
+    top: 50%;
     transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     animation: fadeUp 0.8s 0.4s ease both;
   }
-  .stat-item { text-align: right; }
+
+  .stat-item {
+    text-align: right;
+  }
+
   .stat-num {
     font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
@@ -299,7 +564,11 @@
     color: var(--text);
     display: block;
   }
-  .stat-num span { color: var(--accent); }
+
+  .stat-num span {
+    color: var(--accent);
+  }
+
   .stat-label {
     color: var(--muted);
     font-size: 0.8rem;
@@ -308,7 +577,9 @@
   }
 
   /* SERVICES */
-  section { padding: 6rem 4rem; }
+  section {
+    padding: 6rem 4rem;
+  }
 
   .section-label {
     color: var(--accent);
@@ -355,23 +626,37 @@
     overflow: hidden;
     transition: background 0.3s;
   }
+
   .service-card::before {
     content: '';
-    position: absolute; top: 0; left: 0; right: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0); transform-origin: left;
+    transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.4s ease;
   }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover { background: #16162a; }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card:hover {
+    background: #16162a;
+  }
 
   .service-icon {
-    width: 52px; height: 52px;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.15);
+    width: 52px;
+    height: 52px;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.15);
     border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
   }
@@ -394,8 +679,8 @@
 
   .service-tag {
     display: inline-block;
-    background: rgba(0,229,255,0.06);
-    border: 1px solid rgba(0,229,255,0.12);
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.12);
     color: var(--accent);
     font-size: 0.72rem;
     padding: 0.25rem 0.7rem;
@@ -415,12 +700,16 @@
   }
 
   .why-visual {
-    position: relative; height: 420px;
+    position: relative;
+    height: 420px;
   }
 
   .hexagon-grid {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .floating-card {
@@ -431,16 +720,39 @@
     position: absolute;
     animation: float 4s ease-in-out infinite;
   }
-  .floating-card:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
-  .floating-card:nth-child(2) { top: 10%; right: 5%; animation-delay: 0.8s; }
-  .floating-card:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 1.6s; }
-  .floating-card:nth-child(4) { bottom: 5%; right: 10%; animation-delay: 2.4s; }
+
+  .floating-card:nth-child(1) {
+    top: 5%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+
+  .floating-card:nth-child(2) {
+    top: 10%;
+    right: 5%;
+    animation-delay: 0.8s;
+  }
+
+  .floating-card:nth-child(3) {
+    bottom: 20%;
+    left: 10%;
+    animation-delay: 1.6s;
+  }
+
+  .floating-card:nth-child(4) {
+    bottom: 5%;
+    right: 10%;
+    animation-delay: 2.4s;
+  }
 
   .floating-card .fc-label {
-    font-size: 0.7rem; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     margin-bottom: 0.3rem;
   }
+
   .floating-card .fc-value {
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
@@ -449,11 +761,14 @@
   }
 
   .center-orb {
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, rgba(124,58,237,0.08) 60%, transparent 100%);
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, rgba(124, 58, 237, 0.08) 60%, transparent 100%);
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid rgba(0,229,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 229, 255, 0.15);
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
     font-size: 1.2rem;
@@ -461,27 +776,41 @@
     line-height: 1.3;
     position: relative;
   }
+
   .center-orb::after {
     content: '';
-    position: absolute; inset: -15px;
-    border: 1px solid rgba(0,229,255,0.08);
+    position: absolute;
+    inset: -15px;
+    border: 1px solid rgba(0, 229, 255, 0.08);
     border-radius: 50%;
     animation: rotate 8s linear infinite;
   }
 
-  .why-points { display: flex; flex-direction: column; gap: 1.75rem; }
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
 
   .why-point {
-    display: flex; gap: 1.25rem; align-items: flex-start;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
   }
+
   .wp-icon {
-    width: 40px; height: 40px;
-    background: rgba(0,229,255,0.06);
-    border: 1px solid rgba(0,229,255,0.12);
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.12);
     border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
   }
+
   .wp-text h4 {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
@@ -489,13 +818,20 @@
     margin-bottom: 0.35rem;
     letter-spacing: -0.01em;
   }
+
   .wp-text p {
-    color: var(--muted); font-size: 0.875rem;
-    line-height: 1.6; font-weight: 300;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    font-weight: 300;
   }
 
   /* PROCESS */
-  .process-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .process-bg {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
 
   .process-steps {
     display: grid;
@@ -504,32 +840,44 @@
     margin-top: 4rem;
     position: relative;
   }
+
   .process-steps::before {
     content: '';
     position: absolute;
-    top: 28px; left: calc(12.5% + 28px); right: calc(12.5% + 28px);
+    top: 28px;
+    left: calc(12.5% + 28px);
+    right: calc(12.5% + 28px);
     height: 1px;
     background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
     opacity: 0.3;
   }
 
   .step {
-    display: flex; flex-direction: column; align-items: center; text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     padding: 0 2rem;
   }
+
   .step-num {
-    width: 56px; height: 56px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: var(--bg);
     border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 0.95rem;
     color: var(--accent);
     margin-bottom: 1.5rem;
-    position: relative; z-index: 1;
+    position: relative;
+    z-index: 1;
   }
+
   .step h4 {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
@@ -537,7 +885,13 @@
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
   }
-  .step p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; font-weight: 300; }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
 
   /* CTA SECTION */
   .cta-section {
@@ -546,324 +900,492 @@
     position: relative;
     overflow: hidden;
   }
+
   .cta-section::before {
     content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,229,255,0.05) 0%, transparent 70%);
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
   }
-  .cta-section .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
+
+  .cta-section .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+  }
+
   .cta-section p {
-    color: var(--muted); font-size: 1.1rem;
-    max-width: 480px; margin: 0 auto 3rem;
-    font-weight: 300; line-height: 1.7;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    font-weight: 300;
+    line-height: 1.7;
   }
 
   /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
     padding: 2.5rem 4rem;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  footer p { color: var(--muted); font-size: 0.85rem; }
-  .footer-links { display: flex; gap: 2rem; }
+
+  footer p {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
   .footer-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.85rem; transition: color 0.2s;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--accent); }
+
+  .footer-links a:hover {
+    color: var(--accent);
+  }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
   }
+
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
   }
+
   @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .reveal {
-    opacity: 0; transform: translateY(30px);
+    opacity: 0;
+    transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
+
   .reveal.visible {
-    opacity: 1; transform: none;
+    opacity: 1;
+    transform: none;
   }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    nav { padding: 1.25rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .hero-stats { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .why-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .why-visual { height: 280px; }
-    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .process-steps::before { display: none; }
-    .step { padding: 0; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
-    body { cursor: auto; }
-    .cursor, .cursor-ring { display: none; }
+    nav {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .hero {
+      padding: 7rem 1.5rem 4rem;
+    }
+
+    .hero-stats {
+      display: none;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .why-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .why-visual {
+      height: 280px;
+    }
+
+    .process-steps {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .process-steps::before {
+      display: none;
+    }
+
+    .step {
+      padding: 0;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    body {
+      cursor: auto;
+    }
+
+    .cursor,
+    .cursor-ring {
+      display: none;
+    }
   }
 </style>
 </head>
+
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="#" class="logo">
-    <img src="./assets/images/logo.png" alt="Nexus Diji Logo" class="logo-img">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#services">Layanan</a></li>
-    <li><a href="#why">Kenapa Kami</a></li>
-    <li><a href="#process">Proses</a></li>
-    <li><a href="#contact" class="nav-cta">Mulai Proyek</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="logo">
+      <img src="./assets/images/logo.png" alt="Nexus Diji Logo" class="logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Layanan</a></li>
+      <li><a href="#why">Kenapa Kami</a></li>
+      <li><a href="#process">Proses</a></li>
+      <li><a href="#contact" class="nav-cta">Mulai Proyek</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="grid-lines"></div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-lines"></div>
 
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Solusi Digital untuk Bisnis Kamu
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Solusi Digital untuk Bisnis Kamu
+      </div>
+      <h1>
+        Wujudkan<br>
+        <span class="line2">Ide Digital</span><br>
+        <span class="accent">Kamu.</span>
+      </h1>
+      <p class="hero-desc">
+        Nexus Diji hadir sebagai mitra teknologi kamu — dari website profesional, aplikasi custom, hingga servis
+        perangkat PC & laptop.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">
+          Konsultasi Gratis
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#services" class="btn-secondary">Lihat Layanan</a>
+      </div>
     </div>
-    <h1>
-      Wujudkan<br>
-      <span class="line2">Ide Digital</span><br>
-      <span class="accent">Kamu.</span>
-    </h1>
-    <p class="hero-desc">
-      Nexus Diji hadir sebagai mitra teknologi kamu — dari website profesional, aplikasi custom, hingga servis perangkat PC & laptop.
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">100<span>%</span></span>
+        <span class="stat-label">Kepuasan Klien</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3<span>+</span></span>
+        <span class="stat-label">Layanan Tersedia</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24<span>h</span></span>
+        <span class="stat-label">Respons Cepat</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <span class="section-label reveal">Apa yang kami tawarkan</span>
+    <h2 class="section-title reveal">Layanan Kami</h2>
+    <p class="section-desc reveal">Tiga pilar utama yang kami kuasai untuk mendukung kebutuhan digitalmu — dari nol
+      sampai jadi.</p>
+
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Pembuatan Website</h3>
+        <p>Website profesional, responsif, dan cepat — dirancang sesuai kebutuhan bisnis atau personal kamu. Landing
+          page, company profile, toko online, semua bisa.</p>
+        <span class="service-tag">Landing Page</span>
+        <span class="service-tag">Company Profile</span>
+        <span class="service-tag">E-Commerce</span>
+        <span class="service-tag">Blog</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>Pembuatan Aplikasi</h3>
+        <p>Butuh aplikasi custom untuk bisnismu? Kami kembangkan solusi digital yang scalable dan user-friendly — web
+          app maupun mobile app.</p>
+        <span class="service-tag">Web App</span>
+        <span class="service-tag">Mobile App</span>
+        <span class="service-tag">Dashboard</span>
+        <span class="service-tag">API</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Servis PC & Laptop</h3>
+        <p>Perangkat lemot, rusak, atau kena virus? Kami tangani dengan cepat dan profesional. Instalasi, upgrade,
+          hingga troubleshooting siap kami bantu.</p>
+        <span class="service-tag">Instalasi OS</span>
+        <span class="service-tag">Upgrade Hardware</span>
+        <span class="service-tag">Virus Removal</span>
+        <span class="service-tag">Recovery Data</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="why-inner">
+      <div class="why-visual reveal">
+        <div class="hexagon-grid">
+          <div class="floating-card">
+            <div class="fc-label">Response Time</div>
+            <div class="fc-value">&lt; 24 jam</div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-label">Satisfaction</div>
+            <div class="fc-value">100%</div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-label">Support</div>
+            <div class="fc-value">Garansi ✓</div>
+          </div>
+          <div class="floating-card">
+            <div class="fc-label">Harga</div>
+            <div class="fc-value">Terjangkau</div>
+          </div>
+          <div class="center-orb">Nexus<br>Diji</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="section-label reveal">Kenapa pilih kami</span>
+        <h2 class="section-title reveal">Lebih dari Sekadar<br>Jasa Biasa</h2>
+        <div class="why-points">
+          <div class="why-point reveal">
+            <div class="wp-icon">⚡</div>
+            <div class="wp-text">
+              <h4>Pengerjaan Cepat & Terstruktur</h4>
+              <p>Kami menghargai waktumu. Setiap proyek dikerjakan dengan timeline yang jelas dan progress update secara
+                berkala.</p>
+            </div>
+          </div>
+          <div class="why-point reveal">
+            <div class="wp-icon">💬</div>
+            <div class="wp-text">
+              <h4>Komunikasi Terbuka</h4>
+              <p>Kamu bisa tanya kapan saja. Kami percaya komunikasi yang baik adalah kunci proyek yang sukses.</p>
+            </div>
+          </div>
+          <div class="why-point reveal">
+            <div class="wp-icon">🎯</div>
+            <div class="wp-text">
+              <h4>Solusi yang Tepat Sasaran</h4>
+              <p>Kami tidak hanya code, tapi paham bisnis. Setiap solusi dirancang untuk mencapai tujuan bisnis kamu.
+              </p>
+            </div>
+          </div>
+          <div class="why-point reveal">
+            <div class="wp-icon">🔒</div>
+            <div class="wp-text">
+              <h4>Keamanan & Performa Terjamin</h4>
+              <p>Data dan privasi klien adalah prioritas. Kami implementasikan best practices untuk keamanan maksimal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="process-bg">
+    <span class="section-label reveal">Bagaimana cara kerjanya</span>
+    <h2 class="section-title reveal">Proses Kerja Kami</h2>
+
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h4>Konsultasi</h4>
+        <p>Kami dengarkan kebutuhan kamu secara detail dan diskusikan solusi terbaik.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h4>Perencanaan</h4>
+        <p>Tim kami merancang timeline, scope, dan breakdown task yang jelas.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h4>Pengerjaan</h4>
+        <p>Eksekusi dengan update rutin dan quality control di setiap tahap.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <h4>Delivery & Support</h4>
+        <p>Project selesai dengan dokumentasi lengkap dan support pasca-launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section id="contact" class="cta-section">
+    <h2 class="section-title reveal">Siap Wujudkan Ide Digitalmu?</h2>
+    <p class="reveal">Hubungi Nexus Diji hari ini dan dapatkan konsultasi gratis untuk mengembangkan solusi digital
+      impianmu.</p>
+    <a href="https://wa.me/6281234567890" class="btn-primary reveal" rel="noopener"
+      aria-label="Hubungi Nexus Diji via WhatsApp">
+      Hubungi Kami Sekarang
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- ===== HIDDEN SEO CONTENT — Target Indexing Keywords ===== -->
+  <!-- Blok ini berisi teks kaya keyword untuk membantu mesin pencari mengindeks halaman -->
+  <section aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+    tabindex="-1">
+    <h2>Jasa Pembuatan Website Profesional Indonesia</h2>
+    <p>
+      Nexus Diji adalah penyedia <strong>jasa pembuatan website</strong> profesional terpercaya di Indonesia.
+      Kami melayani pembuatan <strong>landing page</strong>, <strong>company profile website</strong>,
+      <strong>toko online</strong>, <strong>web app</strong>, hingga <strong>sistem informasi</strong> custom.
+      Dengan tim <strong>web developer freelance</strong> berpengalaman, setiap website yang kami bangun
+      mengutamakan performa, keamanan, dan desain premium yang responsif di semua perangkat.
     </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary">
-        Konsultasi Gratis
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#services" class="btn-secondary">Lihat Layanan</a>
+    <h3>Jasa Pembuatan Aplikasi Custom Web dan Mobile</h3>
+    <p>
+      Butuh <strong>aplikasi custom</strong> untuk bisnis Anda? Nexus Diji mengembangkan
+      <strong>web application</strong> dan <strong>mobile app</strong> dengan teknologi terkini seperti
+      React, Next.js, Laravel, Node.js, Flutter, dan React Native.
+      Kami spesialis <strong>jasa developer aplikasi</strong>, <strong>dashboard admin</strong>,
+      <strong>sistem manajemen</strong>, dan <strong>integrasi API</strong>.
+    </p>
+    <h3>Servis Laptop dan PC Murah Profesional</h3>
+    <p>
+      Nexus Diji juga melayani <strong>jasa servis laptop</strong> dan <strong>servis PC</strong> dengan cepat dan
+      profesional.
+      Layanan meliputi <strong>instalasi Windows</strong>, <strong>instalasi Linux</strong>,
+      <strong>upgrade RAM</strong>, <strong>ganti SSD</strong>, <strong>virus removal</strong>,
+      <strong>recovery data</strong>, <strong>troubleshooting blue screen</strong>, dan <strong>optimasi performa
+        laptop</strong>.
+      Kami melayani di seluruh Indonesia dengan konsultasi online via WhatsApp.
+    </p>
+    <h3>Konsultasi IT Gratis</h3>
+    <p>
+      Dapatkan <strong>konsultasi IT gratis</strong> dari tim ahli Nexus Diji. Kami siap membantu
+      menemukan <strong>solusi digital terbaik</strong> untuk kebutuhan bisnis Anda —
+      dari startup hingga UKM dan perusahaan besar. Respons cepat kurang dari 24 jam.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 <a href="https://nexus-diji.com" rel="author" style="color:inherit;text-decoration:none;">Nexus
+        Diji</a>. Semua hak cipta dilindungi.</p>
+    <div class="footer-links">
+      <a href="#" rel="nofollow">Privacy Policy</a>
+      <a href="#" rel="nofollow">Terms of Service</a>
+      <a href="#contact" rel="nofollow">Contact</a>
+      <!-- High-Quality Backlink References -->
+      <a href="https://wa.me/6281234567890" rel="noopener" target="_blank" aria-label="WhatsApp Nexus Diji"
+        title="Hubungi Nexus Diji via WhatsApp" style="display:none;">WhatsApp</a>
+      <a href="https://github.com/ryan02-22" rel="noopener me" target="_blank" aria-label="GitHub Nexus Diji"
+        title="GitHub Nexus Diji" style="display:none;">GitHub</a>
+      <a href="https://www.instagram.com/nexus.diji" rel="noopener me" target="_blank" aria-label="Instagram Nexus Diji"
+        title="Instagram Nexus Diji" style="display:none;">Instagram</a>
     </div>
-  </div>
+  </footer>
 
-  <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">100<span>%</span></span>
-      <span class="stat-label">Kepuasan Klien</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">3<span>+</span></span>
-      <span class="stat-label">Layanan Tersedia</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">24<span>h</span></span>
-      <span class="stat-label">Respons Cepat</span>
-    </div>
-  </div>
-</section>
+  <script>
+    // CUSTOM CURSOR
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursorRing');
 
-<!-- SERVICES -->
-<section id="services">
-  <span class="section-label reveal">Apa yang kami tawarkan</span>
-  <h2 class="section-title reveal">Layanan Kami</h2>
-  <p class="section-desc reveal">Tiga pilar utama yang kami kuasai untuk mendukung kebutuhan digitalmu — dari nol sampai jadi.</p>
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 5 + 'px';
+      cursor.style.top = e.clientY - 5 + 'px';
+      cursorRing.style.left = e.clientX - 18 + 'px';
+      cursorRing.style.top = e.clientY - 18 + 'px';
+    });
 
-  <div class="services-grid reveal">
-    <div class="service-card">
-      <div class="service-icon">🌐</div>
-      <h3>Pembuatan Website</h3>
-      <p>Website profesional, responsif, dan cepat — dirancang sesuai kebutuhan bisnis atau personal kamu. Landing page, company profile, toko online, semua bisa.</p>
-      <span class="service-tag">Landing Page</span>
-      <span class="service-tag">Company Profile</span>
-      <span class="service-tag">E-Commerce</span>
-      <span class="service-tag">Blog</span>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">📱</div>
-      <h3>Pembuatan Aplikasi</h3>
-      <p>Butuh aplikasi custom untuk bisnismu? Kami kembangkan solusi digital yang scalable dan user-friendly — web app maupun mobile app.</p>
-      <span class="service-tag">Web App</span>
-      <span class="service-tag">Mobile App</span>
-      <span class="service-tag">Dashboard</span>
-      <span class="service-tag">API</span>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🔧</div>
-      <h3>Servis PC & Laptop</h3>
-      <p>Perangkat lemot, rusak, atau kena virus? Kami tangani dengan cepat dan profesional. Instalasi, upgrade, hingga troubleshooting siap kami bantu.</p>
-      <span class="service-tag">Instalasi OS</span>
-      <span class="service-tag">Upgrade Hardware</span>
-      <span class="service-tag">Virus Removal</span>
-      <span class="service-tag">Recovery Data</span>
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section id="why">
-  <div class="why-inner">
-    <div class="why-visual reveal">
-      <div class="hexagon-grid">
-        <div class="floating-card">
-          <div class="fc-label">Response Time</div>
-          <div class="fc-value">&lt; 24 jam</div>
-        </div>
-        <div class="floating-card">
-          <div class="fc-label">Satisfaction</div>
-          <div class="fc-value">100%</div>
-        </div>
-        <div class="floating-card">
-          <div class="fc-label">Support</div>
-          <div class="fc-value">Garansi ✓</div>
-        </div>
-        <div class="floating-card">
-          <div class="fc-label">Harga</div>
-          <div class="fc-value">Terjangkau</div>
-        </div>
-        <div class="center-orb">Nexus<br>Diji</div>
-      </div>
-    </div>
-
-    <div>
-      <span class="section-label reveal">Kenapa pilih kami</span>
-      <h2 class="section-title reveal">Lebih dari Sekadar<br>Jasa Biasa</h2>
-      <div class="why-points">
-        <div class="why-point reveal">
-          <div class="wp-icon">⚡</div>
-          <div class="wp-text">
-            <h4>Pengerjaan Cepat & Terstruktur</h4>
-            <p>Kami menghargai waktumu. Setiap proyek dikerjakan dengan timeline yang jelas dan progress update secara berkala.</p>
-          </div>
-        </div>
-        <div class="why-point reveal">
-          <div class="wp-icon">💬</div>
-          <div class="wp-text">
-            <h4>Komunikasi Terbuka</h4>
-            <p>Kamu bisa tanya kapan saja. Kami percaya komunikasi yang baik adalah kunci proyek yang sukses.</p>
-          </div>
-        </div>
-        <div class="why-point reveal">
-          <div class="wp-icon">🎯</div>
-          <div class="wp-text">
-            <h4>Solusi yang Tepat Sasaran</h4>
-            <p>Kami tidak hanya code, tapi paham bisnis. Setiap solusi dirancang untuk mencapai tujuan bisnis kamu.</p>
-          </div>
-        </div>
-        <div class="why-point reveal">
-          <div class="wp-icon">🔒</div>
-          <div class="wp-text">
-            <h4>Keamanan & Performa Terjamin</h4>
-            <p>Data dan privasi klien adalah prioritas. Kami implementasikan best practices untuk keamanan maksimal.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process" class="process-bg">
-  <span class="section-label reveal">Bagaimana cara kerjanya</span>
-  <h2 class="section-title reveal">Proses Kerja Kami</h2>
-
-  <div class="process-steps">
-    <div class="step reveal">
-      <div class="step-num">1</div>
-      <h4>Konsultasi</h4>
-      <p>Kami dengarkan kebutuhan kamu secara detail dan diskusikan solusi terbaik.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">2</div>
-      <h4>Perencanaan</h4>
-      <p>Tim kami merancang timeline, scope, dan breakdown task yang jelas.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">3</div>
-      <h4>Pengerjaan</h4>
-      <p>Eksekusi dengan update rutin dan quality control di setiap tahap.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">4</div>
-      <h4>Delivery & Support</h4>
-      <p>Project selesai dengan dokumentasi lengkap dan support pasca-launch.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA SECTION -->
-<section id="contact" class="cta-section">
-  <h2 class="section-title reveal">Siap Wujudkan Ide Digitalmu?</h2>
-  <p class="reveal">Hubungi Nexus Diji hari ini dan dapatkan konsultasi gratis untuk mengembangkan solusi digital impianmu.</p>
-  <a href="https://wa.me/6281234567890" class="btn-primary reveal">
-    Hubungi Kami Sekarang
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2025 Nexus Diji. Semua hak cipta dilindungi.</p>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Service</a>
-    <a href="#">Contact</a>
-  </div>
-</footer>
-
-<script>
-  // CUSTOM CURSOR
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
-
-  document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX - 5 + 'px';
-    cursor.style.top = e.clientY - 5 + 'px';
-    cursorRing.style.left = e.clientX - 18 + 'px';
-    cursorRing.style.top = e.clientY - 18 + 'px';
-  });
-
-  // NAV SCROLL EFFECT
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-
-  // REVEAL ANIMATIONS
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+    // NAV SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
       }
     });
-  }, observerOptions);
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+    // REVEAL ANIMATIONS
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
 </body>
+
 </html>

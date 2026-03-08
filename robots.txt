@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block admin/private paths (add if needed)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://nexus-diji.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to crawlers)
+Crawl-delay: 1
