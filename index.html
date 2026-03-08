@@ -1158,6 +1158,46 @@
     transition: all 0.3s;
   }
 
+  /* MOBILE MENU — hidden by default, shown only when .open class added */
+  .nav-mobile-menu {
+    display: none;
+  }
+
+  .nav-mobile-menu.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.97);
+    backdrop-filter: blur(20px);
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    z-index: 200;
+  }
+
+  .nav-mobile-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .close-menu-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
   /* ===== PORTFOLIO SECTION ===== */
   .portfolio-grid {
     display: grid;
