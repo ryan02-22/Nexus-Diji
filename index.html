@@ -1465,6 +1465,89 @@
     font-size: 0.78rem;
   }
 
+  /* ===== BLOG / ACTIVITIES SECTION ===== */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .blog-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+
+  .blog-img {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(0, 229, 255, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blog-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .blog-date {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .blog-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .blog-content p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s;
+  }
+
+  .blog-link:hover {
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 900px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
   /* ===== FLOATING WA BUTTON ===== */
   .wa-float {
     position: fixed;
@@ -1573,6 +1656,7 @@
       <li><a href="#services">Layanan</a></li>
       <li><a href="#pricing">Harga</a></li>
       <li><a href="#why">Kenapa Kami</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#contact" class="nav-cta">Mulai Proyek</a></li>
     </ul>
     <!-- HAMBURGER BUTTON -->
@@ -1590,6 +1674,7 @@
     <a href="#why" onclick="closeMobileMenu()">Kenapa Kami</a>
     <a href="#process" onclick="closeMobileMenu()">Proses</a>
     <a href="#testimonials" onclick="closeMobileMenu()">Testimoni</a>
+    <a href="#blog" onclick="closeMobileMenu()">Blog</a>
     <a href="#contact" onclick="closeMobileMenu()" style="color:var(--accent);">Mulai Proyek →</a>
   </div>
 
@@ -1931,6 +2016,66 @@
             <strong>Budi Pratama</strong>
             <span>Mahasiswa Teknik Informatika</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG / ACTIVITIES -->
+  <section id="blog">
+    <span class="section-label reveal">Update & Edukasi</span>
+    <h2 class="section-title reveal">Blog & Aktivitas</h2>
+    <p class="section-desc reveal">Dapatkan tips seputar teknologi, website, dan update terbaru dari tim Nexus Diji.</p>
+
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-img">🚀</div>
+        <div class="blog-content">
+          <span class="blog-date">8 Maret 2026</span>
+          <h3>Pentingnya Website untuk UMKM di 2026</h3>
+          <p>Mengapa memiliki website profesional bukan lagi sekadar pilihan, melainkan keharusan untuk bersaing di era
+            digital.</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Pentingnya%20Website"
+            class="blog-link">
+            Baca Selengkapnya
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal">
+        <div class="blog-img">⚡</div>
+        <div class="blog-content">
+          <span class="blog-date">5 Maret 2026</span>
+          <h3>Tips Meningkatkan Kecepatan Loading Web</h3>
+          <p>5 langkah sederhana yang bisa Anda lakukan sendiri untuk membuat website Anda memuat lebih cepat & disukai
+            Google.</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Tips%20Kecepatan"
+            class="blog-link">
+            Baca Selengkapnya
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal">
+        <div class="blog-img">🛠️</div>
+        <div class="blog-content">
+          <span class="blog-date">2 Maret 2026</span>
+          <h3>Tanda Laptop Anda Butuh Servis Segera</h3>
+          <p>Jangan tunggu rusak parah! Kenali ciri-ciri hardware laptop yang mulai bermasalah sebelum data Anda hilang.
+          </p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Ciri%20Laptop%20Rusak"
+            class="blog-link">
+            Baca Selengkapnya
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
