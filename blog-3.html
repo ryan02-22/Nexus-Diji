@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanda Laptop Anda Butuh Servis Segera | Nexus Diji</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Global Styles */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --border: #1e1e2e;
+            --accent: #00e5ff;
+            --accent2: #7c3aed;
+            --text: #f0f0f8;
+            --muted: #6b6b88;
+            --card: #13131f;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* Navbar Placeholder Container */
+        .nav-container {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            padding: 0.65rem 1.6rem;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.25);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Article Wrapper */
+        .article-wrap {
+            max-width: 800px;
+            margin: 4rem auto 8rem;
+            padding: 0 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            transition: opacity 0.2s;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Typography */
+        .blog-badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.08);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .article-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #d0d0e0;
+        }
+
+        .article-content h2 {
+            color: var(--text);
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .article-content h3 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin: 2rem 0 0.5rem;
+            font-weight: 700;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 0 0 2rem 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2.5rem 0;
+            font-style: italic;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 4rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Minimal Nav -->
+    <header class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="./assets/images/logo.png" alt="Nexus Diji Logo" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#services">Layanan</a></li>
+        </ul>
+        <a href="https://wa.me/6285711171508" class="btn-primary">Hubungi Kami</a>
+    </header>
+
+    <main class="article-wrap">
+        <a href="index.html#blog" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            Kembali ke Beranda
+        </a>
+
+        <span class="blog-badge">Hardware & Maintenance</span>
+        <h1 class="article-title">Tanda Laptop Anda Butuh Servis Segera</h1>
+        <div class="article-meta">
+            <span>Oleh <strong>Tim Teknisi Nexus Diji</strong></span>
+            <span>â€¢</span>
+            <span>2 Maret 2026</span>
+        </div>
+
+        <div class="article-content">
+            <p>Banyak dari kita yang mengabaikan gejala-gejala kecil pada laptop sampai akhirnya perangkat tersebut mati
+                total dan menyebabkan kita kehilangan semua data penting. Layaknya kendaraan, laptop juga membutuhkan
+                perawatan berkala agar komponennya tidak cepat aus/rusak secara permanen.</p>
+
+            <h2>1. Laptop Cepat Panas (Overheating) dan Performa Menurun</h2>
+            <p>Jika laptop Anda terasa sepanas setrika di bagian bawah dan kipas menderu kencang meskipun Anda hanya
+                membuka Microsoft Word, <strong>ini adalah alarm bahaya</strong>. Tumpukan debu di ventilasi menghambat
+                sirkulasi udara, atau pasta termal (Thermal Paste) yang menjembatani CPU dengan *heatsink* mungkin sudah
+                mengeras. Overheating yang dibiarkan bisa membakar *motherboard*!</p>
+
+            <h2>2. Blue Screen of Death (BSoD) Berkali-kali</h2>
+            <p>Layar tiba-tiba menjadi biru dan me-*restart* secara mendadak? BSoD dapat menjadi indikasi adanya
+                kerusakan fatal pada *hardware* internal (terutama pada RAM atau Hard Disk yang mulai rusak bad
+                *sector*), atau masalah ketidakcocokan *software/driver* sistem operasi.</p>
+
+            <div class="highlight-box">
+                Peringatan: Jika layar biru tersebut menunjukkan pesan error seperti "MEMORY_MANAGEMENT" atau
+                "UNMOUNTABLE_BOOT_VOLUME", jangan paksa menyalakan komputer terus menerus. Amankan data Anda segera!
+            </div>
+
+            <h2>3. Suara Aneh dari Dalam Mesin (Bunyi Klik/Bising Keras)</h2>
+            <p>Secara umum, *solid state drive* (SSD) modern tidak bersuara. Suara mencicit hanya berasal dari kipas.
+                Tetapi dengan teknologi lama *Hard Disk Drive* (HDD), apabila ada suara *klik-klik-klik* repetitif, maka
+                **cakram keras (disk magnetis) Anda sedang sekarat secara fisik!** Sebagian data Anda berisiko fatal
+                jika drive ini gagal secara permanen.</p>
+
+            <h2>4. Baterai Cepat Habis Secara Drastis / "Plugged in, not charging"</h2>
+            <p>Siklus hidup baterai polimer Lithium berkurang dari waktu ke waktu. Gejala baterai bocor bukan saja
+                membuat kinerja tanpa saringan listrik merusak baterai cadangan *CMOS*. Baterai lama yang sudah dalam
+                tahap "Swollen" (menggelembung) <strong>berpotensi tinggi untuk terbakar</strong> dan merusak pelindung
+                papan bawah laptop Anda secara fisik. Segera periksakan diri sebelum lapisan bodinya pecah!</p>
+
+            <h2>Tindakan Pencegahan</h2>
+            <p>Coba ingat kapan terakhir kali Anda *maintenance* sistem dan perawatan *hardware* internal seperti
+                pembersihan fisik dari debu mikro dan pembaruan pasta thermal? Lakukan hal tersebut <strong>paling telat
+                    dua (2) tahun sekali</strong> untuk menjaga komputer bekerja dengan peforma maksimal dan tahan umur
+                yang lama.</p>
+
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
+                <h3 style="margin-bottom: 1rem; color: #fff;">Laptop Anda Mengalami Gejala di Atas?</h3>
+                <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Cegah kerusakan fatal sebelum terlambat! Tim
+                    teknisi Nexus Diji siap menjemput dan menangani pengecekan servis laptop Anda secara menyeluruh.</p>
+                <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20konsultasi%20mengenai%20kerusakan%20laptop"
+                    class="btn-primary" target="_blank" rel="noopener">Konsultasikan Keluhan Laptop Anda</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nexus Diji. Semua hak cipta dilindungi.</p>
+    </footer>
+
+</body>
+
+</html>

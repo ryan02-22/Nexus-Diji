@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentingnya Website untuk UMKM di 2026 | Nexus Diji</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Global Styles */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --border: #1e1e2e;
+            --accent: #00e5ff;
+            --accent2: #7c3aed;
+            --text: #f0f0f8;
+            --muted: #6b6b88;
+            --card: #13131f;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* Navbar Placeholder Container */
+        .nav-container {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            padding: 0.65rem 1.6rem;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.25);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Article Wrapper */
+        .article-wrap {
+            max-width: 800px;
+            margin: 4rem auto 8rem;
+            padding: 0 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            transition: opacity 0.2s;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Typography */
+        .blog-badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.08);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .article-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #d0d0e0;
+        }
+
+        .article-content h2 {
+            color: var(--text);
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .article-content h3 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin: 2rem 0 0.5rem;
+            font-weight: 700;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 0 0 2rem 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2.5rem 0;
+            font-style: italic;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 4rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Minimal Nav -->
+    <header class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="./assets/images/logo.png" alt="Nexus Diji Logo" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#services">Layanan</a></li>
+        </ul>
+        <a href="https://wa.me/6285711171508" class="btn-primary">Hubungi Kami</a>
+    </header>
+
+    <main class="article-wrap">
+        <a href="index.html#blog" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            Kembali ke Beranda
+        </a>
+
+        <span class="blog-badge">Bisnis & Teknologi</span>
+        <h1 class="article-title">Pentingnya Website untuk UMKM di 2026</h1>
+        <div class="article-meta">
+            <span>Oleh <strong>Tim Nexus Diji</strong></span>
+            <span>â€¢</span>
+            <span>8 Maret 2026</span>
+        </div>
+
+        <div class="article-content">
+            <p>Mengapa memiliki website profesional bukan lagi sekadar pilihan, melainkan keharusan untuk bersaing di
+                era digital? Banyak pemilik UMKM masih merasa bahwa berjualan melalui media sosial atau marketplace saja
+                sudah cukup. Padahal, perilaku konsumen terus berubah, dan ketergantungan pada platform pihak ketiga
+                memiliki risiko jangka panjang.</p>
+
+            <h2>1. Kredibilitas dan Profesionalisme</h2>
+            <p>Konsumen modern cenderung melakukan riset secara online sebelum memutuskan untuk membeli produk atau
+                menggunakan sebuah jasa. Memiliki domain sendiri (seperti <code>www.namabisnisanda.com</code>) secara
+                instan membangun tingkat kepercayaan yang tidak bisa ditawarkan oleh akun Instagram gratisan. Website
+                berfungsi sebagai <strong>kantor digital resmi</strong> Anda yang buka 24 jam sehari.</p>
+
+            <div class="highlight-box">
+                "75% konsumen menilai kredibilitas sebuah bisnis berdasarkan desain dan kehadiran website mereka."
+            </div>
+
+            <h2>2. Kendali Penuh atas Aset Digital</h2>
+            <p>Algoritma media sosial terus berubah. Hari ini postingan Anda mungkin dilihat oleh ribuan orang, esok
+                hari bisa jadi tenggelam. Jika akun Anda diblokir atau di-hack, Anda bisa kehilangan seluruh pelanggan
+                dalam sekejap.</p>
+            <ul>
+                <li>Dengan website, Anda memegang kendali 100% atas data pelanggan, desain, dan struktur penjualan
+                    komisi (tanpa dipotong biaya layanan marketplace yang semakin tinggi).</li>
+                <li>Anda bebas merancang *funnel* penjualan yang spesifik sesuai dengan journey pelanggan bisnis unik
+                    Anda.</li>
+            </ul>
+
+            <h2>3. Integrasi SEO Lanjut (Search Engine Optimization)</h2>
+            <p>Platform seperti Google memprioritaskan hasil pencarian dari website yang memiliki struktur data lokal
+                yang baik. Ketika seseorang menelusuri <em>"Jasa Katering Terdekat"</em> atau <em>"Toko Baju Muslim
+                    Jakarta"</em>, memiliki website yang dioptimasi secara <strong>SEO (Search Engine
+                    Optimization)</strong> akan menaikkan posisi Anda di atas kompetitor kecil lainnya yang hanya
+                bergantung pada media sosial.</p>
+
+            <h2>4. Akses ke Audiens yang Lebih Luas</h2>
+            <p>Toko fisik memiliki batasan geografis. Media sosial memiliki algoritma yang membatasi jangkauan biologis
+                (*organic reach*). Namun, website yang responsif dan cepat bekerja ibarat *salesman* global yang
+                memperkenalkan produk Anda tanpa batasan waktu dan jarak. Anda dapat dengan bebas beriklan dengan
+                presisi (seperti melalui Google Ads) dan melacak perilaku pengunjung Anda untuk retargeting.</p>
+
+            <h2>Kesimpulan</h2>
+            <p>Di tahun 2026, website bukanlah sekadar brosur online. Ia adalah <strong>pusat dari seluruh ekosistem
+                    digital pemasaran Anda</strong>. Mengabaikan keberadaan website sama dengan membatasi potensi
+                pertumbuhan bisnis Anda sendiri.</p>
+
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
+                <h3 style="margin-bottom: 1rem; color: #fff;">Belum Punya Website untuk Bisnis Anda?</h3>
+                <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Tim Nexus Diji siap membantu merancang website
+                    landing page, company profile, atau e-commerce yang didesain secara kustom.</p>
+                <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20membuat%20website%20untuk%20UMKM%20saya"
+                    class="btn-primary" target="_blank" rel="noopener">Konsultasi Gratis Sekarang</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nexus Diji. Semua hak cipta dilindungi.</p>
+    </footer>
+
+</body>
+
+</html>

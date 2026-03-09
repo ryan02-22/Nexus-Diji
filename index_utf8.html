@@ -177,8 +177,6 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 145px;
-    /* Accounts for promo banner + sticky nav */
   }
 
   body {
@@ -541,32 +539,14 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.2s;
     border: none;
     cursor: none;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-    transform: skewX(-20deg);
-    transition: all 0.5s ease;
-  }
-
-  .btn-primary:hover::after {
-    left: 150%;
   }
 
   .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0, 229, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 229, 255, 0.25);
   }
 
   .btn-secondary {
@@ -626,7 +606,7 @@
 
   /* â”€â”€ SECTIONS â”€â”€ */
   section {
-    padding: 4.5rem 4rem;
+    padding: 6rem 4rem;
   }
 
   .section-label {
@@ -653,7 +633,7 @@
     font-size: 1.05rem;
     line-height: 1.7;
     max-width: 480px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 4rem;
     font-weight: 400;
   }
 
@@ -739,10 +719,12 @@
     margin-bottom: 0.4rem;
   }
 
+  /* â”€â”€ PORTFOLIO â”€â”€ */
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    margin-top: 3rem;
   }
 
   .portfolio-card {
@@ -761,47 +743,12 @@
   .portfolio-thumb {
     width: 100%;
     height: 180px;
-    background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(124, 58, 237, 0.08) 100%);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(124, 58, 237, 0.12) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 3rem;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .portfolio-thumb::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-
-  .portfolio-card:hover .portfolio-thumb::after {
-    opacity: 0.15;
-  }
-
-  .portfolio-thumb svg {
-    width: 48px;
-    height: 48px;
-    color: var(--accent);
-    position: relative;
-    z-index: 1;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.2));
-  }
-
-  .portfolio-card:hover .portfolio-thumb svg {
-    transform: scale(1.15) rotate(-5deg);
-    filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.6));
   }
 
   .portfolio-info {
@@ -836,6 +783,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    margin-top: 3rem;
     align-items: start;
   }
 
@@ -915,14 +863,12 @@
     color: var(--muted);
   }
 
-  .pricing-features li svg {
+  .pricing-features li::before {
+    content: 'âœ“';
     color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
     flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .pricing-features li span {
-    line-height: 1.4;
   }
 
   .pricing-cta {
@@ -933,37 +879,15 @@
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.2s;
     border: 1px solid var(--accent);
     color: var(--accent);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .pricing-cta::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent);
-    transform: skewX(-20deg);
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: -1;
-  }
-
-  .pricing-cta:hover::after,
-  .pricing-card.popular .pricing-cta:hover::after {
-    left: 150%;
   }
 
   .pricing-cta:hover,
   .pricing-card.popular .pricing-cta {
     background: var(--accent);
     color: #000;
-    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.3);
   }
 
   /* â”€â”€ WHY â”€â”€ */
@@ -988,15 +912,12 @@
   }
 
   .floating-card {
-    background: rgba(10, 10, 15, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 229, 255, 0.15);
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
     position: absolute;
     animation: float 4s ease-in-out infinite;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
   .floating-card:nth-child(1) {
@@ -1075,21 +996,16 @@
   }
 
   .wp-icon {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(124, 58, 237, 0.08));
-    border: 1px solid rgba(0, 229, 255, 0.15);
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.12);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    backdrop-filter: blur(4px);
-  }
-
-  .wp-icon svg {
-    color: var(--accent);
-    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5));
+    font-size: 1.1rem;
   }
 
   .wp-text h4 {
@@ -1117,7 +1033,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    margin-top: 2.5rem;
+    margin-top: 4rem;
     position: relative;
   }
 
@@ -1144,10 +1060,8 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(0, 229, 255, 0.1));
-    border: 1px solid rgba(0, 229, 255, 0.3);
-    box-shadow: inset 0 0 12px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1);
-    backdrop-filter: blur(4px);
+    background: var(--bg);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1678,15 +1592,9 @@
 
   .stars {
     color: #fbbf24;
-    display: flex;
-    gap: 0.15rem;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
     margin-bottom: 1rem;
-  }
-
-  .stars svg {
-    width: 18px;
-    height: 18px;
-    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.4));
   }
 
   .testimonial-text {
@@ -1768,32 +1676,25 @@
   }
 
   .faq-icon {
-    width: 34px;
-    height: 34px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    background: rgba(0, 229, 255, 0.04);
     border: 1px solid var(--border);
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s;
     color: var(--accent);
-  }
-
-  .faq-q:hover .faq-icon {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+    font-size: 1.1rem;
+    line-height: 1;
   }
 
   .faq-item.open .faq-icon {
     background: var(--accent);
     color: #000;
-    transform: rotate(180deg);
+    transform: rotate(45deg);
     border-color: var(--accent);
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
   }
 
   .faq-a {
@@ -1841,31 +1742,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 2.5rem;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .blog-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(8px);
-    z-index: 0;
-  }
-
-  .blog-img svg {
-    width: 64px;
-    height: 64px;
-    color: var(--accent);
-    filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
-    z-index: 1;
-  }
-
-  .blog-card:hover .blog-img svg {
-    transform: scale(1.15) rotate(-5deg);
-    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.7));
   }
 
   .blog-content {
@@ -1885,54 +1763,6 @@
     font-weight: 700;
     margin-bottom: 0.75rem;
     line-height: 1.4;
-  }
-
-  /* ── SERVICE ICONS (INNOVATIVE) ── */
-  .service-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid rgba(124, 58, 237, 0.2);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: var(--accent);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(8px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .service-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-
-  .service-card:hover .service-icon {
-    transform: translateY(-5px) scale(1.1) rotate(5deg);
-    border-color: var(--accent);
-    box-shadow: 0 10px 20px rgba(0, 243, 255, 0.15);
-  }
-
-  .service-card:hover .service-icon::before {
-    opacity: 0.1;
-  }
-
-  .service-icon svg {
-    width: 28px;
-    height: 28px;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.3));
   }
 
   .blog-content p {
@@ -2404,7 +2234,7 @@
         <span class="accent" id="typingLine3"></span><span class="typing-cursor" id="typingCursor"></span>
       </h1>
       <p class="hero-desc">
-        Nexus Diji hadir sebagai mitra teknologi kamu - dari website profesional, aplikasi custom, hingga servis
+        Nexus Diji hadir sebagai mitra teknologi kamu â€” dari website profesional, aplikasi custom, hingga servis
         perangkat PC & laptop.
       </p>
       <div class="hero-cta">
@@ -2442,14 +2272,7 @@
       sampai jadi.</p>
     <div class="services-grid reveal">
       <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-        </div>
+        <div class="service-icon">ðŸŒ</div>
         <h3>Pembuatan Website</h3>
         <p>Website profesional, responsif, dan cepat â€” dirancang sesuai kebutuhan bisnis atau personal kamu. Landing
           page, company profile, toko online, semua bisa.</p>
@@ -2459,13 +2282,7 @@
         <span class="service-tag">Blog</span>
       </div>
       <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12.01" y2="18"></line>
-          </svg>
-        </div>
+        <div class="service-icon">ðŸ“±</div>
         <h3>Pembuatan Aplikasi</h3>
         <p>Butuh aplikasi custom untuk bisnismu? Kami kembangkan solusi digital yang scalable dan user-friendly â€” web
           app maupun mobile app.</p>
@@ -2475,14 +2292,7 @@
         <span class="service-tag">API</span>
       </div>
       <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path
-              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
-            </path>
-          </svg>
-        </div>
+        <div class="service-icon">ðŸ”§</div>
         <h3>Servis PC &amp; Laptop</h3>
         <p>Perangkat lemot, rusak, atau kena virus? Kami tangani dengan cepat dan profesional. Instalasi, upgrade,
           hingga troubleshooting siap kami bantu.</p>
@@ -2504,12 +2314,7 @@
       <div class="portfolio-marquee-track">
         <!-- Set 1 -->
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-              <path d="M3 6h18"></path>
-              <path d="M16 10a4 0 0 1-8 0"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ›ï¸</div>
           <div class="portfolio-info">
             <h3>Toko Online Fashion</h3>
             <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
@@ -2517,20 +2322,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-              <path d="M9 22V12h6v10"></path>
-              <path d="M8 6h.01"></path>
-              <path d="M16 6h.01"></path>
-              <path d="M12 6h.01"></path>
-              <path d="M12 10h.01"></path>
-              <path d="M12 14h.01"></path>
-              <path d="M16 10h.01"></path>
-              <path d="M16 14h.01"></path>
-              <path d="M8 10h.01"></path>
-              <path d="M8 14h.01"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ¢</div>
           <div class="portfolio-info">
             <h3>Company Profile PT XYZ</h3>
             <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
@@ -2538,12 +2330,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="3" y1="9" x2="21" y2="9"></line>
-              <line x1="9" y1="21" x2="9" y2="9"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ“Š</div>
           <div class="portfolio-info">
             <h3>Dashboard Manajemen</h3>
             <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
@@ -2551,11 +2338,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="18" x2="12.01" y2="18"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ”</div>
           <div class="portfolio-info">
             <h3>Aplikasi Pesan Makanan</h3>
             <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
@@ -2563,11 +2346,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸŽ“</div>
           <div class="portfolio-info">
             <h3>Platform E-Learning</h3>
             <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
@@ -2575,12 +2354,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ’»</div>
           <div class="portfolio-info">
             <h3>Landing Page SaaS</h3>
             <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
@@ -2589,12 +2363,7 @@
         </div>
         <!-- Set 2 (duplicate for seamless loop) -->
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-              <path d="M3 6h18"></path>
-              <path d="M16 10a4 0 0 1-8 0"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ›ï¸</div>
           <div class="portfolio-info">
             <h3>Toko Online Fashion</h3>
             <p>Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.</p>
@@ -2602,20 +2371,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-              <path d="M9 22V12h6v10"></path>
-              <path d="M8 6h.01"></path>
-              <path d="M16 6h.01"></path>
-              <path d="M12 6h.01"></path>
-              <path d="M12 10h.01"></path>
-              <path d="M12 14h.01"></path>
-              <path d="M16 10h.01"></path>
-              <path d="M16 14h.01"></path>
-              <path d="M8 10h.01"></path>
-              <path d="M8 14h.01"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ¢</div>
           <div class="portfolio-info">
             <h3>Company Profile PT XYZ</h3>
             <p>Website company profile profesional dengan animasi modern dan SEO-friendly.</p>
@@ -2623,12 +2379,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="3" y1="9" x2="21" y2="9"></line>
-              <line x1="9" y1="21" x2="9" y2="9"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ“Š</div>
           <div class="portfolio-info">
             <h3>Dashboard Manajemen</h3>
             <p>Sistem dashboard web app untuk monitoring data bisnis secara real-time.</p>
@@ -2636,11 +2387,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="18" x2="12.01" y2="18"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ”</div>
           <div class="portfolio-info">
             <h3>Aplikasi Pesan Makanan</h3>
             <p>Mobile app untuk pemesanan makanan dengan fitur tracking dan notifikasi real-time.</p>
@@ -2648,11 +2395,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸŽ“</div>
           <div class="portfolio-info">
             <h3>Platform E-Learning</h3>
             <p>Platform pembelajaran online dengan sistem kursus, kuis, dan sertifikasi otomatis.</p>
@@ -2660,12 +2403,7 @@
           </div>
         </div>
         <div class="portfolio-card">
-          <div class="portfolio-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg></div>
+          <div class="portfolio-thumb">ðŸ’»</div>
           <div class="portfolio-info">
             <h3>Landing Page SaaS</h3>
             <p>Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.</p>
@@ -2690,26 +2428,11 @@
         <div class="pricing-desc">Untuk kamu yang baru mulai dan butuh kehadiran online yang profesional.</div>
         <div class="pricing-price">Rp 500rb<span>/proyek</span></div>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Landing Page 1 halaman</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Desain responsif mobile</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Kontak via WhatsApp</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Gratis 2x revisi</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Selesai 3-5 hari kerja</span></li>
+          <li>Landing Page 1 halaman</li>
+          <li>Desain responsif mobile</li>
+          <li>Kontak via WhatsApp</li>
+          <li>Gratis 2x revisi</li>
+          <li>Selesai 3-5 hari kerja</li>
         </ul>
         <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20paket%20Starter"
           class="pricing-cta" rel="noopener" target="_blank">Pilih Paket Ini</a>
@@ -2720,34 +2443,13 @@
         <div class="pricing-desc">Solusi lengkap untuk bisnis yang ingin tampil maksimal secara online.</div>
         <div class="pricing-price">Rp 2jt<span>/proyek</span></div>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Website multi-halaman</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Desain custom premium</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>CMS / panel kelola konten</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>SEO on-page optimasi</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Gratis 5x revisi</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Selesai 7-14 hari kerja</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Support 1 bulan</span></li>
+          <li>Website multi-halaman</li>
+          <li>Desain custom premium</li>
+          <li>CMS / panel kelola konten</li>
+          <li>SEO on-page optimasi</li>
+          <li>Gratis 5x revisi</li>
+          <li>Selesai 7-14 hari kerja</li>
+          <li>Support 1 bulan</li>
         </ul>
         <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20paket%20Profesional"
           class="pricing-cta" rel="noopener" target="_blank">Pilih Paket Ini</a>
@@ -2757,34 +2459,13 @@
         <div class="pricing-desc">Untuk kebutuhan kompleks: sistem, aplikasi, atau platform skala besar.</div>
         <div class="pricing-price">Custom<span>/hubungi kami</span></div>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Web app / mobile app custom</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Integrasi API & database</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Sistem manajemen lengkap</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Revisi unlimited</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Timeline fleksibel</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Support 3 bulan</span></li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg> <span>Dokumentasi teknis</span></li>
+          <li>Web app / mobile app custom</li>
+          <li>Integrasi API & database</li>
+          <li>Sistem manajemen lengkap</li>
+          <li>Revisi unlimited</li>
+          <li>Timeline fleksibel</li>
+          <li>Support 3 bulan</li>
+          <li>Dokumentasi teknis</li>
         </ul>
         <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20butuh%20konsultasi%20Enterprise"
           class="pricing-cta" rel="noopener" target="_blank">Konsultasi Gratis</a>
@@ -2821,12 +2502,7 @@
         <h2 class="section-title reveal">Lebih dari Sekadar<br>Jasa Biasa</h2>
         <div class="why-points">
           <div class="why-point reveal">
-            <div class="wp-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-              </svg>
-            </div>
+            <div class="wp-icon">âš¡</div>
             <div class="wp-text">
               <h4>Pengerjaan Cepat & Terstruktur</h4>
               <p>Kami menghargai waktumu. Setiap proyek dikerjakan dengan timeline yang jelas dan progress update secara
@@ -2834,26 +2510,14 @@
             </div>
           </div>
           <div class="why-point reveal">
-            <div class="wp-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
-              </svg>
-            </div>
+            <div class="wp-icon">ðŸ’¬</div>
             <div class="wp-text">
               <h4>Komunikasi Terbuka</h4>
               <p>Kamu bisa tanya kapan saja. Kami percaya komunikasi yang baik adalah kunci proyek yang sukses.</p>
             </div>
           </div>
           <div class="why-point reveal">
-            <div class="wp-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <circle cx="12" cy="12" r="2"></circle>
-              </svg>
-            </div>
+            <div class="wp-icon">ðŸŽ¯</div>
             <div class="wp-text">
               <h4>Solusi yang Tepat Sasaran</h4>
               <p>Kami tidak hanya code, tapi paham bisnis. Setiap solusi dirancang untuk mencapai tujuan bisnis kamu.
@@ -2861,13 +2525,7 @@
             </div>
           </div>
           <div class="why-point reveal">
-            <div class="wp-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-            </div>
+            <div class="wp-icon">ðŸ”’</div>
             <div class="wp-text">
               <h4>Keamanan & Performa Terjamin</h4>
               <p>Data dan privasi klien adalah prioritas. Kami implementasikan best practices untuk keamanan maksimal.
@@ -2914,38 +2572,7 @@
     <p class="section-desc reveal">Kepercayaan klien adalah motivasi terbesar kami untuk terus berkembang.</p>
     <div class="testimonial-grid">
       <div class="testimonial-card reveal">
-        <div class="stars">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-        </div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
         <p class="testimonial-text">"Website toko online saya selesai dalam 5 hari, desain keren banget dan langsung
           bisa jualan. Tim Nexus Diji responsif dan sabar menjelaskan."</p>
         <div class="testimonial-author">
@@ -2954,38 +2581,7 @@
         </div>
       </div>
       <div class="testimonial-card reveal">
-        <div class="stars">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-        </div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
         <p class="testimonial-text">"Dashboard management yang dibuat sangat membantu operasional bisnis kami. Highly
           recommended untuk yang butuh solusi digital profesional!"</p>
         <div class="testimonial-author">
@@ -2994,38 +2590,7 @@
         </div>
       </div>
       <div class="testimonial-card reveal">
-        <div class="stars">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
-          </svg>
-        </div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
         <p class="testimonial-text">"Laptop saya yang lemot banget berhasil dioptimasi dan sekarang ngebut lagi.
           Servisnya cepat, profesional, dan harganya terjangkau."</p>
         <div class="testimonial-author">
@@ -3046,10 +2611,7 @@
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           Berapa biaya jasa pembuatan website di Nexus Diji?
-          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m6 9 6 6 6-6" />
-            </svg></span>
+          <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
           Harga kami sangat terjangkau, mulai dari <strong>Rp 500.000</strong> untuk landing page sederhana. Website
@@ -3060,15 +2622,11 @@
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           Berapa lama waktu pengerjaan website?
-          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m6 9 6 6 6-6" />
-            </svg></span>
+          <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
           Tergantung kompleksitas proyeknya. <strong>Landing page</strong> biasanya selesai dalam <strong>3â€“5 hari
-            kerja</strong>. Website company profile atau toko online membutuhkan <strong>7â€“14 hari kerja</strong>.
-          Untuk
+            kerja</strong>. Website company profile atau toko online membutuhkan <strong>7â€“14 hari kerja</strong>. Untuk
           web app atau sistem custom, timeline akan didiskusikan bersama di awal.
         </div>
       </div>
@@ -3126,22 +2684,14 @@
     <p class="section-desc reveal">Tips seputar teknologi, website, dan update terbaru dari tim Nexus Diji.</p>
     <div class="blog-grid">
       <div class="blog-card reveal">
-        <div class="blog-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
-            </path>
-            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-          </svg>
-        </div>
+        <div class="blog-img">ðŸš€</div>
         <div class="blog-content">
           <span class="blog-date">8 Maret 2026</span>
           <h3>Pentingnya Website untuk UMKM di 2026</h3>
           <p>Mengapa memiliki website profesional bukan lagi sekadar pilihan, melainkan keharusan untuk bersaing di era
             digital.</p>
-          <a href="blog-1.html" class="blog-link">
+          <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Pentingnya%20Website"
+            class="blog-link">
             Baca Selengkapnya
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3150,18 +2700,14 @@
         </div>
       </div>
       <div class="blog-card reveal">
-        <div class="blog-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-        </div>
+        <div class="blog-img">âš¡</div>
         <div class="blog-content">
           <span class="blog-date">5 Maret 2026</span>
           <h3>Tips Meningkatkan Kecepatan Loading Web</h3>
           <p>5 langkah sederhana yang bisa Anda lakukan sendiri untuk membuat website Anda memuat lebih cepat &amp;
             disukai Google.</p>
-          <a href="blog-2.html" class="blog-link">
+          <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Tips%20Kecepatan"
+            class="blog-link">
             Baca Selengkapnya
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3170,20 +2716,14 @@
         </div>
       </div>
       <div class="blog-card reveal">
-        <div class="blog-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path
-              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
-            </path>
-          </svg>
-        </div>
+        <div class="blog-img">ðŸ› ï¸</div>
         <div class="blog-content">
           <span class="blog-date">2 Maret 2026</span>
           <h3>Tanda Laptop Anda Butuh Servis Segera</h3>
           <p>Jangan tunggu rusak parah! Kenali ciri-ciri hardware laptop yang mulai bermasalah sebelum data Anda hilang.
           </p>
-          <a href="blog-3.html" class="blog-link">
+          <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20baca%20artikel%20Ciri%20Laptop%20Rusak"
+            class="blog-link">
             Baca Selengkapnya
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7" />
