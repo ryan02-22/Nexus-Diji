@@ -3429,6 +3429,253 @@
     </svg>
   </a>
 
+  <!-- ══ NEXUS ASSISTANT CHATBOT ══ -->
+  <style>
+    /* ── CHATBOT TOGGLE BUTTON ── */
+    #chatToggle {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.5rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00e5ff, #7c3aed);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0, 229, 255, 0.4);
+      z-index: 300;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    #chatToggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(0, 229, 255, 0.6);
+    }
+    #chatToggle svg { width: 24px; height: 24px; fill: white; }
+    #chatToggle .chat-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      width: 16px; height: 16px;
+      background: #ff4757;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      animation: pulseBadge 2s infinite;
+    }
+    @keyframes pulseBadge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    /* ── CHATBOT POPUP ── */
+    #chatPopup {
+      position: fixed;
+      bottom: 9.5rem;
+      right: 1.5rem;
+      width: 320px;
+      background: rgba(12, 12, 20, 0.97);
+      border: 1px solid rgba(0, 229, 255, 0.18);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 255, 0.06);
+      backdrop-filter: blur(20px);
+      z-index: 299;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #chatPopup.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header */
+    .chat-header {
+      background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,58,237,0.12));
+      padding: 1rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(0,229,255,0.1);
+    }
+    .chat-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00e5ff, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .chat-header-info { flex: 1; }
+    .chat-header-info strong {
+      display: block; color: #fff;
+      font-size: 0.9rem; font-weight: 700;
+    }
+    .chat-header-info span {
+      font-size: 0.72rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .chat-online-dot {
+      width: 7px; height: 7px;
+      background: #25d366; border-radius: 50%;
+      animation: pulseBadge 2s infinite;
+    }
+    #chatCloseBtn {
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 1.2rem; line-height: 1;
+      transition: color 0.2s;
+    }
+    #chatCloseBtn:hover { color: #fff; }
+
+    /* Messages area */
+    .chat-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .chat-bubble {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px 12px 12px 2px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      color: #d0d0e0;
+      line-height: 1.5;
+      animation: fadeUp 0.4s ease;
+    }
+    .chat-bubble.user-bubble {
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.2);
+      border-radius: 12px 12px 2px 12px;
+      color: #e0f8ff;
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    /* Quick reply buttons */
+    .chat-options {
+      padding: 0 1rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .chat-opt-btn {
+      background: rgba(0,229,255,0.05);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 100px;
+      padding: 0.55rem 1rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .chat-opt-btn:hover {
+      background: rgba(0,229,255,0.12);
+      border-color: rgba(0,229,255,0.45);
+      transform: translateX(3px);
+    }
+
+    /* WA redirect button */
+    .chat-wa-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: #25d366;
+      border: none; border-radius: 100px;
+      padding: 0.65rem 1.1rem;
+      color: #fff; font-size: 0.82rem;
+      font-weight: 700; font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      justify-content: center;
+      margin: 0 1rem 1rem;
+    }
+    .chat-wa-btn:hover { background: #1ebe5d; transform: scale(1.02); }
+    .chat-wa-btn svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
+    /* Footer input (dekoratif) */
+    .chat-footer {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    .chat-footer input {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px; padding: 0.5rem 0.9rem;
+      color: #fff; font-size: 0.8rem;
+      font-family: 'Poppins', sans-serif; outline: none;
+    }
+    .chat-footer input::placeholder { color: var(--muted); }
+    .chat-send-btn {
+      width: 34px; height: 34px; flex-shrink: 0;
+      border-radius: 50%; border: none;
+      background: linear-gradient(135deg, #00e5ff, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .chat-send-btn:hover { transform: scale(1.1); }
+    .chat-send-btn svg { width: 15px; height: 15px; fill: white; }
+
+    @media (max-width: 400px) {
+      #chatPopup { width: calc(100vw - 2rem); right: 1rem; }
+    }
+  </style>
+
+  <!-- Chatbot HTML -->
+  <button id="chatToggle" aria-label="Buka Nexus Assistant">
+    <div class="chat-badge"></div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/>
+    </svg>
+  </button>
+
+  <div id="chatPopup" role="dialog" aria-label="Nexus Assistant Chat">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-avatar">🚀</div>
+      <div class="chat-header-info">
+        <strong>Nexus Assistant</strong>
+        <span><span class="chat-online-dot"></span>Online &bull; Respon instan</span>
+      </div>
+      <button id="chatCloseBtn" aria-label="Tutup chat">&times;</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-body" id="chatBody">
+      <div class="chat-bubble">
+        Halo! 👋 Saya asisten digital <strong>Nexus Diji</strong>.<br><br>
+        Mau wujudkan ide apa hari ini? Pilih salah satu di bawah:
+      </div>
+    </div>
+
+    <!-- Quick reply options -->
+    <div class="chat-options" id="chatOptions">
+      <button class="chat-opt-btn" data-msg="Halo Nexus Diji, saya tertarik membuat website atau aplikasi. Bisa bantu saya?" data-label="🌐 Buat Website / Aplikasi">🌐 Buat Website / Aplikasi</button>
+      <button class="chat-opt-btn" data-msg="Halo Nexus Diji, saya butuh servis laptop atau PC. Bisa bantu?" data-label="💻 Servis Laptop / PC">💻 Servis Laptop / PC</button>
+      <button class="chat-opt-btn" data-msg="Halo Nexus Diji, saya ingin tanya estimasi harga dan paket layanan yang tersedia." data-label="💰 Cek Harga & Estimasi">💰 Cek Harga &amp; Estimasi</button>
+      <button class="chat-opt-btn" data-msg="Halo Nexus Diji, saya ingin konsultasi gratis mengenai kebutuhan digital saya." data-label="💡 Konsultasi Gratis">💡 Konsultasi Gratis</button>
+    </div>
+
+    <!-- Footer input -->
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="Ketik pesan...">
+      <button class="chat-send-btn" id="chatSendBtn" aria-label="Kirim">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
   <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path d="M18 15l-6-6-6 6" />
@@ -3604,6 +3851,88 @@
         }
       });
     });
+
+    // ── NEXUS ASSISTANT CHATBOT ──
+    const chatToggle  = document.getElementById('chatToggle');
+    const chatPopup   = document.getElementById('chatPopup');
+    const chatCloseBtn= document.getElementById('chatCloseBtn');
+    const chatBody    = document.getElementById('chatBody');
+    const chatOptions = document.getElementById('chatOptions');
+    const chatInput   = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const WA_NUMBER   = '6285711171508';
+
+    function openChat() {
+      chatPopup.style.display = 'flex';
+      // force reflow to trigger transition
+      requestAnimationFrame(() => chatPopup.classList.add('open'));
+      chatToggle.querySelector('.chat-badge').style.display = 'none';
+    }
+    function closeChat() {
+      chatPopup.classList.remove('open');
+      setTimeout(() => { chatPopup.style.display = 'none'; }, 300);
+    }
+
+    chatToggle.addEventListener('click', () => {
+      chatPopup.style.display === 'flex' ? closeChat() : openChat();
+    });
+    chatCloseBtn.addEventListener('click', closeChat);
+
+    function addBubble(text, isUser = false) {
+      const b = document.createElement('div');
+      b.className = 'chat-bubble' + (isUser ? ' user-bubble' : '');
+      b.innerHTML = text;
+      chatBody.appendChild(b);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function showWAButton(msg) {
+      const encoded = encodeURIComponent(msg);
+      const a = document.createElement('a');
+      a.href = `https://wa.me/${WA_NUMBER}?text=${encoded}`;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'chat-wa-btn';
+      a.innerHTML = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Lanjutkan di WhatsApp`;
+      chatBody.appendChild(a);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Handle quick reply option clicks
+    chatOptions.querySelectorAll('.chat-opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const label = btn.dataset.label;
+        const msg   = btn.dataset.msg;
+
+        // Show user bubble
+        addBubble(label, true);
+
+        // Hide options
+        chatOptions.style.display = 'none';
+
+        // Bot reply
+        setTimeout(() => {
+          addBubble(`Siap! Saya bantu sambungkan kamu langsung ke tim Nexus Diji via WhatsApp. Klik tombol di bawah ya 👇`);
+          setTimeout(() => showWAButton(msg), 400);
+        }, 600);
+      });
+    });
+
+    // Handle manual text input -> redirect to WA
+    function sendManualMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addBubble(text, true);
+      chatInput.value = '';
+      chatOptions.style.display = 'none';
+      setTimeout(() => {
+        addBubble(`Oke! Saya akan sambungkan kamu ke tim kami via WhatsApp dengan pesanmu 📩`);
+        setTimeout(() => showWAButton(text), 400);
+      }, 600);
+    }
+
+    chatSendBtn.addEventListener('click', sendManualMessage);
+    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendManualMessage(); });
   </script>
 
 </body>
