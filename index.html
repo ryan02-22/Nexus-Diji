@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" prefix="og: https://ogp.me/ns#">
 
 <head>
@@ -439,10 +439,172 @@
     mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
   }
 
-  .hero-content {
+  .hero-inner {
     position: relative;
     z-index: 2;
-    max-width: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 3rem;
+  }
+
+  .hero-content {
+    max-width: 620px;
+    flex-shrink: 0;
+  }
+
+  /* â”€â”€ ROCKET VISUAL â”€â”€ */
+  .hero-visual {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .hero-rocket {
+    width: clamp(280px, 35vw, 480px);
+    height: auto;
+    filter: drop-shadow(0 20px 60px rgba(0, 229, 255, 0.35)) drop-shadow(0 0 30px rgba(124, 58, 237, 0.2));
+    animation: rocketFloat 5s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes rocketFloat {
+
+    0%,
+    100% {
+      transform: translateY(0px) rotate(-5deg);
+    }
+
+    50% {
+      transform: translateY(-24px) rotate(-3deg);
+    }
+  }
+
+  /* glow ring behind rocket */
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(124, 58, 237, 0.06) 60%, transparent 100%);
+    animation: rocketGlow 5s ease-in-out infinite;
+  }
+
+  @keyframes rocketGlow {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+
+    50% {
+      transform: scale(1.12);
+      opacity: 1;
+    }
+  }
+
+  /* launch speed lines */
+  .hero-speedlines {
+    position: absolute;
+    bottom: 30%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0.4;
+  }
+
+  .hero-speedlines span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    animation: speedLine 2.5s ease-in-out infinite;
+  }
+
+  .hero-speedlines span:nth-child(1) {
+    width: 60px;
+    animation-delay: 0s;
+  }
+
+  .hero-speedlines span:nth-child(2) {
+    width: 40px;
+    animation-delay: 0.3s;
+  }
+
+  .hero-speedlines span:nth-child(3) {
+    width: 80px;
+    animation-delay: 0.6s;
+  }
+
+  .hero-speedlines span:nth-child(4) {
+    width: 30px;
+    animation-delay: 0.9s;
+  }
+
+  @keyframes speedLine {
+
+    0%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0.3);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  /* floating badge chips around rocket */
+  .rocket-chip {
+    position: absolute;
+    background: rgba(10, 10, 15, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 100px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    animation: chipFloat 4s ease-in-out infinite;
+  }
+
+  .rocket-chip:nth-child(2) {
+    top: 12%;
+    right: 8%;
+    animation-delay: 0s;
+  }
+
+  .rocket-chip:nth-child(3) {
+    top: 42%;
+    right: 3%;
+    animation-delay: 1s;
+  }
+
+  .rocket-chip:nth-child(4) {
+    bottom: 18%;
+    right: 14%;
+    animation-delay: 2s;
+  }
+
+  @keyframes chipFloat {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   .hero-badge {
@@ -591,18 +753,14 @@
 
   /* â”€â”€ HERO STATS â€” COUNTER â”€â”€ */
   .hero-stats {
-    position: absolute;
-    right: 4rem;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
-    flex-direction: column;
     gap: 2rem;
+    margin-top: 3rem;
     animation: fadeUp 0.8s 0.4s ease both;
   }
 
   .stat-item {
-    text-align: right;
+    text-align: left;
   }
 
   .stat-num {
@@ -1459,7 +1617,7 @@
     transition: all 0.3s;
   }
 
-  /* MOBILE MENU â€” hidden by default, shown only when .open class added */
+  /* MOBILE MENU ” hidden by default, shown only when .open class added */
   .nav-mobile-menu {
     display: none;
   }
@@ -1468,7 +1626,7 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 0;
+    /* top will be set dynamically via JS to avoid banner overlap */
     left: 0;
     right: 0;
     bottom: 0;
@@ -1728,7 +1886,7 @@
     font-size: 0.78rem;
   }
 
-  /* â”€â”€ FAQ SECTION â”€â”€ */
+  /*  FAQ SECTION  */
   .faq-list {
     margin-top: 3rem;
     display: flex;
@@ -1887,7 +2045,7 @@
     line-height: 1.4;
   }
 
-  /* ── SERVICE ICONS (INNOVATIVE) ── */
+  /* â”€â”€ SERVICE ICONS (INNOVATIVE) â”€â”€ */
   .service-icon {
     width: 60px;
     height: 60px;
@@ -2146,7 +2304,7 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 0;
+    /* top will be set dynamically via JS to avoid banner overlap */
     left: 0;
     right: 0;
     bottom: 0;
@@ -2271,8 +2429,17 @@
       padding: 9rem 1.5rem 4rem;
     }
 
-    .hero-stats {
+    .hero-inner {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hero-visual {
       display: none;
+    }
+
+    .hero-stats {
+      gap: 1.5rem;
     }
 
     section {
@@ -2393,44 +2560,60 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="grid-lines"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Solusi Digital untuk Bisnis Kamu
-      </div>
-      <h1>
-        <span id="typingLine1"></span><br>
-        <span class="line2" id="typingLine2"></span><br>
-        <span class="accent" id="typingLine3"></span><span class="typing-cursor" id="typingCursor"></span>
-      </h1>
-      <p class="hero-desc">
-        Nexus Diji hadir sebagai mitra teknologi kamu - dari website profesional, aplikasi custom, hingga servis
-        perangkat PC & laptop.
-      </p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn-primary">
-          Konsultasi Gratis
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-        <a href="#services" class="btn-secondary">Lihat Layanan</a>
-      </div>
-    </div>
+    <div class="hero-inner">
 
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-num" data-target="100" data-suffix="%">0%</span>
-        <span class="stat-label">Kepuasan Klien</span>
+      <!-- Teks kiri -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Solusi Digital untuk Bisnis Kamu
+        </div>
+        <h1>
+          <span id="typingLine1"></span><br>
+          <span class="line2" id="typingLine2"></span><br>
+          <span class="accent" id="typingLine3"></span><span class="typing-cursor" id="typingCursor"></span>
+        </h1>
+        <p class="hero-desc">
+          Nexus Diji hadir sebagai mitra teknologi kamu &mdash; dari website profesional, aplikasi custom, hingga servis
+          perangkat PC &amp; laptop. <strong style="color:var(--accent);">Cepat. Andal. Hasilnya nyata.</strong>
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">
+            🚀 Luncurkan Proyekmu
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary">Lihat Layanan</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num" data-target="100" data-suffix="%">0%</span>
+            <span class="stat-label">Kepuasan Klien</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="3" data-suffix="+">0+</span>
+            <span class="stat-label">Layanan Tersedia</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="24" data-suffix="h">0h</span>
+            <span class="stat-label">Respons Cepat</span>
+          </div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="3" data-suffix="+">0+</span>
-        <span class="stat-label">Layanan Tersedia</span>
+
+      <!-- Rocket visual kanan -->
+      <div class="hero-visual">
+        <span class="rocket-chip">⚡ Pengerjaan Cepat</span>
+        <span class="rocket-chip">🔒 Garansi Support</span>
+        <span class="rocket-chip">✨ Konsultasi Gratis</span>
+        <div class="hero-speedlines">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <img src="./assets/images/rocket.webp" alt="Nexus Diji – Luncurkan Bisnis Digitalmu" class="hero-rocket"
+          loading="eager" width="480" height="480">
       </div>
-      <div class="stat-item">
-        <span class="stat-num" data-target="24" data-suffix="h">0h</span>
-        <span class="stat-label">Respons Cepat</span>
-      </div>
+
     </div>
   </section>
 
@@ -2438,7 +2621,7 @@
   <section id="services">
     <span class="section-label reveal">Apa yang kami tawarkan</span>
     <h2 class="section-title reveal">Layanan Kami</h2>
-    <p class="section-desc reveal">Tiga pilar utama yang kami kuasai untuk mendukung kebutuhan digitalmu â€” dari nol
+    <p class="section-desc reveal">"Tiga pilar utama yang kami kuasai untuk mendukung kebutuhan digitalmu" dari nol
       sampai jadi.</p>
     <div class="services-grid reveal">
       <div class="service-card">
@@ -3253,7 +3436,7 @@
   </button>
 
   <script>
-    // â”€â”€ CUSTOM CURSOR â”€â”€
+    // — CUSTOM CURSOR —
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursorRing');
     document.addEventListener('mousemove', (e) => {
@@ -3263,17 +3446,41 @@
       cursorRing.style.top = e.clientY - 18 + 'px';
     });
 
-    // â”€â”€ NAV SCROLL â”€â”€
+    // — NAV SCROLL —
     const navbar = document.getElementById('navbar');
     const promoBanner = document.getElementById('promoBanner');
     const backToTop = document.getElementById('backToTop');
+
+    // — HAMBURGER (deklarasi dulu sebelum updateNavAndMenuTop) —
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+    function updateNavAndMenuTop() {
+      if (!promoBanner) return;
+      const bannerHeight = promoBanner.classList.contains('hidden') ? 0 : promoBanner.offsetHeight;
+      const scrolled = window.scrollY > 50;
+      navbar.style.top = scrolled ? '0px' : bannerHeight + 'px';
+      // Also adjust mobile menu top so it starts below banner when not scrolled
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.style.top = scrolled ? '0px' : bannerHeight + 'px';
+      }
+    }
+
+    // Panggil saat halaman pertama dimuat dan saat resize
+    updateNavAndMenuTop();
+    window.addEventListener('resize', updateNavAndMenuTop);
+
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > 50;
       navbar.classList.toggle('scrolled', scrolled);
       if (promoBanner) promoBanner.classList.toggle('hidden', scrolled);
       if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 400);
 
-      // â”€â”€ HIDE WA FLOAT NEAR FOOTER â”€â”€
+      // dynamically update top
+      updateNavAndMenuTop();
+
+      // — HIDE WA FLOAT NEAR FOOTER —
       const waFloat = document.getElementById('waFloat');
       if (waFloat) {
         const footer = document.querySelector('footer');
@@ -3286,20 +3493,18 @@
       }
     });
 
-    // â”€â”€ REVEAL â”€â”€
+    // — REVEAL —
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // â”€â”€ HAMBURGER â”€â”€
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    // — HAMBURGER —
     hamburgerBtn.addEventListener('click', () => {
       mobileMenu.classList.add('open');
       hamburgerBtn.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      updateNavAndMenuTop(); // ensure top is correct when opening
     });
     function closeMobileMenu() {
       mobileMenu.classList.remove('open');
