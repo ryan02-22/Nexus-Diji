@@ -616,25 +616,56 @@
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(67, 97, 238, 0.12);
-    border: 1px solid rgba(67, 97, 238, 0.2);
-    color: var(--accent);
-    padding: 0.4rem 1rem;
+    gap: 0.75rem;
+    padding: 2px;
+    background: var(--border);
     border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
     margin-top: 3rem;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    /* Ensure it doesn't break the layout */
+    max-width: fit-content;
     animation: fadeUp 0.8s ease both;
   }
 
+  .hero-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      transparent,
+      var(--accent),
+      transparent 30%
+    );
+    animation: rotate-border 4s linear infinite;
+    z-index: -1;
+  }
+
+  .hero-badge .badge-inner {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
   .badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     background: var(--accent);
     border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
     animation: pulse 2s infinite;
   }
 
@@ -755,6 +786,67 @@
   .btn-secondary:hover {
     border-color: var(--accent);
     color: var(--accent);
+  }
+
+  /* -- ROTATING BORDER BUTTON -- */
+  .btn-rotating-wrapper {
+    position: relative;
+    padding: 3px; /* Border thickness */
+    border-radius: 10px;
+    background: var(--border);
+    overflow: hidden;
+    display: inline-flex;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+  }
+
+  .btn-rotating-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      transparent,
+      var(--accent),
+      var(--accent2),
+      transparent 40%
+    );
+    animation: rotate-border 3s linear infinite;
+    z-index: 0;
+  }
+
+  .btn-rotating-wrapper .btn-inner {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .btn-rotating-wrapper:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(67, 97, 238, 0.2);
+  }
+
+  .btn-rotating-wrapper:hover .btn-inner {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    color: var(--accent);
+  }
+
+  @keyframes rotate-border {
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   /* HERO STATS COUNTER */
@@ -1007,7 +1099,7 @@
 
   .pricing-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 3px solid var(--border);
     border-radius: 16px;
     padding: 2rem;
     position: relative;
@@ -1464,12 +1556,13 @@
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
   }
 
   .reveal.visible {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 
   /* RESPONSIVE */
@@ -1560,8 +1653,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(10, 10, 15, 0.97);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       align-items: center;
       justify-content: center;
       gap: 2.5rem;
@@ -1652,8 +1746,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 10, 15, 0.97);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     align-items: center;
     justify-content: center;
     gap: 2.5rem;
@@ -1777,7 +1872,7 @@
 
   .pricing-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 3px solid var(--border);
     border-radius: 16px;
     padding: 2rem;
     position: relative;
@@ -1942,11 +2037,12 @@
     justify-content: space-between;
     gap: 1rem;
     cursor: none;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
   }
 
   .faq-q:hover {
     color: var(--accent);
+    padding-left: 12px;
   }
 
   .faq-icon {
@@ -2003,7 +2099,7 @@
 
   .blog-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 3px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s, border-color 0.3s;
@@ -2332,8 +2428,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 10, 15, 0.97);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     align-items: center;
     justify-content: center;
     gap: 2.5rem;
@@ -2484,7 +2581,26 @@
     }
 
     .why-visual {
-      height: 280px;
+      height: 360px;
+    }
+
+    .floating-card {
+      padding: 0.7rem 0.9rem;
+      border-radius: 12px;
+    }
+
+    .floating-card .fc-value {
+      font-size: 1rem;
+    }
+
+    .floating-card .fc-label {
+      font-size: 0.65rem;
+    }
+
+    .center-orb {
+      width: 130px;
+      height: 130px;
+      font-size: 1rem;
     }
 
     .process-steps {
@@ -2593,8 +2709,10 @@
         <!-- Teks kiri -->
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge-dot"></span>
-            Solusi Digital untuk Bisnis Kamu
+            <div class="badge-inner">
+              <span class="badge-dot"></span>
+              Solusi Digital untuk Bisnis Kamu
+            </div>
           </div>
           <h1>
             <span id="typingLine1"></span><br>
@@ -2606,15 +2724,23 @@
             servis
             perangkat PC &amp; laptop. <strong style="color:var(--accent);">Cepat. Andal. Hasilnya nyata.</strong>
           </p>
-          <div class="hero-cta">
-            <a href="#contact" class="btn-primary">
-              Mulai Konsultasi Gratis
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a href="#pricing" class="btn-secondary">Lihat Harga & Promo</a>
-          </div>
+            <div class="hero-cta">
+              <a href="#contact" class="btn-primary">
+                Mulai Konsultasi Gratis
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#pricing" class="btn-rotating-wrapper">
+                <div class="btn-inner">
+                  Lihat Harga & Promo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
+              </a>
+            </div>
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-num" data-target="100" data-suffix="%">0%</span>
@@ -2721,7 +2847,7 @@
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                 <path d="M3 6h18"></path>
-                <path d="M16 10a4 0 0 1-8 0"></path>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg></div>
             <div class="portfolio-info">
               <h3>Toko Online Fashion</h3>
@@ -2806,7 +2932,7 @@
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                 <path d="M3 6h18"></path>
-                <path d="M16 10a4 0 0 1-8 0"></path>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg></div>
             <div class="portfolio-info">
               <h3>Toko Online Fashion</h3>
@@ -3007,7 +3133,7 @@
 
     <!-- WHY US -->
     <section id="why">
-      <div class="why-inner">
+      <div class="why-inner reveal">
         <div class="why-visual reveal">
           <div class="hexagon-grid">
             <div class="floating-card">
@@ -3095,9 +3221,11 @@
 
     <!-- PROCESS -->
     <section id="process" class="process-bg">
-      <span class="section-label reveal">Bagaimana cara kerjanya</span>
-      <h2 class="section-title reveal">Proses Kerja Kami</h2>
-      <div class="process-steps">
+      <span class="section-label reveal">Langkah demi langkah</span>
+      <h2 class="section-title reveal">Bagaimana Kami Bekerja</h2>
+      <p class="section-desc reveal">"Proses transparan dan terstruktur untuk memastikan hasil yang maksimal dan sesuai
+        ekspektasi kamu."</p>
+      <div class="process-steps reveal">
         <div class="step reveal">
           <div class="step-num">1</div>
           <h4>Konsultasi</h4>
@@ -3123,10 +3251,10 @@
 
     <!-- TESTIMONIALS -->
     <section id="testimonials">
-      <span class="section-label reveal">Kata Mereka</span>
+      <span class="section-label reveal">Apa kata mereka</span>
       <h2 class="section-title reveal">Testimoni Klien</h2>
       <p class="section-desc reveal">Kepercayaan klien adalah motivasi terbesar kami untuk terus berkembang.</p>
-      <div class="testimonial-grid">
+      <div class="testimonial-grid reveal">
         <div class="testimonial-card reveal">
           <div class="stars">
             <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -3415,8 +3543,8 @@
 
     <!-- CTA -->
     <section id="contact" class="cta-section">
-      <div class="contact-wrap" style="text-align:left;">
-        <div class="reveal">
+      <div class="contact-wrap reveal">
+        <div class="contact-info" style="text-align:left;">
           <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Siap Wujudkan Ide Digitalmu?</h2>
           <p style="margin-bottom:2rem;">Hubungi Nexus Diji hari ini dan dapatkan konsultasi gratis untuk mengembangkan
             solusi digital impianmu.</p>
@@ -4185,6 +4313,8 @@
     updateNavAndMenuTop();
     window.addEventListener('resize', updateNavAndMenuTop);
 
+    const heroSection = document.querySelector('.hero');
+
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > 50;
       navbar.classList.toggle('scrolled', scrolled);
@@ -4208,10 +4338,17 @@
     });
 
     // - REVEAL -
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          // Remove class when leaving viewport to allow re-triggering
+          e.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // - HAMBURGER -
     hamburgerBtn.addEventListener('click', () => {
@@ -4251,6 +4388,8 @@
     }
 
     async function runTyping() {
+      // reset content
+      lines.forEach(line => { line.el.textContent = ''; });
       // wait for hero animation to settle
       await new Promise(r => setTimeout(r, 900));
       for (let i = 0; i < lines.length; i++) {
@@ -4258,10 +4397,25 @@
         await typeText(lines[i].el, lines[i].text, speed);
         if (i < lines.length - 1) await new Promise(r => setTimeout(r, 120));
       }
-      // hide cursor after typing done (optional keep blinking if you want)
-      // typingCursor.style.display = 'none';
     }
-    runTyping();
+
+    // Trigger typing and counter when hero is in view
+    let typingFired = false;
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!typingFired) {
+            typingFired = true;
+            runTyping();
+          }
+        } else {
+          typingFired = false;
+          // Clear text when leaving to prepare for re-typing
+          lines.forEach(line => { line.el.textContent = ''; });
+        }
+      });
+    }, { threshold: 0.1 });
+    if (heroSection) heroObserver.observe(heroSection);
 
     // ------------------------------------------------
     // 2) COUNTER ANIMATION on hero stats
@@ -4280,23 +4434,44 @@
       requestAnimationFrame(step);
     }
 
-    // Trigger counters when hero is in view (they're always visible on load, so use a slight delay)
+    // Trigger counters when hero is in view
     const statEls = document.querySelectorAll('.stat-num[data-target]');
     let countersFired = false;
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !countersFired) {
-          countersFired = true;
-          statEls.forEach(el => {
-            const target = parseInt(el.dataset.target);
-            const suffix = el.dataset.suffix || '';
-            animateCounter(el, target, suffix);
-          });
+        if (entry.isIntersecting) {
+          if (!countersFired) {
+            countersFired = true;
+            statEls.forEach(el => {
+              const target = parseInt(el.dataset.target);
+              const suffix = el.dataset.suffix || '';
+              animateCounter(el, target, suffix);
+            });
+          }
+        } else {
+          // Reset when leaving so it can fire again next time it enters
+          countersFired = false;
+          // Optionally clear to 0 so it's fresh
+          statEls.forEach(el => { el.textContent = '0' + (el.dataset.suffix || ''); });
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
+
+    // Initial check in case observer doesn't fire immediately
+    function checkInitialCounters() {
+      if (!heroSection) return;
+      const rect = heroSection.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView && !countersFired) {
+        countersFired = true;
+        statEls.forEach(el => {
+          animateCounter(el, parseInt(el.dataset.target), el.dataset.suffix || '');
+        });
+      }
+    }
+    setTimeout(checkInitialCounters, 500);
+
     // observe the hero section
-    const heroSection = document.querySelector('.hero');
     if (heroSection) counterObserver.observe(heroSection);
 
     // ------------------------------------------------
@@ -4439,7 +4614,12 @@
       fabTrigger.addEventListener('click', (e) => {
         // Prevent click from propagating to document
         e.stopPropagation();
-        toolsOverlay.classList.toggle('active');
+        const isActive = toolsOverlay.classList.toggle('active');
+
+        // Hide backToTop button if tools overlay is open
+        if (backToTop) {
+          backToTop.style.display = isActive ? 'none' : '';
+        }
 
         // Close chat/help popups if they are open when we toggle FAB
         if (chatPopup.classList.contains('open')) closeChat();
@@ -4450,6 +4630,9 @@
       document.addEventListener('click', (e) => {
         if (!toolsOverlay.contains(e.target) && toolsOverlay.classList.contains('active')) {
           toolsOverlay.classList.remove('active');
+          if (backToTop) {
+            backToTop.style.display = '';
+          }
         }
       });
     }
