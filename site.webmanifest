@@ -10,13 +10,13 @@
   "categories": ["business", "technology", "productivity"],
   "icons": [
     {
-      "src": "/assets/images/logo%20diji.png",
+      "src": "/assets/images/logo%20oke.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/logo%20diji.png",
+      "src": "/assets/images/logo%20oke.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
