@@ -18,14 +18,14 @@
         }
 
         :root {
-            --bg: #0a0a0f;
-            --surface: #111118;
-            --border: #1e1e2e;
-            --accent: #00e5ff;
+            --bg: #EAEEF0;
+            --surface: #FFFFFF;
+            --border: #D1D9E0;
+            --accent: #8615D9;
             --accent2: #7c3aed;
-            --text: #f0f0f8;
-            --muted: #6b6b88;
-            --card: #13131f;
+            --text: #0C111D;
+            --muted: #49515B;
+            --card: #FFFFFF;
         }
 
         body {
@@ -42,6 +42,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: -1;
+            opacity: 0.1;
         }
 
         /* Navbar Placeholder Container */
@@ -84,7 +85,7 @@
 
         .btn-primary {
             background: var(--accent);
-            color: #000;
+            color: #fff;
             padding: 0.65rem 1.6rem;
             border-radius: 100px;
             font-weight: 600;
@@ -160,7 +161,7 @@
         .article-content {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #d0d0e0;
+            color: var(--muted);
         }
 
         .article-content h2 {
@@ -221,7 +222,7 @@
     <!-- Minimal Nav -->
     <header class="nav-container">
         <a href="index.html" class="logo">
-            <img src="./assets/images/logo%20diji.png" alt="Nexus Diji Logo" class="logo-img">
+            <img src="./assets/images/logo_light.png" alt="Nexus Diji Logo" class="logo-img">
         </a>
         <ul class="nav-links">
             <li><a href="index.html#portfolio">Portfolio</a></li>
