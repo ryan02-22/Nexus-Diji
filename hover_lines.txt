@@ -1,0 +1,28 @@
+﻿307: .promo-banner a:hover {
+349: .logo:hover {
+374: .nav-links a:hover {
+413: .nav-cta:hover {
+734: .btn-primary:hover {
+754: .btn-secondary:hover {
+859: .service-card:hover {
+920: .portfolio-card:hover {
+1015: .pricing-card:hover {
+1396: .footer-links a:hover {
+1685: .portfolio-marquee-track:hover {
+1710: .portfolio-card:hover {
+1772: .pricing-card:hover {
+1841: .testimonial-card:hover {
+1932: .faq-q:hover {
+1998: .blog-card:hover {
+2122: .blog-link:hover {
+2204: .footer-links a:hover {
+2227: .wa-float:hover {
+2282: .back-to-top:hover {
+3529: .tool-btn:hover {
+3607: .fab-trigger:hover {
+3732: #helpCloseBtn:hover {
+3757: .help-opt-btn:hover {
+3880: #chatCloseBtn:hover {
+3936: .chat-opt-btn:hover {
+3962: .chat-wa-btn:hover {
+4013: .chat-send-btn:hover {

@@ -21,11 +21,12 @@
             --bg: #EAEEF0;
             --surface: #FFFFFF;
             --border: #D1D9E0;
-            --accent: #8615D9;
-            --accent2: #7c3aed;
+            --accent: #4cc9f0;
+            --accent2: #9b5de5;
             --text: #0C111D;
             --muted: #49515B;
             --card: #FFFFFF;
+            --grad: linear-gradient(135deg, var(--accent), var(--accent2));
         }
 
         body {
@@ -93,13 +94,13 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(134, 21, 217, 0.2);
+            box-shadow: 0 4px 20px rgba(67, 97, 238, 0.2);
             border: none;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(134, 21, 217, 0.3);
+            box-shadow: 0 8px 30px rgba(67, 97, 238, 0.3);
         }
 
         /* Article Wrapper */
@@ -128,7 +129,7 @@
         /* Typography */
         .blog-badge {
             display: inline-block;
-            background: rgba(134, 21, 217, 0.08);
+            background: rgba(67, 97, 238, 0.08);
             color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 100px;
@@ -137,7 +138,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             margin-bottom: 1rem;
-            border: 1px solid rgba(134, 21, 217, 0.2);
+            border: 1px solid rgba(67, 97, 238, 0.2);
         }
 
         .article-title {
@@ -197,7 +198,7 @@
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(124, 58, 237, 0.05));
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(124, 58, 237, 0.05));
             border: 1px solid var(--border);
             border-left: 4px solid var(--accent);
             padding: 1.5rem 2rem;
