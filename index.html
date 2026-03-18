@@ -1572,7 +1572,7 @@
     }
 
     .nav-links {
-      display: none;
+      display: none !important;
     }
 
     .logo-img {
@@ -1580,11 +1580,24 @@
     }
 
     .hero {
-      padding: 9rem 1.5rem 4rem;
+      padding: 8rem 1.5rem 4rem;
+    }
+
+    .hero-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 4rem;
+    }
+
+    .hero-content {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-badge {
-      margin-top: 1.5rem;
+      margin: 1.5rem auto 0;
     }
 
     .hero-stats {
@@ -1606,6 +1619,11 @@
 
     .why-visual {
       height: 280px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-rocket {
+      width: clamp(240px, 60vw, 360px);
     }
 
     .process-steps {
@@ -1670,7 +1688,7 @@
       font-weight: 700;
     }
 
-    .close-menu {
+    .close-menu-btn {
       position: absolute;
       top: 1.5rem;
       right: 1.5rem;
@@ -1713,66 +1731,7 @@
     }
   }
 
-  /* ===== HAMBURGER BUTTON ===== */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-  }
 
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  /* MOBILE MENU " hidden by default, shown only when .open class added */
-  .nav-mobile-menu {
-    display: none;
-  }
-
-  .nav-mobile-menu.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    /* top will be set dynamically via JS to avoid banner overlap */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    z-index: 200;
-  }
-
-  .nav-mobile-menu a {
-    color: var(--text);
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .close-menu-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 2rem;
-    cursor: pointer;
-  }
 
   /* ===== PORTFOLIO SECTION ===== */
   /* ===== PORTFOLIO MARQUEE ===== */
@@ -2847,7 +2806,7 @@
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                 <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                <path d="M16 10a 4 4 0 0 1 -8 0"></path>
               </svg></div>
             <div class="portfolio-info">
               <h3>Toko Online Fashion</h3>
@@ -2932,7 +2891,7 @@
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                 <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                <path d="M16 10a 4 4 0 0 1 -8 0"></path>
               </svg></div>
             <div class="portfolio-info">
               <h3>Toko Online Fashion</h3>
@@ -3664,6 +3623,40 @@
       position: relative;
     }
 
+    .scroll-up {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 45px;
+      height: 45px;
+      background: var(--primary);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .scroll-up.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-up.hidden-by-chat {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
     .tool-btn svg {
       width: 22px;
       height: 22px;
@@ -4271,7 +4264,7 @@
     </div>
   </div>
 
-  <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+  <button class="scroll-up" id="backToTop" aria-label="Kembali ke atas">
     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path d="M18 15l-6-6-6 6" />
     </svg>
@@ -4291,7 +4284,7 @@
     // - NAV SCROLL -
     const navbar = document.getElementById('navbar');
     const promoBanner = document.getElementById('promoBanner');
-    const backToTop = document.getElementById('backToTop');
+    const backToTop = document.getElementById('backToTop'); // Renamed to scroll-up in HTML, but JS variable remains backToTop
 
     // - HAMBURGER (deklarasi dulu sebelum updateNavAndMenuTop) -
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -4513,10 +4506,14 @@
       if (chatPopup.classList.contains('open')) closeChat();
       helpPopup.style.display = 'flex';
       requestAnimationFrame(() => helpPopup.classList.add('open'));
+      const scrollUp = document.getElementById('backToTop');
+      if (scrollUp) scrollUp.classList.add('hidden-by-chat');
     }
     function closeHelp() {
       helpPopup.classList.remove('open');
       setTimeout(() => { helpPopup.style.display = 'none'; }, 300);
+      const scrollUp = document.getElementById('backToTop');
+      if (scrollUp) scrollUp.classList.remove('hidden-by-chat');
     }
 
     overlayHelpBtn.addEventListener('click', () => {
@@ -4529,15 +4526,20 @@
       chatPopup.style.display = 'flex';
       // force reflow to trigger transition
       requestAnimationFrame(() => chatPopup.classList.add('open'));
+      const scrollUp = document.getElementById('backToTop');
+      if (scrollUp) scrollUp.classList.add('hidden-by-chat');
     }
     function closeChat() {
       chatPopup.classList.remove('open');
       setTimeout(() => { chatPopup.style.display = 'none'; }, 300);
+      const scrollUp = document.getElementById('backToTop');
+      if (scrollUp) scrollUp.classList.remove('hidden-by-chat');
     }
 
     overlayChatBtn.addEventListener('click', () => {
       chatPopup.style.display === 'flex' ? closeChat() : openChat();
     });
+
     chatCloseBtn.addEventListener('click', closeChat);
 
     function addBubble(text, isUser = false) {
