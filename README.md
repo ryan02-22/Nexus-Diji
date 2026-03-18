@@ -19,7 +19,7 @@ ND/
 ├── index.html          # Main HTML file
 ├── assets/
 │   └── images/
-│       └── logo%20diji.png    # Nexus Diji Logo
+│       └── logo%20okeh.png    # Nexus Diji Logo
 ├── .gitignore         # Git ignore file
 └── README.md          # File ini
 ```
@@ -95,7 +95,7 @@ git push -u origin main
 ## 📋 Files yang di-track
 
 - `index.html` - Main website
-- `assets/images/logo%20diji.png` - Logo brand
+- `assets/images/logo%20okeh.png` - Logo brand
 
 ## 👨‍💻 Author
 

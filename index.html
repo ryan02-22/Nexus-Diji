@@ -24,6 +24,9 @@
   <link rel="canonical" href="https://nexus-diji.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="./assets/images/logo%20oke.png">
+  <link rel="apple-touch-icon" href="./assets/images/logo%20oke.png">
+  <link rel="manifest" href="./site.webmanifest">
 
   <title>Nexus Diji Jasa Pembuatan Website & Aplikasi Custom | Servis PC Laptop</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -39,11 +42,11 @@
   "url": "https://nexus-diji.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://nexus-diji.com/assets/images/logo%20diji.png",
+    "url": "https://nexus-diji.com/assets/images/logo%20okeh.png",
     "width": 1024,
     "height": 1024
   },
-  "image": "https://nexus-diji.com/assets/images/logo%20diji.png",
+  "image": "https://nexus-diji.com/assets/images/logo%20okeh.png",
   "areaServed": {
     "@type": "Country",
     "name": "Indonesia"
@@ -168,7 +171,7 @@
     --bg: #EAEEF0;
     --surface: #FFFFFF;
     --border: #D1D9E0;
-    --accent: #4cc9f0;
+    --accent: #00b4d8;
     --accent2: #9b5de5;
     --text: #0C111D;
     --muted: #49515B;
@@ -191,8 +194,8 @@
   }
 
   .cursor {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     background: var(--accent);
     border-radius: 50%;
     position: fixed;
@@ -200,22 +203,26 @@
     left: 0;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.15s ease;
-    mix-blend-mode: screen;
+    box-shadow: 0 0 10px var(--accent);
+    opacity: 1;
+    transition: transform 0.1s ease;
   }
 
   .cursor-ring {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid var(--accent2);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     position: fixed;
     top: 0;
     left: 0;
     pointer-events: none;
     z-index: 9998;
-    opacity: 0.5;
-    transition: all 0.25s ease;
+    opacity: 0.9;
+    background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent));
+    -webkit-mask: radial-gradient(circle, transparent 13px, black 14px);
+    mask: radial-gradient(circle, transparent 13px, black 14px);
+    animation: rotate 2s linear infinite;
+    transition: opacity 0.3s ease;
   }
 
   body::before {
@@ -320,7 +327,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 4rem;
+    padding: 0.4rem 4rem;
     position: fixed;
     top: 38px;
     left: 0;
@@ -352,7 +359,7 @@
   }
 
   .logo-img {
-    height: clamp(100px, 20vw, 160px);
+    height: clamp(70px, 12vw, 90px);
     width: auto;
     object-fit: contain;
   }
@@ -682,7 +689,7 @@
 
   h1 .line2 {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(12, 17, 29, 0.2);
+    -webkit-text-stroke: 1.5px rgba(12, 17, 29, 0.45);
   }
 
   h1 .accent {
@@ -887,8 +894,8 @@
 
   .section-label {
     color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.82rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -985,13 +992,13 @@
 
   .service-tag {
     display: inline-block;
-    background: rgba(67, 97, 238, 0.06);
-    border: 1px solid rgba(67, 97, 238, 0.12);
+    background: rgba(0, 180, 216, 0.08);
+    border: 1px solid rgba(0, 180, 216, 0.2);
     color: var(--accent);
     font-size: 0.72rem;
     padding: 0.25rem 0.7rem;
     border-radius: 100px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.04em;
     margin-right: 0.4rem;
     margin-bottom: 0.4rem;
@@ -1080,12 +1087,13 @@
 
   .portfolio-tag {
     display: inline-block;
-    background: rgba(67, 97, 238, 0.06);
-    border: 1px solid rgba(67, 97, 238, 0.12);
+    background: rgba(0, 180, 216, 0.08);
+    border: 1px solid rgba(0, 180, 216, 0.2);
     color: var(--accent);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     padding: 0.2rem 0.6rem;
     border-radius: 100px;
+    font-weight: 700;
     margin-top: 0.6rem;
   }
 
@@ -1748,7 +1756,18 @@
     display: flex;
     gap: 1.5rem;
     width: max-content;
-    animation: marquee-scroll 30s linear infinite;
+    cursor: grab;
+    will-change: transform;
+    transition: transform 0.1s linear; /* Optional: smooth out manual jumps slightly, but usually best without for raw drag */
+  }
+
+  .portfolio-marquee-track.is-dragging {
+    cursor: grabbing;
+    transition: none; /* No transition during drag */
+  }
+
+  .portfolio-marquee-track.is-dragging .portfolio-card {
+    pointer-events: none; /* Disable card interactions while dragging */
   }
 
   .portfolio-marquee-track:hover {
@@ -2513,7 +2532,7 @@
   /* -- RESPONSIVE -- */
   @media (max-width: 900px) {
     nav {
-      padding: 1rem 1.5rem;
+      padding: 0.4rem 1.5rem;
       top: 44px;
     }
 
@@ -2526,7 +2545,7 @@
     }
 
     .logo-img {
-      height: 72px;
+      height: 50px;
     }
 
     .hero {
@@ -4266,10 +4285,10 @@
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursorRing');
     document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX - 5 + 'px';
-      cursor.style.top = e.clientY - 5 + 'px';
-      cursorRing.style.left = e.clientX - 18 + 'px';
-      cursorRing.style.top = e.clientY - 18 + 'px';
+      cursor.style.left = e.clientX - 3 + 'px';
+      cursor.style.top = e.clientY - 3 + 'px';
+      cursorRing.style.left = e.clientX - 16 + 'px';
+      cursorRing.style.top = e.clientY - 16 + 'px';
     });
 
     // - NAV SCROLL -
@@ -4628,6 +4647,81 @@
           }
         }
       });
+    }
+
+    // ------------------------------------------------
+    // 4) INTERACTIVE MARQUEE (Drag & Auto-scroll)
+    // ------------------------------------------------
+    const marqueeTrack = document.querySelector('.portfolio-marquee-track');
+    const marqueeWrapper = document.querySelector('.portfolio-marquee-wrapper');
+    
+    if (marqueeTrack && marqueeWrapper) {
+      let isDown = false;
+      let startX;
+      let currentX = 0;
+      let speed = 0.8; // Auto-scroll speed
+      let isPaused = false;
+      
+      const updateMarquee = () => {
+        if (!isDown && !isPaused) {
+          currentX -= speed;
+          
+          // Looping logic: reset when half the content has scrolled
+          const halfWidth = marqueeTrack.offsetWidth / 2;
+          if (Math.abs(currentX) >= halfWidth) {
+            currentX = 0;
+          }
+          
+          marqueeTrack.style.transform = `translateX(${currentX}px)`;
+        }
+        requestAnimationFrame(updateMarquee);
+      };
+      
+      // Start loop
+      requestAnimationFrame(updateMarquee);
+      
+      // Drag Events
+      const startDrag = (e) => {
+        isDown = true;
+        marqueeTrack.classList.add('is-dragging');
+        startX = (e.pageX || (e.touches && e.touches[0].pageX)) - currentX;
+      };
+      
+      const endDrag = () => {
+        isDown = false;
+        marqueeTrack.classList.remove('is-dragging');
+      };
+      
+      const moveDrag = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = (e.pageX || (e.touches && e.touches[0].pageX));
+        currentX = x - startX;
+        
+        // Loop check while dragging
+        const halfWidth = marqueeTrack.offsetWidth / 2;
+        if (currentX > 0) {
+          currentX = -halfWidth;
+          startX = x - currentX;
+        } else if (Math.abs(currentX) >= halfWidth) {
+          currentX = 0;
+          startX = x - currentX;
+        }
+        
+        marqueeTrack.style.transform = `translateX(${currentX}px)`;
+      };
+      
+      marqueeWrapper.addEventListener('mousedown', startDrag);
+      marqueeWrapper.addEventListener('touchstart', startDrag, { passive: true });
+      
+      window.addEventListener('mouseup', endDrag);
+      window.addEventListener('touchend', endDrag);
+      
+      window.addEventListener('mousemove', moveDrag);
+      window.addEventListener('touchmove', moveDrag, { passive: false });
+      
+      marqueeWrapper.addEventListener('mouseenter', () => { isPaused = true; });
+      marqueeWrapper.addEventListener('mouseleave', () => { if (!isDown) isPaused = false; });
     }
   </script>
 
