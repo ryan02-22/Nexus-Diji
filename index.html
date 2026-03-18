@@ -2324,35 +2324,51 @@
     opacity: 1;
   }
 
-  /* -- BACK TO TOP -- */
-  .back-to-top {
+  /* -- BACK TO TOP (Consolidated) -- */
+  .scroll-up {
     position: fixed;
-    bottom: 11rem;
-    right: 2rem;
-    z-index: 998;
-    width: 42px;
-    height: 42px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 50%;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background: var(--grad);
+    color: #fff;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    z-index: 1000;
     opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s, border-color 0.2s;
-    color: var(--muted);
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3), 0 0 15px rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .back-to-top.visible {
+  .scroll-up.visible {
     opacity: 1;
-    pointer-events: auto;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .back-to-top:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+  .scroll-up:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 15px 35px rgba(67, 97, 238, 0.4), 0 0 25px rgba(0, 229, 255, 0.2);
+    filter: brightness(1.1);
+  }
+
+  .scroll-up.hidden-by-chat {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .scroll-up svg {
+    width: 22px;
+    height: 22px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
   /* -- HAMBURGER -- */
@@ -3623,39 +3639,7 @@
       position: relative;
     }
 
-    .scroll-up {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 45px;
-      height: 45px;
-      background: var(--primary);
-      color: white;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 99;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .scroll-up.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .scroll-up.hidden-by-chat {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
+    /* Redundant .scroll-up styles removed - consolidated above */
 
     .tool-btn svg {
       width: 22px;
@@ -4264,7 +4248,7 @@
   </aside>
 
   <button class="scroll-up" id="backToTop" aria-label="Kembali ke atas">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
       <path d="M18 15l-6-6-6 6" />
     </svg>
   </button>
