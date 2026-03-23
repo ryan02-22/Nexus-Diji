@@ -1520,6 +1520,10 @@
       display: flex !important;
     }
 
+    .nav-actions .nav-cta {
+      display: none;
+    }
+
     .nav-mobile-menu {
       display: none;
     }
@@ -2427,6 +2431,12 @@
   }
 
   /* -- HAMBURGER -- */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
   .hamburger {
     display: none;
     flex-direction: column;
@@ -2570,6 +2580,10 @@
 
     .hamburger {
       display: flex !important;
+    }
+
+    .nav-actions .nav-cta {
+      display: none;
     }
 
     .logo-img {
