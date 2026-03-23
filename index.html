@@ -1371,9 +1371,10 @@
     // - TOOLS OVERLAY SETUP -
     const toolsOverlay = document.getElementById('toolsOverlay');
     let autoHideTimer;
+    let manualOverlayControl = false;
 
     function resetAutoHideTimer() {
-      if (!toolsOverlay) return;
+      if (!toolsOverlay || manualOverlayControl) return;
       clearTimeout(autoHideTimer);
       if (toolsOverlay.classList.contains('visible')) {
         autoHideTimer = setTimeout(() => {
@@ -1688,13 +1689,14 @@
           if (helpPopup.classList.contains('open')) closeHelp();
         } else {
           // Desktop: toggle visible/collapsed
+          manualOverlayControl = true;
+          clearTimeout(autoHideTimer);
           if (toolsOverlay.classList.contains('visible')) {
             toolsOverlay.classList.remove('visible');
             toolsOverlay.classList.add('collapsed');
           } else {
             toolsOverlay.classList.add('visible');
             toolsOverlay.classList.remove('collapsed');
-            resetAutoHideTimer();
           }
         }
       });

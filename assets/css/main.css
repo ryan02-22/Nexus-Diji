@@ -1,4 +1,4 @@
-﻿
+
   *,
   *::before,
   *::after {
@@ -2504,7 +2504,8 @@
       position: fixed;
       top: 50%;
       left: 0;
-      transform: translateY(-50%);
+      transform: translateY(-50%) translateX(-100%);
+      opacity: 0;
       background: linear-gradient(135deg, rgba(63, 55, 201, 0.95), rgba(114, 9, 183, 0.95));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-left: none;
@@ -2515,7 +2516,7 @@
       gap: 16px;
       z-index: 300;
       box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-      transition: opacity 0.3s, transform 0.3s;
+      transition: opacity 0.4s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .tool-btn {
@@ -3281,3 +3282,11 @@
       height: 280px;
     }
   }
+
+/* --- TOOLS OVERLAY FIX --- */
+.tool-btn svg[fill="none"], .tool-btn svg[fill="none"] * { fill: none !important; }
+.tools-overlay.visible { transform: translateY(-50%) translateX(0) !important; opacity: 1 !important; }
+.tools-overlay.collapsed { transform: translateY(-50%) translateX(-100%) !important; opacity: 0 !important; }
+
+/* --- MANUAL TOGGLE HANDLE FOR DESKTOP --- */
+@media (min-width: 769px) { .fab-trigger { display: flex !important; position: absolute !important; bottom: -60px !important; left: 8px !important; width: 44px !important; height: 44px !important; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s !important; } .tools-overlay.collapsed .fab-trigger { left: calc(100% + 4px) !important; transform: rotate(180deg) !important; } }
