@@ -2505,7 +2505,7 @@
       top: 50%;
       left: 0;
       transform: translateY(-50%) translateX(-100%);
-      opacity: 0;
+      opacity: 1;
       background: linear-gradient(135deg, rgba(63, 55, 201, 0.95), rgba(114, 9, 183, 0.95));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-left: none;
@@ -2542,6 +2542,8 @@
       height: 22px;
       fill: currentColor;
     }
+
+    .tool-btn svg[fill="none"], .tool-btn svg[fill="none"] * { fill: none !important; }
 
     .tool-btn:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -2613,10 +2615,10 @@
       width: 24px;
       height: 24px;
       position: absolute;
-      transition: opacity 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: opacity 0.4s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .fab-trigger .icon-close {
+    .fab-trigger .icon-collapse {
       opacity: 0;
       transform: scale(0.5) rotate(-90deg);
     }
@@ -2695,12 +2697,12 @@
         transition-delay: 0.15s;
       }
 
-      .tools-overlay.active .fab-trigger .icon-chat {
+      .tools-overlay.active .fab-trigger .icon-expand {
         opacity: 0;
         transform: scale(0.5) rotate(90deg);
       }
 
-      .tools-overlay.active .fab-trigger .icon-close {
+      .tools-overlay.active .fab-trigger .icon-collapse {
         opacity: 1;
         transform: scale(1) rotate(0);
       }
@@ -3283,10 +3285,48 @@
     }
   }
 
-/* --- TOOLS OVERLAY FIX --- */
+/* --- TOOLS OVERLAY CUSTOMIZATIONS --- */
 .tool-btn svg[fill="none"], .tool-btn svg[fill="none"] * { fill: none !important; }
-.tools-overlay.visible { transform: translateY(-50%) translateX(0) !important; opacity: 1 !important; }
-.tools-overlay.collapsed { transform: translateY(-50%) translateX(-100%) !important; opacity: 0 !important; }
 
-/* --- MANUAL TOGGLE HANDLE FOR DESKTOP --- */
-@media (min-width: 769px) { .fab-trigger { display: flex !important; position: absolute !important; bottom: -60px !important; left: 8px !important; width: 44px !important; height: 44px !important; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s !important; } .tools-overlay.collapsed .fab-trigger { left: calc(100% + 4px) !important; transform: rotate(180deg) !important; } }
+/* Desktop: Manual Toggle Handle & States */
+@media (min-width: 769px) {
+  .tools-overlay.visible { 
+    transform: translateY(-50%) translateX(0) !important; 
+    visibility: visible !important; 
+    opacity: 1 !important;
+    pointer-events: auto !important; 
+  }
+  .tools-overlay.collapsed { 
+    transform: translateY(-50%) translateX(-100%) !important; 
+    visibility: visible !important; 
+    opacity: 1 !important;
+  }
+  .fab-trigger {
+    display: flex !important;
+    position: absolute !important;
+    bottom: -60px !important;
+    left: 8px !important;
+    width: 44px !important;
+    height: 44px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    pointer-events: auto !important;
+    z-index: 302 !important;
+  }
+  .tools-overlay.collapsed .fab-trigger {
+    left: calc(100% + 12px) !important;
+    transform: rotate(180deg) !important;
+  }
+}
+
+/* Mobile: Ensure Visibility */
+@media (max-width: 768px) {
+  .tools-overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: flex !important;
+  }
+  .fab-trigger {
+    display: flex !important;
+  }
+}
