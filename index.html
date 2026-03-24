@@ -1120,7 +1120,7 @@
         <!-- Right: map -->
         <div class="map-container reveal">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.24090288258!2d106.78915598688476!3d-6.229746452243883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e0594391e9%3A0x600c010c79ca8ac2!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1709890000000!5m2!1sid!2sid"
+            src="https://maps.google.com/maps?q=-6.3112391,107.0192466&z=15&output=embed"
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
@@ -1356,14 +1356,22 @@
 
       // dynamically update top
       updateNavAndMenuTop();
-
-      // - TOOLS OVERLAY VISIBILITY (desktop only) -
+      // - TOOLS OVERLAY VISIBILITY -
       if (toolsOverlay) {
-        if (nearFooter) {
-          toolsOverlay.classList.remove('visible', 'collapsed');
-        } else if (!toolsOverlay.classList.contains('visible') && !toolsOverlay.classList.contains('collapsed') && window.innerWidth > 768) {
-          toolsOverlay.classList.add('visible');
-          resetAutoHideTimer();
+        if (window.innerWidth <= 768) {
+          if (nearFooter) {
+            toolsOverlay.classList.add('fab-hidden');
+            toolsOverlay.classList.remove('active');
+          } else {
+            toolsOverlay.classList.remove('fab-hidden');
+          }
+        } else {
+          if (nearFooter) {
+            toolsOverlay.classList.remove('visible', 'collapsed');
+          } else if (!toolsOverlay.classList.contains('visible') && !toolsOverlay.classList.contains('collapsed')) {
+            toolsOverlay.classList.add('visible');
+            resetAutoHideTimer();
+          }
         }
       }
     });
