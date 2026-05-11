@@ -1685,6 +1685,64 @@ footer p {
   margin-top: 0.6rem;
 }
 
+/* Faryta Studio Premium Card - Photography Portfolio */
+.portfolio-card:has(.faryta-studio-thumb) {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #d4af37;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+}
+
+.portfolio-card:has(.faryta-studio-thumb):hover {
+  transform: translateY(-8px);
+  border-color: #f5d678;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+}
+
+.faryta-studio-thumb {
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.faryta-studio-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.portfolio-card:has(.faryta-studio-thumb):hover .faryta-studio-thumb img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.5));
+}
+
+.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 a {
+  color: #d4af37;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 a:hover {
+  color: #f5d678;
+}
+
+.portfolio-card:has(.faryta-studio-thumb) .portfolio-info p {
+  color: rgba(245, 230, 196, 0.8);
+  font-style: italic;
+}
+
+.portfolio-card:has(.faryta-studio-thumb) .portfolio-tag {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f5d678;
+}
+
 /* ===== PRICING SECTION ===== */
 .pricing-grid {
   display: grid;
@@ -1827,6 +1885,48 @@ footer p {
 .author-info span {
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+/* Faryta Studio Premium Testimonial */
+.testimonial-card:has(.author-info strong:nth-child(contains("Nadia"))) {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #d4af37;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+}
+
+/* Alternative: Add class to testimonial for Faryta */
+.wedding-testimonial {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15) !important;
+}
+
+.wedding-testimonial .stars {
+  color: #d4af37;
+}
+
+.wedding-testimonial .stars svg {
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+.wedding-testimonial .testimonial-text {
+  color: rgba(245, 230, 196, 0.9);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.wedding-testimonial .author-avatar {
+  background: linear-gradient(135deg, #d4af37, #f5d678);
+  color: #1a1a2e;
+  border: 2px solid #d4af37;
+}
+
+.wedding-testimonial .author-info strong {
+  color: #d4af37;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.wedding-testimonial .author-info span {
+  color: rgba(245, 230, 196, 0.7);
 }
 
 /*  FAQ SECTION  */
