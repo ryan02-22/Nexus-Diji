@@ -1732,6 +1732,12 @@ footer p {
   color: #f5d678;
 }
 
+.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 {
+  color: #d4af37;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
 .portfolio-card:has(.faryta-studio-thumb) .portfolio-info p {
   color: rgba(245, 230, 196, 0.8);
   font-style: italic;
@@ -1741,6 +1747,60 @@ footer p {
   background: rgba(212, 175, 55, 0.15);
   border: 1px solid rgba(212, 175, 55, 0.4);
   color: #f5d678;
+}
+
+/* Portfolio card link wrapper - makes entire card clickable */
+.portfolio-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Hover effect indicator - arrow icon appears on hover */
+.portfolio-card:has(.portfolio-card-link):hover .faryta-studio-thumb::after {
+  content: '→';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #d4af37;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.portfolio-card:has(.portfolio-card-link):hover .faryta-studio-thumb::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Visit indicator text */
+.portfolio-card:has(.portfolio-card-link)::after {
+  content: 'Klik untuk visit';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(212, 175, 55, 0.9));
+  color: #1a1a2e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.portfolio-card:has(.portfolio-card-link):hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portfolio-card {
+  position: relative;
 }
 
 /* ===== PRICING SECTION ===== */
