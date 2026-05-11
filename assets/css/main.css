@@ -1707,12 +1707,6 @@ footer p {
   padding: 1rem;
 }
 
-.faryta-studio-thumb a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .faryta-studio-thumb img {
   width: auto;
   max-width: 90%;
@@ -1723,41 +1717,7 @@ footer p {
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.faryta-studio-thumb:hover img {
-  transform: scale(1.1);
-  filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.5));
-}
-
-.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 a {
-  color: #d4af37;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 a:hover {
-  color: #f5d678;
-}
-
-.portfolio-card:has(.faryta-studio-thumb) .portfolio-info h3 {
-  color: #d4af37;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-}
-
-.portfolio-card:has(.faryta-studio-thumb) .portfolio-info p {
-  color: rgba(245, 230, 196, 0.8);
-  font-style: italic;
-}
-
-.portfolio-card:has(.faryta-studio-thumb) .portfolio-tag {
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #f5d678;
-}
-
-/* Faryta Studio card - entire card is clickable */
+/* Faryta Studio - entire card clickable */
 .faryta-card-link {
   display: block;
   text-decoration: none;
@@ -1766,6 +1726,42 @@ footer p {
 
 .faryta-card-link:hover {
   text-decoration: none;
+}
+
+.faryta-card-link:hover .faryta-studio-thumb img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.5));
+}
+
+.faryta-card-link:hover {
+  transform: translateY(-8px);
+}
+
+.portfolio-card:has(.faryta-card-link) {
+  border: 2px solid #d4af37;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.portfolio-card:has(.faryta-card-link):hover {
+  border-color: #f5d678;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+}
+
+.faryta-card-link .portfolio-info h3 {
+  color: #d4af37;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+.faryta-card-link .portfolio-info p {
+  color: rgba(245, 230, 196, 0.8);
+  font-style: italic;
+}
+
+.faryta-card-link .portfolio-tag {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f5d678;
 }
 
 /* ===== PRICING SECTION ===== */
