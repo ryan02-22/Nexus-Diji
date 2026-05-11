@@ -1757,6 +1757,17 @@ footer p {
   color: #f5d678;
 }
 
+/* Faryta Studio card - entire card is clickable */
+.faryta-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.faryta-card-link:hover {
+  text-decoration: none;
+}
+
 /* ===== PRICING SECTION ===== */
 .pricing-grid {
   display: grid;
