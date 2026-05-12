@@ -672,28 +672,20 @@
           var article = info.closest('.portfolio-card');
           if (!article) return;
 
-          // Skip faryta-card as it has its own click handler
+          // Handle faryta-card specially
           if (article.classList.contains('faryta-card')) {
-            var span = document.createElement('span');
-            span.className = 'portfolio-visit';
-            span.setAttribute('role', 'link');
-            span.setAttribute('tabindex', '0');
-            span.setAttribute('title', 'Kunjungi situs');
-            span.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-            article.appendChild(span);
-            span.addEventListener('click', function (e) {
-              window.open('https://faryta-studio.vercel.app', '_blank');
-            });
-            span.addEventListener('keydown', function (e) {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                window.open('https://faryta-studio.vercel.app', '_blank');
-              }
-            });
+            var btn = document.createElement('a');
+            btn.className = 'portfolio-visit';
+            btn.setAttribute('href', 'https://faryta-studio.vercel.app');
+            btn.setAttribute('target', '_blank');
+            btn.setAttribute('rel', 'noopener noreferrer');
+            btn.setAttribute('title', 'Kunjungi Faryta Studio');
+            btn.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+            info.appendChild(btn);
             return;
           }
 
-          // Prefer an existing anchor inside the card (e.g. .faryta-card-link)
+          // For other cards, find existing link or create button
           var link = article.querySelector('a');
           var url = link ? link.getAttribute('href') : null;
 
@@ -703,14 +695,12 @@
             a.setAttribute('href', url);
             a.setAttribute('target', '_blank');
             a.setAttribute('rel', 'noopener noreferrer');
-            a.setAttribute('aria-label', 'Kunjungi situs eksternal');
             a.setAttribute('title', 'Kunjungi situs');
-            a.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+            a.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
             info.appendChild(a);
           } else {
             var span = document.createElement('span');
             span.className = 'portfolio-visit disabled';
-            span.setAttribute('aria-disabled', 'true');
             span.textContent = 'Kunjungi Situs';
             info.appendChild(span);
           }
