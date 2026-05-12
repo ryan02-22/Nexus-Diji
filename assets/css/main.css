@@ -1729,11 +1729,41 @@ footer p {
 /* Faryta Studio Premium Card - Photography Portfolio */
 .faryta-card-link {
   display: block;
-  text-decoration: none;
+  text-decoration: none !important;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border: 2px solid #d4af37;
   box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
   transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer !important;
+  /* Fix: Ensure clickable */
+  position: relative;
+  z-index: 10;
+  /* Prevent overlay blocking */
+}
+
+/* Ensure the card is clickable and shows pointer cursor */
+.portfolio-card.faryta-card-link,
+a.portfolio-card.faryta-card-link {
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent;
+  /* Remove tap highlight on mobile */
+  touch-action: manipulation;
+  /* Disable double-tap zoom for faster response */
+}
+
+.portfolio-card.faryta-card-link:hover,
+a.portfolio-card.faryta-card-link:hover {
+  transform: translateY(-8px);
+  border-color: #f5d678;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+}
+
+/* Remove any overlay that might block clicks */
+.faryta-card-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 }
 
 .faryta-card-link:hover {
