@@ -1783,15 +1783,15 @@ footer p {
 }
 
 /* Faryta card visit button styling */
-.faryta-card .portfolio-visit {
-  background: linear-gradient(135deg, #d4af37, #f5d678);
-  color: #1a1a2e;
+.portfolio-visit-premium {
+  background: linear-gradient(135deg, #d4af37, #f5d678) !important;
+  color: #1a1a2e !important;
   font-weight: 700;
   margin-top: 0.75rem;
 }
 
-.faryta-card .portfolio-visit:hover {
-  background: linear-gradient(135deg, #f5d678, #ffe9a0);
+.portfolio-visit-premium:hover {
+  background: linear-gradient(135deg, #f5d678, #ffe9a0) !important;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
 }
