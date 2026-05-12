@@ -6,20 +6,15 @@
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // Portfolio card URLs mapping
-  const portfolioUrls = {
-    'faryta-studio': 'https://faryta-studio.vercel.app'
-  };
-
   /**
    * Create a visit button element
    */
-  function createVisitButton(url, isPremium) {
+  function createVisitButton(url) {
     var a = document.createElement('a');
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.className = 'portfolio-visit' + (isPremium ? ' portfolio-visit-premium' : '');
+    a.className = 'portfolio-visit';
     a.title = 'Kunjungi situs';
     a.setAttribute('aria-label', 'Kunjungi situs eksternal');
     a.innerHTML =
@@ -43,14 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /**
-   * Get portfolio URL from card identifier
+   * Get portfolio URL from card
    */
   function getPortfolioUrl(article) {
-    // Check for faryta-card
-    if (article.classList.contains('faryta-card')) {
-      return portfolioUrls['faryta-studio'];
-    }
-
     // Check for existing links in the card
     var link = article.querySelector('a');
     if (link) {
@@ -59,21 +49,18 @@ document.addEventListener('DOMContentLoaded', function () {
         return href;
       }
     }
-
     return null;
-  }
-
-  /**
-   * Check if portfolio card is premium (special styling)
-   */
-  function isPremiumCard(article) {
-    return article.classList.contains('faryta-card');
   }
 
   // Process all portfolio cards
   var portfolioCards = document.querySelectorAll('.portfolio-card');
 
   portfolioCards.forEach(function (article) {
+    // Skip faryta-card-link as it's already a full link
+    if (article.classList.contains('faryta-card-link')) {
+      return;
+    }
+
     var info = article.querySelector('.portfolio-info');
     if (!info) return;
 
@@ -87,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add appropriate button
     if (url) {
-      var btn = createVisitButton(url, isPremiumCard(article));
+      var btn = createVisitButton(url);
       info.appendChild(btn);
     } else {
       var disabledBtn = createDisabledButton();
@@ -95,6 +82,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Log for debugging
   console.log('Portfolio visit buttons initialized');
 });
