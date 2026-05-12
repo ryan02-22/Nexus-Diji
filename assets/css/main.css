@@ -1630,6 +1630,7 @@ footer p {
   }
 }
 
+/* ===== PORTFOLIO CARD - Mobile Touch Fix ===== */
 .portfolio-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1638,12 +1639,27 @@ footer p {
   transition: transform 0.3s, border-color 0.3s;
   flex-shrink: 0;
   width: 300px;
-  cursor: default;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  /* Fix for mobile tap delay */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .portfolio-card:hover {
   transform: translateY(-6px);
   border-color: var(--accent);
+}
+
+/* Ensure links inside cards work */
+.portfolio-card a {
+  pointer-events: auto;
+}
+
+.portfolio-card:active {
+  transform: translateY(-4px) scale(0.98);
 }
 
 .portfolio-thumb {
@@ -1819,12 +1835,27 @@ a.portfolio-card.faryta-card-link:hover {
   color: #1a1a2e !important;
   font-weight: 700;
   margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .portfolio-visit-premium:hover {
   background: linear-gradient(135deg, #f5d678, #ffe9a0) !important;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.portfolio-visit-premium:active {
+  transform: scale(0.97);
 }
 
 /* ===== PRICING SECTION ===== */

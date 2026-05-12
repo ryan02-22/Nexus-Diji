@@ -1,10 +1,45 @@
 /**
- * Portfolio Card - Visit Button Generator
+ * Portfolio Card - Visit Button Generator & Touch Event Handler
  * Adds "Kunjungi Situs" buttons to portfolio cards
+ * Handles click/touch events for all portfolio cards
  */
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
+
+  // ══════════════════════════════════════════════════════════════
+  // PORTFOLIO CARD TOUCH/CLICK HANDLER
+  // ══════════════════════════════════════════════════════════════
+
+  /**
+   * Initialize touch/click handlers for all portfolio cards
+   * Works on desktop (mouse click) and mobile/tablet (touch tap)
+   */
+  function initPortfolioCardHandlers() {
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    portfolioCards.forEach(function (card) {
+      // Skip if already an anchor tag (like faryta-card-link)
+      if (card.tagName === 'A') {
+        // Add touch event for anchor cards
+        card.addEventListener('touchstart', function (e) {
+          // Trigger click for faster response on mobile
+          // The browser will handle the navigation
+        }, { passive: true });
+
+        // Log for debugging
+        console.log('Portfolio card (link):', card.href || 'no href');
+        return;
+      }
+
+      // For article cards without links, add visit buttons via JS
+      console.log('Portfolio card (article): processed');
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // VISIT BUTTON CREATION
+  // ══════════════════════════════════════════════════════════════
 
   /**
    * Create a visit button element
@@ -53,14 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Process all portfolio cards
-  var portfolioCards = document.querySelectorAll('.portfolio-card');
+  var portfolioCards = document.querySelectorAll('.portfolio-card:not(.faryta-card-link)');
 
   portfolioCards.forEach(function (article) {
-    // Skip faryta-card-link as it's already a full link
-    if (article.classList.contains('faryta-card-link')) {
-      return;
-    }
-
     var info = article.querySelector('.portfolio-info');
     if (!info) return;
 
@@ -81,6 +111,41 @@ document.addEventListener('DOMContentLoaded', function () {
       info.appendChild(disabledBtn);
     }
   });
+
+  // ══════════════════════════════════════════════════════════════
+  // ENSURE FARYTA STUDIO CARD WORKS ON ALL DEVICES
+  // ══════════════════════════════════════════════════════════════
+  var farytaCard = document.querySelector('.faryta-card-link');
+  if (farytaCard) {
+    // The card is an anchor tag, so native behavior should work
+    // But we need to ensure touch events don't conflict
+
+    // For the visit button inside, ensure it doesn't block the card click
+    var visitBtn = farytaCard.querySelector('.portfolio-visit-premium');
+    if (visitBtn) {
+      visitBtn.addEventListener('click', function (e) {
+        // This button is inside an anchor, so let the default action work
+        // Just stop propagation to prevent any double-firing
+        e.stopPropagation();
+      });
+
+      visitBtn.addEventListener('touchend', function (e) {
+        // On touch, trigger the card's click
+        e.preventDefault();
+        e.stopPropagation();
+        // Navigate to the URL
+        window.open(farytaCard.href, '_blank');
+      }, { passive: false });
+    }
+
+    // Also handle the entire card for touchend
+    farytaCard.addEventListener('touchend', function (e) {
+      // Only prevent default if we want custom handling
+      // For now, let the browser handle the click naturally
+    }, { passive: true });
+
+    console.log('Faryta Studio card initialized with touch support');
+  }
 
   console.log('Portfolio visit buttons initialized');
 });
