@@ -440,8 +440,7 @@
               <span class="portfolio-tag">Landing Page</span>
             </div>
           </article>
-          <article class="portfolio-card">
-            <a href="https://faryta-studio.vercel.app" target="_blank" rel="noopener noreferrer" class="faryta-card-link">
+          <article class="portfolio-card faryta-card" onclick="window.open('https://faryta-studio.vercel.app', '_blank')">
             <div class="portfolio-thumb faryta-studio-thumb">
               <img src="assets/images/faryta-studio.svg" alt="Faryta Studio">
             </div>
@@ -450,7 +449,6 @@
               <p>Website portfolio bisnis photography profesional dengan layanan wedding, portrait, dan event documentation.</p>
               <span class="portfolio-tag">Photography Studio</span>
             </div>
-            </a>
           </article>
           <!-- Set 2 (duplicate for seamless loop) -->
           <article class="portfolio-card">
@@ -537,8 +535,7 @@
               <span class="portfolio-tag">Landing Page</span>
             </div>
           </article>
-          <article class="portfolio-card">
-            <a href="https://faryta-studio.vercel.app" target="_blank" rel="noopener noreferrer" class="faryta-card-link">
+          <article class="portfolio-card faryta-card" onclick="window.open('https://faryta-studio.vercel.app', '_blank')">
             <div class="portfolio-thumb faryta-studio-thumb">
               <img src="assets/images/faryta-studio.svg" alt="Faryta Studio">
             </div>
@@ -547,7 +544,6 @@
               <p>Website portfolio bisnis photography profesional dengan layanan wedding, portrait, dan event documentation.</p>
               <span class="portfolio-tag">Photography Studio</span>
             </div>
-            </a>
           </article>
         </div>
       </div>
@@ -676,33 +672,41 @@
           var article = info.closest('.portfolio-card');
           if (!article) return;
 
+          // Skip faryta-card as it has its own click handler
+          if (article.classList.contains('faryta-card')) {
+            var span = document.createElement('span');
+            span.className = 'portfolio-visit';
+            span.setAttribute('role', 'link');
+            span.setAttribute('tabindex', '0');
+            span.setAttribute('title', 'Kunjungi situs');
+            span.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+            article.appendChild(span);
+            span.addEventListener('click', function (e) {
+              window.open('https://faryta-studio.vercel.app', '_blank');
+            });
+            span.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.open('https://faryta-studio.vercel.app', '_blank');
+              }
+            });
+            return;
+          }
+
           // Prefer an existing anchor inside the card (e.g. .faryta-card-link)
           var link = article.querySelector('a');
           var url = link ? link.getAttribute('href') : null;
 
           if (url) {
-            // Avoid creating an <a> inside another <a> (invalid).
-            if (link.contains(info)) {
-              var span = document.createElement('span');
-              span.className = 'portfolio-visit';
-              span.setAttribute('role', 'link');
-              span.setAttribute('tabindex', '0');
-              span.setAttribute('title', 'Kunjungi situs');
-              span.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-              span.addEventListener('click', function (e) { window.open(url, '_blank', 'noopener'); });
-              span.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { window.open(url, '_blank', 'noopener'); } });
-              info.appendChild(span);
-            } else {
-              var a = document.createElement('a');
-              a.className = 'portfolio-visit';
-              a.setAttribute('href', url);
-              a.setAttribute('target', '_blank');
-              a.setAttribute('rel', 'noopener noreferrer');
-              a.setAttribute('aria-label', 'Kunjungi situs eksternal');
-              a.setAttribute('title', 'Kunjungi situs');
-              a.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-              info.appendChild(a);
-            }
+            var a = document.createElement('a');
+            a.className = 'portfolio-visit';
+            a.setAttribute('href', url);
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+            a.setAttribute('aria-label', 'Kunjungi situs eksternal');
+            a.setAttribute('title', 'Kunjungi situs');
+            a.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+            info.appendChild(a);
           } else {
             var span = document.createElement('span');
             span.className = 'portfolio-visit disabled';

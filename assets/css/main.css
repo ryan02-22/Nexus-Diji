@@ -1700,6 +1700,8 @@ footer p {
   text-decoration: none;
   box-shadow: 0 6px 18px rgba(67,97,238,0.12);
   transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+  position: relative;
+  z-index: 1200; /* Ensure CTA sits above decorative overlays */
 }
 .portfolio-visit:hover {
   transform: translateY(-3px);
@@ -1722,19 +1724,21 @@ footer p {
 }
 
 /* Faryta Studio Premium Card - Photography Portfolio */
-.portfolio-card:has(.faryta-studio-thumb) {
+.faryta-card {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border: 2px solid #d4af37;
   box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-.portfolio-card:has(.faryta-studio-thumb):hover {
+.faryta-card:hover {
   transform: translateY(-8px);
   border-color: #f5d678;
   box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
 }
 
-.faryta-studio-thumb {
+.faryta-card .faryta-studio-thumb {
   height: 180px;
   background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
   display: flex;
@@ -1743,7 +1747,7 @@ footer p {
   padding: 1rem;
 }
 
-.faryta-studio-thumb img {
+.faryta-card .faryta-studio-thumb img {
   width: auto;
   max-width: 90%;
   height: auto;
@@ -1753,48 +1757,23 @@ footer p {
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-/* Faryta Studio - entire card clickable */
-.faryta-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.faryta-card-link:hover {
-  text-decoration: none;
-}
-
-.faryta-card-link:hover .faryta-studio-thumb img {
+.faryta-card:hover .faryta-studio-thumb img {
   transform: scale(1.1);
   filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.5));
 }
 
-.faryta-card-link:hover {
-  transform: translateY(-8px);
-}
-
-.portfolio-card:has(.faryta-card-link) {
-  border: 2px solid #d4af37;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-
-.portfolio-card:has(.faryta-card-link):hover {
-  border-color: #f5d678;
-  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
-}
-
-.faryta-card-link .portfolio-info h3 {
+.faryta-card .portfolio-info h3 {
   color: #d4af37;
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
 }
 
-.faryta-card-link .portfolio-info p {
+.faryta-card .portfolio-info p {
   color: rgba(245, 230, 196, 0.8);
   font-style: italic;
 }
 
-.faryta-card-link .portfolio-tag {
+.faryta-card .portfolio-tag {
   background: rgba(212, 175, 55, 0.15);
   border: 1px solid rgba(212, 175, 55, 0.4);
   color: #f5d678;
