@@ -180,7 +180,7 @@
 
     <!-- NAV -->
     <nav id="navbar">
-      <a href="#" class="logo">
+      <a href="https://faryta-studio.vercel.app" class="logo" target="_blank" rel="noopener noreferrer">
         <img src="./assets/images/logo%20okeh.png" alt="Nexus Diji Logo" class="logo-img">
       </a>
       <ul class="nav-links">
@@ -555,7 +555,7 @@
 
     </section>
 
-    <!-- PRICING -->
+  <!-- PRICING -->
     <section id="pricing">
       <span class="section-label reveal">Transparan & Terjangkau</span>
       <h2 class="section-title reveal">Paket Harga</h2>
@@ -668,6 +668,38 @@
         </article>
       </div>
     </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Add a classic 'Visit Site' CTA to each portfolio card.
+        document.querySelectorAll('.portfolio-info').forEach(function (info) {
+          var article = info.closest('.portfolio-card');
+          if (!article) return;
+
+          // Prefer an existing anchor inside the card (e.g. .faryta-card-link)
+          var link = article.querySelector('a');
+          var url = link ? link.getAttribute('href') : null;
+
+          if (url) {
+            var a = document.createElement('a');
+            a.className = 'portfolio-visit';
+            a.setAttribute('href', url);
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+            a.setAttribute('aria-label', 'Kunjungi situs eksternal');
+            a.setAttribute('title', 'Kunjungi situs');
+            a.innerHTML = 'Kunjungi Situs <svg class="visit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+            info.appendChild(a);
+          } else {
+            var span = document.createElement('span');
+            span.className = 'portfolio-visit disabled';
+            span.setAttribute('aria-disabled', 'true');
+            span.textContent = 'Kunjungi Situs';
+            info.appendChild(span);
+          }
+        });
+      });
+    </script>
 
     <!-- WHY US -->
     <section id="why">
@@ -946,10 +978,10 @@
               </polygon>
             </svg>
           </div>
-          <p class="testimonial-text">"Fotonya terasa elegan dan emosional sekaligus. Timnya membuat kami nyaman, mengarahkan pose dengan halus, dan hasil galerinya benar-benar terlihat premium."</p>
+          <p class="testimonial-text">"Website yang dibuat sangat profesional dan sesuai dengan kebutuhan bisnis kami. Tim Nexus Diji bekerja sangat baik dan Cepat."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">NF</div>
-            <div class="author-info"><strong>Nadia & Fajar</strong><span>Wedding Photography</span></div>
+            <div class="author-avatar">FS</div>
+            <div class="author-info"><strong>Faryta Studio</strong><span>Wedding Photography</span></div>
           </div>
         </article>
       </div>
