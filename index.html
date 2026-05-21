@@ -156,6 +156,15 @@
   </script>
 
   <meta name="google-site-verification" content="b4qZsZZQ3iuk5UPQDu8AAFFA8v7e7XNGXapJbn0Tps8">
+
+  <!-- CSS Modules - Load in order for proper cascade -->
+  <link rel="stylesheet" href="./assets/css/variables.css">
+  <link rel="stylesheet" href="./assets/css/global.css">
+  <link rel="stylesheet" href="./assets/css/navbar.css">
+  <link rel="stylesheet" href="./assets/css/mega-menu.css">
+  <link rel="stylesheet" href="./assets/css/pages.css">
+
+  <!-- Legacy CSS - Keep for compatibility during transition -->
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 
@@ -180,15 +189,88 @@
 
     <!-- NAV -->
     <nav id="navbar">
-      <a href="https://faryta-studio.vercel.app" class="logo" target="_blank" rel="noopener noreferrer">
+      <a href="./" class="logo" aria-label="Nexus Diji Beranda">
         <img src="./assets/images/logo%20okeh.png" alt="Nexus Diji Logo" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#services">Layanan</a></li>
+        <!-- Services Dropdown with Mega Menu -->
+        <li class="nav-dropdown">
+          <a href="#services" class="dropdown-trigger">Layanan</a>
+          <!-- Mega Menu -->
+          <div class="mega-menu">
+            <a href="#services" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Pembuatan Website</div>
+                <div class="mega-card__desc">Landing page, company profile, toko online, blog profesional</div>
+              </div>
+            </a>
+            <a href="#services" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Pembuatan Aplikasi</div>
+                <div class="mega-card__desc">Web app, mobile app, dashboard, sistem custom</div>
+              </div>
+            </a>
+            <a href="#services" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Servis PC & Laptop</div>
+                <div class="mega-card__desc">Instalasi OS, upgrade hardware, virus removal, recovery data</div>
+              </div>
+            </a>
+            <!-- Aside branding area -->
+            <div class="mega-menu__aside">
+              <div class="mega-aside">
+                <img src="./assets/images/2.png" alt="Nexus Diji" class="mega-aside__logo">
+                <p class="mega-aside__quote">"Solusi digital terpercaya untuk bisnis kamu"</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mobile Dropdown -->
+          <div class="mobile-dropdown">
+            <a href="#services">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Pembuatan Website
+            </a>
+            <a href="#services">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              Pembuatan Aplikasi
+            </a>
+            <a href="#services">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              Servis PC & Laptop
+            </a>
+          </div>
+        </li>
         <li><a href="#pricing">Harga</a></li>
         <li><a href="#why">Kenapa Kami</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="pages/tentang-kami.html">Tentang Kami</a></li>
       </ul>
       <div class="nav-actions">
         <a href="#contact" class="nav-cta"><span>Mulai Proyek</span></a>
@@ -202,13 +284,21 @@
     <nav class="nav-mobile-menu" id="mobileMenu" aria-label="Menu Navigasi Mobile">
       <button class="close-menu-btn" id="closeMenuBtn" aria-label="Tutup Menu">&times;</button>
       <a href="#portfolio">Portfolio</a>
-      <a href="#services">Layanan</a>
+      <!-- Services with submenu -->
+      <div class="nav-dropdown">
+        <button class="mobile-dropdown-toggle">Layanan</button>
+        <div class="mobile-dropdown">
+          <a href="#services">Pembuatan Website</a>
+          <a href="#services">Pembuatan Aplikasi</a>
+          <a href="#services">Servis PC & Laptop</a>
+        </div>
+      </div>
       <a href="#pricing">Harga</a>
       <a href="#why">Kenapa Kami</a>
       <a href="#process">Proses</a>
       <a href="#testimonials">Testimoni</a>
       <a href="#faq">FAQ</a>
-      <a href="#blog">Blog</a>
+      <a href="pages/tentang-kami.html">Tentang Kami</a>
       <a href="#contact" style="color:var(--accent);">Mulai Proyek →</a>
     </nav>
   </header>
@@ -1376,11 +1466,12 @@
     </svg>
   </button>
 
-  <!-- JavaScript - Separate files for better organization and caching -->
-  <script src="./assets/js/main.js"></script>
+  <!-- JavaScript - Legacy scripts for existing functionality -->
   <script src="./assets/js/marquee.js"></script>
   <script src="./assets/js/portfolio.js"></script>
   <script src="./assets/js/ui-utils.js"></script>
+  <!-- JavaScript - ES6 Modules for new functionality -->
+  <script type="module" src="./assets/js/main.js"></script>
 
 </body>
 

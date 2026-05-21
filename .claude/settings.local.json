@@ -1,7 +1,21 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:minimax-algeng-chat-tts-us.oss-us-east-1.aliyuncs.com)"
+      "WebFetch(domain:minimax-algeng-chat-tts-us.oss-us-east-1.aliyuncs.com)",
+      "Bash(netstat -ano)",
+      "Bash(cmd //c \"taskkill /F /FI \\\\\"WINDOWTITLE eq *localhost*\\\\\" 2>nul || taskkill /F /FI \\\\\"WINDOWTITLE eq *3000*\\\\\" 2>nul || echo No process found\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(tasklist)",
+      "Bash(handle \"Nexus-Diji\")",
+      "Bash(wmic process *)",
+      "Bash(taskkill /F /IM Code.exe)",
+      "Bash(cmd.exe /c \"taskkill /F /IM Code.exe 2>nul\")",
+      "Bash(python -c \"import shutil; shutil.rmtree\\(r'C:\\\\All_Project_Kuliah\\\\SEMESTER-4\\\\Bisnis Elektronik\\\\ND\\\\Nexus-Diji', ignore_errors=True\\); print\\('Done'\\)\")",
+      "Bash(powershell -Command \"Remove-Item -Path 'C:\\\\All_Project_Kuliah\\\\SEMESTER-4\\\\Bisnis Elektronik\\\\ND\\\\Nexus-Diji' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host 'Done'\")",
+      "Bash(cmd.exe /c \"rmdir /s /q \\\\\"C:\\\\All_Project_Kuliah\\\\SEMESTER-4\\\\Bisnis Elektronik\\\\ND\\\\Nexus-Diji\\\\\" 2>nul && echo Deleted\")",
+      "Bash(grep -v \"^Nexus-Diji$\")",
+      "Bash(python -c ' *)",
+      "WebFetch(domain:vodeco.co.id)"
     ]
   }
 }
