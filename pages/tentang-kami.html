@@ -22,8 +22,10 @@
   <link rel="stylesheet" href="../assets/css/variables.css">
   <link rel="stylesheet" href="../assets/css/global.css">
   <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/mega-menu.css">
   <link rel="stylesheet" href="../assets/css/pages.css">
   <link rel="stylesheet" href="../assets/css/about.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 
 <body>
@@ -51,21 +53,84 @@
         <img src="../assets/images/logo%20okeh.png" alt="Nexus Diji Logo" class="logo-img">
       </a>
       <ul class="nav-links">
-        <li><a href="../index.html#portfolio">Portfolio</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
         <li class="nav-dropdown">
-          <a href="../index.html#services" class="dropdown-trigger">Layanan</a>
+          <a href="layanan.html" class="dropdown-trigger">Layanan</a>
+          <div class="mega-menu">
+            <a href="layanan.html#website" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Pembuatan Website</div>
+                <div class="mega-card__desc">Landing page, company profile, toko online, blog profesional</div>
+              </div>
+            </a>
+            <a href="layanan.html#aplikasi" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Pembuatan Aplikasi</div>
+                <div class="mega-card__desc">Web app, mobile app, dashboard, sistem custom</div>
+              </div>
+            </a>
+            <a href="layanan.html#servis" class="mega-card">
+              <div class="mega-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <div class="mega-card__text">
+                <div class="mega-card__title">Servis PC & Laptop</div>
+                <div class="mega-card__desc">Instalasi OS, upgrade hardware, virus removal, recovery data</div>
+              </div>
+            </a>
+            <div class="mega-menu__aside">
+              <div class="mega-aside">
+                <img src="../assets/images/2.png" alt="Nexus Diji" class="mega-aside__logo">
+                <p class="mega-aside__quote">"Solusi digital terpercaya untuk bisnis kamu"</p>
+              </div>
+            </div>
+          </div>
           <div class="mobile-dropdown">
-            <a href="../index.html#services">Pembuatan Website</a>
-            <a href="../index.html#services">Pembuatan Aplikasi</a>
-            <a href="../index.html#services">Servis PC & Laptop</a>
+            <a href="layanan.html#website">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Pembuatan Website
+            </a>
+            <a href="layanan.html#aplikasi">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              Pembuatan Aplikasi
+            </a>
+            <a href="layanan.html#servis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              Servis PC & Laptop
+            </a>
           </div>
         </li>
-        <li><a href="../index.html#pricing">Harga</a></li>
-        <li><a href="../index.html#why">Kenapa Kami</a></li>
+        <li><a href="harga.html">Harga</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="tentang-kami.html" class="active">Tentang Kami</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="../index.html#contact" class="nav-cta"><span>Mulai Proyek</span></a>
+        <a href="kontak.html" class="nav-cta"><span>Mulai Proyek</span></a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -75,18 +140,20 @@
     <!-- MOBILE MENU -->
     <nav class="nav-mobile-menu" id="mobileMenu" aria-label="Menu Navigasi Mobile">
       <button class="close-menu-btn" id="closeMenuBtn" aria-label="Tutup Menu">&times;</button>
-      <a href="../index.html#portfolio">Portfolio</a>
+      <a href="../index.html">Beranda</a>
+      <a href="portfolio.html">Portfolio</a>
       <div class="nav-dropdown">
         <button class="mobile-dropdown-toggle">Layanan</button>
         <div class="mobile-dropdown">
-          <a href="../index.html#services">Pembuatan Website</a>
-          <a href="../index.html#services">Pembuatan Aplikasi</a>
-          <a href="../index.html#services">Servis PC & Laptop</a>
+          <a href="layanan.html#website">Pembuatan Website</a>
+          <a href="layanan.html#aplikasi">Pembuatan Aplikasi</a>
+          <a href="layanan.html#servis">Servis PC & Laptop</a>
         </div>
       </div>
-      <a href="../index.html#pricing">Harga</a>
-      <a href="../index.html#why">Kenapa Kami</a>
+      <a href="harga.html">Harga</a>
+      <a href="blog.html">Blog</a>
       <a href="tentang-kami.html" class="active">Tentang Kami</a>
+      <a href="kontak.html">Kontak</a>
       <a href="../index.html#contact" style="color:var(--accent);">Mulai Proyek →</a>
     </nav>
   </header>
