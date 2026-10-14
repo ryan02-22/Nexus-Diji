@@ -1,0 +1,253 @@
+/* Shared type, icon, and viewport rules for every Nexus Diji page. */
+:root {
+  --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Space Grotesk', 'DM Sans', sans-serif;
+  --page-gutter: clamp(0.75rem, 3vw, 2.25rem);
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: clip;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: clip;
+  font-family: var(--font-primary);
+}
+
+body * {
+  min-width: 0;
+}
+
+body :is(h1, h2, h3, h4, h5, h6, .section-title, .about-hero__title, .story-title, .about-cta__title, .cta-headline) {
+  font-family: var(--font-display) !important;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+body :is(h1, .about-hero__title, .hero-title, .cta-headline) {
+  font-size: clamp(2.1rem, 5.8vw, 5.5rem);
+  line-height: 1.04;
+}
+
+body :is(h2, .section-title, .story-title, .about-cta__title) {
+  font-size: clamp(1.75rem, 4.2vw, 3.5rem);
+  line-height: 1.1;
+}
+
+body :is(p, li, figcaption, blockquote) {
+  text-wrap: pretty;
+}
+
+.container {
+  width: 100%;
+  padding-inline: var(--page-gutter);
+}
+
+img,
+video,
+iframe,
+canvas,
+svg {
+  max-inline-size: 100%;
+}
+
+img,
+video,
+iframe,
+canvas {
+  block-size: auto;
+}
+
+svg[viewBox] {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+svg[stroke] {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+svg[stroke="currentColor"] {
+  stroke-width: 1.9;
+}
+
+a > svg,
+button > svg,
+.mega-card__icon svg,
+.service-icon svg,
+.service-card__icon svg,
+.feature-icon svg,
+.highlight-icon svg,
+.story-card__icon svg,
+.wp-icon svg {
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+a:hover > svg {
+  transform: translateX(2px);
+}
+
+button:hover > svg {
+  transform: scale(1.06);
+}
+
+.mega-card:hover .mega-card__icon svg,
+.service-card:hover .service-card__icon svg,
+.service-card:hover .service-icon svg,
+.highlight-item:hover .highlight-icon svg,
+.story-card:hover .story-card__icon svg {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 5px 8px rgba(0, 180, 216, 0.2));
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  touch-action: manipulation;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+button,
+.btn-primary,
+.btn-secondary,
+.nav-cta,
+.nav-mobile-cta a {
+  min-height: 44px;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(0, 180, 216, 0.72);
+  outline-offset: 3px;
+}
+
+table,
+pre {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  body :is(.services-grid, .service-grid, .features-grid, .feature-grid, .portfolio-grid, .pricing-grid, .blog-grid, .team-grid, .process-grid, .testimonial-grid, .contact-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-container {
+    position: sticky;
+    top: 0;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.8rem var(--page-gutter);
+  }
+
+  .nav-container .logo-img {
+    height: 3.25rem;
+  }
+
+  .nav-container .nav-links {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem clamp(0.75rem, 3vw, 1.5rem);
+  }
+
+  .article-wrap {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    padding-inline: var(--page-gutter);
+  }
+
+  footer {
+    padding: 2rem var(--page-gutter);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --page-gutter: 0.875rem;
+  }
+
+  /* The promo strip and fixed mobile nav stack above this page intro. */
+  .about-hero {
+    padding-top: 10rem;
+  }
+
+  body :is(.services-grid, .service-grid, .features-grid, .feature-grid, .portfolio-grid, .pricing-grid, .blog-grid, .team-grid, .process-grid, .testimonial-grid, .contact-grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body :is(input, select, textarea) {
+    font-size: max(16px, 1em);
+  }
+
+  body :is(.btn-primary, .btn-secondary, .nav-cta) {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .nav-container .nav-links {
+    gap: 0.3rem 0.8rem;
+  }
+
+  .article-content {
+    font-size: 1rem;
+  }
+
+  .article-meta {
+    flex-wrap: wrap;
+    gap: 0.5rem 0.8rem;
+  }
+
+  .highlight-box {
+    padding: 1.1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --page-gutter: 0.75rem;
+  }
+
+  /* Keep the floating help control from covering the edge of the hero CTA. */
+  #toolsOverlay {
+    right: 0.25rem;
+  }
+
+  #toolsOverlay .fab-trigger {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+
+  body :is(h1, .about-hero__title, .hero-title, .cta-headline) {
+    font-size: clamp(1.9rem, 9vw, 2.35rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

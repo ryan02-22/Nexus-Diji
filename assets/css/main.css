@@ -27,7 +27,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
   cursor: none;
 }
@@ -518,7 +518,7 @@ nav.scrolled {
 
 /* -- TYPING EFFECT -- */
 h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 900;
   line-height: 1.05;
@@ -708,7 +708,7 @@ h1 .accent {
 }
 
 .stat-num {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   color: var(--text);
@@ -742,7 +742,7 @@ section {
 }
 
 .section-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -1534,7 +1534,7 @@ footer p {
   .nav-mobile-menu a {
     color: var(--text);
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
   }
@@ -1678,7 +1678,7 @@ footer p {
 }
 
 .portfolio-info h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.4rem;
@@ -1814,7 +1814,7 @@ a.portfolio-card.faryta-card-link:hover {
 
 .faryta-card-link .portfolio-info h3 {
   color: #d4af37;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Space Grotesk', Georgia, serif;
   font-style: italic;
 }
 
@@ -1904,7 +1904,7 @@ a.portfolio-card.faryta-card-link:hover {
 }
 
 .pricing-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 800;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
@@ -1918,7 +1918,7 @@ a.portfolio-card.faryta-card-link:hover {
 }
 
 .pricing-price {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 900;
   font-size: 2rem;
   color: var(--accent);
@@ -2026,7 +2026,7 @@ a.portfolio-card.faryta-card-link:hover {
 
 .wedding-testimonial .testimonial-text {
   color: rgba(245, 230, 196, 0.9);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Space Grotesk', Georgia, serif;
 }
 
 .wedding-testimonial .author-avatar {
@@ -2037,7 +2037,7 @@ a.portfolio-card.faryta-card-link:hover {
 
 .wedding-testimonial .author-info strong {
   color: #d4af37;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Space Grotesk', Georgia, serif;
 }
 
 .wedding-testimonial .author-info span {
@@ -2070,7 +2070,7 @@ a.portfolio-card.faryta-card-link:hover {
   padding: 1.4rem 0;
   font-size: 1rem;
   font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2948,7 +2948,7 @@ footer p {
   overflow: hidden;
   display: none;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -2987,7 +2987,7 @@ footer p {
   text-align: left;
   transition: all 0.2s ease;
   color: #fff;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .help-opt-btn:last-child {
@@ -3046,7 +3046,7 @@ footer p {
   overflow: hidden;
   display: none;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   transform: translateY(20px);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -3167,7 +3167,7 @@ footer p {
   color: var(--accent);
   font-size: 0.8rem;
   font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   text-align: left;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
@@ -3191,7 +3191,7 @@ footer p {
   color: #fff;
   font-size: 0.82rem;
   font-weight: 700;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, transform 0.2s;
@@ -3228,7 +3228,7 @@ footer p {
   padding: 0.5rem 0.9rem;
   color: #fff;
   font-size: 0.8rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   outline: none;
 }
 
@@ -3344,7 +3344,7 @@ footer p {
 }
 
 .cta-headline {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 900;
   line-height: 1.1;
