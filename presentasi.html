@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentasi Proyek Akhir — Nexus Diji | Bisnis Elektronik</title>
+  <link rel="icon" type="image/png" href="./assets/images/2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS RESET & VARIABLES
+       ======================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-surface: #12121a;
+      --bg-card: #1a1a2e;
+      --bg-card-hover: #22223a;
+      --text: #e8e8f0;
+      --text-muted: #8888a8;
+      --text-dim: #5a5a78;
+      --accent: #00e5ff;
+      --accent-glow: rgba(0,229,255,.25);
+      --purple: #7c3aed;
+      --purple-glow: rgba(124,58,237,.25);
+      --pink: #ec4899;
+      --pink-glow: rgba(236,72,153,.25);
+      --green: #10b981;
+      --orange: #f59e0b;
+      --gradient-main: linear-gradient(135deg, #00e5ff, #7c3aed, #ec4899);
+      --gradient-accent: linear-gradient(135deg, #00e5ff, #7c3aed);
+      --gradient-warm: linear-gradient(135deg, #7c3aed, #ec4899);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-xs: 4px;
+      --shadow: 0 8px 32px rgba(0,0,0,.4);
+      --shadow-glow: 0 0 40px rgba(0,229,255,.15);
+      --transition: .4s cubic-bezier(.4,0,.2,1);
+      --font: 'Poppins', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* ========================================
+       BASE STYLES
+       ======================================== */
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      cursor: default;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       PRESENTATION CONTAINER
+       ======================================== */
+    .presentation {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ========================================
+       ANIMATED BACKGROUND
+       ======================================== */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bg-canvas .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+    @keyframes gridShift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .4;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+    .bg-orb--1 {
+      width: 500px; height: 500px;
+      background: var(--purple);
+      top: -15%; left: -10%;
+      animation-duration: 14s;
+    }
+    .bg-orb--2 {
+      width: 400px; height: 400px;
+      background: var(--accent);
+      bottom: -10%; right: -5%;
+      animation-duration: 18s;
+      animation-delay: -4s;
+    }
+    .bg-orb--3 {
+      width: 300px; height: 300px;
+      background: var(--pink);
+      top: 40%; left: 50%;
+      animation-duration: 16s;
+      animation-delay: -8s;
+      opacity: .2;
+    }
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 30px) scale(.95); }
+      100% { transform: translate(15px, -10px) scale(1.02); }
+    }
+
+    /* ========================================
+       SLIDES
+       ======================================== */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px;
+      z-index: 1;
+      opacity: 0;
+      transform: translateX(60px);
+      pointer-events: none;
+      transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    .slide.exit-left {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    .slide-inner {
+      width: 100%;
+      max-width: 1200px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    .slide-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .5s ease .1s;
+    }
+    .slide-label::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .active .slide-label { opacity: 1; transform: translateY(0); }
+
+    .slide-title {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .6s ease .2s;
+    }
+    .active .slide-title { opacity: 1; transform: translateY(0); }
+
+    .gradient-text {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-accent {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 700px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .5s ease .35s;
+    }
+    .active .slide-desc { opacity: 1; transform: translateY(0); }
+
+    .slide-body {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all .6s ease .3s;
+    }
+    .active .slide-body { opacity: 1; transform: translateY(0); }
+
+    /* ========================================
+       SLIDE: COVER
+       ======================================== */
+    .cover-slide {
+      text-align: center;
+    }
+    .cover-slide .logo-presentation {
+      width: 100px; height: 100px;
+      border-radius: 24px;
+      object-fit: contain;
+      margin-bottom: 30px;
+      border: 2px solid rgba(0,229,255,.2);
+      padding: 8px;
+      background: rgba(0,229,255,.05);
+      opacity: 0;
+      transform: scale(.8);
+      transition: all .7s ease .1s;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,229,255,.1); }
+      50% { box-shadow: 0 0 40px rgba(0,229,255,.25); }
+    }
+    .active .logo-presentation { opacity: 1; transform: scale(1); }
+
+    .cover-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .5s ease .5s;
+    }
+    .active .cover-subtitle { opacity: 1; transform: translateY(0); }
+
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all .5s ease .6s;
+    }
+    .active .cover-meta { opacity: 1; transform: translateY(0); }
+
+    .cover-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .85rem;
+      color: var(--text-dim);
+      padding: 8px 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 100px;
+    }
+    .cover-meta-item svg {
+      width: 16px; height: 16px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ========================================
+       CARDS GRID
+       ======================================== */
+    .cards-grid {
+      display: grid;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .cards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .cards-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .info-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gradient-main);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .info-card:hover {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(0,229,255,.15);
+      transform: translateY(-4px);
+    }
+    .info-card:hover::before { opacity: 1; }
+
+    .info-card .card-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+    }
+    .info-card .card-icon.cyan { background: rgba(0,229,255,.1); color: var(--accent); }
+    .info-card .card-icon.purple { background: rgba(124,58,237,.1); color: var(--purple); }
+    .info-card .card-icon.pink { background: rgba(236,72,153,.1); color: var(--pink); }
+    .info-card .card-icon.green { background: rgba(16,185,129,.1); color: var(--green); }
+    .info-card .card-icon.orange { background: rgba(245,158,11,.1); color: var(--orange); }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .info-card p {
+      font-size: .88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       LAYOUT HELPERS
+       ======================================== */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .split-layout.reverse { direction: rtl; }
+    .split-layout.reverse > * { direction: ltr; }
+
+    /* ========================================
+       TECH STACK TAGS
+       ======================================== */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .tech-tag {
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 600;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--text);
+      transition: all .3s ease;
+      letter-spacing: .3px;
+    }
+    .tech-tag:hover {
+      background: rgba(0,229,255,.08);
+      border-color: rgba(0,229,255,.25);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .tech-tag.primary {
+      background: rgba(0,229,255,.1);
+      border-color: rgba(0,229,255,.2);
+      color: var(--accent);
+    }
+
+    /* ========================================
+       PRICING TABLE
+       ======================================== */
+    .pricing-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .price-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 30px 24px;
+      text-align: center;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .price-card.featured {
+      background: rgba(124,58,237,.08);
+      border-color: rgba(124,58,237,.25);
+      transform: scale(1.04);
+    }
+    .price-card.featured::before {
+      content: 'Paling Populer ✨';
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 16px;
+      background: var(--gradient-warm);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: .5px;
+    }
+    .price-card .price-name {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .price-card .price-amount {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .price-card .price-amount span {
+      font-size: .85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    .price-card ul {
+      list-style: none;
+      text-align: left;
+      padding: 0;
+    }
+    .price-card ul li {
+      padding: 6px 0;
+      font-size: .82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .price-card ul li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      font-size: .8rem;
+    }
+
+    /* ========================================
+       TEAM CARDS
+       ======================================== */
+    .team-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .team-card-pres {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 30px 20px;
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .team-card-pres:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(0,229,255,.15);
+      transform: translateY(-4px);
+    }
+    .team-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0 auto 16px;
+      border: 2px solid rgba(0,229,255,.2);
+    }
+    .team-avatar.av-1 { background: rgba(0,229,255,.1); color: var(--accent); }
+    .team-avatar.av-2 { background: rgba(124,58,237,.1); color: var(--purple); }
+    .team-avatar.av-3 { background: rgba(236,72,153,.1); color: var(--pink); }
+    .team-avatar.av-4 { background: rgba(16,185,129,.1); color: var(--green); }
+    .team-card-pres h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .team-card-pres .team-role {
+      font-size: .75rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 10px;
+    }
+    .team-card-pres p {
+      font-size: .78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       PROCESS / STEPS TIMELINE
+       ======================================== */
+    .process-timeline {
+      display: flex;
+      gap: 0;
+      margin-top: 30px;
+      position: relative;
+    }
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      right: 32px;
+      height: 2px;
+      background: rgba(255,255,255,.06);
+    }
+    .process-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding: 0 12px;
+    }
+    .process-step .step-circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 auto 16px;
+      position: relative;
+      z-index: 2;
+      transition: all .3s ease;
+    }
+    .process-step:nth-child(1) .step-circle { background: rgba(0,229,255,.1); color: var(--accent); border: 2px solid rgba(0,229,255,.3); }
+    .process-step:nth-child(2) .step-circle { background: rgba(124,58,237,.1); color: var(--purple); border: 2px solid rgba(124,58,237,.3); }
+    .process-step:nth-child(3) .step-circle { background: rgba(236,72,153,.1); color: var(--pink); border: 2px solid rgba(236,72,153,.3); }
+    .process-step:nth-child(4) .step-circle { background: rgba(16,185,129,.1); color: var(--green); border: 2px solid rgba(16,185,129,.3); }
+    .process-step h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .process-step p {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       STATS ROW
+       ======================================== */
+    .stats-row {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .stat-box {
+      flex: 1;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-box .stat-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+    .stat-box .stat-val.cyan { color: var(--accent); }
+    .stat-box .stat-val.purple { color: var(--purple); }
+    .stat-box .stat-val.pink { color: var(--pink); }
+    .stat-box .stat-val.green { color: var(--green); }
+    .stat-box .stat-lbl {
+      font-size: .8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========================================
+       FEATURE LIST
+       ======================================== */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 16px;
+    }
+    .feature-list li {
+      padding: 10px 0;
+      font-size: .95rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .feature-list li:last-child { border: none; }
+    .feature-list li .check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: .7rem;
+      font-weight: 700;
+      background: rgba(0,229,255,.1);
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,.2);
+    }
+
+    /* ========================================
+       SITEMAP VISUAL
+       ======================================== */
+    .sitemap-visual {
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+    .sitemap-tree {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: .82rem;
+    }
+    .sitemap-tree .tree-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: background .2s ease;
+    }
+    .sitemap-tree .tree-item:hover { background: rgba(255,255,255,.03); }
+    .sitemap-tree .tree-item .tree-icon {
+      font-size: 1rem;
+    }
+    .sitemap-tree .tree-item .tree-name {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .sitemap-tree .tree-item .tree-desc {
+      color: var(--text-dim);
+      margin-left: auto;
+      font-size: .75rem;
+    }
+    .sitemap-tree .tree-item.indent-1 { padding-left: 40px; }
+    .sitemap-tree .tree-item.indent-2 { padding-left: 66px; }
+
+    /* ========================================
+       QUOTE BLOCK
+       ======================================== */
+    .quote-block {
+      background: rgba(124,58,237,.06);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .quote-block p {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .quote-block .quote-author {
+      margin-top: 10px;
+      font-size: .82rem;
+      font-style: normal;
+      color: var(--text-dim);
+    }
+
+    /* ========================================
+       SEO / STRATEGY VISUAL
+       ======================================== */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .strategy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--radius-sm);
+      transition: all .3s ease;
+    }
+    .strategy-item:hover {
+      background: rgba(255,255,255,.04);
+      border-color: rgba(0,229,255,.12);
+    }
+    .strategy-item .strat-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .strategy-item h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .strategy-item p {
+      font-size: .78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       BOTTOM NAV BAR
+       ======================================== */
+    .nav-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      background: rgba(10,10,15,.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 100;
+    }
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .slide-counter {
+      font-size: .8rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      font-family: var(--font-mono);
+    }
+    .slide-counter .current-num {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-btn {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s ease;
+      font-size: 1rem;
+    }
+    .nav-btn:hover {
+      background: rgba(0,229,255,.08);
+      border-color: rgba(0,229,255,.2);
+      color: var(--accent);
+    }
+    .nav-btn:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+    .nav-btn:disabled:hover {
+      background: rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.08);
+      color: var(--text);
+    }
+
+    .nav-btn-text {
+      padding: 0 20px;
+      height: 42px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gradient-accent);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-size: .82rem;
+      font-weight: 600;
+      transition: all .3s ease;
+    }
+    .nav-btn-text:hover { opacity: .85; transform: translateY(-1px); }
+
+    /* ========================================
+       PROGRESS BAR
+       ======================================== */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--gradient-main);
+      z-index: 200;
+      transition: width .4s ease;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* ========================================
+       SLIDE DOTS (mini-map)
+       ======================================== */
+    .slide-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .slide-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: none;
+      cursor: pointer;
+      transition: all .3s ease;
+      padding: 0;
+    }
+    .slide-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+      width: 24px;
+      border-radius: 4px;
+    }
+    .slide-dot:hover:not(.active) {
+      background: rgba(255,255,255,.25);
+    }
+
+    /* ========================================
+       KEYBOARD HINT
+       ======================================== */
+    .keyboard-hint {
+      font-size: .7rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 20px;
+      padding: 0 6px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       THANK YOU SLIDE
+       ======================================== */
+    .thankyou-slide {
+      text-align: center;
+    }
+    .thankyou-emoji {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .6s ease .1s;
+    }
+    .active .thankyou-emoji { opacity: 1; transform: scale(1); }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .5s ease .5s;
+    }
+    .active .contact-links { opacity: 1; transform: translateY(0); }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 100px;
+      font-size: .85rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: all .3s ease;
+      font-weight: 500;
+    }
+    .contact-link:hover {
+      background: rgba(0,229,255,.06);
+      border-color: rgba(0,229,255,.2);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .contact-link svg {
+      width: 18px; height: 18px;
+    }
+
+    /* ========================================
+       SLIDE NUMBER BADGE
+       ======================================== */
+    .slide-number {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ========================================
+       TABLE
+       ======================================== */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: .85rem;
+    }
+    .comparison-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 2px solid rgba(0,229,255,.15);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .comparison-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text-muted);
+    }
+    .comparison-table tr:hover td {
+      background: rgba(255,255,255,.02);
+    }
+
+    /* ========================================
+       FULLSCREEN BUTTON
+       ======================================== */
+    .fullscreen-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 200;
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(10,10,15,.7);
+      backdrop-filter: blur(10px);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s ease;
+    }
+    .fullscreen-btn:hover {
+      color: var(--accent);
+      border-color: rgba(0,229,255,.2);
+    }
+    .fullscreen-btn svg {
+      width: 16px; height: 16px;
+    }
+
+    /* ========================================
+       SPLASH / START SCREEN
+       ======================================== */
+    .splash-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .splash-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .splash-logo {
+      width: 120px; height: 120px;
+      border-radius: 28px;
+      object-fit: contain;
+      border: 2px solid rgba(0,229,255,.2);
+      padding: 10px;
+      background: rgba(0,229,255,.04);
+      margin-bottom: 32px;
+      animation: splashFloat 3s ease-in-out infinite;
+    }
+    @keyframes splashFloat {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 30px rgba(0,229,255,.1); }
+      50% { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,229,255,.2); }
+    }
+    .splash-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .splash-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .splash-start-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      border-radius: 100px;
+      border: 1px solid rgba(0,229,255,.25);
+      background: rgba(0,229,255,.06);
+      color: var(--accent);
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s ease;
+      animation: splashPulse 2s ease-in-out infinite;
+    }
+    .splash-start-btn:hover {
+      background: rgba(0,229,255,.12);
+      border-color: rgba(0,229,255,.4);
+      transform: scale(1.05);
+    }
+    @keyframes splashPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,.2); }
+      50% { box-shadow: 0 0 0 15px rgba(0,229,255,0); }
+    }
+    .splash-hint {
+      position: absolute;
+      bottom: 40px;
+      font-size: .75rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ========================================
+       FILE TREE DETAILED
+       ======================================== */
+    .file-tree {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      line-height: 1.4;
+    }
+    .file-tree .ft-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background .2s;
+    }
+    .file-tree .ft-row:hover { background: rgba(255,255,255,.03); }
+    .file-tree .ft-indent { padding-left: 20px; }
+    .file-tree .ft-indent2 { padding-left: 40px; }
+    .file-tree .ft-name { color: var(--accent); }
+    .file-tree .ft-sep { color: var(--text-dim); }
+    .file-tree .ft-desc { color: var(--text-dim); font-family: var(--font); font-size: .72rem; margin-left: auto; }
+    .file-tree .ft-size { color: var(--purple); font-size: .7rem; margin-left: auto; }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 900px) {
+      .slide { padding: 40px 24px 80px; }
+      .split-layout { grid-template-columns: 1fr; gap: 30px; }
+      .cards-grid.cols-3, .cards-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+      .team-row { grid-template-columns: repeat(2, 1fr); }
+      .pricing-row { grid-template-columns: 1fr; }
+      .price-card.featured { transform: none; }
+      .process-timeline { flex-direction: column; gap: 16px; }
+      .process-timeline::before { display: none; }
+      .stats-row { flex-direction: column; }
+      .strategy-grid { grid-template-columns: 1fr; }
+      .cover-meta { flex-direction: column; align-items: center; }
+      .splash-title { font-size: 1.6rem; }
+    }
+    @media (max-width: 600px) {
+      .cards-grid.cols-2, .cards-grid.cols-3, .cards-grid.cols-4 { grid-template-columns: 1fr; }
+      .team-row { grid-template-columns: 1fr; }
+      .slide-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-canvas">
+  <div class="grid-overlay"></div>
+  <div class="bg-orb bg-orb--1"></div>
+  <div class="bg-orb bg-orb--2"></div>
+  <div class="bg-orb bg-orb--3"></div>
+</div>
+
+<!-- SPLASH / START SCREEN -->
+<div class="splash-overlay" id="splashOverlay">
+  <div class="bg-canvas" style="position:absolute;">
+    <div class="grid-overlay"></div>
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+  </div>
+  <img src="./assets/images/2.png" alt="Nexus Diji" class="splash-logo" style="position:relative;z-index:2;">
+  <h1 class="splash-title" style="position:relative;z-index:2;"><span class="gradient-text">Nexus Diji</span></h1>
+  <p class="splash-sub" style="position:relative;z-index:2;">Presentasi Proyek Akhir — Bisnis Elektronik, Semester 4</p>
+  <button class="splash-start-btn" id="startBtn" style="position:relative;z-index:2;">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Mulai Presentasi (Fullscreen)
+  </button>
+  <div class="splash-hint" style="position:relative;z-index:2;">
+    <span class="kbd">Enter</span> atau klik tombol di atas untuk memulai dalam mode fullscreen
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- FULLSCREEN -->
+<button class="fullscreen-btn" id="fullscreenBtn" title="Toggle Fullscreen (F)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="15 3 21 3 21 9"></polyline>
+    <polyline points="9 21 3 21 3 15"></polyline>
+    <line x1="21" y1="3" x2="14" y2="10"></line>
+    <line x1="3" y1="21" x2="10" y2="14"></line>
+  </svg>
+</button>
+
+<!-- PRESENTATION -->
+<div class="presentation" id="presentation">
+
+  <!-- =============== SLIDE 1: COVER =============== -->
+  <div class="slide active" data-slide="0">
+    <div class="slide-inner cover-slide">
+      <img src="./assets/images/2.png" alt="Nexus Diji Logo" class="logo-presentation">
+      <div class="slide-label">Presentasi Proyek Akhir</div>
+      <h1 class="slide-title">
+        <span class="gradient-text">Nexus Diji</span><br>
+        Solusi Digital Terpercaya
+      </h1>
+      <p class="slide-desc" style="margin: 0 auto;">
+        Website bisnis jasa pembuatan website, aplikasi custom, dan servis PC & laptop — dibangun dengan teknologi modern dan desain premium.
+      </p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Bisnis Elektronik — Semester 4
+        </div>
+        <div class="cover-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2025
+        </div>
+        <div class="cover-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          [Nama Anda]
+        </div>
+      </div>
+      <div class="cover-subtitle" style="margin-top: 40px;">
+        Tekan <span class="kbd" style="display:inline-flex;margin:0 3px;">→</span> atau klik <strong>Next</strong> untuk mulai
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 2: DAFTAR ISI =============== -->
+  <div class="slide" data-slide="1">
+    <div class="slide-inner">
+      <div class="slide-label">Overview</div>
+      <h2 class="slide-title">Daftar Isi <span class="gradient-text">Presentasi</span></h2>
+      <div class="slide-body">
+        <div class="cards-grid cols-3" style="margin-top:30px;">
+          <div class="info-card"><div class="card-icon cyan">01</div><h3>Latar Belakang</h3><p>Mengapa proyek ini dibuat dan apa permasalahan yang dijawab.</p></div>
+          <div class="info-card"><div class="card-icon purple">02</div><h3>Profil Bisnis</h3><p>Tentang Nexus Diji: visi, misi, dan layanan utama.</p></div>
+          <div class="info-card"><div class="card-icon pink">03</div><h3>Fitur Website</h3><p>Fitur-fitur unggulan dan teknologi yang digunakan.</p></div>
+          <div class="info-card"><div class="card-icon green">04</div><h3>Struktur & Halaman</h3><p>Arsitektur website dan konten tiap halaman.</p></div>
+          <div class="info-card"><div class="card-icon orange">05</div><h3>Strategi Bisnis</h3><p>Model bisnis, pricing, SEO, dan digital marketing.</p></div>
+          <div class="info-card"><div class="card-icon cyan">06</div><h3>Tim & Kesimpulan</h3><p>Tim pengembang, demo, dan penutup.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 3: LATAR BELAKANG =============== -->
+  <div class="slide" data-slide="2">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 01</div>
+      <h2 class="slide-title">Latar <span class="gradient-text">Belakang</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;">
+              Di era digital saat ini, setiap bisnis — besar maupun kecil — membutuhkan kehadiran online yang profesional. Namun, banyak pelaku UMKM dan individu yang mengalami beberapa hambatan:
+            </p>
+            <ul class="feature-list" style="margin-top:20px;">
+              <li><span class="check">✓</span> Biaya pembuatan website yang mahal dari agency besar</li>
+              <li><span class="check">✓</span> Kurangnya pengetahuan teknis untuk membangun website sendiri</li>
+              <li><span class="check">✓</span> Sulitnya menemukan jasa servis PC/laptop yang cepat & terpercaya</li>
+              <li><span class="check">✓</span> Kebutuhan aplikasi custom yang sulit dijangkau</li>
+            </ul>
+          </div>
+          <div>
+            <div class="quote-block">
+              <p>"Nexus Diji hadir untuk menjembatani gap antara kebutuhan digital dan keterjangkauan — memberikan solusi profesional dengan harga yang masuk akal."</p>
+              <div class="quote-author">— Visi Nexus Diji</div>
+            </div>
+            <div class="stats-row" style="margin-top:20px;">
+              <div class="stat-box">
+                <div class="stat-val cyan">64%</div>
+                <div class="stat-lbl">UMKM belum punya website</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-val purple">87%</div>
+                <div class="stat-lbl">Konsumen riset online dulu</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 4: RUMUSAN & TUJUAN =============== -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 02</div>
+      <h2 class="slide-title">Rumusan Masalah & <span class="gradient-text">Tujuan</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <h3 style="color:var(--accent);font-size:1rem;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;">🔍 Rumusan Masalah</h3>
+            <ul class="feature-list">
+              <li><span class="check">1</span> Bagaimana membangun platform bisnis digital yang memenuhi kebutuhan pasar lokal?</li>
+              <li><span class="check">2</span> Bagaimana merancang website yang profesional, SEO-friendly, dan mobile-responsive?</li>
+              <li><span class="check">3</span> Bagaimana menerapkan strategi bisnis elektronik yang efektif untuk jasa digital?</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color:var(--green);font-size:1rem;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;">🎯 Tujuan Proyek</h3>
+            <ul class="feature-list">
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Membangun website bisnis profesional untuk Nexus Diji</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Mengimplementasikan konsep e-commerce (B2C) pada jasa digital</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Menerapkan SEO, schema markup, dan strategi digital marketing</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Menciptakan user experience yang premium dan modern</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 5: PROFIL BISNIS =============== -->
+  <div class="slide" data-slide="4">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 03</div>
+      <h2 class="slide-title">Profil Bisnis <span class="gradient-text">Nexus Diji</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;margin-bottom:24px;">
+              <strong style="color:var(--text);">Nexus Diji</strong> adalah penyedia solusi digital terpercaya yang menawarkan jasa pembuatan website, pengembangan aplikasi, dan servis perangkat komputer dengan harga terjangkau dan kualitas premium.
+            </p>
+            <table class="comparison-table">
+              <tr><th>Aspek</th><th>Detail</th></tr>
+              <tr><td>Nama Bisnis</td><td style="color:var(--text)">Nexus Diji</td></tr>
+              <tr><td>Jenis</td><td style="color:var(--text)">Jasa Digital (B2C)</td></tr>
+              <tr><td>Domain</td><td style="color:var(--accent)">nexus-diji.com</td></tr>
+              <tr><td>Area Layanan</td><td style="color:var(--text)">Indonesia</td></tr>
+              <tr><td>Harga</td><td style="color:var(--text)">Rp 300rb – Rp 10jt</td></tr>
+              <tr><td>Kontak</td><td style="color:var(--text)">WhatsApp, Email, Instagram</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="cards-grid cols-1" style="gap:14px;">
+              <div class="info-card">
+                <div class="card-icon cyan">🌐</div>
+                <h3>Pembuatan Website</h3>
+                <p>Landing page, company profile, e-commerce, blog profesional. Harga mulai Rp 500rb.</p>
+              </div>
+              <div class="info-card">
+                <div class="card-icon purple">📱</div>
+                <h3>Pembuatan Aplikasi</h3>
+                <p>Web app, mobile app, dashboard, dan sistem custom yang scalable.</p>
+              </div>
+              <div class="info-card">
+                <div class="card-icon pink">🔧</div>
+                <h3>Servis PC & Laptop</h3>
+                <p>Instalasi OS, upgrade hardware, virus removal, recovery data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 6: TECH STACK =============== -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 04</div>
+      <h2 class="slide-title">Teknologi yang <span class="gradient-text">Digunakan</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;">
+              Website Nexus Diji dibangun menggunakan teknologi web modern tanpa framework berat — mengutamakan kecepatan, performa, dan kemudahan maintenance.
+            </p>
+            <div style="margin-top:24px;">
+              <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Frontend Stack</h4>
+              <div class="tech-tags">
+                <span class="tech-tag primary">HTML5</span>
+                <span class="tech-tag primary">CSS3</span>
+                <span class="tech-tag primary">JavaScript (ES6+)</span>
+                <span class="tech-tag">Google Fonts (Poppins)</span>
+                <span class="tech-tag">CSS Custom Properties</span>
+                <span class="tech-tag">CSS Animations</span>
+                <span class="tech-tag">Intersection Observer API</span>
+              </div>
+            </div>
+            <div style="margin-top:20px;">
+              <h4 style="font-size:.85rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Keahlian Tim</h4>
+              <div class="tech-tags">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Laravel</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">React Native</span>
+                <span class="tech-tag">Figma</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="cards-grid cols-2" style="gap:14px;">
+              <div class="info-card">
+                <div class="card-icon cyan">⚡</div>
+                <h3>Performa</h3>
+                <p>Tanpa framework berat, loading super cepat.</p>
+              </div>
+              <div class="info-card">
+                <div class="card-icon purple">🎨</div>
+                <h3>CSS Modular</h3>
+                <p>10 file CSS terpisah untuk maintainability.</p>
+              </div>
+              <div class="info-card">
+                <div class="card-icon pink">📱</div>
+                <h3>Responsive</h3>
+                <p>Mobile-first design dengan breakpoint adaptif.</p>
+              </div>
+              <div class="info-card">
+                <div class="card-icon green">✨</div>
+                <h3>Animasi</h3>
+                <p>Smooth animations & custom cursor effects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 7: ARSITEKTUR CSS MODULAR =============== -->
+  <div class="slide" data-slide="6">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 05 — Sistem Development</div>
+      <h2 class="slide-title">Arsitektur <span class="gradient-text">CSS Modular</span></h2>
+      <div class="slide-body">
+        <p class="slide-desc" style="opacity:1;transform:none;margin-bottom:20px;">
+          Website ini menggunakan <strong style="color:var(--text)">10 file CSS terpisah</strong> dengan pendekatan modular — setiap file bertanggung jawab atas satu komponen atau area spesifik. Ini memudahkan maintenance dan kolaborasi tim.
+        </p>
+        <div class="split-layout">
+          <div>
+            <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">📁 assets/css/ — 10 File CSS</h4>
+            <div class="file-tree">
+              <div class="ft-row"><span>🎨</span><span class="ft-name">variables.css</span><span class="ft-desc">Design tokens & CSS custom properties (warna, spacing, font)</span><span class="ft-size">2.2 KB</span></div>
+              <div class="ft-row"><span>🌐</span><span class="ft-name">global.css</span><span class="ft-desc">CSS reset, base styles, utility classes, scroll-reveal</span><span class="ft-size">5.6 KB</span></div>
+              <div class="ft-row"><span>📌</span><span class="ft-name">navbar.css</span><span class="ft-desc">Navigasi desktop & mobile, hamburger, promo banner</span><span class="ft-size">22.7 KB</span></div>
+              <div class="ft-row"><span>📋</span><span class="ft-name">mega-menu.css</span><span class="ft-desc">Dropdown mega menu card layout & animasi</span><span class="ft-size">8.5 KB</span></div>
+              <div class="ft-row"><span>📄</span><span class="ft-name">pages.css</span><span class="ft-desc">Shared page-level styles (hero, section headers)</span><span class="ft-size">34 KB</span></div>
+              <div class="ft-row"><span>⚙️</span><span class="ft-name">main.css</span><span class="ft-desc">Legacy/main styles — hero, services, pricing, footer</span><span class="ft-size">70.9 KB</span></div>
+              <div class="ft-row"><span>👤</span><span class="ft-name">about.css</span><span class="ft-desc">Halaman About & Team spesifik (story, timeline)</span><span class="ft-size">32.9 KB</span></div>
+              <div class="ft-row"><span>📝</span><span class="ft-name">blog.css</span><span class="ft-desc">Blog listing & article detail page styles</span><span class="ft-size">5.8 KB</span></div>
+              <div class="ft-row"><span>🧩</span><span class="ft-name">components.css</span><span class="ft-desc">Reusable UI components (cards, badges, buttons)</span><span class="ft-size">21 KB</span></div>
+              <div class="ft-row"><span>🦶</span><span class="ft-name">footer.css</span><span class="ft-desc">Footer layout, links, social icons</span><span class="ft-size">3 KB</span></div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.85rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">🔧 Mengapa Modular?</h4>
+            <div class="cards-grid cols-1" style="gap:12px;">
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">🧱</span>
+                <div><h3 style="font-size:.88rem;">Separation of Concerns</h3><p style="font-size:.76rem;">Setiap file punya tanggung jawab spesifik — tidak ada "god file" yang mengatur segalanya.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">👥</span>
+                <div><h3 style="font-size:.88rem;">Kolaborasi Tim</h3><p style="font-size:.76rem;">Anggota tim bisa bekerja di file berbeda tanpa konflik merge.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">🔍</span>
+                <div><h3 style="font-size:.88rem;">Debugging Mudah</h3><p style="font-size:.76rem;">Bug styling? Langsung tahu file mana yang perlu diperbaiki.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">📐</span>
+                <div><h3 style="font-size:.88rem;">CSS Variables (Design Tokens)</h3><p style="font-size:.76rem;">variables.css menyimpan semua warna, spacing, dan font — ubah 1 tempat, berubah di seluruh website.</p></div>
+              </div>
+            </div>
+            <div class="stat-box" style="margin-top:14px;text-align:center;">
+              <div class="stat-val purple" style="font-size:1.6rem;">~207 KB</div>
+              <div class="stat-lbl">Total CSS (10 files modular)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 8: JAVASCRIPT & SEO FILES =============== -->
+  <div class="slide" data-slide="7">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 06 — Sistem Development</div>
+      <h2 class="slide-title">JavaScript, SEO & <span class="gradient-text">File Konfigurasi</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">⚙️ JavaScript (ES6 Modules)</h4>
+            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+              Script utama menggunakan <code style="background:rgba(0,229,255,.1);padding:2px 6px;border-radius:4px;color:var(--accent);font-family:var(--font-mono);font-size:.8rem;">type="module"</code> untuk clean architecture. Fitur-fitur yang diimplementasikan:
+            </p>
+            <div class="cards-grid cols-1" style="gap:10px;">
+              <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
+                <span style="font-size:1.2rem;">👁️</span>
+                <div><h3 style="font-size:.82rem;">Intersection Observer API</h3><p style="font-size:.72rem;">Scroll reveal animations — elemen muncul saat masuk viewport.</p></div>
+              </div>
+              <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
+                <span style="font-size:1.2rem;">⌨️</span>
+                <div><h3 style="font-size:.82rem;">Typing Animation Engine</h3><p style="font-size:.72rem;">Hero headline dengan efek ketik otomatis multi-baris.</p></div>
+              </div>
+              <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
+                <span style="font-size:1.2rem;">🖱️</span>
+                <div><h3 style="font-size:.82rem;">Custom Cursor Tracking</h3><p style="font-size:.72rem;">Dual-ring cursor yang mengikuti posisi mouse user.</p></div>
+              </div>
+              <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
+                <span style="font-size:1.2rem;">🔢</span>
+                <div><h3 style="font-size:.82rem;">Counter Animation</h3><p style="font-size:.72rem;">Angka statistik yang menghitung naik secara animatif.</p></div>
+              </div>
+              <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
+                <span style="font-size:1.2rem;">☰</span>
+                <div><h3 style="font-size:.82rem;">Mobile Menu System</h3><p style="font-size:.72rem;">Hamburger toggle, sub-menu accordion, back navigation.</p></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.85rem;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">📦 File Konfigurasi & SEO</h4>
+            <div class="file-tree" style="margin-bottom:16px;">
+              <div class="ft-row"><span>🗺️</span><span class="ft-name">sitemap.xml</span><span class="ft-desc">Peta situs untuk crawler Google</span></div>
+              <div class="ft-row"><span>🤖</span><span class="ft-name">robots.txt</span><span class="ft-desc">Instruksi untuk search engine bots</span></div>
+              <div class="ft-row"><span>📱</span><span class="ft-name">site.webmanifest</span><span class="ft-desc">PWA manifest (icon, nama, theme)</span></div>
+              <div class="ft-row"><span>✅</span><span class="ft-name">googlee92d...html</span><span class="ft-desc">Google Search Console verification</span></div>
+            </div>
+            <h4 style="font-size:.85rem;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">🖼️ Assets & Optimasi</h4>
+            <div class="file-tree" style="margin-bottom:16px;">
+              <div class="ft-row"><span>🚀</span><span class="ft-name">rocket.webp</span><span class="ft-desc">Hero image (format WebP = 476 KB, lebih kecil dari PNG)</span></div>
+              <div class="ft-row"><span>🏷️</span><span class="ft-name">logo okeh.png</span><span class="ft-desc">Logo utama brand Nexus Diji</span></div>
+              <div class="ft-row"><span>🎯</span><span class="ft-name">2.png</span><span class="ft-desc">Favicon & Open Graph image</span></div>
+              <div class="ft-row"><span>🎨</span><span class="ft-name">faryta-studio.svg</span><span class="ft-desc">SVG icon portfolio (vector = infinite scale)</span></div>
+            </div>
+            <h4 style="font-size:.85rem;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">🏗️ HTML Semantic Structure</h4>
+            <div class="tech-tags" style="margin-top:0;">
+              <span class="tech-tag">&lt;header&gt;</span>
+              <span class="tech-tag">&lt;nav&gt;</span>
+              <span class="tech-tag">&lt;main&gt;</span>
+              <span class="tech-tag">&lt;section&gt;</span>
+              <span class="tech-tag">&lt;article&gt;</span>
+              <span class="tech-tag">&lt;footer&gt;</span>
+              <span class="tech-tag">aria-label</span>
+              <span class="tech-tag">JSON-LD</span>
+            </div>
+            <div class="quote-block" style="margin-top:14px;">
+              <p style="font-size:.82rem;">"Setiap file punya tujuan. Tidak ada file yang dibuat tanpa alasan — semuanya terstruktur untuk performa, SEO, dan developer experience."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 9: FITUR WEBSITE =============== -->
+  <div class="slide" data-slide="8">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 05</div>
+      <h2 class="slide-title">Fitur Unggulan <span class="gradient-text">Website</span></h2>
+      <div class="slide-body">
+        <div class="cards-grid cols-4" style="margin-top:24px;">
+          <div class="info-card">
+            <div class="card-icon cyan">🚀</div>
+            <h3>Hero Interaktif</h3>
+            <p>Typing animation, counter stats, rocket visual, dan CTA yang menarik perhatian.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon purple">🎯</div>
+            <h3>Mega Menu</h3>
+            <p>Navigasi dropdown modern dengan card layout untuk desktop dan mobile.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon pink">🎨</div>
+            <h3>Custom Cursor</h3>
+            <p>Animasi cursor interaktif yang mengikuti pergerakan mouse user.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon green">📊</div>
+            <h3>Pricing Cards</h3>
+            <p>3 paket harga (Starter, Professional, Enterprise) dengan CTA WhatsApp.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon orange">🔄</div>
+            <h3>Portfolio Marquee</h3>
+            <p>Carousel auto-scroll yang menampilkan hasil kerja nyata secara dinamis.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon cyan">⭐</div>
+            <h3>Testimonial</h3>
+            <p>Social proof dari klien yang menampilkan rating dan review.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon purple">📱</div>
+            <h3>PWA Ready</h3>
+            <p>Web Manifest, apple-touch-icon, dan service-ready configuration.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon pink">🔍</div>
+            <h3>SEO Optimized</h3>
+            <p>Schema.org, Open Graph, meta tags, robots.txt, sitemap.xml.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 8: STRUKTUR WEBSITE =============== -->
+  <div class="slide" data-slide="7">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 06</div>
+      <h2 class="slide-title">Struktur & Halaman <span class="gradient-text">Website</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <div class="sitemap-visual">
+              <div class="sitemap-tree">
+                <div class="tree-item"><span class="tree-icon">🏠</span><span class="tree-name">index.html</span><span class="tree-desc">Homepage utama</span></div>
+                <div class="tree-item indent-1"><span class="tree-icon">📁</span><span class="tree-name">pages/</span><span class="tree-desc">11 halaman</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">layanan.html</span><span class="tree-desc">Detail layanan</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">harga.html</span><span class="tree-desc">Paket & harga</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">portfolio.html</span><span class="tree-desc">Hasil kerja</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">tentang-kami.html</span><span class="tree-desc">Profil perusahaan</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">tim-kami.html</span><span class="tree-desc">Anggota tim</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">blog.html</span><span class="tree-desc">Artikel & tips</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">📄</span><span class="tree-name">kontak.html</span><span class="tree-desc">Form kontak</span></div>
+                <div class="tree-item indent-1"><span class="tree-icon">📁</span><span class="tree-name">assets/</span><span class="tree-desc">CSS, JS, Images</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">🎨</span><span class="tree-name">css/ (10 files)</span><span class="tree-desc">Modular styles</span></div>
+                <div class="tree-item indent-2"><span class="tree-icon">⚙️</span><span class="tree-name">js/</span><span class="tree-desc">Main scripts</span></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="stats-row" style="flex-direction:column;gap:14px;">
+              <div class="stat-box" style="text-align:left;display:flex;align-items:center;gap:16px;">
+                <div class="stat-val cyan" style="font-size:1.8rem;">12+</div>
+                <div><div style="font-size:.9rem;font-weight:600;">Total Halaman</div><div class="stat-lbl">Termasuk blog posts & privacy</div></div>
+              </div>
+              <div class="stat-box" style="text-align:left;display:flex;align-items:center;gap:16px;">
+                <div class="stat-val purple" style="font-size:1.8rem;">10</div>
+                <div><div style="font-size:.9rem;font-weight:600;">File CSS Modular</div><div class="stat-lbl">variables, global, navbar, mega-menu, dll.</div></div>
+              </div>
+              <div class="stat-box" style="text-align:left;display:flex;align-items:center;gap:16px;">
+                <div class="stat-val pink" style="font-size:1.8rem;">7+</div>
+                <div><div style="font-size:.9rem;font-weight:600;">Sections per Halaman</div><div class="stat-lbl">Hero, Services, Portfolio, Pricing, dll.</div></div>
+              </div>
+              <div class="stat-box" style="text-align:left;display:flex;align-items:center;gap:16px;">
+                <div class="stat-val green" style="font-size:1.8rem;">100%</div>
+                <div><div style="font-size:.9rem;font-weight:600;">Responsive</div><div class="stat-lbl">Mobile, Tablet, Desktop</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 9: SEO & DIGITAL MARKETING =============== -->
+  <div class="slide" data-slide="8">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 07</div>
+      <h2 class="slide-title">SEO & Strategi <span class="gradient-text">Digital Marketing</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;margin-bottom:20px;">
+              Website Nexus Diji dioptimasi secara menyeluruh untuk mesin pencari dan konversi pengguna.
+            </p>
+            <div class="strategy-grid" style="grid-template-columns:1fr;">
+              <div class="strategy-item">
+                <div class="strat-icon">🔍</div>
+                <div>
+                  <h4>Schema.org / Structured Data</h4>
+                  <p>Organization, LocalBusiness, FAQPage — membantu Google memahami konten.</p>
+                </div>
+              </div>
+              <div class="strategy-item">
+                <div class="strat-icon">🏷️</div>
+                <div>
+                  <h4>Meta Tags & Open Graph</h4>
+                  <p>Title, description, og:tags, twitter cards — optimal untuk sharing.</p>
+                </div>
+              </div>
+              <div class="strategy-item">
+                <div class="strat-icon">🗺️</div>
+                <div>
+                  <h4>sitemap.xml & robots.txt</h4>
+                  <p>Crawler guidance yang terstruktur untuk indexing optimal.</p>
+                </div>
+              </div>
+              <div class="strategy-item">
+                <div class="strat-icon">✅</div>
+                <div>
+                  <h4>Google Search Console</h4>
+                  <p>Verified dengan google-site-verification untuk monitoring performa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.85rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">📈 Channel Marketing</h4>
+            <div class="cards-grid cols-2" style="gap:12px;">
+              <div class="info-card" style="padding:20px;">
+                <h3 style="font-size:.9rem;">WhatsApp</h3>
+                <p style="font-size:.78rem;">CTA langsung ke chat — konversi instan.</p>
+              </div>
+              <div class="info-card" style="padding:20px;">
+                <h3 style="font-size:.9rem;">Instagram</h3>
+                <p style="font-size:.78rem;">@nexus.diji — showcase portfolio & tips.</p>
+              </div>
+              <div class="info-card" style="padding:20px;">
+                <h3 style="font-size:.9rem;">Blog / Content</h3>
+                <p style="font-size:.78rem;">3+ artikel untuk SEO organic traffic.</p>
+              </div>
+              <div class="info-card" style="padding:20px;">
+                <h3 style="font-size:.9rem;">GitHub</h3>
+                <p style="font-size:.78rem;">Open-source presence & credibility.</p>
+              </div>
+            </div>
+            <div class="quote-block" style="margin-top:16px;">
+              <p style="font-size:.88rem;">"Website yang tidak ditemukan di Google = tidak ada."</p>
+              <div class="quote-author">— Prinsip Digital Marketing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 10: MODEL BISNIS & PRICING =============== -->
+  <div class="slide" data-slide="9">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 08</div>
+      <h2 class="slide-title">Model Bisnis & <span class="gradient-text">Pricing Strategy</span></h2>
+      <div class="slide-body">
+        <p class="slide-desc" style="opacity:1;transform:none;margin-bottom:24px;">
+          Nexus Diji menerapkan model <strong style="color:var(--accent)">B2C (Business to Consumer)</strong> dengan pendekatan freemium consultation — konsultasi gratis, bayar saat mulai proyek.
+        </p>
+        <div class="pricing-row">
+          <div class="price-card">
+            <div class="price-name">Starter</div>
+            <div class="price-amount" style="color:var(--accent);">Rp 500rb <span>/proyek</span></div>
+            <ul>
+              <li>Landing page 1 halaman</li>
+              <li>Desain responsif mobile</li>
+              <li>Kontak via WhatsApp</li>
+              <li>Gratis 2x revisi</li>
+              <li>Selesai 3-5 hari kerja</li>
+            </ul>
+          </div>
+          <div class="price-card featured">
+            <div class="price-name">Profesional</div>
+            <div class="price-amount" style="color:var(--purple);">Rp 2jt <span>/proyek</span></div>
+            <ul>
+              <li>Website multi-halaman</li>
+              <li>Desain custom premium</li>
+              <li>CMS / panel kelola konten</li>
+              <li>SEO on-page optimasi</li>
+              <li>Gratis 5x revisi</li>
+              <li>Support 1 bulan</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <div class="price-name">Enterprise</div>
+            <div class="price-amount" style="color:var(--pink);">Custom <span>/hubungi kami</span></div>
+            <ul>
+              <li>Web app / mobile app custom</li>
+              <li>Integrasi API & database</li>
+              <li>Sistem manajemen lengkap</li>
+              <li>Revisi unlimited</li>
+              <li>Support 3 bulan</li>
+              <li>Dokumentasi teknis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 11: PROSES KERJA =============== -->
+  <div class="slide" data-slide="10">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 09</div>
+      <h2 class="slide-title">Alur Kerja <span class="gradient-text">Proyek</span></h2>
+      <div class="slide-body">
+        <p class="slide-desc" style="opacity:1;transform:none;margin-bottom:24px;">
+          Proses pengerjaan yang transparan dan terstruktur — dari konsultasi hingga delivery.
+        </p>
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="step-circle">1</div>
+            <h4>Konsultasi</h4>
+            <p>Dengarkan kebutuhan klien secara detail via WhatsApp atau meeting.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-circle">2</div>
+            <h4>Perencanaan</h4>
+            <p>Rancang timeline, scope, wireframe, dan breakdown task yang jelas.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-circle">3</div>
+            <h4>Pengerjaan</h4>
+            <p>Eksekusi dengan update rutin, quality control, dan revisi bersama.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-circle">4</div>
+            <h4>Delivery & Support</h4>
+            <p>Project selesai dengan dokumentasi lengkap dan garansi support.</p>
+          </div>
+        </div>
+        <div class="stats-row" style="margin-top:40px;">
+          <div class="stat-box">
+            <div class="stat-val cyan">< 24 jam</div>
+            <div class="stat-lbl">Response Time</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val purple">3-14 hari</div>
+            <div class="stat-lbl">Waktu Pengerjaan</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val pink">100%</div>
+            <div class="stat-lbl">Kepuasan Klien</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val green">Garansi</div>
+            <div class="stat-lbl">Support Pasca-Launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 12: DESAIN & UX =============== -->
+  <div class="slide" data-slide="11">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 10</div>
+      <h2 class="slide-title">Desain & <span class="gradient-text">User Experience</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;margin-bottom:20px;">
+              Desain website mengadopsi pendekatan <strong style="color:var(--text)">dark theme futuristik</strong> dengan aksen warna yang vibrant — mencerminkan brand teknologi yang modern dan profesional.
+            </p>
+            <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">🎨 Color Palette</h4>
+            <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#0a0a0f;border:1px solid rgba(255,255,255,.1);"></div>
+                <span style="font-size:.78rem;color:var(--text-muted);">#0a0a0f</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#00e5ff;"></div>
+                <span style="font-size:.78rem;color:var(--text-muted);">#00e5ff</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#7c3aed;"></div>
+                <span style="font-size:.78rem;color:var(--text-muted);">#7c3aed</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#ec4899;"></div>
+                <span style="font-size:.78rem;color:var(--text-muted);">#ec4899</span>
+              </div>
+            </div>
+            <h4 style="font-size:.85rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">✍️ Typography</h4>
+            <div style="font-size:.88rem;color:var(--text-muted);line-height:1.8;">
+              <div><strong style="color:var(--text)">Poppins</strong> — Heading & body text</div>
+              <div>Weights: 400, 500, 600, 700, 800, 900</div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.85rem;color:var(--pink);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">✨ Elemen Desain Utama</h4>
+            <div class="cards-grid cols-1" style="gap:12px;">
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">🌀</span>
+                <div><h3 style="font-size:.88rem;">Gradient Accents</h3><p style="font-size:.76rem;">Cyan → Purple → Pink gradient pada elemen-elemen kunci.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">💫</span>
+                <div><h3 style="font-size:.88rem;">Scroll Reveal Animations</h3><p style="font-size:.76rem;">Intersection Observer API untuk animasi on-scroll.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">🖱️</span>
+                <div><h3 style="font-size:.88rem;">Custom Cursor</h3><p style="font-size:.76rem;">Dual-ring cursor yang mengikuti mouse interaktif.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">⬡</span>
+                <div><h3 style="font-size:.88rem;">Floating Cards & Orbs</h3><p style="font-size:.76rem;">Hexagonal grid dan floating card dengan glassmorphism.</p></div>
+              </div>
+              <div class="info-card" style="padding:18px;display:flex;gap:14px;align-items:center;">
+                <span style="font-size:1.5rem;">🚀</span>
+                <div><h3 style="font-size:.88rem;">Hero Visual Rocket</h3><p style="font-size:.76rem;">Ilustrasi roket dengan speedlines dan floating chips.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 13: TIM =============== -->
+  <div class="slide" data-slide="12">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 11</div>
+      <h2 class="slide-title">Tim <span class="gradient-text">Nexus Diji</span></h2>
+      <div class="slide-body">
+        <p class="slide-desc" style="opacity:1;transform:none;margin-bottom:10px;">
+          Tim kecil tapi solid — setiap anggota membawa keahlian unik.
+        </p>
+        <div class="team-row">
+          <div class="team-card-pres">
+            <div class="team-avatar av-1">FN</div>
+            <h4>Febryan & Noval</h4>
+            <div class="team-role">Founder & Lead Developer</div>
+            <p>Spesialis web development dengan React, Next.js, dan Laravel. Arsitektur scalable & kode bersih.</p>
+          </div>
+          <div class="team-card-pres">
+            <div class="team-avatar av-2">FT</div>
+            <h4>Faryta S.</h4>
+            <div class="team-role">Creative Director</div>
+            <p>Desainer kreatif dengan pengalaman di branding dan UI/UX design yang memorable.</p>
+          </div>
+          <div class="team-card-pres">
+            <div class="team-avatar av-3">AK</div>
+            <h4>Ahmad K.</h4>
+            <div class="team-role">Tech Specialist</div>
+            <p>Ahli hardware, networking, servis PC/laptop, dan optimasi sistem.</p>
+          </div>
+          <div class="team-card-pres">
+            <div class="team-avatar av-4">DP</div>
+            <h4>Dewi P.</h4>
+            <div class="team-role">Project Manager</div>
+            <p>Mengelola proyek dengan metodologi agile. Koordinasi tim & komunikasi klien.</p>
+          </div>
+        </div>
+        <div class="stats-row" style="margin-top:30px;">
+          <div class="stat-box">
+            <div class="stat-val cyan">6</div>
+            <div class="stat-lbl">Area Keahlian</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val purple">Frontend, Backend, Mobile</div>
+            <div class="stat-lbl">Development Stack</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val pink">UI/UX, Branding</div>
+            <div class="stat-lbl">Design Capabilities</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 14: KEUNGGULAN KOMPETITIF =============== -->
+  <div class="slide" data-slide="13">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 12</div>
+      <h2 class="slide-title">Keunggulan <span class="gradient-text">Kompetitif</span></h2>
+      <div class="slide-body">
+        <div class="cards-grid cols-2" style="margin-top:24px;">
+          <div class="info-card">
+            <div class="card-icon cyan">⚡</div>
+            <h3>Pengerjaan Cepat & Terstruktur</h3>
+            <p>Timeline jelas, progress update berkala. Landing page selesai dalam 3-5 hari kerja — lebih cepat dari rata-rata agency.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon purple">💬</div>
+            <h3>Komunikasi Terbuka</h3>
+            <p>Klien bisa tanya kapan saja via WhatsApp. Response time kurang dari 24 jam — tidak ada gap komunikasi.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon pink">🎯</div>
+            <h3>Solusi Tepat Sasaran</h3>
+            <p>Bukan sekadar coding — kami pahami bisnis klien. Setiap solusi dirancang untuk mencapai tujuan bisnis.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon green">🔒</div>
+            <h3>Keamanan & Performa</h3>
+            <p>Best practices keamanan web, optimasi performa, dan data privacy sebagai prioritas utama.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon orange">💰</div>
+            <h3>Harga Terjangkau</h3>
+            <p>Mulai dari Rp 500rb — premium quality tanpa premium price. Konsultasi gratis tanpa komitmen.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon cyan">🛡️</div>
+            <h3>Garansi & Support</h3>
+            <p>Support pasca-launch hingga 3 bulan. Revisi gratis sesuai paket. Dokumentasi teknis lengkap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 15: KESIMPULAN =============== -->
+  <div class="slide" data-slide="14">
+    <div class="slide-inner">
+      <div class="slide-label">Slide 13</div>
+      <h2 class="slide-title">Kesimpulan & <span class="gradient-text">Hasil</span></h2>
+      <div class="slide-body">
+        <div class="split-layout">
+          <div>
+            <p class="slide-desc" style="opacity:1;transform:none;max-width:100%;margin-bottom:20px;">
+              Proyek Nexus Diji berhasil membangun sebuah <strong style="color:var(--text)">platform bisnis digital yang komprehensif</strong>, menerapkan konsep e-commerce (B2C) dengan implementasi teknis modern.
+            </p>
+            <h4 style="font-size:.85rem;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">✅ Capaian Proyek</h4>
+            <ul class="feature-list">
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Website profesional dengan 12+ halaman & desain premium</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Implementasi SEO lengkap (Schema.org, OG, sitemap)</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Responsive design 100% di semua device</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Strategi bisnis & pricing yang terstruktur</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Integrasi WhatsApp untuk konversi langsung</li>
+              <li><span class="check" style="background:rgba(16,185,129,.1);color:var(--green);border-color:rgba(16,185,129,.2);">✓</span> Verified di Google Search Console</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.85rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">📚 Pelajaran yang Didapat</h4>
+            <div class="cards-grid cols-1" style="gap:12px;">
+              <div class="info-card" style="padding:18px;">
+                <h3 style="font-size:.9rem;">Pentingnya UX dalam Bisnis Digital</h3>
+                <p style="font-size:.78rem;">Desain yang baik bukan hanya soal estetika, tapi juga konversi dan kepercayaan pengguna.</p>
+              </div>
+              <div class="info-card" style="padding:18px;">
+                <h3 style="font-size:.9rem;">SEO sebagai Fondasi Bisnis Online</h3>
+                <p style="font-size:.78rem;">Tanpa SEO, website terbaik sekalipun tidak akan ditemukan oleh target market.</p>
+              </div>
+              <div class="info-card" style="padding:18px;">
+                <h3 style="font-size:.9rem;">Komunikasi = Konversi</h3>
+                <p style="font-size:.78rem;">Integrasi WhatsApp sebagai CTA mengurangi friction dan meningkatkan conversion rate.</p>
+              </div>
+            </div>
+            <div class="quote-block" style="margin-top:16px;">
+              <p style="font-size:.88rem;">"Proyek ini membuktikan bahwa bisnis digital yang sukses membutuhkan kombinasi antara kualitas teknis, strategi pemasaran, dan pengalaman pengguna."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SLIDE 16: TERIMA KASIH =============== -->
+  <div class="slide" data-slide="15">
+    <div class="slide-inner thankyou-slide">
+      <div class="thankyou-emoji">🙏</div>
+      <div class="slide-label">Terima Kasih</div>
+      <h2 class="slide-title">
+        <span class="gradient-text">Terima Kasih!</span>
+      </h2>
+      <p class="slide-desc" style="margin: 0 auto 10px;">
+        Presentasi Proyek Akhir — Bisnis Elektronik, Semester 4
+      </p>
+      <div class="cover-subtitle">
+        Sesi Tanya Jawab 🎤
+      </div>
+      <div class="contact-links">
+        <a href="https://nexus-diji.com" class="contact-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          nexus-diji.com
+        </a>
+        <a href="https://wa.me/6285711171508" class="contact-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--green);"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          0857-1117-1508
+        </a>
+        <a href="mailto:nexusdiji@gmail.com" class="contact-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          nexusdiji@gmail.com
+        </a>
+        <a href="https://www.instagram.com/nexus.diji" class="contact-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @nexus.diji
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV BAR -->
+<div class="nav-bar">
+  <div class="nav-left">
+    <div class="keyboard-hint">
+      <span class="kbd">←</span><span class="kbd">→</span> atau <span class="kbd">Space</span>
+    </div>
+  </div>
+  <div class="nav-center">
+    <button class="nav-btn" id="prevBtn" disabled title="Slide Sebelumnya">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="slide-dots" id="slideDots"></div>
+    <button class="nav-btn" id="nextBtn" title="Slide Selanjutnya">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="nav-right">
+    <div class="slide-counter">
+      <span class="current-num" id="currentSlide">01</span>
+      <span>/</span>
+      <span id="totalSlides">16</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========================================
+  // SPLASH SCREEN & AUTO-FULLSCREEN
+  // ========================================
+  const splashOverlay = document.getElementById('splashOverlay');
+  const startBtn = document.getElementById('startBtn');
+  let presentationStarted = false;
+
+  function startPresentation() {
+    if (presentationStarted) return;
+    presentationStarted = true;
+
+    // Enter fullscreen
+    document.documentElement.requestFullscreen().catch(() => {
+      // If fullscreen fails (user denied), still start
+      console.log('Fullscreen not available, starting anyway');
+    });
+
+    // Hide splash
+    splashOverlay.classList.add('hidden');
+
+    // Remove splash from DOM after animation
+    setTimeout(() => {
+      splashOverlay.style.display = 'none';
+    }, 700);
+  }
+
+  startBtn.addEventListener('click', startPresentation);
+  splashOverlay.addEventListener('click', (e) => {
+    if (e.target === splashOverlay) startPresentation();
+  });
+
+  // Enter key also starts
+  document.addEventListener('keydown', (e) => {
+    if (!presentationStarted && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      startPresentation();
+    }
+  }, { once: false });
+
+  // ========================================
+  // PRESENTATION ENGINE
+  // ========================================
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let currentIndex = 0;
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const currentSlideEl = document.getElementById('currentSlide');
+  const totalSlidesEl = document.getElementById('totalSlides');
+  const progressBar = document.getElementById('progressBar');
+  const dotsContainer = document.getElementById('slideDots');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+  // Set total
+  totalSlidesEl.textContent = String(totalSlides).padStart(2, '0');
+
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.title = `Slide ${i + 1}`;
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToSlide(index) {
+    if (!presentationStarted) return;
+    if (index === currentIndex || index < 0 || index >= totalSlides) return;
+
+    const direction = index > currentIndex ? 1 : -1;
+    const oldIndex = currentIndex;
+
+    // Remove active from current
+    slides[oldIndex].classList.remove('active');
+    slides[oldIndex].classList.add(direction > 0 ? 'exit-left' : '');
+
+    // Add active to new
+    slides[index].classList.remove('exit-left');
+    slides[index].style.transform = direction > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+    slides[index].offsetHeight; // Force reflow
+    slides[index].classList.add('active');
+    slides[index].style.transform = '';
+
+    // Cleanup old exit class
+    setTimeout(() => {
+      slides[oldIndex].classList.remove('exit-left');
+    }, 600);
+
+    currentIndex = index;
+    updateUI();
+  }
+
+  function nextSlide() {
+    if (!presentationStarted) { startPresentation(); return; }
+    if (currentIndex < totalSlides - 1) goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    if (!presentationStarted) return;
+    if (currentIndex > 0) goToSlide(currentIndex - 1);
+  }
+
+  function updateUI() {
+    currentSlideEl.textContent = String(currentIndex + 1).padStart(2, '0');
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === totalSlides - 1;
+
+    // Progress bar
+    const progress = ((currentIndex + 1) / totalSlides) * 100;
+    progressBar.style.width = progress + '%';
+
+    // Dots
+    document.querySelectorAll('.slide-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  // Button events
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!presentationStarted) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+      case ' ':
+      case 'PageDown':
+        e.preventDefault();
+        nextSlide();
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'PageUp':
+        e.preventDefault();
+        prevSlide();
+        break;
+      case 'Home':
+        e.preventDefault();
+        goToSlide(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+        break;
+      case 'f':
+      case 'F':
+        toggleFullscreen();
+        break;
+      case 'Escape':
+        // Escape handled by browser fullscreen
+        break;
+    }
+  });
+
+  // Touch support
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (!presentationStarted) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      dx < 0 ? nextSlide() : prevSlide();
+    }
+  }, { passive: true });
+
+  // Fullscreen
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+  fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+  // Update fullscreen button icon on change
+  document.addEventListener('fullscreenchange', () => {
+    const icon = fullscreenBtn.querySelector('svg');
+    if (document.fullscreenElement) {
+      icon.innerHTML = '<polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line>';
+      fullscreenBtn.title = 'Keluar Fullscreen (F)';
+    } else {
+      icon.innerHTML = '<polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line>';
+      fullscreenBtn.title = 'Toggle Fullscreen (F)';
+    }
+  });
+
+  // Mouse wheel (debounced)
+  let wheelTimeout = false;
+  document.addEventListener('wheel', (e) => {
+    if (!presentationStarted) return;
+    if (wheelTimeout) return;
+    wheelTimeout = true;
+    if (e.deltaY > 0) nextSlide();
+    else if (e.deltaY < 0) prevSlide();
+    setTimeout(() => { wheelTimeout = false; }, 800);
+  }, { passive: true });
+
+  // Initial UI
+  updateUI();
+</script>
+
+</body>
+</html>

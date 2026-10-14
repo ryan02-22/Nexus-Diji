@@ -1,0 +1,132 @@
+/* Team page: fresh typography and focused founder profiles. */
+:root {
+  --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.team-page h1,
+.team-page h2,
+.team-page h3,
+.team-page h4,
+.team-page h5,
+.team-page h6 {
+  font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+}
+
+.team-page .about-hero__title,
+.team-page .section-title,
+.team-page .story-title,
+.team-page .about-cta__title {
+  letter-spacing: -0.045em;
+}
+
+.team-page .about-hero__desc,
+.team-page .section-desc,
+.team-page .story-text,
+.team-page .about-cta__desc {
+  font-size: 1.05rem;
+}
+
+.team-page .team-section {
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(0, 180, 216, 0.08), transparent 34%),
+    radial-gradient(ellipse at 88% 72%, rgba(155, 93, 229, 0.08), transparent 36%),
+    var(--bg);
+}
+
+.team-page .team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 920px;
+}
+
+.team-page .team-card {
+  border-radius: 24px;
+  box-shadow: 0 14px 38px rgba(12, 17, 29, 0.06);
+}
+
+.team-page .team-card__image {
+  min-height: 190px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), transparent 62%),
+    linear-gradient(135deg, rgba(0, 180, 216, 0.12), rgba(155, 93, 229, 0.12));
+}
+
+.team-page .team-card--noval .team-card__image {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), transparent 62%),
+    linear-gradient(135deg, rgba(155, 93, 229, 0.14), rgba(0, 180, 216, 0.12));
+}
+
+.team-page .team-card__avatar {
+  width: 112px;
+  height: 112px;
+  border: 5px solid rgba(255, 255, 255, 0.88);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.25rem;
+  letter-spacing: -0.06em;
+}
+
+.team-page .team-card--noval .team-card__avatar {
+  background: linear-gradient(135deg, #8b5cf6, #00b4d8);
+}
+
+.team-page .team-card__content {
+  padding: 1.6rem 1.75rem 1.9rem;
+}
+
+.team-page .team-card__name {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  letter-spacing: -0.035em;
+}
+
+.team-page .team-card__role {
+  max-width: 100%;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: #5731a3;
+  background: rgba(155, 93, 229, 0.12);
+}
+
+.team-page .team-card__expertise {
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.team-page .services-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.team-page .service-card {
+  border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .team-page .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .team-page .team-grid,
+  .team-page .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-page .team-section {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .team-page .team-card__image {
+    min-height: 165px;
+  }
+
+  .team-page .team-card__content {
+    padding: 1.35rem 1.25rem 1.6rem;
+  }
+}
