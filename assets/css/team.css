@@ -3,13 +3,26 @@
   --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+body.team-page,
+body.team-page *,
+body.founders-page,
+body.founders-page * {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
 .team-page h1,
 .team-page h2,
 .team-page h3,
 .team-page h4,
 .team-page h5,
-.team-page h6 {
-  font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+.team-page h6,
+.founders-page h1,
+.founders-page h2,
+.founders-page h3,
+.founders-page h4,
+.founders-page h5,
+.founders-page h6 {
+  font-family: 'Space Grotesk', 'DM Sans', sans-serif !important;
 }
 
 .team-page .about-hero__title,
@@ -62,7 +75,7 @@
   width: 112px;
   height: 112px;
   border: 5px solid rgba(255, 255, 255, 0.88);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', sans-serif !important;
   font-size: 2.25rem;
   letter-spacing: -0.06em;
 }
@@ -105,6 +118,76 @@
   border-radius: 20px;
 }
 
+.founders-page .team-section {
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(0, 180, 216, 0.08), transparent 34%),
+    radial-gradient(ellipse at 88% 72%, rgba(155, 93, 229, 0.08), transparent 36%),
+    var(--bg);
+}
+
+.founders-page .team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 920px;
+}
+
+.founders-page .team-card {
+  border-radius: 24px;
+  box-shadow: 0 14px 38px rgba(12, 17, 29, 0.06);
+}
+
+.founders-page .team-card__image {
+  min-height: 190px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), transparent 62%),
+    linear-gradient(135deg, rgba(0, 180, 216, 0.12), rgba(155, 93, 229, 0.12));
+}
+
+.founders-page .team-card--noval .team-card__image {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), transparent 62%),
+    linear-gradient(135deg, rgba(155, 93, 229, 0.14), rgba(0, 180, 216, 0.12));
+}
+
+.founders-page .team-card__avatar {
+  width: 112px;
+  height: 112px;
+  border: 5px solid rgba(255, 255, 255, 0.88);
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 2.25rem;
+  letter-spacing: -0.06em;
+}
+
+.founders-page .team-card--noval .team-card__avatar {
+  background: linear-gradient(135deg, #8b5cf6, #00b4d8);
+}
+
+.founders-page .team-card__content {
+  padding: 1.6rem 1.75rem 1.9rem;
+}
+
+.founders-page .team-card__name {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  letter-spacing: -0.035em;
+}
+
+.founders-page .team-card__role {
+  max-width: 100%;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: #5731a3;
+  background: rgba(155, 93, 229, 0.12);
+}
+
+.founders-page .team-card__expertise {
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
 @media (max-width: 900px) {
   .team-page .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -114,6 +197,10 @@
 @media (max-width: 640px) {
   .team-page .team-grid,
   .team-page .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .founders-page .team-grid {
     grid-template-columns: 1fr;
   }
 
@@ -127,6 +214,19 @@
   }
 
   .team-page .team-card__content {
+    padding: 1.35rem 1.25rem 1.6rem;
+  }
+
+  .founders-page .team-section {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .founders-page .team-card__image {
+    min-height: 165px;
+  }
+
+  .founders-page .team-card__content {
     padding: 1.35rem 1.25rem 1.6rem;
   }
 }
