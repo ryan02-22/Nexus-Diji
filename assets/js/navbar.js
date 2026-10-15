@@ -139,6 +139,13 @@ export function initNavbar() {
     hamburgerBtn.setAttribute('aria-expanded', 'false');
     navbar.classList.remove('menu-open');
 
+    mobileMenu.querySelectorAll('.mobile-dropdown-toggle').forEach((toggle) => {
+      const dropdown = toggle.nextElementSibling;
+      toggle.classList.remove('open', 'active');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (dropdown && dropdown.classList.contains('mobile-dropdown')) dropdown.classList.remove('open');
+    });
+
     // Restore body scroll
     document.body.classList.remove('menu-open');
     document.body.style.overflow = '';
@@ -153,38 +160,36 @@ export function initNavbar() {
     if (backToTop) backToTop.style.display = '';
   }
 
-  // Mobile dropdown accordion - improved single-click behavior
-  const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+  // Mobile dropdown accordion: keep visual and accessible states in sync.
+  const mobileToggles = Array.from(document.querySelectorAll('.mobile-dropdown-toggle'));
 
-  mobileToggles.forEach(toggle => {
+  mobileToggles.forEach((toggle) => {
+    const dropdown = toggle.nextElementSibling;
+    if (!dropdown || !dropdown.classList.contains('mobile-dropdown')) return;
+
+    const initiallyOpen = dropdown.classList.contains('open') || toggle.getAttribute('aria-expanded') === 'true';
+    toggle.classList.toggle('open', initiallyOpen);
+    toggle.classList.toggle('active', initiallyOpen);
+    dropdown.classList.toggle('open', initiallyOpen);
+    toggle.setAttribute('aria-expanded', String(initiallyOpen));
+
     toggle.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
 
-      const dropdown = toggle.nextElementSibling;
-      if (dropdown && dropdown.classList.contains('mobile-dropdown')) {
-        const isCurrentlyOpen = toggle.classList.contains('active');
+      const shouldOpen = !toggle.classList.contains('open');
+      mobileToggles.forEach((otherToggle) => {
+        const otherDropdown = otherToggle.nextElementSibling;
+        const isOpen = otherToggle === toggle && shouldOpen;
 
-        // Close all other dropdowns first (accordion behavior)
-        mobileToggles.forEach(otherToggle => {
-          if (otherToggle !== toggle) {
-            otherToggle.classList.remove('active');
-            const otherDropdown = otherToggle.nextElementSibling;
-            if (otherDropdown && otherDropdown.classList.contains('mobile-dropdown')) {
-              otherDropdown.classList.remove('open');
-            }
-          }
-        });
+        otherToggle.classList.toggle('open', isOpen);
+        otherToggle.classList.toggle('active', isOpen);
+        otherToggle.setAttribute('aria-expanded', String(isOpen));
 
-        // Toggle current dropdown
-        if (isCurrentlyOpen) {
-          toggle.classList.remove('active');
-          dropdown.classList.remove('open');
-        } else {
-          toggle.classList.add('active');
-          dropdown.classList.add('open');
+        if (otherDropdown && otherDropdown.classList.contains('mobile-dropdown')) {
+          otherDropdown.classList.toggle('open', isOpen);
         }
-      }
+      });
     });
   });
 

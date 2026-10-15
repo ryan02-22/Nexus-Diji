@@ -158,13 +158,14 @@
           <li><a href="../index.html">Beranda</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li class="nav-mobile-dropdown">
-            <button class="mobile-dropdown-toggle">
+            <button class="mobile-dropdown-toggle" aria-expanded="false" aria-controls="mobile-services-dropdown">
               Layanan
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
+              <svg class="mobile-dropdown-indicator" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line class="indicator-horizontal" x1="6" y1="12" x2="18" y2="12"></line>
+                <line class="indicator-vertical" x1="12" y1="6" x2="12" y2="18"></line>
               </svg>
             </button>
-            <div class="mobile-dropdown">
+            <div class="mobile-dropdown" id="mobile-services-dropdown">
               <a href="layanan.html#website">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"></circle>

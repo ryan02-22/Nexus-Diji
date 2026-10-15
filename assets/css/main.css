@@ -1181,6 +1181,14 @@ section {
   animation: rotate 8s linear infinite;
 }
 
+.center-orb-rocket {
+  display: block;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 5px 12px rgba(0, 180, 216, 0.24));
+}
+
 .why-points {
   display: flex;
   flex-direction: column;
@@ -1514,41 +1522,11 @@ footer p {
     display: none;
   }
 
-  .nav-mobile-menu.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    z-index: 200;
-  }
 
-  .nav-mobile-menu a {
-    color: var(--text);
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
 
-  .close-menu-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 2rem;
-    cursor: pointer;
-  }
+
+
+
 
   /* PORTFOLIO MOBILE */
   .portfolio-grid {
@@ -2483,40 +2461,11 @@ footer p {
   display: none;
 }
 
-.nav-mobile-menu.open {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  /* top will be set dynamically via JS to avoid banner overlap */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-  z-index: 200;
-}
 
-.nav-mobile-menu a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
 
-.close-menu-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 2rem;
-  cursor: pointer;
-}
+
+
+
 
 /* -- ANIMATIONS -- */
 @keyframes fadeUp {
