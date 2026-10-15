@@ -7,6 +7,7 @@ import { initNavbar } from './navbar.js';
 import { initMegaMenu } from './mega-menu.js';
 import { initAnimations } from './animations.js';
 import { initCursor, initToolsOverlay } from './utilities.js';
+import './site-effects.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';

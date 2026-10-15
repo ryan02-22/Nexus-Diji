@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -11,10 +11,10 @@
     <link rel="apple-touch-icon" href="../assets/images/logo%20okeh.png">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="stylesheet" href="../assets/css/blog.css">
-  <link rel="stylesheet" href="../assets/css/site-polish.css">
+  <link rel="stylesheet" href="../assets/css/site-polish.css?v=visual-refresh-2026">
 </head>
 
-<body>
+<body class="article-page article-page--performance">
 
     <!-- Minimal Nav -->
     <header class="nav-container">
@@ -29,79 +29,71 @@
     </header>
 
     <main class="article-wrap">
-        <a href="../index.html" class="back-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="m15 18-6-6 6-6" />
-            </svg>
-            Kembali ke Beranda
-        </a>
-
-        <span class="blog-badge">Optimasi & Performa</span>
-        <h1 class="article-title">Tips Meningkatkan Kecepatan Loading Web</h1>
-        <div class="article-meta">
-            <span>Oleh <strong>Tim Web Dev Nexus Diji</strong></span>
-            <span>-</span>
-            <span>5 Maret 2026</span>
+        <div class="article-back-row">
+            <a href="../index.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+                Kembali ke Beranda
+            </a>
         </div>
 
-        <div class="article-content">
-            <p>Pengunjung modern sangat tidak sabar. Menurut penelitian dari Google, <strong>53% pengguna seluler akan
-                    meninggalkan situs yang memuat lebih dari 3 detik</strong>. Jika website Anda lambat, secantik apa
-                pun desainnya, Anda pasti akan kehilangan potensi penjualan (konversi). Berikut adalah 5 langkah
-                sederhana yang bisa Anda lakukan untuk memperbaiki performanya.</p>
+        <header class="article-hero">
+            <span class="blog-badge">Optimasi & Performa</span>
+            <h1 class="article-title">Tips Meningkatkan Kecepatan Loading Web</h1>
+            <div class="article-meta">
+                <span>Oleh <strong>Tim Web Dev Nexus Diji</strong></span>
+                <span class="article-meta__separator" aria-hidden="true">•</span>
+                <span>5 Maret 2026</span>
+                <span class="article-meta__separator" aria-hidden="true">•</span>
+                <span class="article-read-time"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>4 menit baca</span>
+            </div>
+        </header>
 
-            <h2>1. Optimasi Ukuran Gambar</h2>
-            <p>Gambar yang berukuran terlalu besar (misalnya 5MB per foto produk) adalah penyebab nomor satu website
-                memuat lambat. Resolusi 4000px tidak dibutuhkan untuk foto yang hanya ditampilkan 400px di layar HP!</p>
+        <div class="article-content">
+            <p>Website lambat tidak selalu disebabkan oleh satu hal. Ukuran gambar, JavaScript yang berat, waktu respons server, font, dan layanan pihak ketiga bisa ikut menambah waktu tunggu. Mulailah dengan mengukur halaman yang benar-benar digunakan pelanggan, lalu perbaiki hambatan terbesar satu per satu.</p>
+
+            <h2>1. Ukur sebelum mengubah</h2>
+            <p>Uji halaman utama dan halaman penting seperti katalog atau formulir dengan PageSpeed Insights atau Chrome DevTools. Catat perangkat dan jaringan pengujian, lalu periksa elemen yang paling lambat serta berkas yang paling besar. Pengujian laboratorium membantu menemukan masalah saat pengembangan; data lapangan menunjukkan pengalaman pengguna nyata. Keduanya menjawab pertanyaan yang berbeda.</p>
+            <p><a href="https://web.dev/articles/defining-core-web-vitals-thresholds" target="_blank" rel="noopener noreferrer">Core Web Vitals</a> mengukur pengalaman pemuatan, respons, dan kestabilan tampilan. Ambang dalam kategori baik di persentil ke-75 adalah LCP sampai 2,5 detik, INP sampai 200 milidetik, dan CLS sampai 0,1. Nilai ini dipakai untuk diagnosis pengalaman, bukan janji bahwa optimasi tertentu otomatis menaikkan peringkat.</p>
+
+            <h2>2. Kecilkan gambar tanpa mengorbankan keterbacaan</h2>
+            <p>Unggah gambar dengan dimensi mendekati ukuran tampilnya, kompres sesuai jenis gambar, dan sediakan ukuran berbeda untuk layar kecil bila memungkinkan. <a href="https://web.dev/articles/choose-the-right-image-format" target="_blank" rel="noopener noreferrer">WebP dan AVIF</a> dapat mengurangi ukuran pada banyak gambar web, tetapi hasilnya bergantung pada isi gambar dan pengaturan kualitas. Bandingkan tampilan setelah kompresi; logo atau ilustrasi garis sering lebih cocok sebagai SVG.</p>
             <ul>
-                <li><strong>Gunakan Format WebM atau WebP:</strong> Secara drastis format ini dapat memotong ukuran
-                    *file-size* gambar hingga 70% dibandingkan dengan PNG atau JPG tanpa kehilangan kualitas yang
-                    berarti.</li>
-                <li><strong>Compress Gambar:</strong> Gunakan tool gratis seperti TinyPNG sebelum mengunggah aset ke
-                    website Anda.</li>
+                <li>Isi atribut <code>width</code> dan <code>height</code> agar ruang gambar disediakan sebelum file selesai dimuat.</li>
+                <li>Gunakan <code>srcset</code> atau layanan gambar untuk menyajikan ukuran yang sesuai perangkat.</li>
+                <li>Gunakan <code>loading="lazy"</code> untuk gambar jauh di bawah layar; jangan menunda gambar utama yang terlihat saat halaman dibuka.</li>
             </ul>
 
+            <h2>3. Tinjau JavaScript, CSS, font, dan skrip pihak ketiga</h2>
+            <p>Hapus kode dan plugin yang tidak dipakai, tunda skrip yang tidak diperlukan untuk tampilan awal, dan hindari memuat banyak pustaka hanya untuk satu efek kecil. Formulir, chat, video sematan, dan pelacak iklan juga menambah pekerjaan browser. Nonaktifkan satu per satu saat mendiagnosis agar terlihat mana yang memberi dampak.</p>
+            <p>Gunakan font dan variasi ketebalan secukupnya. Jika halaman membutuhkan font khusus, sediakan fallback yang serupa agar teks tetap tampil saat font belum selesai diunduh.</p>
+
+            <h2>4. Atur caching dengan benar</h2>
+            <p>Header HTTP <code>Cache-Control</code> menentukan berapa lama browser atau cache bersama dapat menyimpan respons. Berkas statis yang namanya berubah ketika konten berubah dapat disimpan lebih lama; halaman berisi informasi pribadi atau data yang berubah cepat perlu aturan yang lebih hati-hati. Konfigurasikan header di server atau CDN, lalu uji setelah publikasi agar pengunjung tidak terus menerima berkas lama.</p>
+            <p>CDN dapat membantu menyajikan aset dari lokasi yang lebih dekat dan menyerap sebagian trafik, tetapi tidak memperbaiki kode berat atau basis data lambat dengan sendirinya. Periksa waktu respons server terpisah dari waktu unduh aset.</p>
+
+            <h2>5. Periksa kestabilan dan ulangi pengukuran</h2>
+            <p>Sesudah tiap perubahan, jalankan pengukuran yang sama dan bandingkan hasilnya. Untuk CLS, sisakan ruang gambar dan iklan sebelum konten datang. Untuk LCP, periksa apakah gambar hero terlalu besar atau baru diminta terlambat. Untuk INP, cari pekerjaan JavaScript panjang yang menghambat respons saat pengguna menekan tombol atau membuka menu.</p>
+
+            <h2>Urutan kerja yang praktis</h2>
             <div class="highlight-box">
-                Tips Pro: Pastikan untuk mengimplementasikan *Lazy Loading*. Jangan biarkan browser memuat seluruh
-                gambar di halaman secara bersamaan. Muat gambar hanya saat pengguna menggulir halaman ke bawah menuju
-                gambar tersebut.
+                1) Ambil baseline di satu halaman penting; 2) optimalkan gambar terbesar; 3) kurangi skrip yang tidak dibutuhkan; 4) cek cache dan waktu respons server; 5) ukur ulang di desktop dan ponsel; 6) pantau data lapangan setelah perubahan tersedia bagi pengunjung.
             </div>
 
-            <h2>2. Gunakan CDN (Content Delivery Network)</h2>
-            <p>Jika server website Anda berada di Jakarta, pengguna yang mengakses website dari Papua pasti akan
-                merasakan kelambatan (karena data harus melintasi jaringan internet yang sangat jauh).
-                <strong>CDN</strong> (seperti Cloudflare) menyimpan *cache* atau replika statis dari web Anda di
-                berbagai server sedunia, sehingga pengunjung diakseskan dari peladen terdekat mereka.
-            </p>
+            <h2>Referensi</h2>
+            <ul class="article-references">
+                <li><a href="https://web.dev/articles/defining-core-web-vitals-thresholds" target="_blank" rel="noopener noreferrer">web.dev: ambang Core Web Vitals</a></li>
+                <li><a href="https://web.dev/articles/choose-the-right-image-format" target="_blank" rel="noopener noreferrer">web.dev: memilih format gambar</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control" target="_blank" rel="noopener noreferrer">MDN: header Cache-Control</a></li>
+            </ul>
 
-            <h2>3. Minifikasi CSS, HTML, dan JavaScript</h2>
-            <p>Hapus karakter yang tidak perlu dalam kode Anda-spasi berlebih, baris baru, dan koma. Meskipun ini
-                terdengar teknis, minifikasi dapat sangat menghemat bandwidth pengiriman antara *server* dan *browser*
-                klien. Banyak *framework* moderen seperti <strong>React, Next.js, dan Vite</strong> (yang kami gunakan
-                di Nexus Diji) melakukan ini secara otomatis saat tahap *build* / kompilasi (Bundling).</p>
-
-            <h2>4. Hilangkan Plugin yang Tidak Perlu</h2>
-            <p>Bagi Anda yang menggunakan CMS seperti WordPress, hindari penumpukan *Plugin*. Hanya karena semuanya bisa
-                diinstal, bukan berarti Anda *harus* menginstalnya. Jika sebuah *plugin* tidak aktif digunakan, copot
-                pemasangannya. Setiap plugin memaksa browser meminta berkas `javascript` dan `css` tambahan.</p>
-
-            <h2>5. Manfaatkan Browser Caching</h2>
-            <p>Atur struktur kepala web (Headers) Anda untuk mengizinkan instruksi <strong>Caching</strong>. Anda tidak
-                perlu memuat ulang Logo Perusahaan setiap kali pengguna berpindah halaman; cukup izinkan browser
-                pengguna untuk menyimpannya sementara di perangkat keras mereka secara lokal.</p>
-
-            <h2>Butuh Bantuan Optimasi?</h2>
-            <p>Memperbaiki skor Core Web Vitals (sistem ranking performa Google) bisa sangat membingungkan tanpa
-                *developer tools*. Di Nexus Diji, pengoptimalan arsitektur website dan <em>Loading Time</em> sudah
-                menjadi standar wajib (*built-in*) dari semua proyek pembuatan UI kami.</p>
-
-            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
-                <h3 style="margin-bottom: 1rem; color: #fff;">Kecewa dengan Performa Website Saat Ini?</h3>
-                <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Tim ahil Nexus Diji sanggup bermigrasi, maupun
-                    mengonstruksi ulang web aplikasimu dari nol dengan modern-stack web engineering.</p>
-                <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20konsultasi%20mengenai%20kecepatan%20website"
-                    class="btn-primary" target="_blank" rel="noopener">Periksa Performa Website Saya</a>
+            <div class="article-cta">
+                <h3>Perlu mencari sumber lambat pada website?</h3>
+                <p>Mulai dengan URL halaman, perangkat yang terdampak, dan hasil pengukuran agar pemeriksaan lebih terarah.</p>
+                <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20ingin%20memeriksa%20performa%20website"
+                    class="btn-primary" target="_blank" rel="noopener noreferrer">Diskusikan Performa Website</a>
             </div>
         </div>
     </main>
@@ -110,6 +102,7 @@
         <p>&copy; 2026 Nexus Diji. Semua hak cipta dilindungi.</p>
     </footer>
 
+    <script type="module" src="../assets/js/site-effects.js"></script>
 </body>
 
 </html>

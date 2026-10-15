@@ -166,11 +166,11 @@
 
   <!-- Legacy CSS - Keep for compatibility during transition -->
   <link rel="stylesheet" href="./assets/css/main.css">
-  <link rel="stylesheet" href="./assets/css/site-polish.css">
+  <link rel="stylesheet" href="./assets/css/site-polish.css?v=visual-refresh-2026">
 </head>
 
 
-<body>
+<body class="page-home">
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
@@ -179,7 +179,7 @@
     <!-- PROMO BANNER -->
     <div class="promo-banner" id="promoBanner">
       <span class="promo-badge">Limited Offer</span>
-      <span>Wujudkan ide digitalmu dengan diskon 20% khusus bulan ini!</span>
+      <span class="promo-copy">Wujudkan ide digitalmu dengan diskon 20% khusus bulan ini!</span>
       <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20mau%20klaim%20diskon%2020%25"
         target="_blank">Klaim Sekarang <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -465,7 +465,7 @@
           <div class="hero-speedlines">
             <span></span><span></span><span></span><span></span>
           </div>
-          <img src="./assets/images/rocket.webp" alt="Nexus Diji - Luncurkan Bisnis Digitalmu" class="hero-rocket"
+          <img src="./assets/images/robot-nd.webp" alt="Maskot Robot Nexus Diji" class="hero-rocket hero-mascot"
             loading="eager" width="480" height="480">
         </div>
 
@@ -965,6 +965,7 @@
 
     <!-- PROCESS -->
     <section id="process" class="process-bg">
+      <img src="./assets/images/rocket.webp" alt="" aria-hidden="true" class="process-rocket" loading="lazy">
       <span class="section-label reveal">Langkah demi langkah</span>
       <h2 class="section-title reveal">Bagaimana Kami Bekerja</h2>
       <p class="section-desc reveal">"Proses transparan dan terstruktur untuk memastikan hasil yang maksimal dan sesuai
@@ -1252,73 +1253,49 @@
       <h2 class="section-title reveal">Blog &amp; Aktivitas</h2>
       <p class="section-desc reveal">Tips seputar teknologi, website, dan update terbaru dari tim Nexus Diji.</p>
       <div class="blog-grid">
-        <article class="blog-card reveal">
-          <div class="blog-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
-              </path>
-              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
-              </path>
-              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-            </svg>
+<article class="blog-card reveal">
+          <div class="blog-img blog-img--umkm" aria-hidden="true">
+            <div class="blog-cover-copy"><span>FIELD NOTE / 01 / UMKM</span><strong>Bangun fondasi<br><em>digital bisnis</em></strong><small>WEBSITE / PELANGGAN LOKAL</small></div>
+            <span class="blog-cover-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18M9 20V9"></path></svg></span>
           </div>
           <div class="blog-content">
-            <span class="blog-date">8 Maret 2026</span>
+            <div class="blog-card__meta"><span>Bisnis & Teknologi</span><span>4 menit baca</span></div>
             <h3>Pentingnya Website untuk UMKM di 2026</h3>
-            <p>Mengapa memiliki website profesional bukan lagi sekadar pilihan, melainkan keharusan untuk bersaing di
-              era
-              digital.</p>
-            <a href="pages/blog-1.html" class="blog-link">
-              Baca Selengkapnya
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
+            <p>Panduan menyusun website yang menjawab pertanyaan pelanggan, mendukung pencarian lokal, dan punya biaya serta keamanan yang terencana.</p>
+            <div class="blog-card__footer">
+              <time class="blog-date" datetime="2026-03-08">8 Maret 2026</time>
+              <a href="pages/blog-1.html" class="blog-link">Baca Artikel <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg></a>
+            </div>
           </div>
         </article>
-        <article class="blog-card reveal">
-          <div class="blog-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
+<article class="blog-card reveal">
+          <div class="blog-img blog-img--speed" aria-hidden="true">
+            <div class="blog-cover-copy"><span>FIELD NOTE / 02 / WEB</span><strong>Website cepat<br><em>lebih nyaman</em></strong><small>UKUR / OPTIMALKAN / ULANG</small></div>
+            <span class="blog-cover-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 8h7l-6 12 2-9H6l7-11z"></path></svg></span>
           </div>
           <div class="blog-content">
-            <span class="blog-date">5 Maret 2026</span>
+            <div class="blog-card__meta"><span>Web Development</span><span>4 menit baca</span></div>
             <h3>Tips Meningkatkan Kecepatan Loading Web</h3>
-            <p>5 langkah sederhana yang bisa Anda lakukan sendiri untuk membuat website Anda memuat lebih cepat &amp;
-              disukai Google.</p>
-            <a href="pages/blog-2.html" class="blog-link">
-              Baca Selengkapnya
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
+            <p>Temukan sumber lambat, optimalkan gambar dan cache, lalu pantau Core Web Vitals dengan urutan yang terukur.</p>
+            <div class="blog-card__footer">
+              <time class="blog-date" datetime="2026-03-05">5 Maret 2026</time>
+              <a href="pages/blog-2.html" class="blog-link">Baca Artikel <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg></a>
+            </div>
           </div>
         </article>
-        <article class="blog-card reveal">
-          <div class="blog-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path
-                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
-              </path>
-            </svg>
+<article class="blog-card reveal">
+          <div class="blog-img blog-img--hardware" aria-hidden="true">
+            <div class="blog-cover-copy"><span>FIELD NOTE / 03 / DEVICE</span><strong>Jaga perangkat,<br><em>amankan data</em></strong><small>KENALI GEJALA / CEK AMAN</small></div>
+            <span class="blog-cover-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></span>
           </div>
           <div class="blog-content">
-            <span class="blog-date">2 Maret 2026</span>
+            <div class="blog-card__meta"><span>Hardware</span><span>4 menit baca</span></div>
             <h3>Tanda Laptop Anda Butuh Servis Segera</h3>
-            <p>Jangan tunggu rusak parah! Kenali ciri-ciri hardware laptop yang mulai bermasalah sebelum data Anda
-              hilang.
-            </p>
-            <a href="pages/blog-3.html" class="blog-link">
-              Baca Selengkapnya
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
+            <p>Kenali gejala yang perlu diperiksa, lakukan langkah aman, amankan data, dan ketahui kapan perlu berhenti memakai laptop.</p>
+            <div class="blog-card__footer">
+              <time class="blog-date" datetime="2026-03-02">2 Maret 2026</time>
+              <a href="pages/blog-3.html" class="blog-link">Baca Artikel <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg></a>
+            </div>
           </div>
         </article>
       </div>
