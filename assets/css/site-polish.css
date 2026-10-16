@@ -1706,3 +1706,174 @@ body.article-page .article-back-row .back-btn {
 @media (prefers-reduced-motion: reduce) {
   body.page-home #blog .blog-cover-mark svg { transition: none; }
 }
+
+
+/* Founder profile cards: refined portrait grid for About Us. */
+.founders-page .team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 980px;
+  align-items: stretch;
+}
+
+.founders-page .team-card {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 28px;
+  background: linear-gradient(180deg, #fff 0%, #fcfdff 100%);
+  box-shadow: 0 18px 48px rgba(11, 16, 32, 0.08);
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 320ms ease, box-shadow 320ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .founders-page .team-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(0, 180, 216, 0.34);
+    box-shadow: 0 26px 64px rgba(11, 16, 32, 0.13), 0 8px 26px rgba(0, 180, 216, 0.08);
+  }
+
+  .founders-page .team-card:hover .team-card__avatar {
+    transform: scale(1.18);
+  }
+}
+
+.founders-page .team-card__image {
+  position: relative;
+  display: grid;
+  min-height: 274px;
+  padding: 2.25rem 1.5rem;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.98), transparent 44%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 180, 216, 0.13), transparent 56%),
+    linear-gradient(145deg, #f3f9fc 0%, #f5f3fc 100%);
+}
+
+.founders-page .team-card--noval .team-card__image {
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.98), transparent 44%),
+    radial-gradient(ellipse at 50% 100%, rgba(155, 93, 229, 0.13), transparent 56%),
+    linear-gradient(145deg, #f4f7fc 0%, #f7f3fb 100%);
+}
+
+.founders-page .team-card__image::before {
+  position: absolute;
+  z-index: -1;
+  width: 244px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(11, 16, 32, 0.07);
+  border-radius: 50%;
+  content: "";
+}
+
+.founders-page .team-card__image::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 180, 216, 0.34), rgba(155, 93, 229, 0.24), transparent);
+  content: "";
+}
+
+.founders-page .team-card__portrait {
+  position: relative;
+  z-index: 1;
+  width: clamp(148px, 16vw, 178px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0.94);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e9f7fb, #f0eafa);
+  box-shadow: 0 18px 44px rgba(11, 16, 32, 0.16), 0 0 0 1px rgba(11, 16, 32, 0.06);
+}
+
+.founders-page .team-card__avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  object-fit: cover;
+  object-position: 50% 0%;
+  transform: scale(1.12);
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.founders-page .team-card--noval .team-card__avatar {
+  object-position: 50% 0%;
+}
+
+.founders-page .team-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.75rem clamp(1.25rem, 3vw, 2rem) 2rem;
+  text-align: center;
+}
+
+.founders-page .team-card__name {
+  margin: 0 0 0.7rem;
+  color: #0b1020;
+  font-size: clamp(1.2rem, 2.1vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.founders-page .team-card__role {
+  align-self: center;
+  max-width: 100%;
+  margin-bottom: 0.9rem;
+  padding: 0.42rem 0.9rem;
+  border: 1px solid rgba(0, 180, 216, 0.16);
+  border-radius: 999px;
+  background: rgba(0, 180, 216, 0.08);
+  color: #087d98;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.founders-page .team-card__expertise {
+  max-width: 31rem;
+  margin: 0 auto;
+  color: #596273;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 640px) {
+  .founders-page .team-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .founders-page .team-card__image {
+    min-height: 238px;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .founders-page .team-card__portrait {
+    width: 156px;
+  }
+
+  .founders-page .team-card__content {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .founders-page .team-card,
+  .founders-page .team-card__avatar {
+    transition: none;
+  }
+}

@@ -159,6 +159,18 @@ function initMagneticButtons() {
     });
 }
 
+function initHistoryBackButtons() {
+  document.querySelectorAll("[data-history-back]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const modifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      if (event.defaultPrevented || event.button !== 0 || modifiedClick || window.history.length <= 1) return;
+
+      event.preventDefault();
+      window.history.back();
+    });
+  });
+}
+
 function initMascot() {
   const aboutHero = document.querySelector(".about-hero");
   if (aboutHero && !aboutHero.querySelector(".about-hero-mascot")) {
@@ -173,6 +185,7 @@ function initMascot() {
 }
 
 function initSiteEffects() {
+  initHistoryBackButtons();
   addAtmosphere();
   initSectionThemes();
   initScrollReveals();
