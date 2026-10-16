@@ -1877,3 +1877,52 @@ body.article-page .article-back-row .back-btn {
     transition: none;
   }
 }
+
+
+/* Meet the Founders section hierarchy. */
+:is(.founders-page, .team-page) .founders-intro {
+  width: min(100%, 780px);
+  max-width: 780px;
+  margin: 0 auto clamp(2.25rem, 4vw, 3.25rem);
+  text-align: center;
+}
+
+:is(.founders-page, .team-page) .founders-intro .section-title {
+  margin: 0 0 0.8rem;
+  font-size: clamp(2rem, 4.3vw, 3.25rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+:is(.founders-page, .team-page) .founders-intro__lead {
+  max-width: 44rem;
+  margin: 0 auto 0.7rem;
+  color: #26364c;
+  font-size: clamp(1.05rem, 1.8vw, 1.24rem);
+  font-weight: 600;
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+:is(.founders-page, .team-page) .founders-intro__copy {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #596273;
+  font-size: clamp(0.95rem, 1.25vw, 1.02rem);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+@media (max-width: 640px) {
+  :is(.founders-page, .team-page) .founders-intro {
+    margin-bottom: 2.25rem;
+  }
+
+  :is(.founders-page, .team-page) .founders-intro .section-title {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+  }
+
+  :is(.founders-page, .team-page) .founders-intro__lead {
+    font-size: 1.05rem;
+  }
+}
