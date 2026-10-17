@@ -3,7 +3,7 @@
  * Imports and initializes all modules
  */
 
-import { initNavbar, initLanguageSwitch } from './navbar.js';
+import { initNavbar, initLanguageSwitch } from './navbar.js?v=mascot-20261017b';
 import { initMegaMenu } from './mega-menu.js';
 import { initAnimations } from './animations.js';
 import { initCursor, initToolsOverlay } from './utilities.js';
@@ -30,6 +30,7 @@ function bootstrapApp() {
   // Initialize chatbot functionality
   try { initChatbot(); } catch (e) { console.warn('initChatbot error:', e); }
   try { initContactCards(); } catch (e) { console.warn('initContactCards error:', e); }
+  try { initHeroMascotParallax(); } catch (e) { console.warn('initHeroMascotParallax error:', e); }
 
   console.log('Nexus Diji initialized');
 }
@@ -234,4 +235,87 @@ function initContactCards() {
       });
     });
   }
+}
+
+// ══════════════════════════════════════════════════════════════
+// HERO MASCOT 3D PARALLAX & TILT
+// ══════════════════════════════════════════════════════════════
+function initHeroMascotParallax() {
+  const stage = document.getElementById('heroRobotStage');
+  const heroSection = document.querySelector('.hero');
+  if (!stage || !heroSection) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth <= 768) return;
+
+  const mascot = stage.querySelector('.robot-mascot-wrapper');
+  const cards = stage.querySelectorAll('.hero-bento-card');
+  const props = stage.querySelector('.stage-props');
+  const pedestal = stage.querySelector('.stage-pedestal');
+  const orbit = stage.querySelector('.stage-orbit-wrap');
+
+  let mouseX = 0, mouseY = 0;
+  let targetX = 0, targetY = 0;
+  let rafId = null;
+
+  function onMouseMove(e) {
+    const rect = stage.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    targetX = (e.clientX - centerX) / (rect.width / 2);
+    targetY = (e.clientY - centerY) / (rect.height / 2);
+
+    targetX = Math.max(-1.2, Math.min(1.2, targetX));
+    targetY = Math.max(-1.2, Math.min(1.2, targetY));
+
+    if (!rafId) {
+      rafId = requestAnimationFrame(updateParallax);
+    }
+  }
+
+  function updateParallax() {
+    mouseX += (targetX - mouseX) * 0.08;
+    mouseY += (targetY - mouseY) * 0.08;
+
+    const rotX = -mouseY * 7;
+    const rotY = mouseX * 9;
+
+    if (mascot) {
+      mascot.style.transform = `translate3d(${mouseX * 10}px, ${mouseY * 7}px, 20px) rotateY(${rotY * 0.7}deg) rotateX(${rotX * 0.5}deg)`;
+    }
+
+    if (pedestal) {
+      pedestal.style.transform = `translateX(calc(-50% + ${mouseX * 5}px)) rotateX(72deg) rotateZ(${mouseX * 3}deg)`;
+    }
+
+    if (orbit) {
+      orbit.style.transform = `translate(calc(-50% + ${mouseX * 7}px), calc(-50% + ${mouseY * 5}px)) rotate(-15deg) rotateX(63deg) rotateY(${rotY * 0.35}deg)`;
+    }
+
+    if (props) {
+      props.style.transform = `translate3d(${mouseX * -8}px, ${mouseY * -6}px, 0)`;
+    }
+
+    cards.forEach((card, i) => {
+      const depth = (i + 1) * 5;
+      card.style.translate = `${mouseX * depth}px ${mouseY * (depth * 0.7)}px`;
+    });
+
+    if (Math.abs(targetX - mouseX) > 0.002 || Math.abs(targetY - mouseY) > 0.002) {
+      rafId = requestAnimationFrame(updateParallax);
+    } else {
+      rafId = null;
+    }
+  }
+
+  function onMouseLeave() {
+    targetX = 0;
+    targetY = 0;
+    if (!rafId) {
+      rafId = requestAnimationFrame(updateParallax);
+    }
+  }
+
+  heroSection.addEventListener('mousemove', onMouseMove, { passive: true });
+  heroSection.addEventListener('mouseleave', onMouseLeave);
 }

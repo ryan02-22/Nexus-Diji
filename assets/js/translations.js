@@ -45,9 +45,13 @@ export const TRANSLATIONS = {
   'Kamu.': 'to Life.',
   'Nexus Diji hadir sebagai mitra teknologi kamu — dari website profesional, aplikasi custom, hingga servis perangkat PC & laptop.': 'Nexus Diji is your technology partner — from professional websites and custom apps to PC and laptop repair.',
   'Cepat. Andal. Hasilnya nyata.': 'Fast. Reliable. Real results.',
-  'Launch < 7 Hari': 'Launch < 7 Days',
+  'Launch < 7 Hari': 'Launch in 7 Days',
+  'Launch in 7 Days': 'Launch in 7 Days',
+  'Pengembangan kilat, hasil optimal.': 'Fast delivery, real results.',
   'Kualitas Premium': 'Premium Quality',
+  'Modern, aman, dan scalable.': 'Modern, secure and scalable.',
   '100+ Klien Puas': '100+ Satisfied Clients',
+  'Dipercaya bisnis di seluruh Indonesia.': 'Trusted by businesses across Indonesia.',
 
   // Index - Services & Features
   'Apa yang kami tawarkan': 'What We Offer',
@@ -935,7 +939,10 @@ export const ATTRIBUTE_TRANSLATIONS = {
     'Tutup Menu': 'Close Menu',
     'Kembali': 'Go Back',
     'Kembali ke halaman sebelumnya': 'Return to previous page',
-    'Pilih bahasa': 'Select language'
+    'Pilih bahasa': 'Select language',
+    'Pelajari Launch in 7 Days': 'Learn about Launch in 7 Days',
+    'Lihat Portfolio dan Klien Puas': 'View Portfolio and Satisfied Clients',
+    'Jelajahi Kualitas Layanan Premium': 'Explore Premium Service Quality'
   }
 };
 

@@ -10,7 +10,7 @@ import {
   TITLE_TRANSLATIONS,
   REVERSE_TRANSLATIONS,
   REVERSE_TITLES
-} from './translations.js';
+} from './translations.js?v=mascot-20261017b';
 
 export function initNavbar() {
   initLanguageSwitch();
