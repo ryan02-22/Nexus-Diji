@@ -10,8 +10,9 @@
   --bg: #EAEEF0;
   --surface: #FFFFFF;
   --border: #D1D9E0;
-  --accent: #00b4d8;
-  --accent2: #9b5de5;
+  --accent: #006e99;
+  --accent2: #7c3aed;
+  --accent-on-dark: #67e8f9;
   --text: #0C111D;
   --muted: #49515B;
   --card: #FFFFFF;
@@ -1918,6 +1919,11 @@ a.portfolio-card.faryta-card-link:hover {
   margin-top: 3rem;
 }
 
+.testimonial-grid:has(> :only-child) {
+  grid-template-columns: minmax(0, 640px);
+  justify-content: center;
+}
+
 .testimonial-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -2344,7 +2350,7 @@ footer p {
   z-index: 999;
   width: 56px;
   height: 56px;
-  background: #25d366;
+  background: #0f7a41;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -3115,7 +3121,7 @@ footer p {
   border: 1px solid rgba(67, 97, 238, 0.2);
   border-radius: 100px;
   padding: 0.55rem 1rem;
-  color: var(--accent);
+  color: var(--accent-on-dark);
   font-size: 0.8rem;
   font-weight: 600;
   font-family: 'DM Sans', sans-serif;
@@ -3135,7 +3141,7 @@ footer p {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: #25d366;
+  background: #0f7a41;
   border: none;
   border-radius: 100px;
   padding: 0.65rem 1.1rem;
@@ -3151,7 +3157,7 @@ footer p {
 }
 
 .chat-wa-btn:hover {
-  background: #1ebe5d;
+  background: #0c6b39;
   transform: scale(1.02);
 }
 
@@ -3183,6 +3189,11 @@ footer p {
   outline: none;
 }
 
+.chat-footer input:focus {
+  outline: 2px solid var(--accent-on-dark);
+  outline-offset: 1px;
+}
+
 .chat-footer input::placeholder {
   color: var(--muted);
 }
@@ -3193,7 +3204,7 @@ footer p {
   flex-shrink: 0;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, #00e5ff, #7c3aed);
+  background: linear-gradient(135deg, #0077b6, #7c3aed);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3352,7 +3363,7 @@ footer p {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #25d366;
+  background: #0f7a41;
   color: #fff;
   padding: 0.85rem 1.75rem;
   border-radius: 100px;
@@ -3366,7 +3377,7 @@ footer p {
 .cta-btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-  background: #1ebe5d;
+  background: #0c6b39;
 }
 
 .cta-btn-secondary {

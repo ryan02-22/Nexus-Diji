@@ -43,13 +43,19 @@ export function initMegaMenu() {
       let hoverTimeout;
       const megaMenu = dropdown.querySelector('.mega-menu');
       const simpleDropdown = dropdown.querySelector('.simple-dropdown');
+      const trigger = dropdown.querySelector('.dropdown-trigger');
       const menu = megaMenu || simpleDropdown;
 
       if (!menu) return;
 
+      const setOpen = (open) => {
+        dropdown.classList.toggle('open', open);
+        if (trigger) trigger.setAttribute('aria-expanded', String(open));
+      };
+
       dropdown.addEventListener('mouseenter', () => {
         clearTimeout(hoverTimeout);
-        dropdown.classList.add('open');
+        setOpen(true);
         if (megaMenu) {
           requestAnimationFrame(() => positionMegaMenu(megaMenu));
         }
@@ -57,14 +63,14 @@ export function initMegaMenu() {
 
       dropdown.addEventListener('mouseleave', () => {
         hoverTimeout = setTimeout(() => {
-          dropdown.classList.remove('open');
+          setOpen(false);
         }, 100);
       });
 
       // Keep menu open if user hovers over the menu itself
       menu.addEventListener('mouseenter', () => {
         clearTimeout(hoverTimeout);
-        dropdown.classList.add('open');
+        setOpen(true);
         if (megaMenu) {
           positionMegaMenu(megaMenu);
         }
@@ -72,11 +78,46 @@ export function initMegaMenu() {
 
       menu.addEventListener('mouseleave', () => {
         hoverTimeout = setTimeout(() => {
-          dropdown.classList.remove('open');
+          setOpen(false);
         }, 100);
       });
     });
   }
+
+  // Keyboard access: focus opens the submenu, Escape closes it
+  dropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('.dropdown-trigger');
+    const menu = dropdown.querySelector('.mega-menu, .simple-dropdown');
+    if (!trigger || !menu) return;
+
+    trigger.setAttribute('aria-haspopup', 'true');
+    if (!trigger.hasAttribute('aria-expanded')) {
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    const setExpanded = (open) => {
+      dropdown.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    };
+
+    dropdown.addEventListener('focusin', () => {
+      if (!desktopMedia.matches) return;
+      setExpanded(true);
+      const megaMenu = dropdown.querySelector('.mega-menu');
+      if (megaMenu) requestAnimationFrame(() => positionMegaMenu(megaMenu));
+    });
+
+    dropdown.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && dropdown.contains(e.relatedTarget)) return;
+      setExpanded(false);
+    });
+
+    dropdown.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !dropdown.classList.contains('open')) return;
+      setExpanded(false);
+      trigger.focus();
+    });
+  });
 
   // Prevent dropdown close when clicking inside
   dropdowns.forEach(dropdown => {

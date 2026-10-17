@@ -595,6 +595,11 @@
   gap: 1.5rem;
 }
 
+.testimonial-slider:has(> :only-child) {
+  grid-template-columns: minmax(0, 640px);
+  justify-content: center;
+}
+
 .testimonial-card {
   background: var(--bg);
   border-radius: var(--radius-xl);

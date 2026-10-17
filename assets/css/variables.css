@@ -8,8 +8,11 @@
   --bg: #EAEEF0;
   --surface: #FFFFFF;
   --border: #D1D9E0;
-  --accent: #00b4d8;
-  --accent2: #9b5de5;
+  /* AA-safe as text on light surfaces (4.87:1 on --bg, 5.69:1 on white) */
+  --accent: #006e99;
+  --accent2: #7c3aed;
+  /* AA-safe as text on dark surfaces (chat popup, carousel stage) */
+  --accent-on-dark: #67e8f9;
   --text: #0C111D;
   --muted: #49515B;
   --card: #FFFFFF;

@@ -24,6 +24,10 @@ function initPortfolioShowcase() {
     let isDragging = false;
     let dragStartX = 0;
     let dragDistance = 0;
+    let userPaused = false;
+
+    const pauseBtn = document.getElementById('stagePauseBtn');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     // Generate indicator dots
     if (dotsContainer && totalCards > 0) {
@@ -126,9 +130,10 @@ function initPortfolioShowcase() {
       goToIndex(activeIndex - 1);
     }
 
-    // Auto-play continuous rotation
+    // Auto-play continuous rotation (respects user pause and reduced motion)
     function startAutoPlay() {
       stopAutoPlay();
+      if (userPaused || reduceMotion.matches) return;
       autoPlayTimer = setInterval(() => {
         if (!isHovered && !isDragging) {
           nextCard();
@@ -191,6 +196,34 @@ function initPortfolioShowcase() {
         restartAutoPlay();
       });
     }
+
+    if (pauseBtn) {
+      const syncPauseState = () => {
+        pauseBtn.classList.toggle('is-paused', userPaused);
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.setAttribute('aria-label', userPaused ? 'Putar otomatis carousel' : 'Jeda putar otomatis carousel');
+      };
+      syncPauseState();
+
+      pauseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        userPaused = !userPaused;
+        syncPauseState();
+        if (userPaused) {
+          stopAutoPlay();
+        } else {
+          restartAutoPlay();
+        }
+      });
+    }
+
+    reduceMotion.addEventListener('change', () => {
+      if (reduceMotion.matches) {
+        stopAutoPlay();
+      } else if (!userPaused) {
+        restartAutoPlay();
+      }
+    });
 
     // Pause on hover
     stage.addEventListener('mouseenter', () => { isHovered = true; });
@@ -256,19 +289,28 @@ function initPortfolioShowcase() {
       if (isDragging) handleDragEnd();
     }, { passive: true });
 
-    // Keyboard navigation when stage is in viewport
+    // Keyboard navigation (only when the stage is hovered or focus is inside it)
     window.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
+      const target = e.target;
+      if (target instanceof Element && target.closest('input, textarea, select, [contenteditable="true"]')) {
+        return;
+      }
+
       const rect = stage.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (!inView) return;
 
+      if (!stage.contains(document.activeElement) && !stage.matches(':hover')) return;
+
+      e.preventDefault();
       if (e.key === 'ArrowLeft') {
         prevCard();
-        restartAutoPlay();
-      } else if (e.key === 'ArrowRight') {
+      } else {
         nextCard();
-        restartAutoPlay();
       }
+      restartAutoPlay();
     });
 
     // Responsive update
@@ -279,57 +321,6 @@ function initPortfolioShowcase() {
     // Initialize layout and start timer
     updateLayout();
     startAutoPlay();
-  }
-
-  // =========================================================================
-  // 2. BACKWARD COMPATIBILITY: Legacy Horizontal Marquee Track (if present)
-  // =========================================================================
-  const marqueeTrack = document.querySelector('.portfolio-marquee-track');
-  const marqueeWrapper = document.querySelector('.portfolio-marquee-wrapper');
-
-  if (marqueeTrack && marqueeWrapper) {
-    let isDown = false;
-    let startX = 0;
-    let currentX = 0;
-    let speed = 0.8;
-    let isPaused = false;
-    let hasMoved = false;
-
-    const updateMarquee = () => {
-      if (!isDown && !isPaused) {
-        currentX -= speed;
-        const halfWidth = marqueeTrack.offsetWidth / 2;
-        if (Math.abs(currentX) >= halfWidth) {
-          currentX = 0;
-        }
-        marqueeTrack.style.transform = `translateX(${currentX}px)`;
-      }
-      requestAnimationFrame(updateMarquee);
-    };
-
-    requestAnimationFrame(updateMarquee);
-
-    marqueeWrapper.addEventListener('mousedown', (e) => {
-      isDown = true;
-      hasMoved = false;
-      startX = e.pageX - currentX;
-      marqueeTrack.classList.add('is-dragging');
-    });
-
-    window.addEventListener('mouseup', () => {
-      isDown = false;
-      marqueeTrack.classList.remove('is-dragging');
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      hasMoved = true;
-      currentX = e.pageX - startX;
-      marqueeTrack.style.transform = `translateX(${currentX}px)`;
-    });
-
-    marqueeWrapper.addEventListener('mouseenter', () => { isPaused = true; });
-    marqueeWrapper.addEventListener('mouseleave', () => { if (!isDown) isPaused = false; });
   }
 }
 

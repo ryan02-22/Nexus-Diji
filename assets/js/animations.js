@@ -77,6 +77,7 @@ export function initTypingEffect() {
     });
   }, { threshold: 0.1 });
 
+  lines.forEach(line => { line.el.textContent = ''; });
   heroObserver.observe(heroSection);
 }
 

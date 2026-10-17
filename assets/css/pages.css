@@ -988,7 +988,7 @@ h1 .accent {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #25d366;
+  background: #0f7a41;
   color: #fff;
   padding: 0.85rem 1.75rem;
   border-radius: var(--radius-full);
@@ -1002,7 +1002,7 @@ h1 .accent {
 .cta-btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-  background: #1ebe5d;
+  background: #0c6b39;
 }
 
 .cta-btn-secondary {

@@ -6,7 +6,7 @@ Allow: /
 # Disallow: /private/
 
 # Sitemap location
-Sitemap: https://nexus-diji.com/sitemap.xml
+Sitemap: https://nexus-diji.vercel.app/sitemap.xml
 
 # Crawl delay (optional - be respectful to crawlers)
 Crawl-delay: 1

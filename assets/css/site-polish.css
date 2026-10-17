@@ -2733,6 +2733,29 @@ body.menu-open .promo-banner {
   color: #000 !important;
 }
 
+/* Neutral card link button for portfolio grid cards */
+.service-card .service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--grad);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 110, 153, 0.25);
+}
+
+.service-card .service-card__link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 110, 153, 0.45);
+  filter: brightness(1.08);
+}
+
 /* Faryta Testimonial Avatar styling across index & tentang-kami */
 .author-avatar.author-avatar--faryta,
 .testimonial-card__avatar.testimonial-card__avatar--faryta {
@@ -3060,6 +3083,18 @@ body.menu-open .promo-banner {
   transform: scale(0.94);
 }
 
+.stage-pause-btn .icon-play {
+  display: none;
+}
+
+.stage-pause-btn.is-paused .icon-pause {
+  display: none;
+}
+
+.stage-pause-btn.is-paused .icon-play {
+  display: block;
+}
+
 .stage-dots {
   display: flex;
   align-items: center;
@@ -3080,6 +3115,11 @@ body.menu-open .promo-banner {
   outline: none;
   flex: 0 0 auto !important;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stage-dot:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 .stage-dot:hover {

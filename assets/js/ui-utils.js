@@ -87,45 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ══════════════════════════════════════════════════════════════
-  // FARYTA STUDIO CARD - Ensure single click works
-  // ══════════════════════════════════════════════════════════════
-  const farytaCard = document.querySelector('.faryta-card-link');
-
-  if (farytaCard) {
-    // The card is an <a> tag, so native click should work
-    // Ensure no event is blocking the native click
-    farytaCard.addEventListener('click', function (e) {
-      // Allow the default action (navigation) to proceed
-      // No preventDefault unless we want to handle it manually
-      console.log('Faryta Studio card clicked, navigating to: ' + farytaCard.href);
-    });
-
-    // Ensure cursor shows pointer on all devices
-    farytaCard.style.cursor = 'pointer';
-  }
-
-  // ══════════════════════════════════════════════════════════════
-  // PRICING CTA BUTTONS - Single click to WhatsApp
-  // ══════════════════════════════════════════════════════════════
-  document.querySelectorAll('.pricing-cta').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      // Let the <a> tag handle navigation naturally
-      // This ensures single tap works on mobile
-      console.log('Pricing CTA clicked');
-    });
-  });
-
-  // ══════════════════════════════════════════════════════════════
-  // BLOG LINKS - Single click navigation
-  // ══════════════════════════════════════════════════════════════
-  document.querySelectorAll('.blog-link').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      // Let the <a> tag handle navigation naturally
-      console.log('Blog link clicked');
-    });
-  });
-
-  // ══════════════════════════════════════════════════════════════
   // FOOTER LINKS - Ensure proper navigation
   // ══════════════════════════════════════════════════════════════
   document.querySelectorAll('footer a').forEach(function (link) {
@@ -168,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const href = link.getAttribute('href');
       // Let external links work normally
       if (href && href.startsWith('http')) {
-        console.log('External link clicked:', href);
         return;
       }
       // Internal hash links
@@ -183,37 +143,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ══════════════════════════════════════════════════════════════
-  // PROMO BANNER LINK - Single click
-  // ══════════════════════════════════════════════════════════════
-  const promoLink = document.querySelector('.promo-banner a');
-  if (promoLink) {
-    promoLink.addEventListener('click', function () {
-      console.log('Promo banner link clicked');
-    });
-  }
-
-  // ══════════════════════════════════════════════════════════════
-  // WA FLOAT BUTTON - Single click
-  // ══════════════════════════════════════════════════════════════
-  const waFloat = document.querySelector('.wa-float');
-  if (waFloat) {
-    waFloat.addEventListener('click', function (e) {
-      // Let the <a> tag handle navigation naturally
-      console.log('WA Float clicked');
-    });
-  }
-
-  // ══════════════════════════════════════════════════════════════
-  // TOOL BUTTONS - Ensure single tap works
-  // ══════════════════════════════════════════════════════════════
-  document.querySelectorAll('.tool-btn').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      // Let buttons work naturally
-      // These are already handled by main.js for chatbot/help
-      console.log('Tool button clicked');
-    });
-  });
-
-  console.log('UI utilities initialized');
 });

@@ -27,6 +27,7 @@
 }
 
 .nav-dropdown:hover .dropdown-trigger::after,
+.nav-dropdown:focus-within .dropdown-trigger::after,
 .nav-dropdown.open .dropdown-trigger::after {
   transform: rotate(180deg);
 }
@@ -50,6 +51,7 @@
 }
 
 .nav-dropdown:hover .simple-dropdown,
+.nav-dropdown:focus-within .simple-dropdown,
 .nav-dropdown.open .simple-dropdown {
   opacity: 1;
   visibility: visible;
@@ -104,6 +106,7 @@
 }
 
 .nav-dropdown:hover .mega-menu,
+.nav-dropdown:focus-within .mega-menu,
 .nav-dropdown.open .mega-menu {
   opacity: 1;
   visibility: visible;
@@ -301,6 +304,8 @@
 
   .nav-dropdown:hover > .simple-dropdown,
   .nav-dropdown:hover > .mega-menu,
+  .nav-dropdown:focus-within > .simple-dropdown,
+  .nav-dropdown:focus-within > .mega-menu,
   .nav-dropdown.open > .simple-dropdown,
   .nav-dropdown.open > .mega-menu {
     pointer-events: auto;
