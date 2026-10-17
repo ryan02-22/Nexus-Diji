@@ -64,14 +64,23 @@ document.addEventListener('DOMContentLoaded', function () {
   const promoBanner = document.getElementById('promoBanner');
 
   function updateNavbarTop() {
-    if (!promoBanner) return;
-    const bannerHeight = promoBanner.classList.contains('hidden') ? 0 : promoBanner.offsetHeight;
+    if (!navbar) return;
+    const isHidden = !promoBanner || promoBanner.classList.contains('hidden');
+    const bannerHeight = isHidden ? 0 : Math.round(promoBanner.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--promo-banner-height', `${bannerHeight}px`);
     const scrolled = window.scrollY > 50;
     navbar.style.top = scrolled ? '0px' : bannerHeight + 'px';
   }
 
   updateNavbarTop();
   window.addEventListener('resize', updateNavbarTop);
+  if (window.ResizeObserver && promoBanner) {
+    new ResizeObserver(() => updateNavbarTop()).observe(promoBanner);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateNavbarTop);
+  }
+  window.addEventListener('load', updateNavbarTop);
 
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY > 50;
@@ -92,6 +101,11 @@ document.addEventListener('DOMContentLoaded', function () {
       mobileMenu.classList.add('open');
       hamburgerBtn.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (promoBanner) {
+        promoBanner.style.opacity = '0';
+        promoBanner.style.visibility = 'hidden';
+        promoBanner.style.pointerEvents = 'none';
+      }
       updateNavbarTop();
     });
 
@@ -99,6 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
       mobileMenu.classList.remove('open');
       hamburgerBtn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (promoBanner) {
+        promoBanner.style.opacity = '';
+        promoBanner.style.visibility = '';
+        promoBanner.style.pointerEvents = '';
+      }
+      updateNavbarTop();
     }
 
     closeMenuBtn.addEventListener('click', closeMobileMenu);

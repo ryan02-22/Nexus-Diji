@@ -69,7 +69,7 @@
   /* Navbar Heights */
   --navbar-height: auto;
   --navbar-height-scrolled: auto;
-  --promo-banner-height: 38px;
+  --promo-banner-height: 42px;
 
   /* Breakpoints (for reference in JS) */
   --breakpoint-sm: 480px;

@@ -4,7 +4,17 @@
  * Production-grade mobile navigation interactions
  */
 
+import {
+  TRANSLATIONS,
+  ATTRIBUTE_TRANSLATIONS,
+  TITLE_TRANSLATIONS,
+  REVERSE_TRANSLATIONS,
+  REVERSE_TITLES
+} from './translations.js';
+
 export function initNavbar() {
+  initLanguageSwitch();
+
   const navbar = document.getElementById('navbar');
   const promoBanner = document.getElementById('promoBanner');
   const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -17,25 +27,34 @@ export function initNavbar() {
 
   // Update navbar and mobile menu top position based on promo banner
   function updateNavAndMenuTop() {
-    if (!promoBanner || !navbar) return;
-    const bannerHeight = promoBanner.classList.contains('hidden') ? 0 : promoBanner.offsetHeight;
-    const scrolled = window.scrollY > 50;
+    if (!navbar) return;
+    const isHidden = !promoBanner || promoBanner.classList.contains('hidden');
+    const bannerHeight = isHidden ? 0 : Math.round(promoBanner.getBoundingClientRect().height);
 
-    if (scrolled) {
-      navbar.style.top = '0px';
-    } else {
-      navbar.style.top = bannerHeight + 'px';
-    }
+    // Sync CSS variable so all CSS rules have exact value
+    document.documentElement.style.setProperty('--promo-banner-height', `${bannerHeight}px`);
+
+    const scrolled = window.scrollY > 50;
+    navbar.style.top = scrolled ? '0px' : `${bannerHeight}px`;
   }
 
   updateNavAndMenuTop();
   window.addEventListener('resize', updateNavAndMenuTop);
 
+  if (window.ResizeObserver && promoBanner) {
+    const promoRo = new ResizeObserver(() => updateNavAndMenuTop());
+    promoRo.observe(promoBanner);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateNavAndMenuTop);
+  }
+  window.addEventListener('load', updateNavAndMenuTop);
+
   // Scroll handler for navbar state
   let lastScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY > 50;
-    navbar.classList.toggle('scrolled', scrolled);
+    if (navbar) navbar.classList.toggle('scrolled', scrolled);
     if (promoBanner) promoBanner.classList.toggle('hidden', scrolled);
     updateNavAndMenuTop();
 
@@ -123,7 +142,12 @@ export function initNavbar() {
       setTimeout(() => firstFocusable.focus(), 50);
     }
 
-    // Hide floating elements
+    // Hide floating elements and promo banner to prevent overlap
+    if (promoBanner) {
+      promoBanner.style.opacity = '0';
+      promoBanner.style.visibility = 'hidden';
+      promoBanner.style.pointerEvents = 'none';
+    }
     const toolsOverlay = document.getElementById('toolsOverlay');
     const backToTop = document.getElementById('backToTop');
     if (toolsOverlay) toolsOverlay.style.display = 'none';
@@ -138,6 +162,14 @@ export function initNavbar() {
     hamburgerBtn.classList.remove('active');
     hamburgerBtn.setAttribute('aria-expanded', 'false');
     navbar.classList.remove('menu-open');
+
+    // Restore promo banner
+    if (promoBanner) {
+      promoBanner.style.opacity = '';
+      promoBanner.style.visibility = '';
+      promoBanner.style.pointerEvents = '';
+    }
+    updateNavAndMenuTop();
 
     mobileMenu.querySelectorAll('.mobile-dropdown-toggle').forEach((toggle) => {
       const dropdown = toggle.nextElementSibling;
@@ -258,3 +290,146 @@ export function initNavbar() {
 }
 
 export default initNavbar;
+
+let currentLanguage = 'id';
+
+export function applyLanguage(targetLang) {
+  const isEnglish = targetLang === 'en';
+  currentLanguage = isEnglish ? 'en' : 'id';
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dataset.language = currentLanguage;
+
+  // 1. Update UI button states
+  const buttons = document.querySelectorAll('.nav-language__option[data-lang]');
+  buttons.forEach((btn) => {
+    const active = btn.dataset.lang === currentLanguage;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+
+  // 2. Translate DOM text nodes
+  const dict = isEnglish ? TRANSLATIONS : REVERSE_TRANSLATIONS;
+  const walker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        if (parent.closest('script, style, svg, noscript, textarea, code, pre, .nav-language')) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (!node.nodeValue.trim()) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+
+  let node;
+  while ((node = walker.nextNode())) {
+    const rawVal = node.nodeValue;
+    const trimmed = rawVal.trim();
+    const normalized = trimmed.replace(/\s+/g, ' ');
+
+    if (dict[normalized]) {
+      const match = rawVal.match(/^(\s*)([\s\S]*?)(\s*)$/);
+      if (match) {
+        node.nodeValue = match[1] + dict[normalized] + match[3];
+      } else {
+        node.nodeValue = dict[normalized];
+      }
+    }
+  }
+
+  // 3. Form placeholders
+  const placeholderMap = ATTRIBUTE_TRANSLATIONS?.placeholders || {};
+  const reversePlaceholderMap = Object.entries(placeholderMap).reduce((acc, [idVal, enVal]) => {
+    acc[enVal] = idVal;
+    return acc;
+  }, {});
+
+  document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach((el) => {
+    const current = el.getAttribute('placeholder');
+    if (!current) return;
+    const target = isEnglish ? placeholderMap[current] : reversePlaceholderMap[current];
+    if (target) el.setAttribute('placeholder', target);
+  });
+
+  // 4. Accessibility aria-labels
+  const ariaMap = ATTRIBUTE_TRANSLATIONS?.ariaLabels || {};
+  const reverseAriaMap = Object.entries(ariaMap).reduce((acc, [idVal, enVal]) => {
+    acc[enVal] = idVal;
+    return acc;
+  }, {});
+
+  document.querySelectorAll('[aria-label]').forEach((el) => {
+    if (el.classList.contains('nav-language__option')) return;
+    const current = el.getAttribute('aria-label');
+    if (!current) return;
+    const target = isEnglish ? ariaMap[current] : reverseAriaMap[current];
+    if (target) el.setAttribute('aria-label', target);
+  });
+
+  // 5. Document title
+  const currentTitle = document.title.trim();
+  if (isEnglish) {
+    if (TITLE_TRANSLATIONS[currentTitle]) {
+      document.title = TITLE_TRANSLATIONS[currentTitle];
+    }
+  } else {
+    if (REVERSE_TITLES[currentTitle]) {
+      document.title = REVERSE_TITLES[currentTitle];
+    }
+  }
+
+  // 6. Homepage typing animation headline sync
+  const typingLine1 = document.getElementById('typingLine1');
+  const typingLine2 = document.getElementById('typingLine2');
+  const typingLine3 = document.getElementById('typingLine3');
+  if (typingLine1 && typingLine2 && typingLine3) {
+    if (isEnglish) {
+      typingLine1.textContent = 'Bring Your';
+      typingLine2.textContent = 'Digital Ideas';
+      typingLine3.textContent = 'to Life.';
+    } else {
+      typingLine1.textContent = 'Wujudkan';
+      typingLine2.textContent = 'Ide Digital';
+      typingLine3.textContent = 'Kamu.';
+    }
+  }
+}
+
+export function initLanguageSwitch() {
+  const buttons = [...document.querySelectorAll('.nav-language__option[data-lang]')];
+  if (!buttons.length) return;
+
+  let storedLang = 'id';
+  try {
+    storedLang = localStorage.getItem('nexus-diji-language') === 'en' ? 'en' : 'id';
+  } catch {
+    storedLang = 'id';
+  }
+
+  // Apply stored language
+  applyLanguage(storedLang);
+
+  // Setup click listeners for seamless bidirectional translation
+  buttons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetLang = button.dataset.lang;
+      if (targetLang !== 'id' && targetLang !== 'en') return;
+      if (targetLang === currentLanguage) return;
+
+      try {
+        localStorage.setItem('nexus-diji-language', targetLang);
+      } catch {
+        // Storage fallback
+      }
+
+      applyLanguage(targetLang);
+    });
+  });
+}

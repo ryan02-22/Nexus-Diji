@@ -3,27 +3,40 @@
  * Imports and initializes all modules
  */
 
-import { initNavbar } from './navbar.js';
+import { initNavbar, initLanguageSwitch } from './navbar.js';
 import { initMegaMenu } from './mega-menu.js';
 import { initAnimations } from './animations.js';
 import { initCursor, initToolsOverlay } from './utilities.js';
 import './site-effects.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+function bootstrapApp() {
   'use strict';
 
-  // Initialize all modules
-  initCursor();
-  initNavbar();
-  initMegaMenu();
-  initAnimations();
-  initToolsOverlay();
+  // Apply language immediately across any page
+  try {
+    initLanguageSwitch();
+  } catch (err) {
+    console.warn('initLanguageSwitch error:', err);
+  }
+
+  // Initialize all modules safely
+  try { initCursor(); } catch (e) { console.warn('initCursor error:', e); }
+  try { initNavbar(); } catch (e) { console.warn('initNavbar error:', e); }
+  try { initMegaMenu(); } catch (e) { console.warn('initMegaMenu error:', e); }
+  try { initAnimations(); } catch (e) { console.warn('initAnimations error:', e); }
+  try { initToolsOverlay(); } catch (e) { console.warn('initToolsOverlay error:', e); }
 
   // Initialize chatbot functionality
-  initChatbot();
+  try { initChatbot(); } catch (e) { console.warn('initChatbot error:', e); }
 
   console.log('Nexus Diji initialized');
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrapApp, { once: true });
+} else {
+  bootstrapApp();
+}
 
 // ══════════════════════════════════════════════════════════════
 // CHATBOT MODULE

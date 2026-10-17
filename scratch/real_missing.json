@@ -1,0 +1,67 @@
+{
+  "index.html": [
+    "0h",
+    "AR",
+    "SR",
+    "BP",
+    "R",
+    "A",
+    "S",
+    "B",
+    "© 2025",
+    "FAQ",
+    "Contact",
+    "Privacy Policy",
+    "💡",
+    "×",
+    "🛠️",
+    "💰",
+    "🎯",
+    "❓",
+    "🚀"
+  ],
+  "pages/layanan.html": [
+    "React, Next.js, Vue.js, HTML5, CSS3, JavaScript ES6+, TailwindCSS, Bootstrap",
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/portfolio.html": [
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/harga.html": [
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/blog.html": [
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/tentang-kami.html": [
+    "UI/UX Design",
+    "h",
+    "AR",
+    "SR",
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/kontak.html": [
+    "Facebook",
+    "FAQ",
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/tim-kami.html": [
+    "AA",
+    "NS",
+    "© 2025",
+    "Privacy Policy"
+  ],
+  "pages/blog-2.html": [
+    "width",
+    "height",
+    "srcset",
+    "loading=\"lazy\"",
+    "Cache-Control"
+  ]
+}

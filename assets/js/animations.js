@@ -31,11 +31,18 @@ export function initTypingEffect() {
 
   if (!typingLine1 || !typingLine2 || !typingLine3 || !heroSection) return;
 
-  const lines = [
-    { el: typingLine1, text: 'Wujudkan' },
-    { el: typingLine2, text: 'Ide Digital' },
-    { el: typingLine3, text: 'Kamu.' }
-  ];
+  const isEnglish = document.documentElement.dataset.language === 'en';
+  const lines = isEnglish
+    ? [
+        { el: typingLine1, text: 'Bring Your' },
+        { el: typingLine2, text: 'Digital Ideas' },
+        { el: typingLine3, text: 'to Life.' }
+      ]
+    : [
+        { el: typingLine1, text: 'Wujudkan' },
+        { el: typingLine2, text: 'Ide Digital' },
+        { el: typingLine3, text: 'Kamu.' }
+      ];
 
   async function typeText(el, text, speed = 80) {
     for (let i = 0; i < text.length; i++) {

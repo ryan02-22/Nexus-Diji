@@ -1768,26 +1768,28 @@ a.portfolio-card.faryta-card-link:hover {
 
 .faryta-card-link .faryta-studio-thumb {
   height: 180px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.16) 0%, rgba(15, 23, 42, 0.98) 72%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  overflow: hidden;
 }
 
 .faryta-card-link .faryta-studio-thumb img {
   width: auto;
-  max-width: 90%;
+  max-width: 92%;
   height: auto;
-  max-height: 100px;
+  max-height: 105px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
-  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.35));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .faryta-card-link:hover .faryta-studio-thumb img {
-  transform: scale(1.1);
-  filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.5));
+  transform: scale(1.08);
+  filter: drop-shadow(0 8px 26px rgba(212, 175, 55, 0.6));
 }
 
 .faryta-card-link .portfolio-info h3 {
@@ -2543,7 +2545,7 @@ footer p {
 @media (max-width: 900px) {
   nav {
     padding: 0.4rem 1.5rem;
-    top: 44px;
+    top: var(--promo-banner-height);
   }
 
   .nav-links {

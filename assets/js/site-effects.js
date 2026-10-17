@@ -1,4 +1,5 @@
 /* Nexus Diji visual interactions: section atmosphere, reveal, parallax, mascot, and magnetic buttons. */
+import { initLanguageSwitch } from "./navbar.js";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 const mascotUrl = new URL("../images/robot-nd.webp", import.meta.url).href;
@@ -185,6 +186,7 @@ function initMascot() {
 }
 
 function initSiteEffects() {
+  initLanguageSwitch();
   initHistoryBackButtons();
   addAtmosphere();
   initSectionThemes();

@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="../assets/images/logo%20okeh.png">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="stylesheet" href="../assets/css/blog.css">
-  <link rel="stylesheet" href="../assets/css/site-polish.css?v=visual-refresh-2026">
+  <link rel="stylesheet" href="../assets/css/site-polish.css?v=nav-balanced-pill-2026">
 </head>
 
 <body class="article-page article-page--performance">
@@ -25,7 +25,13 @@
             <li><a href="../index.html#portfolio">Portfolio</a></li>
             <li><a href="../index.html#services">Layanan</a></li>
         </ul>
-        <a href="https://wa.me/6285711171508" class="btn-primary">Hubungi Kami</a>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div class="nav-language" role="group" aria-label="Pilih bahasa">
+            <button class="nav-language__option is-active" type="button" data-lang="id" aria-pressed="true">ID</button>
+            <button class="nav-language__option" type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+          <a href="https://wa.me/6285711171508" class="btn-primary">Hubungi Kami</a>
+        </div>
     </header>
 
     <main class="article-wrap">
@@ -102,7 +108,7 @@
         <p>&copy; 2026 Nexus Diji. Semua hak cipta dilindungi.</p>
     </footer>
 
-    <script type="module" src="../assets/js/site-effects.js"></script>
+    <script src="../assets/js/main.js" type="module"></script>
 </body>
 
 </html>

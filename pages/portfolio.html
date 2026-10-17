@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../assets/css/pages.css">
   <link rel="stylesheet" href="../assets/css/about.css">
   <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/css/site-polish.css?v=visual-refresh-2026">
+  <link rel="stylesheet" href="../assets/css/site-polish.css?v=nav-balanced-pill-2026">
 </head>
 
 <body class="page-portfolio">
@@ -126,7 +126,11 @@
         <li><a href="kontak.html">Kontak</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="kontak.html" class="nav-cta"><span>Mulai Proyek</span></a>
+        <div class="nav-language" role="group" aria-label="Pilih bahasa">
+          <button class="nav-language__option is-active" type="button" data-lang="id" aria-pressed="true">ID</button>
+          <button class="nav-language__option" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="kontak.html" class="nav-cta"><span>Hubungi Kami</span></a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -317,28 +321,28 @@
         </div>
 
         <div class="services-grid reveal">
-          <article class="service-card">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-                <path d="M3 6h18"></path>
-                <path d="M16 10a 4 4 0 0 1 -8 0"></path>
-              </svg>
+          <article class="service-card service-card--faryta">
+            <div class="service-card__icon service-card__icon--faryta">
+              <img src="../assets/images/LOGO%20FARYTA%20STUDIO.png" alt="Faryta Studio Logo" class="faryta-portfolio-icon">
             </div>
             <h3 class="service-card__title">Faryta Studio</h3>
             <p class="service-card__desc">
               Website portfolio profesional untuk bisnis photography dengan fokus pada layanan wedding, portrait, dan event documentation. Dilengkapi dengan galeri interaktif dan sistem booking.
             </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Portfolio</span>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Photography</span>
-            <a href="https://faryta-studio.vercel.app" class="service-card__link" target="_blank" rel="noopener">
-              Kunjungi Situs
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
+            <div class="service-card__tags" style="margin: 0.75rem 0 1.25rem;">
+              <span class="service-tag" style="display:inline-block;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.35);color:#f5d678;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Portfolio</span>
+              <span class="service-tag" style="display:inline-block;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.35);color:#f5d678;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Photography</span>
+            </div>
+            <div class="service-card__actions" style="margin-top:auto; padding-top:0.5rem;">
+              <a href="https://faryta-studio.vercel.app" class="service-card__link faryta-btn-link" target="_blank" rel="noopener">
+                Kunjungi Situs
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
           </article>
 
           <article class="service-card">

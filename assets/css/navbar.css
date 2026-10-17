@@ -30,7 +30,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-sticky);
+  z-index: 998;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +107,7 @@ nav#navbar {
   top: var(--promo-banner-height);
   left: 0;
   right: 0;
-  z-index: var(--z-sticky);
+  z-index: 990;
   border-bottom: 1px solid transparent;
   transition: all var(--transition-base);
   background: transparent;
