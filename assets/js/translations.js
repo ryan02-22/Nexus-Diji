@@ -905,8 +905,16 @@ export const TRANSLATIONS = {
   'Flutter, React Native, Swift (iOS), Kotlin (Android) untuk aplikasi mobile': 'Flutter, React Native, Swift (iOS), Kotlin (Android) for mobile applications',
   'PostgreSQL, MySQL, MongoDB, Firebase, Supabase untuk storage dan data': 'PostgreSQL, MySQL, MongoDB, Firebase, Supabase for data and storage',
   'Vercel, Netlify, AWS, Google Cloud, Docker, CI/CD untuk deployment': 'Vercel, Netlify, AWS, Google Cloud, Docker, CI/CD for cloud deployment',
-  'WordPress, Shopify, Strapi, Sanity, Prisma, Figma untuk design dan management': 'WordPress, Shopify, Strapi, Sanity, Prisma, Figma for design and content management',
-  'Segera minta bantuan untuk baterai menggembung, terkena cairan, bau terbakar, percikan, panas yang tidak wajar, kerusakan fisik, atau peringatan kesehatan penyimpanan yang berulang. Buat janji pemeriksaan jika laptop sering gagal boot, mati mendadak, atau tetap bermasalah setelah langkah aman dasar. Jika data lebih penting daripada perangkat, sampaikan prioritas itu sebelum teknisi menjalankan reset atau instalasi ulang.': 'Seek immediate professional help for swollen batteries, liquid spills, burning odors, sparking, severe overheating, physical damage, or repeating SMART drive errors. Schedule an inspection if the laptop fails to boot or suffers sudden shutdowns. If data takes priority over the machine, declare this before technicians execute OS reinstalls or resets.'
+  'Segera minta bantuan untuk baterai menggembung, terkena cairan, bau terbakar, percikan, panas yang tidak wajar, kerusakan fisik, atau peringatan kesehatan penyimpanan yang berulang. Buat janji pemeriksaan jika laptop sering gagal boot, mati mendadak, atau tetap bermasalah setelah langkah aman dasar. Jika data lebih penting daripada perangkat, sampaikan prioritas itu sebelum teknisi menjalankan reset atau instalasi ulang.': 'Seek immediate professional help for swollen batteries, liquid spills, burning odors, sparking, severe overheating, physical damage, or repeating SMART drive errors. Schedule an inspection if the laptop fails to boot or suffers sudden shutdowns. If data takes priority over the machine, declare this before technicians execute OS reinstalls or resets.',
+  'Salon & Spa': 'Salon & Spa',
+  'F&B POS': 'F&B POS',
+  'SaaS & Tech': 'SaaS & Tech',
+  'Sistem Booking Salon': 'Salon Booking System',
+  'Sistem booking online dengan kalender interaktif, notifikasi WhatsApp, dan manajemen stok.': 'Online booking system with interactive calendar, WhatsApp notifications, and inventory management.',
+  'Dashboard POS Restaurant': 'Restaurant POS Dashboard',
+  'Sistem kasir digital untuk restaurant dengan fitur split bill, floor management, dan laporan harian.': 'Digital point-of-sale system for restaurants with split-bill, table floor management, and daily reports.',
+  'Landing Page SaaS': 'SaaS Landing Page',
+  'Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.': 'High-converting landing page for SaaS products with A/B testing and analytics.'
 };
 
 // Form attribute translations (placeholders, aria-labels)
