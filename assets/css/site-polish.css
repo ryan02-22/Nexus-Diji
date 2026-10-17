@@ -3628,3 +3628,505 @@ footer .footer-links a[hidden] {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ULTRA-PREMIUM 3D CONTACT CARDS (Match Image 2)
+   ═══════════════════════════════════════════════════════════════ */
+.contact-3d-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 2.75rem;
+  perspective: 1200px;
+}
+
+.contact-3d-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 36px;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+  padding: 1.85rem 1.85rem 2.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.contact-3d-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 32px 64px -16px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* Ambient Top Light Beam & Halo */
+.contact-3d-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  pointer-events: none;
+  border-radius: 36px 36px 0 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.contact-3d-card--wa::before {
+  background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(37, 211, 102, 0.18), transparent 75%);
+}
+
+.contact-3d-card--email::before {
+  background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(0, 180, 216, 0.20), transparent 75%);
+}
+
+.contact-3d-card--call::before {
+  background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(124, 58, 237, 0.16), transparent 75%);
+}
+
+.contact-3d-card:hover.contact-3d-card--wa {
+  border-color: rgba(37, 211, 102, 0.45);
+}
+.contact-3d-card:hover.contact-3d-card--email {
+  border-color: rgba(0, 180, 216, 0.45);
+}
+.contact-3d-card:hover.contact-3d-card--call {
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+/* 1. Pill Badge */
+.contact-3d-card__badge {
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+}
+
+.contact-3d-card__badge--wa {
+  background: rgba(236, 253, 245, 0.95);
+  border: 1px solid rgba(167, 243, 208, 0.9);
+  color: #047857;
+}
+
+.contact-3d-card__badge--email {
+  background: rgba(240, 249, 255, 0.95);
+  border: 1px solid rgba(186, 230, 253, 0.9);
+  color: #0369a1;
+}
+
+.contact-3d-card__badge--purple {
+  background: rgba(245, 243, 255, 0.95);
+  border: 1px solid rgba(221, 214, 254, 0.9);
+  color: #6d28d9;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.badge-dot--green {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.badge-dot--blue {
+  background: #0284c7;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.8);
+}
+
+.badge-dot--purple {
+  background: #7c3aed;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.8);
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.75;
+  }
+}
+
+/* 2. 3D Visual Hero Area */
+.contact-3d-card__visual {
+  position: relative;
+  z-index: 1;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.contact-3d-card__img {
+  max-height: 100%;
+  width: auto;
+  max-width: 90%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 56%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 50%, black 56%, transparent 72%);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.08));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  user-select: none;
+}
+
+@keyframes contactFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.8deg);
+  }
+}
+
+.contact-3d-card--wa .contact-3d-card__img {
+  animation: contactFloat 5.5s ease-in-out infinite;
+}
+
+.contact-3d-card--email .contact-3d-card__img {
+  animation: contactFloat 5.5s ease-in-out 0.9s infinite;
+}
+
+.contact-3d-card--call .contact-3d-card__img {
+  animation: contactFloat 5.5s ease-in-out 1.8s infinite;
+}
+
+.contact-3d-card:hover .contact-3d-card__img {
+  transform: scale(1.07) translateY(-6px);
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.12));
+}
+
+/* 3. Card Content */
+.contact-3d-card__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-3d-card__title {
+  font-family: 'Space Grotesk', var(--font-primary), sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.45rem;
+}
+
+.accent-wa {
+  background: linear-gradient(135deg, #05c46b, #009432);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-call {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-3d-card__desc {
+  color: #64748b;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 1.35rem;
+  min-height: 44px;
+}
+
+/* 4. Info Box (Value + Copy Pill) */
+.contact-3d-card__info-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.15rem;
+  position: relative;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.contact-3d-card__info-box:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.info-box__left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.info-box__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.info-box__icon--wa {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+}
+
+.info-box__icon--email {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+}
+
+.info-box__icon--call {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.25);
+}
+
+.info-box__val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.info-box__copy-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 8px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.info-box__copy-btn:hover {
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.info-box__copy-btn:hover .copy-tooltip,
+.info-box__copy-btn.copied .copy-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-box__copy-btn.copied {
+  color: #10b981;
+}
+
+.info-box__chevron {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.contact-3d-card:hover .info-box__chevron {
+  color: #7c3aed;
+  transform: translateX(3px);
+}
+
+/* 5. Primary Action Button */
+.contact-3d-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.75rem 0.65rem 1.4rem;
+  border-radius: 9999px;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-3d-card__btn--wa {
+  background: linear-gradient(135deg, #05c46b 0%, #009432 100%);
+  box-shadow: 0 10px 24px -5px rgba(5, 196, 107, 0.45);
+}
+
+.contact-3d-card__btn--wa:hover {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  box-shadow: 0 16px 32px -4px rgba(5, 196, 107, 0.6);
+  transform: translateY(-2px);
+}
+
+.contact-3d-card__btn--email {
+  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  box-shadow: 0 10px 24px -5px rgba(0, 180, 216, 0.45);
+}
+
+.contact-3d-card__btn--email:hover {
+  background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%);
+  box-shadow: 0 16px 32px -4px rgba(0, 180, 216, 0.6);
+  transform: translateY(-2px);
+}
+
+.contact-3d-card__btn--call {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  box-shadow: 0 10px 24px -5px rgba(124, 58, 237, 0.45);
+}
+
+.contact-3d-card__btn--call:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #3730a3 100%);
+  box-shadow: 0 16px 32px -4px rgba(124, 58, 237, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-text-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-arrow-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.contact-3d-card__btn--wa .btn-arrow-circle {
+  color: #009432;
+}
+
+.contact-3d-card__btn--email .btn-arrow-circle {
+  color: #0077b6;
+}
+
+.contact-3d-card__btn--call .btn-arrow-circle {
+  color: #6d28d9;
+}
+
+.contact-3d-card__btn:hover .btn-arrow-circle {
+  transform: translateX(4px) scale(1.06);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Shimmer Highlight on Button */
+.contact-3d-card__btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.75s ease;
+}
+
+.contact-3d-card__btn:hover::after {
+  left: 150%;
+}
+
+/* 6. Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .contact-3d-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-3d-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 1.75rem;
+  }
+
+  .contact-3d-card {
+    padding: 1.6rem 1.4rem 1.85rem;
+    border-radius: 28px;
+  }
+
+  .contact-3d-card__visual {
+    height: 195px;
+  }
+
+  .contact-3d-card__title {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .contact-3d-card {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .contact-3d-card__title {
+    font-size: 1.5rem;
+  }
+
+  .info-box__val {
+    font-size: 0.82rem;
+  }
+
+  .contact-3d-card__btn {
+    font-size: 0.88rem;
+    padding-left: 1rem;
+  }
+}
+
+

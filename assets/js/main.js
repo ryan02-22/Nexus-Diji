@@ -29,6 +29,7 @@ function bootstrapApp() {
 
   // Initialize chatbot functionality
   try { initChatbot(); } catch (e) { console.warn('initChatbot error:', e); }
+  try { initContactCards(); } catch (e) { console.warn('initContactCards error:', e); }
 
   console.log('Nexus Diji initialized');
 }
@@ -172,5 +173,65 @@ function initChatbot() {
       helpPopup.style.display === 'flex' ? closeHelp() : openHelp();
     });
     helpCloseBtn.addEventListener('click', closeHelp);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// 3D CONTACT CARDS INTERACTION (Copy & Tilt)
+// ══════════════════════════════════════════════════════════════
+function initContactCards() {
+  const cards = document.querySelectorAll('.contact-3d-card');
+  if (!cards.length) return;
+
+  // 1. Interactive Copy Button
+  cards.forEach(card => {
+    const infoBox = card.querySelector('.contact-3d-card__info-box');
+    const copyBtn = card.querySelector('.info-box__copy-btn');
+    if (!infoBox) return;
+
+    const copyText = infoBox.getAttribute('data-copy');
+    if (!copyText) return;
+
+    function handleCopy(e) {
+      if (e) e.stopPropagation();
+      navigator.clipboard.writeText(copyText).then(() => {
+        if (copyBtn) {
+          copyBtn.classList.add('copied');
+          const tooltip = copyBtn.querySelector('.copy-tooltip');
+          if (tooltip) tooltip.textContent = 'Tersalin!';
+          setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            if (tooltip) tooltip.textContent = 'Salin';
+          }, 2000);
+        }
+      }).catch(err => {
+        console.warn('Clipboard copy failed:', err);
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', handleCopy);
+    }
+  });
+
+  // 2. Subtle 3D Mouse Tilt on Desktop
+  if (window.matchMedia('(min-width: 992px)').matches) {
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
   }
 }
