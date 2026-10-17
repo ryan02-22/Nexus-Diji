@@ -19,12 +19,12 @@
 
   <link rel="stylesheet" href="../assets/css/variables.css">
   <link rel="stylesheet" href="../assets/css/global.css">
-  <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/navbar.css?v=logo-crisp-20261017c">
   <link rel="stylesheet" href="../assets/css/mega-menu.css">
   <link rel="stylesheet" href="../assets/css/pages.css">
   <link rel="stylesheet" href="../assets/css/about.css">
   <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/css/site-polish.css?v=3d-arc-20261017">
+  <link rel="stylesheet" href="../assets/css/site-polish.css?v=logo-crisp-20261017c">
 </head>
 
 <body class="page-portfolio">
@@ -46,7 +46,7 @@
 
     <nav id="navbar">
       <a href="../index.html" class="logo" aria-label="Nexus Diji Beranda">
-        <img src="../assets/images/logo%20okeh.png" alt="Nexus Diji Logo" class="logo-img">
+        <img src="../assets/images/logo%20okeh.png?v=20261017b" alt="Nexus Diji Logo" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="portfolio.html" class="active">Portfolio</a></li>
@@ -146,7 +146,7 @@
             </svg>
           </button>
           <a href="../index.html" aria-label="Nexus Diji Beranda" class="nav-mobile-logo-link">
-            <img src="../assets/images/logo%20okeh.png" alt="Nexus Diji Logo" class="nav-mobile-logo">
+            <img src="../assets/images/logo%20okeh.png?v=20261017b" alt="Nexus Diji Logo" class="nav-mobile-logo">
           </a>
         </div>
         <button class="close-menu-btn" id="closeMenuBtn" aria-label="Tutup Menu">
@@ -321,57 +321,96 @@
         </div>
 
         <div class="services-grid reveal">
+          <!-- Featured 1: Faryta Studio VIP Showcase -->
           <article class="service-card service-card--faryta">
-            <div class="service-card__icon service-card__icon--faryta">
-              <img src="../assets/images/LOGO%20FARYTA%20STUDIO.png" alt="Faryta Studio Logo" class="faryta-portfolio-icon">
-            </div>
-            <h3 class="service-card__title">Faryta Studio</h3>
-            <p class="service-card__desc">
-              Website portfolio profesional untuk bisnis photography dengan fokus pada layanan wedding, portrait, dan event documentation. Dilengkapi dengan galeri interaktif dan sistem booking.
-            </p>
-            <div class="service-card__tags" style="margin: 0.75rem 0 1.25rem;">
-              <span class="service-tag" style="display:inline-block;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.35);color:#f5d678;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Portfolio</span>
-              <span class="service-tag" style="display:inline-block;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.35);color:#f5d678;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Photography</span>
-            </div>
-            <div class="service-card__actions" style="margin-top:auto; padding-top:0.5rem;">
-              <a href="https://faryta-studio.vercel.app" class="service-card__link faryta-btn-link" target="_blank" rel="noopener">
-                Kunjungi Situs
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
+            <div class="service-card__thumb service-card__thumb--faryta">
+              <span class="service-card__badge service-card__badge--gold">
+                <span class="badge-dot badge-dot--gold"></span>
+                VIP • Photography
+              </span>
+              <div class="faryta-thumb-media">
+                <img src="../assets/images/LOGO%20FARYTA%20STUDIO.png" alt="Faryta Studio Logo" class="faryta-portfolio-icon" loading="lazy">
+              </div>
+              <div class="service-card__action-indicator service-card__action-indicator--gold" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
                 </svg>
-              </a>
+              </div>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Faryta Studio</h3>
+              <p class="service-card__desc">
+                Website portfolio profesional untuk bisnis photography dengan fokus pada layanan wedding, portrait, dan event documentation. Dilengkapi dengan galeri interaktif dan sistem booking.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag service-tag--gold">Portfolio</span>
+                <span class="service-tag service-tag--gold">Photography</span>
+                <span class="service-tag service-tag--gold">VIP Client</span>
+              </div>
+              <div class="service-card__actions" style="margin-top: 1rem;">
+                <a href="https://faryta-studio.vercel.app" class="faryta-btn-link" target="_blank" rel="noopener">
+                  <span>Kunjungi Situs</span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
             </div>
           </article>
 
+          <!-- Featured 2: Calvo Furniture -->
           <article class="service-card">
             <div class="service-card__thumb">
-              <span class="service-card__badge">E-Commerce & Craft</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                E-Commerce & Craft
+              </span>
               <img src="../assets/images/portfolio/portfolio-furniture.jpg" alt="Calvo Furniture - Custom Woodcraft" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Calvo Furniture</h3>
-            <p class="service-card__desc">
-              Website e-commerce artisan furniture kayu dengan 3D product view, sistem katalog interaktif, dan payment gateway otomatis.
-            </p>
-            <div class="service-card__tags" style="margin: 0.75rem 0 1.25rem;">
-              <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">E-Commerce</span>
-              <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Craft</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Calvo Furniture</h3>
+              <p class="service-card__desc">
+                Website e-commerce artisan furniture kayu dengan 3D product view, sistem katalog interaktif, dan payment gateway otomatis.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">E-Commerce</span>
+                <span class="service-tag">Woodcraft</span>
+                <span class="service-tag">3D Catalog</span>
+              </div>
             </div>
           </article>
 
+          <!-- Featured 3: Modern Living Architecture -->
           <article class="service-card">
             <div class="service-card__thumb">
-              <span class="service-card__badge">Company Profile</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                Company Profile
+              </span>
               <img src="../assets/images/portfolio/portfolio-interior.jpg" alt="Modern Living Interior" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Modern Living Architecture</h3>
-            <p class="service-card__desc">
-              Website portfolio arsitektur dan studio interior dengan galeri resolusi tinggi, animasi modern, dan sistem konsultasi terintegrasi.
-            </p>
-            <div class="service-card__tags" style="margin: 0.75rem 0 1.25rem;">
-              <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Company Profile</span>
-              <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Architecture</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Modern Living Architecture</h3>
+              <p class="service-card__desc">
+                Website portfolio arsitektur dan studio interior dengan galeri resolusi tinggi, animasi modern, dan sistem konsultasi terintegrasi.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Company Profile</span>
+                <span class="service-tag">Architecture</span>
+                <span class="service-tag">Interactive</span>
+              </div>
             </div>
           </article>
         </div>
@@ -390,76 +429,166 @@
         </div>
 
         <div class="services-grid">
+          <!-- Project 1: Aeterna Fashion Boutique -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">Toko Online</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                Toko Online
+              </span>
               <img src="../assets/images/portfolio/portfolio-fashion.jpg" alt="Aeterna Fashion Boutique" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Aeterna Fashion Boutique</h3>
-            <p class="service-card__desc">
-              Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">E-Commerce</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Aeterna Fashion Boutique</h3>
+              <p class="service-card__desc">
+                Website e-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin dinamis.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">E-Commerce</span>
+                <span class="service-tag">Fashion</span>
+                <span class="service-tag">Payment Gateway</span>
+              </div>
+            </div>
           </article>
 
+          <!-- Project 2: Paw & Petals Boutique -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">Pet Boutique</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                Pet Boutique
+              </span>
               <img src="../assets/images/portfolio/portfolio-petcare.jpg" alt="Paw & Petals Boutique" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Paw & Petals Boutique</h3>
-            <p class="service-card__desc">
-              Mobile app dan web untuk booking grooming hewan dengan fitur tracking dan notifikasi real-time.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Mobile App</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Paw & Petals Boutique</h3>
+              <p class="service-card__desc">
+                Mobile app dan web untuk booking grooming hewan dengan fitur tracking dan notifikasi WhatsApp real-time.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Mobile App</span>
+                <span class="service-tag">Pet Care</span>
+                <span class="service-tag">Real-time Booking</span>
+              </div>
+            </div>
           </article>
 
+          <!-- Project 3: Aether Technologies -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">Enterprise</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                Enterprise
+              </span>
               <img src="../assets/images/portfolio/portfolio-corporate.jpg" alt="Aether Technologies" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Aether Technologies</h3>
-            <p class="service-card__desc">
-              Portal korporat skala besar terintegrasi SSO, sistem analitik data karyawan, dan dashboard cloud.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Enterprise</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Aether Technologies</h3>
+              <p class="service-card__desc">
+                Portal korporat skala besar terintegrasi SSO, sistem analitik data karyawan, dan dashboard cloud performa tinggi.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Enterprise</span>
+                <span class="service-tag">Cloud Portal</span>
+                <span class="service-tag">SSO Integration</span>
+              </div>
+            </div>
           </article>
 
+          <!-- Project 4: Landing Page SaaS -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">SaaS & Tech</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                SaaS & Tech
+              </span>
               <img src="../assets/images/portfolio/portfolio-saas.jpg" alt="Landing Page SaaS - Tech Interface" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Landing Page SaaS</h3>
-            <p class="service-card__desc">
-              Landing page high-converting untuk produk SaaS dengan A/B testing dan analytics.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Landing Page</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Landing Page SaaS</h3>
+              <p class="service-card__desc">
+                Landing page high-converting untuk produk SaaS dengan visual interaktif, A/B testing, dan integrasi analitik modern.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Landing Page</span>
+                <span class="service-tag">SaaS UI/UX</span>
+                <span class="service-tag">High Conversion</span>
+              </div>
+            </div>
           </article>
 
+          <!-- Project 5: Sistem Booking Salon -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">Salon & Spa</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                Salon & Spa
+              </span>
               <img src="../assets/images/portfolio/portfolio-salon.jpg" alt="Sistem Booking Salon - Hair & Beauty Studio" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Sistem Booking Salon</h3>
-            <p class="service-card__desc">
-              Sistem booking online dengan kalender interaktif, notifikasi WhatsApp, dan manajemen stok.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Web App</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Sistem Booking Salon</h3>
+              <p class="service-card__desc">
+                Sistem booking online dengan kalender interaktif, jadwal terapis otomatis, dan manajemen inventori salon.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Web App</span>
+                <span class="service-tag">Booking Engine</span>
+                <span class="service-tag">Calendar Sync</span>
+              </div>
+            </div>
           </article>
 
+          <!-- Project 6: Dashboard POS Restaurant -->
           <article class="service-card reveal">
             <div class="service-card__thumb">
-              <span class="service-card__badge">F&B POS</span>
+              <span class="service-card__badge">
+                <span class="badge-dot"></span>
+                F&B POS
+              </span>
               <img src="../assets/images/portfolio/portfolio-pos.jpg" alt="Dashboard POS Restaurant - Cashier & Order System" loading="lazy">
+              <div class="service-card__action-indicator" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
             </div>
-            <h3 class="service-card__title">Dashboard POS Restaurant</h3>
-            <p class="service-card__desc">
-              Sistem kasir digital untuk restaurant dengan fitur split bill, floor management, dan laporan harian.
-            </p>
-            <span class="service-tag" style="display:inline-block;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);color:var(--accent);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:var(--radius-full);font-weight:700;margin-right:0.4rem;">Dashboard</span>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Dashboard POS Restaurant</h3>
+              <p class="service-card__desc">
+                Sistem kasir digital untuk restaurant dengan fitur split bill, floor table management, dan laporan keuangan harian.
+              </p>
+              <div class="service-card__tags">
+                <span class="service-tag">Dashboard</span>
+                <span class="service-tag">POS System</span>
+                <span class="service-tag">Real-time Orders</span>
+              </div>
+            </div>
           </article>
         </div>
       </div>
