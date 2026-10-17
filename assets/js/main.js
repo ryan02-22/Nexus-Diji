@@ -3,7 +3,7 @@
  * Imports and initializes all modules
  */
 
-import { initNavbar, initLanguageSwitch } from './navbar.js?v=mascot-20261017b';
+import { initNavbar, initLanguageSwitch } from './navbar.js?v=auto-sync-20261018c';
 import { initMegaMenu } from './mega-menu.js';
 import { initAnimations } from './animations.js';
 import { initCursor, initToolsOverlay } from './utilities.js';

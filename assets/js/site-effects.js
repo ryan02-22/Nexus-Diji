@@ -1,12 +1,13 @@
 /* Nexus Diji visual interactions: section atmosphere, reveal, parallax, mascot, and magnetic buttons. */
-import { initLanguageSwitch } from "./navbar.js";
+import { initLanguageSwitch } from "./navbar.js?v=auto-sync-20261018c";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 const mascotUrl = new URL("../images/robot-nd.webp", import.meta.url).href;
 
 function addAtmosphere() {
   if (document.querySelector(".scroll-atmosphere")) return;
-  ["cyan", "violet", "blue"].forEach((tone) => {
+  const tones = ["cyan-aurora", "cyan", "dark-prism", "violet", "blue", "aurora", "dark-horizon"];
+  tones.forEach((tone) => {
     const layer = document.createElement("div");
     layer.className = "scroll-atmosphere scroll-atmosphere--" + tone;
     layer.setAttribute("aria-hidden", "true");
@@ -22,11 +23,13 @@ function getThemeSections() {
     ".about-hero",
     ".story-section",
     ".services-section",
+    ".portfolio-section-3d",
     ".workflow-section",
     ".values-section",
     ".trust-section",
     ".team-section",
-    ".about-cta"
+    ".about-cta",
+    "footer"
   ];
   return [...new Set(document.querySelectorAll(selectors.join(",")))];
 }
@@ -35,18 +38,40 @@ function initSectionThemes() {
   const sections = getThemeSections();
   if (!sections.length) return;
 
-  const tones = ["cyan", "violet", "blue", "violet"];
+  const toneMap = {
+    hero: "cyan-aurora",
+    services: "cyan",
+    portfolio: "dark-prism",
+    pricing: "violet",
+    why: "blue",
+    process: "cyan",
+    testimonials: "violet",
+    faq: "blue",
+    blog: "cyan",
+    contact: "aurora"
+  };
+
   sections.forEach((section, index) => {
-    section.dataset.scrollTone = tones[index % tones.length];
+    if (section.dataset.scrollTone) return;
+    const id = section.id || (section.classList.contains("hero") ? "hero" : "");
+    if (id && toneMap[id]) {
+      section.dataset.scrollTone = toneMap[id];
+    } else if (section.tagName === "FOOTER") {
+      section.dataset.scrollTone = "dark-horizon";
+    } else {
+      const fallbackTones = ["cyan", "violet", "blue", "aurora"];
+      section.dataset.scrollTone = fallbackTones[index % fallbackTones.length];
+    }
   });
-  document.body.dataset.scrollTheme = sections[0].dataset.scrollTone;
+
+  document.body.dataset.scrollTheme = sections[0].dataset.scrollTone || "cyan-aurora";
 
   if (!("IntersectionObserver" in window)) return;
 
   const observer = new IntersectionObserver((entries) => {
     if (!entries.some((entry) => entry.isIntersecting)) return;
 
-    const midpoint = window.innerHeight * 0.5;
+    const midpoint = window.innerHeight * 0.48;
     const active = sections
       .map((section) => {
         const rect = section.getBoundingClientRect();
@@ -54,16 +79,51 @@ function initSectionThemes() {
       })
       .filter(({ section }) => {
         const rect = section.getBoundingClientRect();
-        return rect.top < midpoint && rect.bottom > midpoint;
+        return rect.top < midpoint + 80 && rect.bottom > midpoint - 80;
       })
       .sort((a, b) => a.distance - b.distance)[0]?.section;
 
     if (!active) return;
     sections.forEach((section) => section.classList.toggle("scroll-theme-active", section === active));
     document.body.dataset.scrollTheme = active.dataset.scrollTone;
-  }, { rootMargin: "-8% 0px -8% 0px", threshold: 0 });
+  }, { rootMargin: "-8% 0px -8% 0px", threshold: [0, 0.2, 0.5] });
 
   sections.forEach((section) => observer.observe(section));
+}
+
+function initScrollProgressBeam() {
+  let beam = document.querySelector(".scroll-progress-beam");
+  if (!beam) {
+    beam = document.createElement("div");
+    beam.className = "scroll-progress-beam";
+    beam.setAttribute("aria-hidden", "true");
+    document.body.prepend(beam);
+  }
+
+  let ticking = false;
+  const updateBeam = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+    beam.style.setProperty("--scroll-percent", progress.toFixed(1) + "%");
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateBeam);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateBeam);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateBeam();
 }
 
 function initScrollReveals() {
@@ -188,6 +248,7 @@ function initMascot() {
 function initSiteEffects() {
   initLanguageSwitch();
   initHistoryBackButtons();
+  initScrollProgressBeam();
   addAtmosphere();
   initSectionThemes();
   initScrollReveals();
