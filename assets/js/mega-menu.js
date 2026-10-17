@@ -4,7 +4,7 @@
  * Stable and responsive mega menu with proper state management
  */
 
-export function initMegaMenu() {
+function initMegaMenu() {
   const dropdowns = document.querySelectorAll('.nav-dropdown');
   const desktopMedia = window.matchMedia('(min-width: 1024px)');
 
@@ -156,4 +156,3 @@ export function initMegaMenu() {
   // to avoid duplicate event listeners. The accordion logic is centralized there.
 }
 
-export default initMegaMenu;

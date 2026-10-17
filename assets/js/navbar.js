@@ -4,15 +4,7 @@
  * Production-grade mobile navigation interactions
  */
 
-import {
-  TRANSLATIONS,
-  ATTRIBUTE_TRANSLATIONS,
-  TITLE_TRANSLATIONS,
-  REVERSE_TRANSLATIONS,
-  REVERSE_TITLES
-} from './translations.js';
-
-export function initNavbar() {
+function initNavbar() {
   initLanguageSwitch();
 
   const navbar = document.getElementById('navbar');
@@ -289,11 +281,10 @@ export function initNavbar() {
   });
 }
 
-export default initNavbar;
 
 let currentLanguage = 'id';
 
-export function applyLanguage(targetLang) {
+function applyLanguage(targetLang) {
   const isEnglish = targetLang === 'en';
   currentLanguage = isEnglish ? 'en' : 'id';
   document.documentElement.lang = currentLanguage;
@@ -401,7 +392,7 @@ export function applyLanguage(targetLang) {
   }
 }
 
-export function initLanguageSwitch() {
+function initLanguageSwitch() {
   const buttons = [...document.querySelectorAll('.nav-language__option[data-lang]')];
   if (!buttons.length) return;
 

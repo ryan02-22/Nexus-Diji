@@ -1,8 +1,8 @@
 /* Nexus Diji visual interactions: section atmosphere, reveal, parallax, mascot, and magnetic buttons. */
-import { initLanguageSwitch } from "./navbar.js";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-const mascotUrl = new URL("../images/robot-nd.webp", import.meta.url).href;
+const mascotScriptEl = document.currentScript || document.querySelector('script[src*="site-effects.js"]');
+const mascotUrl = mascotScriptEl ? new URL("../images/robot-nd.webp", mascotScriptEl.src).href : "../images/robot-nd.webp";
 
 function addAtmosphere() {
   if (document.querySelector(".scroll-atmosphere")) return;

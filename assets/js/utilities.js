@@ -6,7 +6,7 @@
 // ══════════════════════════════════════════════════════════════
 // CUSTOM CURSOR (Desktop only)
 // ══════════════════════════════════════════════════════════════
-export function initCursor() {
+function initCursor() {
   const cursor = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
 
@@ -66,7 +66,7 @@ export function initCursor() {
 // ══════════════════════════════════════════════════════════════
 // SCROLL UTILITIES
 // ══════════════════════════════════════════════════════════════
-export function scrollToElement(selector, offset = 120) {
+function scrollToElement(selector, offset = 120) {
   const element = document.querySelector(selector);
   if (!element) return;
 
@@ -79,7 +79,7 @@ export function scrollToElement(selector, offset = 120) {
   });
 }
 
-export function isInViewport(element, offset = 0) {
+function isInViewport(element, offset = 0) {
   if (!element) return false;
   const rect = element.getBoundingClientRect();
   return (
@@ -88,7 +88,7 @@ export function isInViewport(element, offset = 0) {
   );
 }
 
-export function isNearFooter(threshold = 100) {
+function isNearFooter(threshold = 100) {
   const footer = document.querySelector('footer');
   if (!footer) return false;
   const footerTop = footer.getBoundingClientRect().top;
@@ -98,7 +98,7 @@ export function isNearFooter(threshold = 100) {
 // ══════════════════════════════════════════════════════════════
 // DEBOUNCE & THROTTLE
 // ══════════════════════════════════════════════════════════════
-export function debounce(func, wait = 250) {
+function debounce(func, wait = 250) {
   let timeout;
   return function executedFunction(...args) {
     const later = () => {
@@ -110,7 +110,7 @@ export function debounce(func, wait = 250) {
   };
 }
 
-export function throttle(func, limit = 100) {
+function throttle(func, limit = 100) {
   let inThrottle;
   return function executedFunction(...args) {
     if (!inThrottle) {
@@ -124,15 +124,15 @@ export function throttle(func, limit = 100) {
 // ══════════════════════════════════════════════════════════════
 // DOM UTILITIES
 // ══════════════════════════════════════════════════════════════
-export function $(selector, parent = document) {
+function $(selector, parent = document) {
   return parent.querySelector(selector);
 }
 
-export function $$(selector, parent = document) {
+function $$(selector, parent = document) {
   return Array.from(parent.querySelectorAll(selector));
 }
 
-export function createElement(tag, attrs = {}, children = []) {
+function createElement(tag, attrs = {}, children = []) {
   const el = document.createElement(tag);
 
   Object.entries(attrs).forEach(([key, value]) => {
@@ -163,7 +163,7 @@ export function createElement(tag, attrs = {}, children = []) {
 // ══════════════════════════════════════════════════════════════
 // STRING UTILITIES
 // ══════════════════════════════════════════════════════════════
-export function slugify(text) {
+function slugify(text) {
   return text
     .toString()
     .toLowerCase()
@@ -173,7 +173,7 @@ export function slugify(text) {
     .replace(/\-\-+/g, '-');
 }
 
-export function truncate(str, length, suffix = '...') {
+function truncate(str, length, suffix = '...') {
   if (str.length <= length) return str;
   return str.slice(0, length - suffix.length) + suffix;
 }
@@ -181,22 +181,22 @@ export function truncate(str, length, suffix = '...') {
 // ══════════════════════════════════════════════════════════════
 // NUMBER UTILITIES
 // ══════════════════════════════════════════════════════════════
-export function formatNumber(num) {
+function formatNumber(num) {
   return new Intl.NumberFormat('id-ID').format(num);
 }
 
-export function randomInt(min, max) {
+function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function lerp(start, end, t) {
+function lerp(start, end, t) {
   return start + (end - start) * t;
 }
 
 // ══════════════════════════════════════════════════════════════
 // TOOLS OVERLAY (FAB)
 // ══════════════════════════════════════════════════════════════
-export function initToolsOverlay() {
+function initToolsOverlay() {
   const toolsOverlay = document.getElementById('toolsOverlay');
   const backToTop = document.getElementById('backToTop');
   const fabTrigger = document.getElementById('fabTrigger');
@@ -297,20 +297,3 @@ export function initToolsOverlay() {
   }
 }
 
-export default {
-  initCursor,
-  scrollToElement,
-  isInViewport,
-  isNearFooter,
-  debounce,
-  throttle,
-  $,
-  $$,
-  createElement,
-  slugify,
-  truncate,
-  formatNumber,
-  randomInt,
-  lerp,
-  initToolsOverlay
-};

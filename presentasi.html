@@ -1480,9 +1480,9 @@
       <div class="slide-body">
         <div class="split-layout">
           <div>
-            <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">⚙️ JavaScript (ES6 Modules)</h4>
+            <h4 style="font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">⚙️ JavaScript (ES6)</h4>
             <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
-              Script utama menggunakan <code style="background:rgba(0,229,255,.1);padding:2px 6px;border-radius:4px;color:var(--accent);font-family:var(--font-mono);font-size:.8rem;">type="module"</code> untuk clean architecture. Fitur-fitur yang diimplementasikan:
+              Setiap fitur dipisah ke file script tersendiri (navbar, animasi, mega menu, efek visual) dan dimuat berurutan agar situs tetap berjalan meski dibuka langsung tanpa server. Fitur-fitur yang diimplementasikan:
             </p>
             <div class="cards-grid cols-1" style="gap:10px;">
               <div class="info-card" style="padding:14px 18px;display:flex;gap:12px;align-items:center;">
@@ -2300,6 +2300,8 @@
   updateUI();
 </script>
 
-    <script type="module" src="./assets/js/site-effects.js"></script>
+    <script defer src="./assets/js/translations.js?v=classic-20261017"></script>
+    <script defer src="./assets/js/navbar.js?v=classic-20261017"></script>
+    <script defer src="./assets/js/site-effects.js?v=classic-20261017"></script>
 </body>
 </html>

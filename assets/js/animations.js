@@ -6,7 +6,7 @@
 // ══════════════════════════════════════════════════════════════
 // REVEAL ANIMATIONS (Intersection Observer)
 // ══════════════════════════════════════════════════════════════
-export function initRevealAnimations() {
+function initRevealAnimations() {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -23,7 +23,7 @@ export function initRevealAnimations() {
 // ══════════════════════════════════════════════════════════════
 // TYPING EFFECT
 // ══════════════════════════════════════════════════════════════
-export function initTypingEffect() {
+function initTypingEffect() {
   const typingLine1 = document.getElementById('typingLine1');
   const typingLine2 = document.getElementById('typingLine2');
   const typingLine3 = document.getElementById('typingLine3');
@@ -97,7 +97,7 @@ function animateCounter(el, target, suffix, duration = 1600) {
   requestAnimationFrame(step);
 }
 
-export function initCounterAnimations() {
+function initCounterAnimations() {
   const statEls = document.querySelectorAll('.stat-num[data-target]');
   const heroSection = document.querySelector('.hero');
 
@@ -140,7 +140,7 @@ export function initCounterAnimations() {
 // ══════════════════════════════════════════════════════════════
 // FAQ ACCORDION
 // ══════════════════════════════════════════════════════════════
-export function initFAQ() {
+function initFAQ() {
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -162,11 +162,10 @@ export function initFAQ() {
 }
 
 // Initialize all animations
-export function initAnimations() {
+function initAnimations() {
   initRevealAnimations();
   initTypingEffect();
   initCounterAnimations();
   initFAQ();
 }
 
-export default initAnimations;

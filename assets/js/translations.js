@@ -3,7 +3,7 @@
  * Translates page text nodes, titles, meta tags, and form placeholders.
  */
 
-export const TRANSLATIONS = {
+const TRANSLATIONS = {
   // Navigation & Global Header
   'Limited Offer': 'Limited Offer',
   'Wujudkan ide digitalmu dengan diskon 20% khusus bulan ini!': 'Bring your digital ideas to life with 20% off this month!',
@@ -918,7 +918,7 @@ export const TRANSLATIONS = {
 };
 
 // Form attribute translations (placeholders, aria-labels)
-export const ATTRIBUTE_TRANSLATIONS = {
+const ATTRIBUTE_TRANSLATIONS = {
   placeholders: {
     'Nama Lengkap': 'Full Name',
     'Nama Anda': 'Your Name',
@@ -940,7 +940,7 @@ export const ATTRIBUTE_TRANSLATIONS = {
 };
 
 // Document title translations
-export const TITLE_TRANSLATIONS = {
+const TITLE_TRANSLATIONS = {
   'Nexus Diji Jasa Pembuatan Website & Aplikasi Custom | Servis PC Laptop': 'Nexus Diji Website & Custom App Development | PC and Laptop Repair',
   'Blog - Nexus Diji | Tips & Edukasi Teknologi': 'Blog - Nexus Diji | Technology Tips & Insights',
   'Harga - Nexus Diji | Paket Layanan Terjangkau': 'Pricing - Nexus Diji | Affordable Service Plans',
@@ -957,14 +957,14 @@ export const TITLE_TRANSLATIONS = {
 };
 
 // Reverse dictionary for EN -> ID restoration
-export const REVERSE_TRANSLATIONS = Object.entries(TRANSLATIONS).reduce((acc, [idText, enText]) => {
+const REVERSE_TRANSLATIONS = Object.entries(TRANSLATIONS).reduce((acc, [idText, enText]) => {
   if (idText !== enText) {
     acc[enText] = idText;
   }
   return acc;
 }, {});
 
-export const REVERSE_TITLES = Object.entries(TITLE_TRANSLATIONS).reduce((acc, [idTitle, enTitle]) => {
+const REVERSE_TITLES = Object.entries(TITLE_TRANSLATIONS).reduce((acc, [idTitle, enTitle]) => {
   acc[enTitle] = idTitle;
   return acc;
 }, {});

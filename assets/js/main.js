@@ -3,11 +3,6 @@
  * Imports and initializes all modules
  */
 
-import { initNavbar, initLanguageSwitch } from './navbar.js';
-import { initMegaMenu } from './mega-menu.js';
-import { initAnimations } from './animations.js';
-import { initCursor, initToolsOverlay } from './utilities.js';
-import './site-effects.js';
 
 function bootstrapApp() {
   'use strict';
