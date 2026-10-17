@@ -25,6 +25,7 @@ function bootstrapApp() {
   try { initMegaMenu(); } catch (e) { console.warn('initMegaMenu error:', e); }
   try { initAnimations(); } catch (e) { console.warn('initAnimations error:', e); }
   try { initToolsOverlay(); } catch (e) { console.warn('initToolsOverlay error:', e); }
+  try { if (typeof window.initPortfolioShowcase === 'function') window.initPortfolioShowcase(); } catch (e) { console.warn('initPortfolioShowcase error:', e); }
 
   // Initialize chatbot functionality
   try { initChatbot(); } catch (e) { console.warn('initChatbot error:', e); }
