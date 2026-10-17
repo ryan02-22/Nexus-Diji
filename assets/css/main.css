@@ -1332,10 +1332,12 @@ section {
 /* FOOTER */
 footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 4rem;
+  padding: 2.5rem clamp(1.25rem, 5vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 footer p {
@@ -1345,7 +1347,8 @@ footer p {
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .footer-links a {
@@ -2309,10 +2312,12 @@ a.portfolio-card.faryta-card-link:hover {
 /* -- FOOTER -- */
 footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 4rem;
+  padding: 2.5rem clamp(1.25rem, 5vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 footer p {
@@ -2322,7 +2327,8 @@ footer p {
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .footer-links a {

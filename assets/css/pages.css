@@ -1095,7 +1095,8 @@ footer p {
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .footer-links a {
