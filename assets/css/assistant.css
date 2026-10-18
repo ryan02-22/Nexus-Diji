@@ -1,0 +1,452 @@
+/* ═══════════════════════════════════════════════════════════════
+   NEXUS DIJI - VIRTUAL ASSISTANT (Robot ND)
+   State-driven stage for the hero mascot, chat additions, voice control.
+   Reasons for each block are written inline (antislop R-31).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. ROBOT ND STAGE ─────────────────────────────────────────
+   Wrapper so the mascot, its halo (state light), speech bubble
+   (entry affordance for prospective customers) and the assistant
+   CTA can be positioned relative to each other. */
+.hero-visual .assistant-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  z-index: 4;
+  --assist-tilt-x: 0deg;
+  --assist-tilt-y: 0deg;
+}
+
+/* The robot itself is the primary tap target: clicking or tapping it opens
+   the chat, so it is a real button, not decoration. */
+.hero-visual .assistant-robot {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.hero-visual .assistant-robot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: var(--radius-2xl);
+}
+
+/* The source webp ships with an opaque white backdrop. Multiply makes
+   white read as the page background, so the character floats free of its
+   photo box instead of sitting in a glowing rectangle. */
+.hero-visual .assistant-stage .hero-mascot {
+  filter: none;
+  mix-blend-mode: multiply;
+  border-radius: 0;
+  transform: perspective(1000px) rotateX(var(--assist-tilt-x)) rotateY(var(--assist-tilt-y));
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+
+/* Halo = assistant state light. Color and pulse communicate idle,
+   listening, thinking and speaking, so users can tell what the robot
+   is doing without reading the chat. */
+.assistant-halo {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: min(420px, 92%);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 110, 153, 0.22) 0%, rgba(124, 58, 237, 0.14) 55%, transparent 72%);
+  pointer-events: none;
+  transition: background 420ms ease, scale 420ms ease;
+}
+
+.assistant-stage[data-state="listening"] .assistant-halo {
+  background: radial-gradient(circle, rgba(0, 110, 153, 0.34) 0%, rgba(103, 232, 249, 0.2) 58%, transparent 74%);
+  scale: 1.06;
+  animation: assistantPulse 2.4s ease-in-out infinite;
+}
+
+.assistant-stage[data-state="thinking"] .assistant-halo {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0.16) 58%, transparent 74%);
+  scale: 1.03;
+  animation: assistantPulse 1.1s ease-in-out infinite;
+}
+
+.assistant-stage[data-state="speaking"] .assistant-halo {
+  background: radial-gradient(circle, rgba(0, 110, 153, 0.3) 0%, rgba(124, 58, 237, 0.22) 58%, transparent 74%);
+  scale: 1.08;
+  animation: assistantPulse 900ms ease-in-out infinite;
+}
+
+@keyframes assistantPulse {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+/* ── 2. SPEECH BUBBLE (entry affordance + state text) ────────── */
+.assistant-bubble {
+  position: absolute;
+  bottom: calc(100% + 0.15rem);
+  left: 50%;
+  translate: -50% 0;
+  max-width: min(300px, 82%);
+  width: max-content;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid rgba(0, 110, 153, 0.28);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--text);
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: 0 10px 26px rgba(12, 17, 29, 0.1);
+  cursor: pointer;
+  animation: assistantBubbleFloat 6s ease-in-out infinite;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+}
+
+.assistant-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 0;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  rotate: 45deg;
+  background: rgba(255, 255, 255, 0.94);
+  border-right: 1px solid rgba(0, 110, 153, 0.28);
+  border-bottom: 1px solid rgba(0, 110, 153, 0.28);
+}
+
+.assistant-bubble:hover {
+  border-color: var(--accent);
+  box-shadow: 0 14px 30px rgba(0, 110, 153, 0.18);
+}
+
+.assistant-bubble.is-swapping {
+  opacity: 0;
+}
+
+@keyframes assistantBubbleFloat {
+  0%, 100% { translate: -50% 0; }
+  50% { translate: -50% -6px; }
+}
+
+/* ── 3. ASSISTANT CTA (opens the chat) ──────────────────────── */
+.assistant-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--grad);
+  color: #fff;
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 110, 153, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assistant-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 110, 153, 0.28);
+}
+
+.assistant-cta:focus-visible,
+.assistant-bubble:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.assistant-cta[aria-expanded="true"] {
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* ── 4. CHAT ADDITIONS ─────────────────────────────────────── */
+.chat-avatar {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #ffffff 0%, #e8f4fb 100%);
+}
+
+.chat-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 8%;
+  mix-blend-mode: multiply;
+  transform: scale(1.28);
+  transform-origin: 50% 22%;
+}
+
+/* The avatar lip-syncs the assistant state: it brightens while the
+   robot listens, thinks or speaks, so the header mirrors the stage. */
+#chatPopup[data-state="listening"] .chat-avatar,
+#chatPopup[data-state="thinking"] .chat-avatar,
+#chatPopup[data-state="speaking"] .chat-avatar {
+  box-shadow: 0 0 0 2px rgba(103, 232, 249, 0.55);
+}
+
+#chatPopup[data-state="speaking"] .chat-avatar img {
+  animation: assistantAvatarTalk 0.6s ease-in-out infinite;
+}
+
+@keyframes assistantAvatarTalk {
+  0%, 100% { transform: scale(1.28) translateY(0); }
+  50% { transform: scale(1.28) translateY(-2px); }
+}
+
+/* Roomier message area: streamed answers need space before scrolling. */
+.chat-body {
+  max-height: min(46vh, 340px);
+  scroll-behavior: smooth;
+}
+
+/* Chips and send button meet the 44px tap target. */
+.chat-opt-btn {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chat-send-btn {
+  width: 44px;
+  height: 44px;
+}
+
+.chat-send-btn:focus-visible,
+.chat-voice-btn:focus-visible,
+#chatCloseBtn:focus-visible {
+  outline: 2px solid var(--accent-on-dark);
+  outline-offset: 2px;
+}
+
+/* The × was a bare glyph: give it the same 44px target as its neighbours. */
+#chatCloseBtn {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+#chatCloseBtn:hover {
+  color: #fff;
+}
+
+/* Voice toggle in the chat header */
+.chat-voice-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  color: var(--accent-on-dark);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.chat-voice-btn:hover {
+  border-color: var(--accent-on-dark);
+}
+
+.chat-voice-btn svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chat-voice-btn .voice-off-mark {
+  display: none;
+}
+
+.chat-voice-btn[aria-pressed="false"] {
+  color: #9aa3b2;
+}
+
+.chat-voice-btn[aria-pressed="false"] .voice-off-mark {
+  display: block;
+}
+
+.chat-voice-btn[aria-pressed="false"] .voice-wave-mark {
+  display: none;
+}
+
+/* Typing indicator (loading state of the chat) */
+.chat-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.7rem 0.9rem;
+  width: fit-content;
+}
+
+.chat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-on-dark);
+  opacity: 0.5;
+  animation: assistantTyping 1s ease-in-out infinite;
+}
+
+.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes assistantTyping {
+  0%, 100% { opacity: 0.35; translate: 0 0; }
+  50% { opacity: 1; translate: 0 -2px; }
+}
+
+/* The WhatsApp escalation button predates the widget refresh and sat at
+   42px; bring it up to the 44px tap target like the rest of the chat. */
+.chat-wa-btn {
+  min-height: 44px;
+}
+
+/* Links inside answers (real destinations, 44px tap target) */
+.chat-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.35rem 0 0.25rem;
+}
+
+.chat-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(103, 232, 249, 0.35);
+  border-radius: var(--radius-full);
+  color: var(--accent-on-dark);
+  background: rgba(103, 232, 249, 0.08);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.chat-link-btn:hover {
+  background: rgba(103, 232, 249, 0.18);
+  border-color: var(--accent-on-dark);
+}
+
+.chat-link-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Message meta line: makes clear who is talking in a log of bubbles. */
+.chat-bubble .chat-bubble__from {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+
+.chat-bubble.user-bubble .chat-bubble__from {
+  color: rgba(224, 248, 255, 0.75);
+}
+
+/* ── 5. RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .assistant-bubble {
+    max-width: min(260px, 78%);
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-visual .assistant-stage {
+    gap: 0.7rem;
+  }
+
+  .assistant-halo {
+    width: min(300px, 96%);
+    top: 0;
+  }
+
+  .assistant-bubble {
+    bottom: calc(100% - 0.1rem);
+    max-width: min(232px, 84vw);
+    padding: 0.55rem 0.8rem;
+    font-size: 0.74rem;
+  }
+
+  .assistant-cta {
+    font-size: 0.78rem;
+    padding: 0.55rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .assistant-bubble {
+    max-width: 86vw;
+  }
+
+  .chat-body {
+    max-height: min(38vh, 280px);
+  }
+}
+
+/* ── 6. REDUCED MOTION ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .assistant-bubble,
+  .assistant-halo,
+  #chatPopup[data-state="speaking"] .chat-avatar img,
+  .chat-typing span {
+    animation: none;
+  }
+
+  .hero-visual .assistant-stage .hero-mascot {
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .chat-body {
+    scroll-behavior: auto;
+  }
+}

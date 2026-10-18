@@ -21,3 +21,6 @@ __pycache__/
 # Environment
 .env
 .env.local
+
+# Local verification harness (CDP driver, probes, screenshots)
+scratch/

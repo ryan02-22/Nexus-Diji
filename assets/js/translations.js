@@ -516,6 +516,20 @@ const TRANSLATIONS = {
   'Pertanyaan yang sering diajukan': 'Frequently asked questions',
   'Nexus Assistant': 'Nexus Assistant',
   'Online • Respon instan': 'Online • Instant response',
+  'Hai! Aku Robot ND, asisten Nexus Diji. Tanya soal layanan, harga, lama pengerjaan, atau servis perangkat.': 'Hi! I am Robot ND, the Nexus Diji assistant. Ask about our services, pricing, timelines, or device repair.',
+  'Tanya Asisten': 'Ask the Assistant',
+  '🌐 Website & Aplikasi': '🌐 Website & Apps',
+  '💻 Servis Laptop & PC': '💻 Laptop & PC Repair',
+  '💰 Cek Harga & Paket': '💰 Check Pricing & Plans',
+  'Tutup chat': 'Close chat',
+  'Kirim': 'Send',
+  'Buka chat asisten Nexus Diji': 'Open the Nexus Diji assistant chat',
+  'Matikan suara asisten': 'Mute the assistant voice',
+  'Nyalakan suara asisten': 'Turn on the assistant voice',
+  'Asisten menyimak': 'The assistant is listening',
+  'Sedang menyiapkan jawaban': 'Preparing an answer',
+  'Sedang menjawab': 'Answering now',
+  'Percakapan dengan asisten Nexus Diji': 'Conversation with the Nexus Diji assistant',
   'Halo! 👋 Saya asisten digital': 'Hello! 👋 I am your digital assistant',
   'Buat Website / Aplikasi': 'Build Website / App',
   'Servis Laptop / PC': 'Laptop / PC Repair',
@@ -928,14 +942,22 @@ const ATTRIBUTE_TRANSLATIONS = {
     'Ceritakan proyek Anda...': 'Tell us about your project...',
     'Ceritakan kebutuhan atau ide proyek Anda...': 'Tell us about your project requirements or ideas...',
     'Tulis pesan Anda di sini...': 'Type your message here...',
-    'Cari artikel...': 'Search articles...'
+    'Cari artikel...': 'Search articles...',
+    'Ketik pesan...': 'Type a message...',
+    'Ketik pesan untuk asisten': 'Type a message for the assistant'
   },
   ariaLabels: {
     'Buka Menu': 'Open Menu',
     'Tutup Menu': 'Close Menu',
     'Kembali': 'Go Back',
     'Kembali ke halaman sebelumnya': 'Return to previous page',
-    'Pilih bahasa': 'Select language'
+    'Pilih bahasa': 'Select language',
+    'Buka chat asisten Nexus Diji': 'Open the Nexus Diji assistant chat',
+    'Matikan suara asisten': 'Mute the assistant voice',
+    'Nyalakan suara asisten': 'Turn on the assistant voice',
+    'Tutup chat': 'Close chat',
+    'Kirim': 'Send',
+    'Percakapan dengan asisten Nexus Diji': 'Conversation with the Nexus Diji assistant'
   }
 };
 

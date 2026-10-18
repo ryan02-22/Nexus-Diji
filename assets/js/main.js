@@ -96,50 +96,52 @@ function initChatbot() {
   // Close button
   chatCloseBtn.addEventListener('click', closeChat);
 
-  // Quick reply options
-  chatOptions.querySelectorAll('.chat-opt-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const label = btn.dataset.label;
-      const msg = btn.dataset.msg;
-      const bId = btn.dataset.id;
+  // Fallback path: only used when assistant.js did not load, so no handler runs twice.
+  if (typeof window.NexusAssistant === 'undefined') {
+    // Quick reply options
+    chatOptions.querySelectorAll('.chat-opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const label = btn.dataset.label || btn.textContent.trim();
+        const msg = btn.dataset.msg || label;
 
-      addBubble(label, true);
-      chatOptions.style.display = 'none';
+        addBubble(label, true);
+        chatOptions.style.display = 'none';
 
-      const botResponses = {
-        "website": "Tentu! Nexus Diji sudah berpengalaman membuat Landing Page, Company Profile, Toko Online, Web App hingga Aplikasi Custom. Ingin lanjut diskusi ke spesifikasi idemu via WhatsApp?",
-        "servis": "Tim teknisi kami yang handal siap membantu! Kami melayani Instalasi OS, Upgrade RAM/SSD, pembersihan virus, hingga Recovery Data. Silakan ceritakan keluhan perangkatmu lebih lanjut di WhatsApp ya.",
-        "harga": "Sebagai gambaran, harga pembuatan website kami mulai dari Rp500.000 saja, sedangkan servis PC/Laptop start dari Rp50.000. Untuk rincian lebih pas sesuai kebutuhanmu, yuk tanyakan ke admin kami!",
-        "konsultasi": "Tentu! Konsultasi di Nexus Diji 100% GRATIS tanpa dipungut biaya. Tim ahli kami siap menjawab pertanyaanmu mengenai solusi digital apa pun. Lanjut di WhatsApp sekarang yuk!"
-      };
+        const botResponses = {
+          "website": "Tentu! Nexus Diji sudah berpengalaman membuat Landing Page, Company Profile, Toko Online, Web App hingga Aplikasi Custom. Ingin lanjut diskusi ke spesifikasi idemu via WhatsApp?",
+          "servis": "Tim teknisi kami yang handal siap membantu! Kami melayani Instalasi OS, Upgrade RAM/SSD, pembersihan virus, hingga Recovery Data. Silakan ceritakan keluhan perangkatmu lebih lanjut di WhatsApp ya.",
+          "harga": "Sebagai gambaran, harga pembuatan website kami mulai dari Rp500.000 saja, sedangkan servis PC/Laptop start dari Rp50.000. Untuk rincian lebih pas sesuai kebutuhanmu, yuk tanyakan ke admin kami!",
+          "konsultasi": "Tentu! Konsultasi di Nexus Diji 100% GRATIS tanpa dipungut biaya. Tim ahli kami siap menjawab pertanyaanmu mengenai solusi digital apa pun. Lanjut di WhatsApp sekarang yuk!"
+        };
 
-      const replyText = bId && botResponses[bId] ? botResponses[bId] : `Siap! Saya bantu sambungkan kamu langsung ke tim Nexus Diji via WhatsApp. Klik tombol di bawah ya 👇`;
+        const replyText = btn.dataset.id && botResponses[btn.dataset.id] ? botResponses[btn.dataset.id] : `Siap! Saya bantu sambungkan kamu langsung ke tim Nexus Diji via WhatsApp. Klik tombol di bawah ya 👇`;
 
-      setTimeout(() => {
-        addBubble(replyText);
-        setTimeout(() => showWAButton(msg), 400);
-      }, 600);
+        setTimeout(() => {
+          addBubble(replyText);
+          setTimeout(() => showWAButton(msg), 400);
+        }, 600);
+      });
     });
-  });
 
-  // Manual text input -> redirect to WA
-  function sendManualMessage() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-    addBubble(text, true);
-    chatInput.value = '';
-    chatOptions.style.display = 'none';
-    setTimeout(() => {
-      addBubble(`Halo, saya telah menerima pesan manual kamu. Tim kami akan merespons detail pesanmu via WhatsApp secepatnya. Klik tombol di bawah ini ya 📩`);
-      setTimeout(() => showWAButton(text), 400);
-    }, 600);
-  }
+    // Manual text input -> redirect to WA
+    function sendManualMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addBubble(text, true);
+      chatInput.value = '';
+      chatOptions.style.display = 'none';
+      setTimeout(() => {
+        addBubble(`Halo, saya telah menerima pesan manual kamu. Tim kami akan merespons detail pesanmu via WhatsApp secepatnya. Klik tombol di bawah ini ya 📩`);
+        setTimeout(() => showWAButton(text), 400);
+      }, 600);
+    }
 
-  if (chatSendBtn) {
-    chatSendBtn.addEventListener('click', sendManualMessage);
-  }
-  if (chatInput) {
-    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendManualMessage(); });
+    if (chatSendBtn) {
+      chatSendBtn.addEventListener('click', sendManualMessage);
+    }
+    if (chatInput) {
+      chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendManualMessage(); });
+    }
   }
 
   // Help Popup

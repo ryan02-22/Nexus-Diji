@@ -173,6 +173,7 @@
   <!-- Legacy CSS - Keep for compatibility during transition -->
   <link rel="stylesheet" href="./assets/css/main.css">
   <link rel="stylesheet" href="./assets/css/site-polish.css?v=logo-crisp-20261017c">
+  <link rel="stylesheet" href="./assets/css/assistant.css?v=assistant-20261018b">
 </head>
 
 
@@ -447,8 +448,21 @@
           <div class="hero-speedlines">
             <span></span><span></span><span></span><span></span>
           </div>
-          <img src="./assets/images/robot-nd.webp" alt="Maskot Robot Nexus Diji" class="hero-rocket hero-mascot"
-            loading="eager" width="480" height="480">
+
+          <!-- Robot ND: maskot sekaligus asisten virtual untuk calon customer.
+               Halo, balon kata, dan tombol di bawah membuka chat asisten. -->
+          <div class="assistant-stage" id="assistantStage" data-state="idle">
+            <span class="assistant-halo" aria-hidden="true"></span>
+            <button type="button" class="assistant-robot" id="assistantRobotBtn"
+              aria-label="Buka chat asisten Nexus Diji">
+              <img src="./assets/images/robot-nd.webp" alt="Maskot robot Nexus Diji" class="hero-rocket hero-mascot"
+                loading="eager" width="480" height="480">
+            </button>
+            <button type="button" class="assistant-bubble" id="assistantBubble"
+              aria-label="Buka chat asisten Nexus Diji">Hai! Mau tanya harga?</button>
+            <button type="button" class="assistant-cta" id="assistantOpenBtn" aria-haspopup="dialog"
+              aria-expanded="false" aria-label="Tanya Asisten">Tanya Asisten</button>
+          </div>
         </div>
 
       </div>
@@ -1306,41 +1320,43 @@
   <aside id="chatPopup" role="dialog" aria-label="Nexus Assistant Chat">
     <!-- Header -->
     <div class="chat-header">
-      <div class="chat-avatar">🚀</div>
+      <div class="chat-avatar">
+        <img src="./assets/images/robot-nd.webp" alt="" aria-hidden="true" width="80" height="80" loading="lazy">
+      </div>
       <div class="chat-header-info">
         <strong>Nexus Assistant</strong>
-        <span><span class="chat-online-dot"></span>Online &bull; Respon instan</span>
+        <span><span class="chat-online-dot"></span><span id="chatStatusText">Online &bull; Respon instan</span></span>
       </div>
+      <button class="chat-voice-btn" id="chatVoiceBtn" type="button" aria-pressed="true"
+        aria-label="Matikan suara asisten" title="Matikan suara asisten">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path class="voice-wave-mark" d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />
+          <path class="voice-off-mark" d="M11 5 6 9H3v6h3l5 4zM17 9l4 6M21 9l-4 6" />
+        </svg>
+      </button>
       <button id="chatCloseBtn" aria-label="Tutup chat">&times;</button>
     </div>
 
     <!-- Messages -->
-    <div class="chat-body" id="chatBody">
+    <div class="chat-body" id="chatBody" role="log" aria-live="off"
+      aria-label="Percakapan dengan asisten Nexus Diji">
       <div class="chat-bubble">
-        Halo! 👋 Saya asisten digital <strong>Nexus Diji</strong>.<br><br>
-        Mau wujudkan ide apa hari ini? Pilih salah satu di bawah:
+        Hai! Aku Robot ND, asisten Nexus Diji. Tanya soal layanan, harga, lama pengerjaan, atau servis perangkat.
       </div>
     </div>
+    <div class="sr-only" id="chatLive" role="status" aria-live="polite"></div>
 
-    <!-- Quick reply options -->
+    <!-- Quick reply options (asisten menggantinya dengan saran lanjutan tiap jawaban) -->
     <div class="chat-options" id="chatOptions">
-      <button class="chat-opt-btn" data-id="website"
-        data-msg="Halo Nexus Diji, saya tertarik membuat website atau aplikasi. Bisa bantu saya?"
-        data-label="🌐 Buat Website / Aplikasi">🌐 Buat Website / Aplikasi</button>
-      <button class="chat-opt-btn" data-id="servis"
-        data-msg="Halo Nexus Diji, saya butuh servis laptop atau PC. Bisa bantu?" data-label="💻 Servis Laptop / PC">💻
-        Servis Laptop / PC</button>
-      <button class="chat-opt-btn" data-id="harga"
-        data-msg="Halo Nexus Diji, saya ingin tanya estimasi harga dan paket layanan yang tersedia."
-        data-label="💰 Cek Harga & Estimasi">💰 Cek Harga &amp; Estimasi</button>
-      <button class="chat-opt-btn" data-id="konsultasi"
-        data-msg="Halo Nexus Diji, saya ingin konsultasi gratis mengenai kebutuhan digital saya."
-        data-label="💡 Konsultasi Gratis">💡 Konsultasi Gratis</button>
+      <button class="chat-opt-btn" type="button" data-intent="jenis_website">🌐 Website &amp; Aplikasi</button>
+      <button class="chat-opt-btn" type="button" data-intent="harga_servis">💻 Servis Laptop &amp; PC</button>
+      <button class="chat-opt-btn" type="button" data-intent="harga_website">💰 Cek Harga &amp; Paket</button>
+      <button class="chat-opt-btn" type="button" data-intent="konsultasi">💡 Konsultasi Gratis</button>
     </div>
 
     <!-- Footer input -->
     <div class="chat-footer">
-      <input type="text" id="chatInput" placeholder="Ketik pesan...">
+      <input type="text" id="chatInput" placeholder="Ketik pesan..." aria-label="Ketik pesan untuk asisten">
       <button class="chat-send-btn" id="chatSendBtn" aria-label="Kirim">
         <svg viewBox="0 0 24 24">
           <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -1359,13 +1375,16 @@
   <script src="./assets/js/marquee.js?v=3d-arc-20261017"></script>
   <script src="./assets/js/ui-utils.js"></script>
   <!-- JavaScript - classic scripts in load order (runs without a local server) -->
-  <script defer src="./assets/js/translations.js?v=classic-20261017"></script>
+  <script defer src="./assets/js/translations.js?v=assistant-20261018c"></script>
   <script defer src="./assets/js/navbar.js?v=classic-20261017"></script>
   <script defer src="./assets/js/mega-menu.js?v=classic-20261017"></script>
   <script defer src="./assets/js/animations.js?v=classic-20261017"></script>
   <script defer src="./assets/js/utilities.js?v=classic-20261017"></script>
   <script defer src="./assets/js/site-effects.js?v=classic-20261017"></script>
-  <script defer src="./assets/js/main.js?v=classic-20261017"></script>
+  <!-- assistant.js must run before main.js: main.js keeps a legacy chat fallback that is
+       skipped only when window.NexusAssistant already exists. -->
+  <script defer src="./assets/js/assistant.js?v=assistant-20261018c"></script>
+  <script defer src="./assets/js/main.js?v=assistant-20261018"></script>
 
 </body>
 
