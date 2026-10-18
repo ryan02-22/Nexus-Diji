@@ -374,22 +374,6 @@ function applyLanguage(targetLang) {
       document.title = REVERSE_TITLES[currentTitle];
     }
   }
-
-  // 6. Homepage typing animation headline sync
-  const typingLine1 = document.getElementById('typingLine1');
-  const typingLine2 = document.getElementById('typingLine2');
-  const typingLine3 = document.getElementById('typingLine3');
-  if (typingLine1 && typingLine2 && typingLine3) {
-    if (isEnglish) {
-      typingLine1.textContent = 'Bring Your';
-      typingLine2.textContent = 'Digital Ideas';
-      typingLine3.textContent = 'to Life.';
-    } else {
-      typingLine1.textContent = 'Wujudkan';
-      typingLine2.textContent = 'Ide Digital';
-      typingLine3.textContent = 'Kamu.';
-    }
-  }
 }
 
 function initLanguageSwitch() {

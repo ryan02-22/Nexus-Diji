@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" href="./assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <meta name="description"
     content="Nexus Diji jasa pembuatan website profesional, aplikasi custom, dan servis PC & laptop terpercaya. Konsultasi gratis, pengerjaan cepat, harga terjangkau.">
   <meta name="keywords"
@@ -28,14 +30,11 @@
   <meta name="twitter:image" content="https://nexus-diji.vercel.app/assets/images/og-image.png">
   <meta name="twitter:image:alt" content="Logo Nexus Diji, jasa pembuatan website dan aplikasi">
   <link rel="canonical" href="https://nexus-diji.vercel.app/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/png" href="./assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png">
   <link rel="manifest" href="./site.webmanifest">
 
   <title>Nexus Diji Jasa Pembuatan Website & Aplikasi Custom | Servis PC Laptop</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
 {
@@ -165,14 +164,14 @@
 
   <!-- CSS Modules - Load in order for proper cascade -->
   <link rel="stylesheet" href="./assets/css/variables.css">
-  <link rel="stylesheet" href="./assets/css/global.css">
+  <link rel="stylesheet" href="./assets/css/global.css?v=perf-20261018">
   <link rel="stylesheet" href="./assets/css/navbar.css?v=logo-crisp-20261017c">
   <link rel="stylesheet" href="./assets/css/mega-menu.css">
-  <link rel="stylesheet" href="./assets/css/pages.css">
+  <link rel="stylesheet" href="./assets/css/pages.css?v=perf-20261018">
 
   <!-- Legacy CSS - Keep for compatibility during transition -->
-  <link rel="stylesheet" href="./assets/css/main.css">
-  <link rel="stylesheet" href="./assets/css/site-polish.css?v=logo-crisp-20261017c">
+  <link rel="stylesheet" href="./assets/css/main.css?v=perf-20261018">
+  <link rel="stylesheet" href="./assets/css/site-polish.css?v=perf-20261018">
   <link rel="stylesheet" href="./assets/css/assistant.css?v=assistant-20261018b">
 </head>
 
@@ -198,7 +197,7 @@
     <!-- NAV -->
     <nav id="navbar">
       <a href="./" class="logo" aria-label="Nexus Diji Beranda">
-        <img src="./assets/images/logo%20okeh.png?v=20261017b" alt="Nexus Diji Logo" class="logo-img">
+        <img src="./assets/images/logo%20okeh.png?v=perf-20261018" alt="Nexus Diji Logo" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="pages/portfolio.html">Portfolio</a></li>
@@ -302,7 +301,7 @@
             </svg>
           </button>
           <a href="./index.html" aria-label="Nexus Diji Beranda" class="nav-mobile-logo-link">
-            <img src="./assets/images/logo%20okeh.png?v=20261017b" alt="Nexus Diji Logo" class="nav-mobile-logo">
+            <img src="./assets/images/logo%20okeh.png?v=perf-20261018" alt="Nexus Diji Logo" class="nav-mobile-logo">
           </a>
         </div>
         <button class="close-menu-btn" id="closeMenuBtn" aria-label="Tutup Menu">
@@ -404,9 +403,9 @@
             </div>
           </div>
           <h1>
-            <span id="typingLine1">Wujudkan</span><br>
-            <span class="line2" id="typingLine2">Ide Digital</span><br>
-            <span class="accent" id="typingLine3">Kamu.</span><span class="typing-cursor" id="typingCursor" aria-hidden="true"></span>
+            <span>Wujudkan</span><br>
+            <span class="line2">Ide Digital</span><br>
+            <span class="accent">Kamu.</span>
           </h1>
           <p class="hero-desc">
             Nexus Diji hadir sebagai mitra teknologi kamu: dari website profesional, aplikasi custom, hingga
@@ -456,7 +455,7 @@
             <button type="button" class="assistant-robot" id="assistantRobotBtn"
               aria-label="Buka chat asisten Nexus Diji">
               <img src="./assets/images/robot-nd.webp" alt="Maskot robot Nexus Diji" class="hero-rocket hero-mascot"
-                loading="eager" width="480" height="480">
+                loading="eager" fetchpriority="high" decoding="async" width="480" height="480">
             </button>
             <button type="button" class="assistant-bubble" id="assistantBubble"
               aria-label="Buka chat asisten Nexus Diji">Hai! Mau tanya harga?</button>
@@ -544,7 +543,7 @@
             <!-- Card 0: Calvo Furniture -->
             <article class="portfolio-3d-card" data-index="0" data-link="pages/portfolio.html">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-furniture.jpg" alt="Calvo Furniture - Custom Woodcraft" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-furniture.jpg" alt="Calvo Furniture - Custom Woodcraft" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">E-Commerce & Craft</span>
@@ -562,7 +561,7 @@
             <!-- Card 1: Modern Living Interior -->
             <article class="portfolio-3d-card" data-index="1" data-link="pages/portfolio.html">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-interior.jpg" alt="Modern Living - Architecture & Interior" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-interior.jpg" alt="Modern Living - Architecture & Interior" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">Company Profile</span>
@@ -580,7 +579,7 @@
             <!-- Card 2: Paw & Petals Boutique -->
             <article class="portfolio-3d-card" data-index="2" data-link="pages/portfolio.html">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-petcare.jpg" alt="Paw & Petals - Pet Boutique" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-petcare.jpg" alt="Paw & Petals - Pet Boutique" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">Pet Boutique & Care</span>
@@ -599,7 +598,7 @@
             <article class="portfolio-3d-card portfolio-3d-card--faryta" data-index="3" data-link="https://faryta-studio.vercel.app" data-external="true">
               <div class="card-media card-media--faryta">
                 <div class="faryta-bg-pattern"></div>
-                <img src="assets/images/LOGO%20FARYTA%20STUDIO.png" alt="Faryta Studio Logo" class="faryta-3d-logo" loading="lazy">
+                <img src="assets/images/LOGO%20FARYTA%20STUDIO.png" alt="Faryta Studio Logo" class="faryta-3d-logo" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag card-tag--gold">Photography Studio</span>
@@ -617,7 +616,7 @@
             <!-- Card 4: Aeterna Fashion Boutique -->
             <article class="portfolio-3d-card" data-index="4" data-link="pages/portfolio.html">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-fashion.jpg" alt="Aeterna Fashion - E-Commerce Boutique" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-fashion.jpg" alt="Aeterna Fashion - E-Commerce Boutique" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">Toko Online</span>
@@ -635,7 +634,7 @@
             <!-- Card 5: Aether Technologies Corporate Portal -->
             <article class="portfolio-3d-card" data-index="5" data-link="pages/portfolio.html">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-corporate.jpg" alt="Aether Technologies - Enterprise Portal" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-corporate.jpg" alt="Aether Technologies - Enterprise Portal" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">Enterprise System</span>
@@ -653,7 +652,7 @@
             <!-- Card 6: Undangan Pernikahan Yoga & Saylun -->
             <article class="portfolio-3d-card" data-index="6" data-link="https://undangan-pernikahan-yogadansaylun.vercel.app/" data-external="true">
               <div class="card-media">
-                <img src="assets/images/portfolio/portfolio-undangan.jpg" alt="Undangan Pernikahan Digital Yoga & Saylun" loading="lazy">
+                <img src="assets/images/portfolio/portfolio-undangan.jpg" alt="Undangan Pernikahan Digital Yoga & Saylun" loading="lazy" decoding="async">
               </div>
               <div class="card-overlay">
                 <span class="card-tag">Undangan Digital</span>
@@ -918,7 +917,7 @@
 
     <!-- PROCESS -->
     <section id="process" class="process-bg">
-      <img src="./assets/images/rocket.webp" alt="" aria-hidden="true" class="process-rocket" loading="lazy">
+      <img src="./assets/images/rocket.webp" alt="" aria-hidden="true" class="process-rocket" loading="lazy" decoding="async">
       <span class="section-label reveal">Langkah demi langkah</span>
       <h2 class="section-title reveal">Bagaimana Kami Bekerja</h2>
       <p class="section-desc reveal">"Proses transparan dan terstruktur untuk memastikan hasil yang maksimal dan sesuai
@@ -1321,7 +1320,7 @@
     <!-- Header -->
     <div class="chat-header">
       <div class="chat-avatar">
-        <img src="./assets/images/robot-nd.webp" alt="" aria-hidden="true" width="80" height="80" loading="lazy">
+        <img src="./assets/images/robot-nd.webp" alt="" aria-hidden="true" width="80" height="80" loading="lazy" decoding="async">
       </div>
       <div class="chat-header-info">
         <strong>Nexus Assistant</strong>
@@ -1376,11 +1375,11 @@
   <script src="./assets/js/ui-utils.js"></script>
   <!-- JavaScript - classic scripts in load order (runs without a local server) -->
   <script defer src="./assets/js/translations.js?v=assistant-20261018c"></script>
-  <script defer src="./assets/js/navbar.js?v=classic-20261017"></script>
-  <script defer src="./assets/js/mega-menu.js?v=classic-20261017"></script>
-  <script defer src="./assets/js/animations.js?v=classic-20261017"></script>
-  <script defer src="./assets/js/utilities.js?v=classic-20261017"></script>
-  <script defer src="./assets/js/site-effects.js?v=classic-20261017"></script>
+  <script defer src="./assets/js/navbar.js?v=perf-20261018"></script>
+  <script defer src="./assets/js/mega-menu.js?v=perf-20261018"></script>
+  <script defer src="./assets/js/animations.js?v=perf-20261018"></script>
+  <script defer src="./assets/js/utilities.js?v=perf-20261018"></script>
+  <script defer src="./assets/js/site-effects.js?v=perf-20261018"></script>
   <!-- assistant.js must run before main.js: main.js keeps a legacy chat fallback that is
        skipped only when window.NexusAssistant already exists. -->
   <script defer src="./assets/js/assistant.js?v=assistant-20261018c"></script>

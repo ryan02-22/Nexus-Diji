@@ -525,7 +525,7 @@ h1 {
   line-height: 1.05;
   letter-spacing: -0.04em;
   margin-bottom: 1.5rem;
-  animation: fadeUp 0.8s 0.1s ease both;
+  animation: riseUp 0.7s 0.05s ease both;
 }
 
 h1 .line2 {
@@ -537,26 +537,15 @@ h1 .accent {
   color: var(--accent);
 }
 
-/* typing cursor blink */
-.typing-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  background: var(--accent);
-  margin-left: 4px;
-  vertical-align: middle;
-  animation: blink 0.75s step-end infinite;
-}
-
-@keyframes blink {
-
-  0%,
-  100% {
-    opacity: 1
+/* Hero headline entrance: transform-only, so the h1 is painted (and counts as
+   the LCP element) from the first frame instead of fading in from opacity 0. */
+@keyframes riseUp {
+  from {
+    transform: translateY(24px);
   }
 
-  50% {
-    opacity: 0
+  to {
+    transform: translateY(0);
   }
 }
 

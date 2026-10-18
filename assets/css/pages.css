@@ -110,21 +110,6 @@ h1 .accent {
   color: var(--accent);
 }
 
-.typing-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  background: var(--accent);
-  margin-left: 4px;
-  vertical-align: middle;
-  animation: blink 0.75s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 .hero-desc {
   color: var(--muted);
   font-size: 1.125rem;

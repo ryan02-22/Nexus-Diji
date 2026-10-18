@@ -1,6 +1,6 @@
 /**
  * Nexus Diji - Animations Module
- * Reveal animations, typing effect, counter animations
+ * Reveal animations, counter animations
  */
 
 // ══════════════════════════════════════════════════════════════
@@ -18,67 +18,6 @@ function initRevealAnimations() {
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-}
-
-// ══════════════════════════════════════════════════════════════
-// TYPING EFFECT
-// ══════════════════════════════════════════════════════════════
-function initTypingEffect() {
-  const typingLine1 = document.getElementById('typingLine1');
-  const typingLine2 = document.getElementById('typingLine2');
-  const typingLine3 = document.getElementById('typingLine3');
-  const heroSection = document.querySelector('.hero');
-
-  if (!typingLine1 || !typingLine2 || !typingLine3 || !heroSection) return;
-
-  const isEnglish = document.documentElement.dataset.language === 'en';
-  const lines = isEnglish
-    ? [
-        { el: typingLine1, text: 'Bring Your' },
-        { el: typingLine2, text: 'Digital Ideas' },
-        { el: typingLine3, text: 'to Life.' }
-      ]
-    : [
-        { el: typingLine1, text: 'Wujudkan' },
-        { el: typingLine2, text: 'Ide Digital' },
-        { el: typingLine3, text: 'Kamu.' }
-      ];
-
-  async function typeText(el, text, speed = 80) {
-    for (let i = 0; i < text.length; i++) {
-      el.textContent += text[i];
-      await new Promise(r => setTimeout(r, speed));
-    }
-  }
-
-  async function runTyping() {
-    lines.forEach(line => { line.el.textContent = ''; });
-    await new Promise(r => setTimeout(r, 900));
-
-    for (let i = 0; i < lines.length; i++) {
-      const speed = i === 0 ? 90 : i === 1 ? 80 : 110;
-      await typeText(lines[i].el, lines[i].text, speed);
-      if (i < lines.length - 1) await new Promise(r => setTimeout(r, 120));
-    }
-  }
-
-  let typingFired = false;
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (!typingFired) {
-          typingFired = true;
-          runTyping();
-        }
-      } else {
-        typingFired = false;
-        lines.forEach(line => { line.el.textContent = ''; });
-      }
-    });
-  }, { threshold: 0.1 });
-
-  lines.forEach(line => { line.el.textContent = ''; });
-  heroObserver.observe(heroSection);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -164,7 +103,6 @@ function initFAQ() {
 // Initialize all animations
 function initAnimations() {
   initRevealAnimations();
-  initTypingEffect();
   initCounterAnimations();
   initFAQ();
 }
