@@ -2980,9 +2980,10 @@ footer p {
 /* â”€â”€ CHATBOT POPUP â”€â”€ */
 #chatPopup {
   position: fixed;
-  bottom: 10.5rem;
-  right: 2rem;
-  width: 320px;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: min(380px, calc(100vw - 2.5rem));
+  max-height: calc(100vh - 10rem);
   background: rgba(12, 12, 20, 0.98);
   border: 1px solid rgba(114, 9, 183, 0.2);
   border-radius: 20px;
@@ -3002,6 +3003,125 @@ footer p {
   display: flex;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* The panel owns the height cap, so the message list is the only part that
+   flexes and scrolls; header, quick replies and input keep their size. */
+#chatPopup .chat-header,
+#chatPopup .chat-options,
+#chatPopup .chat-footer {
+  flex-shrink: 0;
+}
+
+/* Short viewports (landscape phones, small windows) cannot fit every row at
+   once: let the quick replies scroll instead of clipping the input. */
+@media (max-height: 700px) {
+  #chatPopup .chat-options {
+    flex-shrink: 1;
+    min-height: 44px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  }
+}
+
+#chatPopup .chat-body {
+  flex: 1 1 auto;
+  min-height: 88px;
+  max-height: none;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+/* On wide bottom sheets (tablets) a full-width bubble produces mile-long
+   lines; cap the measure so answers stay readable. */
+#chatPopup .chat-bubble {
+  max-width: min(560px, 92%);
+}
+
+/* Desktop: the panel parks at the right edge and the page body shifts left by
+   exactly the space the panel needs (380px + 20px edge gap + 24px breathing
+   room), so it never sits on top of the hero mascot or any other content. */
+@media (min-width: 1200px) {
+  section {
+    transition: padding-right 320ms ease;
+  }
+
+  body:has(#chatPopup.open) section {
+    padding-right: 26.5rem;
+  }
+
+  body:has(#chatPopup.open) .hero-content {
+    max-width: 460px;
+  }
+
+  body:has(#chatPopup.open) .hero-visual .hero-mascot {
+    width: clamp(180px, 20vw, 300px);
+  }
+}
+
+/* Below desktop width there is no room to dock beside the content, so the
+   panel docks to the bottom edge instead and the mascot stage steps aside
+   while the chat is up (it reappears on close). */
+@media (max-width: 1199px) {
+  #chatPopup {
+    left: 1.25rem;
+    right: 1.25rem;
+    width: auto;
+    max-height: min(72vh, 620px);
+  }
+
+  .hero-visual .assistant-stage {
+    transition: opacity 260ms ease, visibility 260ms ease;
+  }
+
+  body:has(#chatPopup.open) .hero-visual .assistant-stage {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* The sheet reaches the left edge on these widths, so the tool FAB would
+     sit on top of it. It is a second door to the same chat: hide it while
+     the chat is open and it comes straight back on close. */
+  body:has(#chatPopup.open) .tools-overlay {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Phones: keep the open sheet clear of the hero headline. The tighter
+   header/footer paddings buy the ~15px that makes every row fit inside the
+   cap without pushing the sheet over the headline. */
+@media (max-width: 768px) {
+  #chatPopup {
+    max-height: min(56vh, 430px);
+  }
+
+  #chatPopup .chat-header {
+    padding-block: 0.7rem;
+  }
+
+  #chatPopup .chat-footer {
+    padding-block: 0.6rem;
+  }
+
+  #chatPopup .chat-options {
+    padding-bottom: 0.6rem;
+  }
+
+  #chatPopup .chat-body {
+    min-height: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section {
+    transition: none;
+  }
 }
 
 /* Header */
@@ -3210,14 +3330,6 @@ footer p {
   height: 15px;
   fill: white;
 }
-
-@media (max-width: 400px) {
-  #chatPopup {
-    width: calc(100vw - 2rem);
-    right: 1rem;
-  }
-}
-
 
 .nav-actions {
   display: flex;
