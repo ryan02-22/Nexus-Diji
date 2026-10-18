@@ -1743,3 +1743,255 @@ footer p {
     font-size: 0.75rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   SERVICES GRID: NUMBERED SERVICE CARDS (About page only)
+   Eyebrow + icon header, accent title word, and a pill action
+   button with an arrow disc, plus one featured dark card that
+   mirrors the reference card design. Scoped to body.page-about
+   because layanan.html also loads this stylesheet and keeps the
+   original card look.
+   ═══════════════════════════════════════════════════════════════ */
+
+body.page-about #services .service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.65rem 1.5rem;
+  background-color: var(--surface);
+  background-image: linear-gradient(180deg, rgba(0, 110, 153, 0.05), rgba(0, 110, 153, 0.015) 55%, rgba(0, 110, 153, 0));
+  border: 1px solid rgba(0, 110, 153, 0.16);
+  border-radius: var(--radius-2xl);
+}
+
+body.page-about #services .service-card:hover {
+  border-color: rgba(0, 110, 153, 0.35);
+}
+
+body.page-about #services .service-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+body.page-about #services .service-card__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+body.page-about #services .service-card__num {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+body.page-about #services .service-card__rule {
+  width: 1.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+body.page-about #services .service-card__cat {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+body.page-about #services .service-card__icon {
+  width: 46px;
+  height: 46px;
+  margin: 0;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+body.page-about #services .service-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+body.page-about #services .service-card__title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+
+body.page-about #services .service-card__accent {
+  color: var(--accent);
+}
+
+body.page-about #services .service-card__desc {
+  margin-bottom: 1.4rem;
+}
+
+body.page-about #services .service-card__link {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  padding: 0.45rem 0.5rem 0.45rem 1.1rem;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid rgba(0, 110, 153, 0.28);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+body.page-about #services .service-card__link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 110, 153, 0.5);
+  box-shadow: var(--shadow-md);
+  filter: none;
+}
+
+body.page-about #services .service-card__link-arrow {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--text);
+  color: #fff;
+  flex-shrink: 0;
+  transition: background-color var(--transition-fast);
+}
+
+body.page-about #services .service-card__link-arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+body.page-about #services .service-card__link:hover .service-card__link-arrow {
+  background: var(--accent);
+}
+
+/* Featured dark card: mirrors the dark middle card of the reference
+   design; light-on-dark colors reuse the site's dark-surface tokens. */
+body.page-about #services .service-card--dark {
+  background-color: #0b1120;
+  background-image: linear-gradient(155deg, #131f38 0%, #0c1424 55%, #0b1120 100%);
+  border-color: rgba(103, 232, 249, 0.25);
+}
+
+body.page-about #services .service-card--dark:hover {
+  border-color: rgba(103, 232, 249, 0.45);
+}
+
+body.page-about #services .service-card--dark .service-card__num {
+  color: #fff;
+}
+
+body.page-about #services .service-card--dark .service-card__rule {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+body.page-about #services .service-card--dark .service-card__cat {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+body.page-about #services .service-card--dark .service-card__icon {
+  background: rgba(103, 232, 249, 0.14);
+}
+
+body.page-about #services .service-card--dark .service-card__icon svg {
+  color: var(--accent-on-dark);
+}
+
+body.page-about #services .service-card--dark .service-card__title {
+  background-image: linear-gradient(120deg, #7dd3fc, #67e8f9 40%, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-on-dark);
+}
+
+body.page-about #services .service-card--dark .service-card__desc {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+body.page-about #services .service-card--dark .service-card__link {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+  box-shadow: none;
+}
+
+body.page-about #services .service-card--dark .service-card__link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(103, 232, 249, 0.6);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.page-about #services .service-card--dark .service-card__link-arrow {
+  background: var(--grad);
+}
+
+@media (max-width: 900px) {
+  body.page-about #services .service-card {
+    padding: 1.4rem 1.35rem 1.3rem;
+  }
+
+  body.page-about #services .service-card__title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body.page-about #services .service-card {
+    padding: 1.3rem 1.2rem 1.2rem;
+  }
+
+  body.page-about #services .service-card__title {
+    font-size: 1.15rem;
+  }
+
+  body.page-about #services .service-card__desc {
+    font-size: 0.875rem;
+  }
+
+  body.page-about #services .service-card__icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  body.page-about #services .service-card__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  body.page-about #services .service-card__link {
+    font-size: 0.82rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  body.page-about #services .service-card {
+    padding: 1.15rem 1.05rem 1.05rem;
+  }
+
+  body.page-about #services .service-card__cat {
+    letter-spacing: 0.12em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-about #services .service-card__link,
+  body.page-about #services .service-card__link-arrow {
+    transition: none;
+  }
+}

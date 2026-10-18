@@ -662,6 +662,8 @@ const TRANSLATIONS = {
   'Strategi pemasaran digital untuk meningkatkan jangkauan dan konversi bisnis Anda di platform online.': 'Digital marketing strategies designed to expand your reach and boost conversion rates.',
   'Instalasi OS, upgrade hardware, virus removal, dan recovery data untuk performa perangkat optimal.': 'OS installation, hardware upgrades, virus removal, and data recovery for peak device performance.',
   'Custom Systems': 'Custom Systems',
+  'DESAIN': 'DESIGN',
+  'SISTEM': 'SYSTEMS',
   'Pengembangan sistem custom sesuai kebutuhan spesifik bisnis Anda, dari CRM hingga inventory management.': 'Development of custom systems tailored to your unique workflows, from CRM to inventory management.',
   'Cara Kami Bekerja': 'How We Work',
   'Proses Kolaborasi': 'A Structured',
