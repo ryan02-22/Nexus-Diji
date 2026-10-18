@@ -389,7 +389,10 @@ export function applyLanguage(targetLang) {
   document.documentElement.dataset.language = currentLanguage;
 
   try {
-    // 1. Update UI button states
+    // 1. Update UI button states and container glider position
+    document.querySelectorAll('.nav-language').forEach((container) => {
+      container.dataset.activeLang = currentLanguage;
+    });
     const buttons = document.querySelectorAll('.nav-language__option[data-lang]');
     buttons.forEach((btn) => {
       const active = btn.dataset.lang === currentLanguage;
