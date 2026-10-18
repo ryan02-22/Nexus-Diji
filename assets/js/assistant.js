@@ -49,8 +49,167 @@
     return HOME ? hash : ROOT + 'index.html' + hash;
   }
 
+  function fill(template, vars) {
+    return String(template).replace(/\{(\w+)\}/g, (match, key) => (key in vars ? vars[key] : match));
+  }
+
   /* ══════════════════════════════════════════════════════════════
-     2. KNOWLEDGE BASE
+     2. MEMORY (what the assistant learns from this visitor)
+     Stays on the device in localStorage: visit count, topics asked,
+     stated need, unanswered questions, sections browsed. No server.
+     ══════════════════════════════════════════════════════════════ */
+  const MEMORY_KEY = 'nexus-diji-assistant-memory-v1';
+  const MEMORY_CAP = 24;
+  const TOPIC_IGNORE = { greeting: 1, terima_kasih: 1, fallback: 1 };
+
+  // Short, generic questions ("kalau yang itu berapa?") lean on the section
+  // the visitor is reading to pick the right intent.
+  const SECTION_INTENTS = {
+    services: ['layanan'],
+    portfolio: ['portofolio'],
+    pricing: ['harga_umum', 'harga_website', 'harga_servis', 'bayar'],
+    why: ['kenapa'],
+    process: ['proses', 'durasi'],
+    faq: ['garansi', 'bayar', 'teknologi'],
+    blog: ['blog'],
+    contact: ['konsultasi', 'lokasi'],
+    testimonials: ['kenapa', 'portofolio']
+  };
+
+  // Proactive bubble lines: the robot reacts to the section being read and
+  // answers that topic right away when the bubble is clicked.
+  const HINTS = {
+    services: {
+      text: { id: 'Lagi lihat layanan kami? Tanya aku.', en: 'Browsing our services? Ask me.' },
+      intent: 'layanan'
+    },
+    portfolio: {
+      text: { id: 'Mau contoh yang mirip idemu?', en: 'Want a sample like your idea?' },
+      intent: 'portofolio'
+    },
+    pricing: {
+      text: { id: 'Lagi cek paket harga ya?', en: 'Checking the plans?' },
+      intent: 'harga_umum'
+    },
+    why: {
+      text: { id: 'Lagi cek keunggulan kami ya?', en: 'Checking what sets us apart?' },
+      intent: 'kenapa'
+    },
+    process: {
+      text: { id: 'Penasaran alur kerjanya?', en: 'Curious about the process?' },
+      intent: 'proses'
+    },
+    faq: {
+      text: { id: 'Ada yang belum jelas? Tanya aku.', en: 'Something unclear? Ask me.' },
+      intent: null
+    },
+    blog: {
+      text: { id: 'Mau baca yang mana? Aku ringkas.', en: 'Which article? I can sum it up.' },
+      intent: 'blog'
+    },
+    contact: {
+      text: { id: 'Mau hubungi tim? Klik aku.', en: 'Ready to reach the team?' },
+      intent: 'konsultasi'
+    }
+  };
+
+  const memory = {
+    data: {
+      visits: 0,
+      firstSeen: 0,
+      lastSeen: 0,
+      lastIntent: null,
+      need: null,
+      needAt: 0,
+      interests: {},
+      unknowns: [],
+      sections: {}
+    },
+    returning: false,
+    load() {
+      const now = Date.now();
+      try {
+        const raw = localStorage.getItem(MEMORY_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') Object.assign(this.data, parsed);
+        }
+      } catch (error) { /* storage may be blocked */ }
+      if (!this.data.interests || typeof this.data.interests !== 'object') this.data.interests = {};
+      if (!this.data.sections || typeof this.data.sections !== 'object') this.data.sections = {};
+      if (!Array.isArray(this.data.unknowns)) this.data.unknowns = [];
+      this.returning = this.data.visits > 0 && now - (this.data.lastSeen || 0) < 30 * 24 * 60 * 60 * 1000;
+      if (!this.data.firstSeen) this.data.firstSeen = now;
+      this.data.visits += 1;
+      this.data.lastSeen = now;
+      this.save();
+    },
+    save() {
+      try { localStorage.setItem(MEMORY_KEY, JSON.stringify(this.data)); } catch (error) { /* noop */ }
+    },
+    reset() {
+      this.data = {
+        visits: 0, firstSeen: 0, lastSeen: 0, lastIntent: null,
+        need: null, needAt: 0, interests: {}, unknowns: [], sections: {}
+      };
+      this.returning = false;
+      try { localStorage.removeItem(MEMORY_KEY); } catch (error) { /* noop */ }
+    },
+    timesAsked(id) {
+      return this.data.interests[id] || 0;
+    },
+    noteIntent(id) {
+      this.data.interests[id] = (this.data.interests[id] || 0) + 1;
+      this.data.lastIntent = id;
+      this.save();
+    },
+    topInterest() {
+      const ids = Object.keys(this.data.interests)
+        .filter((id) => BY_ID[id] && !TOPIC_IGNORE[id]);
+      return ids.sort((a, b) => this.data.interests[b] - this.data.interests[a])[0] || null;
+    },
+    noteNeed(need) {
+      if (!need || this.data.need === need) return;
+      this.data.need = need;
+      this.data.needAt = Date.now();
+      this.save();
+    },
+    noteUnknown(text) {
+      const question = String(text || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+      if (!question) return;
+      this.data.unknowns.unshift({ q: question, at: Date.now() });
+      this.data.unknowns = this.data.unknowns.slice(0, MEMORY_CAP);
+      this.save();
+    },
+    noteSection(id) {
+      this.data.sections[id] = (this.data.sections[id] || 0) + 1;
+      this.save();
+    },
+    recentNeed() {
+      const fresh = Date.now() - (this.data.needAt || 0) < 6 * 60 * 60 * 1000;
+      return fresh ? this.data.need : null;
+    }
+  };
+  memory.load();
+
+  // What the visitor says they need, read from their own words. Only the
+  // latest match is kept, and only for a few hours, so follow-up lines stay true.
+  const NEED_PATTERNS = [
+    ['toko', /toko online|ecommerce|e commerce|online shop|jualan online|olshop/],
+    ['profile', /company profile|company profil|profil perusahaan|profil bisnis|multi halaman/],
+    ['landing', /landing page|landing|satu halaman|1 halaman/],
+    ['blog', /blog|artikel|berita/],
+    ['app', /aplikasi|mobile app|web app|dashboard|sistem custom/],
+    ['servis', /servis|service|laptop|komputer/]
+  ];
+
+  function noteNeedFrom(norm) {
+    const hit = NEED_PATTERNS.find((pair) => pair[1].test(norm));
+    if (hit) memory.noteNeed(hit[0]);
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     3. KNOWLEDGE BASE
      ══════════════════════════════════════════════════════════════ */
   const KB = [
     {
@@ -344,6 +503,24 @@
       id: 'Hai! Aku Robot ND, asisten Nexus Diji.',
       en: 'Hi! I am Robot ND, the Nexus Diji assistant.'
     },
+    greetingNew: {
+      id: '{greet}! Aku Robot ND, asisten Nexus Diji. Tanya soal layanan, harga, lama pengerjaan, atau servis perangkat.',
+      en: '{greet}! I am Robot ND, the Nexus Diji assistant. Ask about services, pricing, timelines, or device repair.'
+    },
+    greetingReturn: {
+      id: 'Hai lagi! Terakhir kita bahas "{topic}". Mau lanjut dari situ, atau tanya hal lain?',
+      en: 'Welcome back! Last time we talked about "{topic}". Continue there, or ask something new?'
+    },
+    greetingTime: {
+      pagi: { id: 'Selamat pagi', en: 'Good morning' },
+      siang: { id: 'Selamat siang', en: 'Good afternoon' },
+      sore: { id: 'Selamat sore', en: 'Good evening' },
+      malam: { id: 'Selamat malam', en: 'Good evening' }
+    },
+    repeatAgain: {
+      id: 'Tadi aku sudah jawab soal "{topic}". Ketik "jelaskan lagi" kalau mau diulang versi lengkapnya, atau tanya hal lain ya.',
+      en: 'I already covered "{topic}". Type "explain more" for the full version again, or ask something else.'
+    },
     status: {
       idle: { id: 'Online • Respon instan', en: 'Online • Instant response' },
       listening: { id: 'Asisten menyimak', en: 'The assistant is listening' },
@@ -374,7 +551,7 @@
   };
 
   /* ══════════════════════════════════════════════════════════════
-     3. INTENT MATCHING
+     4. INTENT MATCHING
      ══════════════════════════════════════════════════════════════ */
   function scoreIntent(item, norm, inputTokens) {
     let score = 0;
@@ -411,14 +588,31 @@
     const norm = strip(rawText);
     if (!norm) return null;
     const inputTokens = norm.split(' ').filter((token) => token.length > 2);
+    const contextIds = conversation.section ? SECTION_INTENTS[conversation.section] : null;
 
     const ranked = KB
-      .map((item) => ({ item, score: scoreIntent(item, norm, inputTokens) }))
-      .sort((a, b) => b.score - a.score);
+      .map((item) => {
+        let score = scoreIntent(item, norm, inputTokens);
+        // A section only nudges questions the words alone would miss.
+        if (contextIds && score > 0 && score < 3.4 && contextIds.indexOf(item.id) !== -1) {
+          score += 1.2;
+        }
+        return { item, score };
+      })
+      .sort((a, b) => (b.score - a.score)
+        || ((TOPIC_IGNORE[a.item.id] ? 1 : 0) - (TOPIC_IGNORE[b.item.id] ? 1 : 0)));
 
     const best = ranked[0];
     const second = ranked[1];
-    if (!best || best.score < 1.6) return null;
+    if (!best || best.score < 1.6) {
+      // "Kalau yang itu berapa?" stays on the topic already under discussion.
+      if (conversation.lastIntent && /\b(itu|tadi|tersebut|lanjut)\b/.test(norm)) return conversation.lastIntent;
+      // Bare "berapa" while reading the pricing area means the pricing question.
+      if (contextIds && contextIds.indexOf('harga_umum') !== -1 && /^(berapa|brp)\b/.test(norm)) {
+        return BY_ID.harga_umum;
+      }
+      return null;
+    }
 
     // Ambiguous between two intents of the same price group: answer the group.
     if (second && second.score >= best.score * 0.7) {
@@ -429,10 +623,40 @@
   }
 
   /* ══════════════════════════════════════════════════════════════
-     4. UI PLUMBING (assistant-facing strings)
+     5. UI PLUMBING (assistant-facing strings)
      ══════════════════════════════════════════════════════════════ */
   const lang = () => (document.documentElement.dataset.language === 'en' ? 'en' : 'id');
   const t = (pair) => (pair ? pair[lang()] || pair.id : '');
+
+  function timeSlot() {
+    const hour = new Date().getHours();
+    if (hour >= 4 && hour < 11) return 'pagi';
+    if (hour >= 11 && hour < 15) return 'siang';
+    if (hour >= 15 && hour < 19) return 'sore';
+    return 'malam';
+  }
+
+  // Greeting blends the time of day with what this visitor asked before.
+  function greetingText() {
+    const greet = t(UI.greetingTime[timeSlot()]);
+    const topicId = memory.data.lastIntent;
+    const topic = topicId && !TOPIC_IGNORE[topicId] && memory.timesAsked(topicId) > 0 ? BY_ID[topicId] : null;
+    if (memory.returning && topic) {
+      return fill(t(UI.greetingReturn), { topic: t(topic.label).toLowerCase() });
+    }
+    return fill(t(UI.greetingNew), { greet });
+  }
+
+  // Repeat visitors see their most-asked topic as the first quick reply.
+  function startChips() {
+    const list = START_CHIPS.slice();
+    const top = memory.topInterest();
+    if (top && list.indexOf(top) !== -1) {
+      list.splice(list.indexOf(top), 1);
+      list.unshift(top);
+    }
+    return list;
+  }
 
   const els = {
     stage: document.getElementById('assistantStage'),
@@ -456,7 +680,10 @@
     busy: false,
     streamTimer: null,
     typingNode: null,
-    lastIntent: null
+    lastIntent: null,
+    counts: {},
+    section: null,
+    opened: false
   };
 
   function setState(state) {
@@ -599,16 +826,66 @@
     els.options.style.display = '';
   }
 
-  function askIntent(intent) {
+  // Follow-up line that ties a pricing question to the need the visitor
+  // mentioned earlier, using only facts already stated on the site.
+  const TAILS = {
+    toko: {
+      when: ['harga_website', 'harga_umum'],
+      text: { id: 'Karena tadi kamu sebut toko online: paket Profesional sudah termasuk CMS untuk mengelola produk.', en: 'Since you mentioned an online store: the Professional plan already includes a CMS to manage products.' }
+    },
+    profile: {
+      when: ['harga_website', 'harga_umum'],
+      text: { id: 'Karena tadi kamu sebut company profile: paket Profesional (Rp 2.000.000) mencakup website multi-halaman dan CMS.', en: 'Since you mentioned a company profile: the Professional plan (IDR 2M) covers a multi-page site and a CMS.' }
+    },
+    landing: {
+      when: ['harga_website', 'harga_umum'],
+      text: { id: 'Karena tadi kamu cari landing page: paket Starter Rp 500.000 sudah cukup untuk satu halaman promosi.', en: 'Since you were after a landing page: the Starter plan at IDR 500k covers one promo page.' }
+    },
+    blog: {
+      when: ['harga_website', 'harga_umum'],
+      text: { id: 'Karena tadi kamu sebut blog: CMS di paket Profesional memudahkan update artikel.', en: 'Since you mentioned a blog: the CMS in the Professional plan makes posting articles easy.' }
+    },
+    app: {
+      when: ['harga_umum', 'durasi'],
+      text: { id: 'Karena tadi kamu sebut aplikasi: sistem custom masuk paket Enterprise dengan integrasi API dan database.', en: 'Since you mentioned an app: custom systems sit in the Enterprise plan with API and database integration.' }
+    }
+  };
+
+  function personalTail(intent) {
+    const need = memory.recentNeed();
+    const rule = need ? TAILS[need] : null;
+    if (!rule || rule.when.indexOf(intent.id) === -1) return null;
+    return rule.text;
+  }
+
+  function repeatReply(intent) {
+    return fill(t(UI.repeatAgain), { topic: t(intent.label).toLowerCase() });
+  }
+
+  const EXPLAIN_RE = /^(jelaskan|jelasin|jelaskan lagi|ulangi|ulang|repeat|lebih detail|lebih lengkap|lengkapnya|detail dong|kasih detail|explain|more detail|in detail)/;
+
+  function askIntent(intent, opts) {
+    const options = opts || {};
     conversation.busy = true;
     setState('thinking');
     showTyping();
-    const answer = intent.answer;
-    const wait = 320 + Math.min(520, t(answer).split(' ').length * 6);
+
+    let text;
+    if (options.repeat) {
+      text = repeatReply(intent);
+    } else {
+      text = t(intent.answer);
+      if (!options.full) {
+        const tail = personalTail(intent);
+        if (tail) text += ' ' + t(tail);
+      }
+    }
+
+    const wait = 320 + Math.min(520, text.split(' ').length * 6);
 
     setTimeout(() => {
       hideTyping();
-      streamAnswer(t(answer), () => {
+      streamAnswer(text, () => {
         if (intent.links) renderLinks(intent.links);
         if (intent.cta) {
           const message = t(intent.cta);
@@ -617,6 +894,7 @@
           } else {
             renderWaButton(message);
           }
+          setMood('cheer', 1000);
         }
         renderFollowUps(intent.follow);
         const stillTalking = voice.supported && window.speechSynthesis.speaking;
@@ -631,11 +909,22 @@
     if (!text) return;
 
     finishActiveStream();
+    clearHint();
     makeBubble({ from: 'user', html: text });
     announce(text);
+    setMood('nod', 700);
 
-    const intent = resolveIntent(text) || FALLBACK;
-    if (intent.id === 'fallback') {
+    const norm = strip(text);
+    noteNeedFrom(norm);
+
+    let intent = resolveIntent(text);
+    let options = null;
+    if (!intent && conversation.lastIntent && EXPLAIN_RE.test(norm)) {
+      intent = conversation.lastIntent;
+      options = { full: true };
+    }
+    if (!intent) {
+      memory.noteUnknown(text);
       const fallback = Object.assign({}, FALLBACK, {
         cta: {
           id: UI.fallbackCta.id + text.slice(0, 180),
@@ -645,12 +934,47 @@
       askIntent(fallback);
       return;
     }
+
+    // Same topic twice in one conversation: recap instead of repeating a wall
+    // of text, and offer the full version on request.
+    const seen = conversation.counts[intent.id] || 0;
+    conversation.counts[intent.id] = seen + 1;
+    if (seen > 0 && !options && !TOPIC_IGNORE[intent.id]) options = { repeat: true };
+
     conversation.lastIntent = intent;
-    askIntent(intent);
+    if (!TOPIC_IGNORE[intent.id]) memory.noteIntent(intent.id);
+    askIntent(intent, options);
+  }
+
+  // Quick-reply chips know the intent already, so they skip matching and
+  // log straight into the same repeat/topic bookkeeping.
+  function askExplicit(intent, label) {
+    finishActiveStream();
+    clearHint();
+    makeBubble({ from: 'user', html: label });
+    announce(label);
+    setMood('nod', 700);
+    const seen = conversation.counts[intent.id] || 0;
+    conversation.counts[intent.id] = seen + 1;
+    conversation.lastIntent = intent;
+    if (!TOPIC_IGNORE[intent.id]) memory.noteIntent(intent.id);
+    askIntent(intent, seen > 0 && !TOPIC_IGNORE[intent.id] ? { repeat: true } : null);
+  }
+
+  // Proactive answer after the visitor clicks a context hint bubble: the
+  // robot answers the topic for the section they were reading.
+  function askProactive(id) {
+    const intent = BY_ID[id];
+    if (!intent || conversation.busy) return;
+    const seen = conversation.counts[id] || 0;
+    conversation.counts[id] = seen + 1;
+    conversation.lastIntent = intent;
+    if (!TOPIC_IGNORE[id]) memory.noteIntent(id);
+    askIntent(intent, seen > 0 ? { repeat: true } : null);
   }
 
   /* ══════════════════════════════════════════════════════════════
-     5. VOICE (Web Speech API)
+     6. VOICE (Web Speech API)
      ══════════════════════════════════════════════════════════════ */
   const voice = {
     enabled: true,
@@ -723,18 +1047,145 @@
   }
 
   /* ══════════════════════════════════════════════════════════════
-     6. ROBOT STAGE (tilt, bubble, open chat)
+     7. ROBOT STAGE (tilt, bubble, moods, context hints)
      ══════════════════════════════════════════════════════════════ */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   let bubbleIndex = 0;
   let bubbleTimer = null;
+  let hintSection = null;
+  let hintUntil = 0;
+  let hintIntent = null;
+  let hintShown = 0;
+  let sectionAt = 0;
+  let pendingAsk = null;
+  let moodTimer = null;
+  let pointerInside = false;
+  let lookTimer = null;
+  const seenSections = new Set();
+
+  // The static intro bubble in the markup is the no-JS fallback; once the
+  // brain is live it shows the time/returning-visitor greeting instead.
+  function renderIntro() {
+    if (!els.body || conversation.lastIntent) return;
+    if (els.body.querySelector('.user-bubble')) return;
+    const node = els.body.querySelector('.chat-bubble');
+    if (!node) return;
+    const text = greetingText();
+    if (node.textContent.trim() !== text) node.textContent = text;
+  }
+
+  function currentHintText() {
+    if (!hintSection || Date.now() >= hintUntil) return null;
+    return t(HINTS[hintSection].text);
+  }
+
+  function clearHint() {
+    hintSection = null;
+    hintUntil = 0;
+    hintIntent = null;
+  }
+
+  // Context-aware bubble: after the visitor spends a moment in a section the
+  // robot reacts to what they are reading. Once per section, four per visit.
+  function showHint(section) {
+    if (!els.bubble || !HINTS[section] || hintShown >= 4) return false;
+    if (Date.now() < hintUntil) return false;
+    if (conversation.busy || els.popup.classList.contains('open')) return false;
+    if (els.stage && els.stage.dataset.state !== 'idle') return false;
+    hintSection = section;
+    hintUntil = Date.now() + 12000;
+    hintIntent = HINTS[section].intent || null;
+    hintShown += 1;
+    renderBubble('idle');
+    return true;
+  }
+
+  function maybeHint() {
+    const section = conversation.section;
+    if (!section || !HINTS[section] || seenSections.has(section)) return;
+    if (Date.now() - sectionAt > 120000) return;
+    if (!showHint(section)) return;
+    seenSections.add(section);
+  }
+
+  // The robot is at the top of the page, so the hint fires when it scrolls
+  // back into view: it picks up the topic of the section just browsed.
+  function initStageWatch() {
+    if (!('IntersectionObserver' in window) || !els.stage) return;
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[entries.length - 1];
+      if (entry && entry.isIntersecting && entry.intersectionRatio >= 0.5) maybeHint();
+    }, { threshold: [0.5] });
+    observer.observe(els.stage);
+  }
+
+  function initContextWatch() {
+    if (!('IntersectionObserver' in window)) return;
+    const ids = Object.keys(HINTS).concat(['testimonials']);
+    const nodes = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!nodes.length) return;
+    const ratios = new Map();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
+      let best = null;
+      let bestRatio = 0.3;
+      ratios.forEach((ratio, id) => {
+        if (ratio >= bestRatio) {
+          bestRatio = ratio;
+          best = id;
+        }
+      });
+      if (!best || best === conversation.section) return;
+      conversation.section = best;
+      sectionAt = Date.now();
+      memory.noteSection(best);
+    }, { threshold: [0.3, 0.55, 0.8], rootMargin: '-8% 0px -18% 0px' });
+    nodes.forEach((node) => observer.observe(node));
+  }
+
+  // Mood = short micro-expression on the mascot. It plays on top of the idle
+  // float animation (see assistant.css section 7) and clears itself.
+  function setMood(name, ms) {
+    if (!els.stage || reduceMotion.matches) return;
+    els.stage.dataset.mood = name;
+    if (moodTimer) clearTimeout(moodTimer);
+    moodTimer = setTimeout(() => {
+      moodTimer = null;
+      if (els.stage) delete els.stage.dataset.mood;
+    }, ms || 900);
+  }
+
+  // Idle micro-behaviour: with nobody pointing at the robot it still glances
+  // around once in a while, so the hero does not feel like a still image.
+  function initLookAround() {
+    if (!finePointer.matches || reduceMotion.matches || lookTimer) return;
+    lookTimer = setInterval(() => {
+      if (document.hidden || pointerInside || conversation.busy) return;
+      if (els.popup.classList.contains('open')) return;
+      if (els.stage.dataset.state !== 'idle') return;
+      const rect = els.stage.getBoundingClientRect();
+      if (!rect.width || rect.bottom < 40 || rect.top > window.innerHeight - 40) return;
+      els.stage.style.setProperty('--assist-tilt-y', (Math.random() * 12 - 6).toFixed(1) + 'deg');
+      els.stage.style.setProperty('--assist-tilt-x', (Math.random() * -3).toFixed(1) + 'deg');
+      setTimeout(() => {
+        if (pointerInside) return;
+        els.stage.style.setProperty('--assist-tilt-y', '0deg');
+        els.stage.style.setProperty('--assist-tilt-x', '0deg');
+      }, 1500);
+    }, 7000);
+  }
 
   function renderBubble(state) {
     if (!els.bubble) return;
+    const hint = state === 'idle' ? currentHintText() : null;
     const entry = UI.bubble[state];
     let text;
-    if (Array.isArray(entry)) {
+    if (hint) {
+      text = hint;
+    } else if (Array.isArray(entry)) {
       text = t(entry[bubbleIndex % entry.length]);
     } else {
       text = t(entry);
@@ -751,6 +1202,10 @@
   function cycleBubble() {
     if (!els.bubble) return;
     if (document.hidden) return;
+    if (hintUntil) {
+      if (Date.now() < hintUntil) return;
+      clearHint();
+    }
     if (els.stage && els.stage.dataset.state !== 'idle') return;
     bubbleIndex += 1;
     renderBubble('idle');
@@ -779,7 +1234,9 @@
         if (!frame) frame = requestAnimationFrame(() => update(event));
       };
       visual.addEventListener('pointermove', schedule, { passive: true });
+      visual.addEventListener('pointerenter', () => { pointerInside = true; });
       visual.addEventListener('pointerleave', () => {
+        pointerInside = false;
         els.stage.style.setProperty('--assist-tilt-y', '0deg');
         els.stage.style.setProperty('--assist-tilt-x', '0deg');
       });
@@ -795,10 +1252,26 @@
       startBubbleCycle();
     });
 
-    [els.robotBtn, els.bubble, els.cta].forEach((control) => {
+    [els.robotBtn, els.cta].forEach((control) => {
       if (!control) return;
       control.addEventListener('click', () => openChat());
     });
+
+    // The bubble can carry a section hint: clicking it opens the chat and
+    // lets the robot answer that hint topic right away.
+    if (els.bubble) {
+      els.bubble.addEventListener('click', () => {
+        const ask = hintIntent;
+        clearHint();
+        if (ask && els.popup.classList.contains('open')) {
+          openChat();
+          setTimeout(() => askProactive(ask), 420);
+        } else {
+          pendingAsk = ask || null;
+          openChat();
+        }
+      });
+    }
   }
 
   function stopBubbleCycle() {
@@ -825,10 +1298,22 @@
     els.cta.setAttribute('aria-label', open ? t(UI.ctaOpen) : t(UI.cta));
     if (els.robotBtn) els.robotBtn.setAttribute('aria-label', t(UI.robotLabel));
     setState(open ? (conversation.busy ? 'speaking' : 'listening') : 'idle');
+
+    if (open && !conversation.opened) {
+      conversation.opened = true;
+      setMood('greet', 1100);
+    }
+    if (open && pendingAsk) {
+      const ask = pendingAsk;
+      pendingAsk = null;
+      setTimeout(() => askProactive(ask), 700);
+    } else if (!open) {
+      pendingAsk = null;
+    }
   }
 
   /* ══════════════════════════════════════════════════════════════
-     7. EVENT WIRING
+     8. EVENT WIRING
      ══════════════════════════════════════════════════════════════ */
   if (els.send) {
     els.send.addEventListener('click', () => {
@@ -853,13 +1338,8 @@
       const button = event.target.closest('.chat-opt-btn');
       if (!button) return;
       const intent = BY_ID[button.dataset.intent];
-      const label = button.textContent.trim();
       if (!intent) return;
-      finishActiveStream();
-      makeBubble({ from: 'user', html: label });
-      announce(label);
-      conversation.lastIntent = intent;
-      askIntent(intent);
+      askExplicit(intent, button.textContent.trim());
     });
   }
 
@@ -887,17 +1367,22 @@
     if (els.input) els.input.setAttribute('placeholder', t(UI.inputPlaceholder));
     if (els.robotBtn) els.robotBtn.setAttribute('aria-label', t(UI.robotLabel));
     renderBubble((els.stage && els.stage.dataset.state) || 'idle');
+    renderIntro();
     if (conversation.lastIntent) renderFollowUps(conversation.lastIntent.follow);
-    if (els.options && !els.options.children.length) renderFollowUps(START_CHIPS);
+    if (els.options && !els.options.children.length) renderFollowUps(startChips());
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'data-language'] });
 
   function init() {
     if (els.input) els.input.setAttribute('placeholder', t(UI.inputPlaceholder));
     if (els.options) {
       els.options.innerHTML = '';
-      renderFollowUps(START_CHIPS);
+      renderFollowUps(startChips());
     }
+    renderIntro();
     initStage();
+    initContextWatch();
+    initStageWatch();
+    initLookAround();
     syncCtaState();
   }
 
@@ -911,6 +1396,13 @@
       return intent ? intent.id : 'fallback';
     },
     state: () => (els.stage ? els.stage.dataset.state : null),
-    voice
+    voice,
+    memory: () => JSON.parse(JSON.stringify(memory.data)),
+    context: () => ({
+      section: conversation.section,
+      lastIntent: conversation.lastIntent ? conversation.lastIntent.id : null,
+      hint: hintSection
+    }),
+    resetMemory: () => memory.reset()
   };
 }());
