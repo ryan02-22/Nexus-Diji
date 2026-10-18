@@ -17,6 +17,18 @@ html {
   scroll-padding-top: 145px;
 }
 
+@media (max-width: 1024px) {
+  html {
+    scroll-padding-top: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+}
+
 body {
   background: var(--bg);
   color: var(--text);

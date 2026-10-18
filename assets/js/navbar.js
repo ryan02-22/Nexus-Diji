@@ -25,41 +25,56 @@ export function initNavbar() {
   // Prevent body scroll lock conflicts
   let scrollPosition = 0;
 
+  // Cached state to eliminate layout thrashing
+  let cachedBannerHeight = -1;
+  let cachedScrolled = null;
+
   // Update navbar and mobile menu top position based on promo banner
-  function updateNavAndMenuTop() {
+  function updateNavAndMenuTop(force = false) {
     if (!navbar) return;
     const isHidden = !promoBanner || promoBanner.classList.contains('hidden');
     const bannerHeight = isHidden ? 0 : Math.round(promoBanner.getBoundingClientRect().height);
 
-    // Sync CSS variable so all CSS rules have exact value
-    document.documentElement.style.setProperty('--promo-banner-height', `${bannerHeight}px`);
+    // Sync CSS variable only when actual height changes
+    if (force || bannerHeight !== cachedBannerHeight) {
+      cachedBannerHeight = bannerHeight;
+      document.documentElement.style.setProperty('--promo-banner-height', `${bannerHeight}px`);
+    }
 
     const scrolled = window.scrollY > 50;
-    navbar.style.top = scrolled ? '0px' : `${bannerHeight}px`;
+    if (force || scrolled !== cachedScrolled) {
+      cachedScrolled = scrolled;
+      navbar.style.top = scrolled ? '0px' : `${bannerHeight}px`;
+    }
   }
 
-  updateNavAndMenuTop();
-  window.addEventListener('resize', updateNavAndMenuTop);
+  updateNavAndMenuTop(true);
+  window.addEventListener('resize', () => updateNavAndMenuTop(true), { passive: true });
 
   if (window.ResizeObserver && promoBanner) {
-    const promoRo = new ResizeObserver(() => updateNavAndMenuTop());
+    const promoRo = new ResizeObserver(() => updateNavAndMenuTop(true));
     promoRo.observe(promoBanner);
   }
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(updateNavAndMenuTop);
+    document.fonts.ready.then(() => updateNavAndMenuTop(true));
   }
-  window.addEventListener('load', updateNavAndMenuTop);
+  window.addEventListener('load', () => updateNavAndMenuTop(true), { passive: true });
 
-  // Scroll handler for navbar state
+  // Scroll handler for navbar state with rAF throttling and passive listener
   let lastScrollY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 50;
-    if (navbar) navbar.classList.toggle('scrolled', scrolled);
-    if (promoBanner) promoBanner.classList.toggle('hidden', scrolled);
-    updateNavAndMenuTop();
+  let scrollTicking = false;
+
+  function handleNavbarScroll() {
+    const currentScrollY = window.scrollY;
+    const scrolled = currentScrollY > 50;
+
+    if (scrolled !== cachedScrolled) {
+      if (navbar) navbar.classList.toggle('scrolled', scrolled);
+      if (promoBanner) promoBanner.classList.toggle('hidden', scrolled);
+      updateNavAndMenuTop();
+    }
 
     // Detect scroll direction for FAB
-    const currentScrollY = window.scrollY;
     const scrollingDown = currentScrollY > lastScrollY;
     lastScrollY = currentScrollY;
 
@@ -69,9 +84,20 @@ export function initNavbar() {
       if (scrollingDown && currentScrollY > 200) {
         fab.classList.remove('visible');
         fab.classList.add('collapsed');
+      } else if (!scrollingDown && currentScrollY > 200) {
+        fab.classList.remove('collapsed');
+        fab.classList.add('visible');
       }
     }
-  });
+    scrollTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(handleNavbarScroll);
+      scrollTicking = true;
+    }
+  }, { passive: true });
 
   // Mobile menu functionality with improved UX
   if (hamburgerBtn && mobileMenu && closeMenuBtn) {

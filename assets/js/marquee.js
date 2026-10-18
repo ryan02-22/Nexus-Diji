@@ -48,13 +48,14 @@ function initPortfolioShowcase() {
 
     // Calculate card layout in 3D Arc perspective (Matching Image 2)
     function updateLayout() {
-      const isMobile = window.innerWidth <= 768;
-      const isTablet = window.innerWidth <= 1080 && !isMobile;
+      const isSmallMobile = window.innerWidth <= 420;
+      const isMobile = window.innerWidth <= 768 && !isSmallMobile;
+      const isTablet = window.innerWidth <= 1080 && !isMobile && !isSmallMobile;
 
       // Spacing constants based on viewport width for tight overlapping arc
-      const x1 = isMobile ? 135 : (isTablet ? 175 : 215);
-      const x2 = isMobile ? 255 : (isTablet ? 335 : 415);
-      const xFar = isMobile ? 380 : (isTablet ? 500 : 640);
+      const x1 = isSmallMobile ? 88 : (isMobile ? 135 : (isTablet ? 175 : 215));
+      const x2 = isSmallMobile ? 165 : (isMobile ? 255 : (isTablet ? 335 : 415));
+      const xFar = isSmallMobile ? 240 : (isMobile ? 380 : (isTablet ? 500 : 640));
 
       cards.forEach((card, i) => {
         let diff = (i - activeIndex) % totalCards;
@@ -67,34 +68,34 @@ function initPortfolioShowcase() {
         card.classList.toggle('is-active', absDiff === 0);
 
         if (absDiff === 0) {
-          // 1. Center Active Card (Image 2 style: elevated, highest, flat facing front)
-          const scale = isMobile ? 1.02 : 1.06;
+          // 1. Center Active Card
+          const scale = isSmallMobile ? 0.98 : (isMobile ? 1.02 : 1.06);
           card.style.transform = `translate3d(0px, -12px, 80px) rotateY(0deg) rotateZ(0deg) scale(${scale})`;
           card.style.opacity = '1';
           card.style.zIndex = '10';
           card.style.pointerEvents = 'auto';
         } else if (absDiff === 1) {
-          // 2. Immediate left / right cards (tilted in 3D convex arc, partially behind center)
-          const yOffset = isMobile ? 14 : 20;
-          const rotY = isMobile ? 20 : 25;
-          const rotZ = isMobile ? 3 : 4;
-          const scale = isMobile ? 0.88 : 0.91;
+          // 2. Immediate left / right cards
+          const yOffset = (isMobile || isSmallMobile) ? 14 : 20;
+          const rotY = (isMobile || isSmallMobile) ? 20 : 25;
+          const rotZ = (isMobile || isSmallMobile) ? 3 : 4;
+          const scale = isSmallMobile ? 0.82 : (isMobile ? 0.88 : 0.91);
 
           card.style.transform = `translate3d(${sign * x1}px, ${yOffset}px, -15px) rotateY(${-sign * rotY}deg) rotateZ(${sign * rotZ}deg) scale(${scale})`;
           card.style.opacity = '0.94';
           card.style.zIndex = '8';
           card.style.pointerEvents = 'auto';
         } else if (absDiff === 2) {
-          // 3. Outer left / right cards (further tilted & curved downwards, matching Image 2)
-          const yOffset = isMobile ? 32 : 48;
-          const rotY = isMobile ? 32 : 40;
-          const rotZ = isMobile ? 6 : 8;
-          const scale = isMobile ? 0.76 : 0.81;
+          // 3. Outer left / right cards
+          const yOffset = (isMobile || isSmallMobile) ? 32 : 48;
+          const rotY = (isMobile || isSmallMobile) ? 32 : 40;
+          const rotZ = (isMobile || isSmallMobile) ? 6 : 8;
+          const scale = isSmallMobile ? 0.68 : (isMobile ? 0.76 : 0.81);
 
           card.style.transform = `translate3d(${sign * x2}px, ${yOffset}px, -70px) rotateY(${-sign * rotY}deg) rotateZ(${sign * rotZ}deg) scale(${scale})`;
-          card.style.opacity = isMobile ? '0.4' : '0.82';
+          card.style.opacity = isSmallMobile ? '0' : (isMobile ? '0.4' : '0.82');
           card.style.zIndex = '6';
-          card.style.pointerEvents = 'auto';
+          card.style.pointerEvents = isSmallMobile ? 'none' : 'auto';
         } else {
           // 4. Far hidden cards
           const farSign = sign || 1;

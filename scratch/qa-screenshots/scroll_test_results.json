@@ -1,0 +1,320 @@
+{
+  "desktop": {
+    "viewport": {
+      "name": "desktop",
+      "width": 1920,
+      "height": 1080,
+      "mobile": false,
+      "dpr": 1
+    },
+    "initCheck": {
+      "windowInnerWidth": 1920,
+      "windowInnerHeight": 1080,
+      "scrollHeight": 8828,
+      "scrollWidth": 1905,
+      "hasHorizontalOverflow": false,
+      "overflowingElements": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "cta-orb cta-orb-2",
+          "right": 1985,
+          "excess": 65
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--cyan-aurora",
+          "right": 2174,
+          "excess": 254
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--cyan",
+          "right": 2125,
+          "excess": 205
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--dark-prism",
+          "right": 2125,
+          "excess": 205
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--violet",
+          "right": 2125,
+          "excess": 205
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--blue",
+          "right": 2125,
+          "excess": 205
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--aurora",
+          "right": 2125,
+          "excess": 205
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "scroll-atmosphere scroll-atmosphere--dark-horizon",
+          "right": 2125,
+          "excess": 205
+        }
+      ],
+      "navbarTop": 42,
+      "navbarPosition": "fixed",
+      "promoBannerVisible": true
+    },
+    "scrollResult": {
+      "totalHeight": 7748,
+      "finalScrollY": 7748
+    },
+    "footerCheck": {
+      "isAtBottom": true,
+      "scrollY": 7748,
+      "footerVisible": true,
+      "footerTop": 961,
+      "backToTopButton": {
+        "exists": true,
+        "visible": true,
+        "clickable": true
+      }
+    },
+    "backToTopResult": {
+      "returnedToTop": true,
+      "finalY": 0,
+      "attempts": 32
+    }
+  },
+  "tablet": {
+    "viewport": {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024,
+      "mobile": true,
+      "dpr": 2
+    },
+    "initCheck": {
+      "windowInnerWidth": 768,
+      "windowInnerHeight": 1024,
+      "scrollHeight": 12132,
+      "scrollWidth": 768,
+      "hasHorizontalOverflow": false,
+      "overflowingElements": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "cta-orb cta-orb-2",
+          "right": 848,
+          "excess": 80
+        }
+      ],
+      "navbarTop": 48,
+      "navbarPosition": "fixed",
+      "promoBannerVisible": true
+    },
+    "scrollResult": {
+      "totalHeight": 11108,
+      "finalScrollY": 11108
+    },
+    "footerCheck": {
+      "isAtBottom": true,
+      "scrollY": 11108,
+      "footerVisible": true,
+      "footerTop": 875,
+      "backToTopButton": {
+        "exists": true,
+        "visible": true,
+        "clickable": true
+      }
+    },
+    "backToTopResult": {
+      "returnedToTop": true,
+      "finalY": 0,
+      "attempts": 19
+    }
+  },
+  "mobile": {
+    "viewport": {
+      "name": "mobile",
+      "width": 375,
+      "height": 667,
+      "mobile": true,
+      "dpr": 2
+    },
+    "initCheck": {
+      "windowInnerWidth": 375,
+      "windowInnerHeight": 667,
+      "scrollHeight": 14254,
+      "scrollWidth": 375,
+      "hasHorizontalOverflow": false,
+      "overflowingElements": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-ambient-orb card-ambient-orb--violet",
+          "right": 388,
+          "excess": 13
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-ambient-orb card-ambient-orb--br",
+          "right": 398,
+          "excess": 23
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "cta-orb cta-orb-2",
+          "right": 455,
+          "excess": 80
+        }
+      ],
+      "navbarTop": 52,
+      "navbarPosition": "fixed",
+      "promoBannerVisible": true
+    },
+    "scrollResult": {
+      "totalHeight": 13587,
+      "finalScrollY": 13586.400390625
+    },
+    "footerCheck": {
+      "isAtBottom": true,
+      "scrollY": 13586.400390625,
+      "footerVisible": true,
+      "footerTop": 500,
+      "backToTopButton": {
+        "exists": true,
+        "visible": true,
+        "clickable": true
+      }
+    },
+    "backToTopResult": {
+      "returnedToTop": true,
+      "finalY": 0,
+      "attempts": 34
+    }
+  },
+  "small-mobile": {
+    "viewport": {
+      "name": "small-mobile",
+      "width": 320,
+      "height": 568,
+      "mobile": true,
+      "dpr": 2
+    },
+    "initCheck": {
+      "windowInnerWidth": 320,
+      "windowInnerHeight": 568,
+      "scrollHeight": 15069,
+      "scrollWidth": 320,
+      "hasHorizontalOverflow": false,
+      "overflowingElements": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "stage-orbit-wrap",
+          "right": 325,
+          "excess": 5
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "stage-orbit-ring",
+          "right": 323,
+          "excess": 3
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-ambient-orb card-ambient-orb--violet",
+          "right": 333,
+          "excess": 13
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-ambient-orb card-ambient-orb--br",
+          "right": 343,
+          "excess": 23
+        },
+        {
+          "tag": "ARTICLE",
+          "id": "",
+          "className": "portfolio-3d-card",
+          "right": 387,
+          "excess": 67
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-media",
+          "right": 387,
+          "excess": 67
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "className": "",
+          "right": 387,
+          "excess": 67
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "card-overlay",
+          "right": 387,
+          "excess": 67
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "className": "card-tag",
+          "right": 347,
+          "excess": 27
+        },
+        {
+          "tag": "H3",
+          "id": "",
+          "className": "card-title",
+          "right": 359,
+          "excess": 39
+        }
+      ],
+      "navbarTop": 95,
+      "navbarPosition": "fixed",
+      "promoBannerVisible": true
+    },
+    "scrollResult": {
+      "totalHeight": 14501,
+      "finalScrollY": 14500.7998046875
+    },
+    "footerCheck": {
+      "isAtBottom": true,
+      "scrollY": 14500.7998046875,
+      "footerVisible": true,
+      "footerTop": 405,
+      "backToTopButton": {
+        "exists": true,
+        "visible": true,
+        "clickable": true
+      }
+    },
+    "backToTopResult": {
+      "returnedToTop": true,
+      "finalY": 0,
+      "attempts": 25
+    }
+  }
+}
