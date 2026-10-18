@@ -100,7 +100,7 @@
       phrases: ['harga website', 'biaya website', 'harga bikin website', 'harga buat website', 'harga bikin web', 'paket website', 'harga pembuatan website', 'berapa biaya', 'list harga', 'daftar harga', 'price list', 'pricelist', 'website price', 'website pricing', 'website cost', 'cost of a website', 'how much does a website cost', 'how much for a website'],
       tokens: ['harga', 'biaya', 'tarif', 'paket', 'price', 'cost', 'budget', 'starter', 'profesional', 'enterprise', 'murah', 'rp'],
       answer: {
-        id: 'Paket website: Starter Rp 500rb (landing page 1 halaman, gratis 2x revisi, selesai 3-5 hari kerja), Profesional Rp 2jt (multi-halaman, desain custom, CMS, SEO on-page, support 1 bulan), Enterprise custom (web app atau sistem, integrasi API dan database, support 3 bulan). Semua paket sudah termasuk revisi dan garansi.',
+        id: 'Paket website: Starter Rp 500.000 (landing page 1 halaman, gratis 2x revisi, selesai 3-5 hari kerja), Profesional Rp 2.000.000 (multi-halaman, desain custom, CMS, SEO on-page, support 1 bulan), Enterprise custom (web app atau sistem, integrasi API dan database, support 3 bulan). Semua paket sudah termasuk revisi dan garansi.',
         en: 'Website plans: Starter IDR 500k (one landing page, 2 free revisions, ready in 3 to 5 working days), Professional IDR 2M (multi-page, custom design, CMS, on-page SEO, 1 month support), Enterprise custom (web app or system, API and database integration, 3 months support). Every plan includes revisions and a warranty.'
       },
       links: [
@@ -116,7 +116,7 @@
       phrases: ['harga servis', 'biaya servis', 'servis laptop', 'service laptop', 'servis pc', 'service pc', 'servis komputer', 'laptop lemot', 'laptop rusak', 'komputer rusak', 'blue screen', 'instalasi os', 'install ulang', 'upgrade ram', 'ganti ssd', 'upgrade ssd', 'kena virus', 'recovery data', 'data hilang', 'laptop panas', 'fan berisik', 'laptop repair', 'pc repair', 'computer repair', 'repair cost', 'repair price'],
       tokens: ['servis', 'service', 'laptop', 'pc', 'komputer', 'ram', 'ssd', 'virus', 'instalasi', 'install', 'recovery', 'optimasi', 'reparasi', 'perbaikan', 'repair'],
       answer: {
-        id: 'Tarif servis perangkat: instalasi OS mulai Rp 100rb, upgrade RAM atau SSD mulai Rp 150rb, virus removal mulai Rp 75rb, recovery data mulai Rp 200rb, optimasi performa mulai Rp 50rb, dan service lengkap mulai Rp 300rb. Perangkat dicek dulu sebelum dikerjakan, jadi tidak ada biaya tersembunyi.',
+        id: 'Tarif servis perangkat: instalasi OS mulai Rp 100.000, upgrade RAM atau SSD mulai Rp 150.000, virus removal mulai Rp 75.000, recovery data mulai Rp 200.000, optimasi performa mulai Rp 50.000, dan service lengkap mulai Rp 300.000. Perangkat dicek dulu sebelum dikerjakan, jadi tidak ada biaya tersembunyi.',
         en: 'Repair rates: OS installation from IDR 100k, RAM or SSD upgrade from IDR 150k, virus removal from IDR 75k, data recovery from IDR 200k, performance tuning from IDR 50k, and a full service from IDR 300k. We inspect the device first, so there are no hidden fees.'
       },
       links: [
@@ -131,7 +131,7 @@
       tokens: ['harga', 'biaya', 'tarif'],
       group: 'harga',
       answer: {
-        id: 'Ada dua area harga: pembuatan website mulai Rp 500rb per proyek, dan servis PC atau laptop mulai Rp 50rb. Mau aku rincikan yang mana dulu?',
+        id: 'Ada dua area harga: pembuatan website mulai Rp 500.000 per proyek, dan servis PC atau laptop mulai Rp 50.000. Mau aku rincikan yang mana dulu?',
         en: 'There are two price areas: website development from IDR 500k per project, and PC or laptop repair from IDR 50k. Which one should I break down first?'
       },
       follow: ['harga_website', 'harga_servis', 'konsultasi']
@@ -307,7 +307,7 @@
       phrases: ['kenapa pilih', 'mengapa harus', 'keunggulan', 'kelebihan', 'bedanya', 'kenapa nexus', 'alasan memilih', 'kenapa kalian'],
       tokens: ['keunggulan', 'kelebihan', 'alasan', 'kenapa', 'mengapa', 'beda', 'unggul'],
       answer: {
-        id: 'Tiga alasan: website, aplikasi, dan servis perangkat ditangani satu tim; harga transparan dengan titik awal Rp 500rb untuk website dan Rp 50rb untuk servis; dan komunikasi terbuka dengan update rutin plus garansi setelah proyek selesai.',
+        id: 'Tiga alasan: website, aplikasi, dan servis perangkat ditangani satu tim; harga transparan dengan titik awal Rp 500.000 untuk website dan Rp 50.000 untuk servis; dan komunikasi terbuka dengan update rutin plus garansi setelah proyek selesai.',
         en: 'Three reasons: websites, apps, and device repair are handled by one team; pricing is transparent starting at IDR 500k for a site and IDR 50k for repair; and communication stays open with regular updates plus a post-launch warranty.'
       },
       follow: ['portofolio', 'konsultasi']
