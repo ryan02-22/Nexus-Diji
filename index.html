@@ -1911,14 +1911,17 @@
         <span class="tool-tooltip">Nexus AI Chat</span>
       </button>
       <!-- FAQ/Help Icon -->
-      <button class="tool-btn" id="overlayHelpBtn" aria-label="Buka Menu Bantuan">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-          <line x1="12" y1="17" x2="12.01" y2="17"></line>
-        </svg>
-        <span class="tool-tooltip">Bantuan</span>
+      <button class="tool-btn tool-btn--help" id="overlayHelpBtn" aria-label="Buka Menu Bantuan" title="Pusat Bantuan">
+        <div class="help-avatar-dock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <span class="help-dock-pulse" aria-hidden="true"></span>
+        </div>
+        <span class="tool-tooltip">Pusat Bantuan</span>
       </button>
       <!-- WhatsApp Icon -->
       <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20ingin%20konsultasi" class="tool-btn"
@@ -1949,50 +1952,293 @@
 
   <!-- ══ NEXUS ASSISTANT CHATBOT ══ -->
 
-  <!-- Help Popup HTML -->
-  <aside id="helpPopup" role="dialog" aria-label="Pusat Bantuan">
+  <!-- ══ NEXUS HELP & SUPPORT HUB ══ -->
+  <aside id="helpPopup" class="nexus-help-popup" role="dialog" aria-label="Pusat Bantuan &amp; FAQ Nexus Diji" aria-modal="true" aria-hidden="true">
+    <!-- Header -->
     <div class="help-header">
-      <div class="help-avatar">💡</div>
-      <div class="help-header-info">
-        <strong>Pusat Bantuan</strong>
-        <span>Nexus Diji Support</span>
+      <div class="help-header-main">
+        <div class="help-avatar-wrap">
+          <div class="help-avatar-glow"></div>
+          <div class="help-avatar-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <span class="help-online-badge" title="Support Siaga"></span>
+        </div>
+        <div class="help-header-meta">
+          <div class="help-name-row">
+            <strong class="help-title-text">Pusat Bantuan</strong>
+            <span class="help-tag-pill">Support 24/7</span>
+          </div>
+          <span class="help-subtitle">
+            <span class="help-live-point"></span>
+            Siaga &bull; Panduan Layanan &amp; FAQ Cepat
+          </span>
+        </div>
       </div>
-      <button id="helpCloseBtn" aria-label="Tutup bantuan">&times;</button>
+      <button id="helpCloseBtn" class="help-ctrl-btn help-close-btn" aria-label="Tutup Bantuan" title="Tutup Bantuan">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
-    <div class="help-body">
-      <p>Pilih topik bantuan di bawah ini:</p>
 
-      <button class="help-opt-btn" data-section="services">
-        <div class="help-opt-icon">🛠️</div>
-        <div class="help-opt-text">
-          <strong>Detail Layanan</strong>
-          <span>Apa saja yang bisa kami bantu?</span>
-        </div>
-      </button>
+    <!-- Quick Info Ribbon -->
+    <div class="help-notice-ribbon">
+      <span class="ribbon-icon">💡</span>
+      <span class="ribbon-text">Panduan praktis pembuatan website, aplikasi &amp; servis laptop/PC</span>
+    </div>
 
-      <button class="help-opt-btn" data-section="pricing">
-        <div class="help-opt-icon">💰</div>
-        <div class="help-opt-text">
-          <strong>Paket Harga</strong>
-          <span>Estimasi biaya proyek</span>
-        </div>
+    <!-- Category Nav Tabs -->
+    <div class="help-nav-tabs" role="tablist">
+      <button type="button" class="help-tab-btn active" data-tab="workflow" role="tab" aria-selected="true">
+        <span>🚀</span> Alur Proyek
       </button>
+      <button type="button" class="help-tab-btn" data-tab="faq" role="tab" aria-selected="false">
+        <span>❓</span> FAQ Populer
+      </button>
+      <button type="button" class="help-tab-btn" data-tab="warranty" role="tab" aria-selected="false">
+        <span>🛡️</span> Garansi &amp; Biaya
+      </button>
+      <button type="button" class="help-tab-btn" data-tab="estimator" role="tab" aria-selected="false">
+        <span>⚡</span> Estimasi Kilat
+      </button>
+    </div>
 
-      <button class="help-opt-btn" data-section="why">
-        <div class="help-opt-icon">🎯</div>
-        <div class="help-opt-text">
-          <strong>Kenapa Penting?</strong>
-          <span>Mengapa bisnis butuh ini?</span>
+    <!-- Help Body with Scrollable Content -->
+    <div class="help-body" id="helpBody">
+      <!-- Tab 1: Alur Kerja / Workflow -->
+      <div class="help-tab-pane active" id="helpTabWorkflow">
+        <div class="help-section-intro">
+          <h4>🚀 4 Langkah Mudah Realisasi Proyek</h4>
+          <p>Proses transparan, cepat, dan profesional bersama tim ahli Nexus Diji:</p>
         </div>
-      </button>
 
-      <button class="help-opt-btn" data-section="faq">
-        <div class="help-opt-icon">❓</div>
-        <div class="help-opt-text">
-          <strong>FAQ Cepat</strong>
-          <span>Pertanyaan yang sering diajukan</span>
+        <div class="help-timeline">
+          <div class="timeline-step">
+            <div class="step-num">1</div>
+            <div class="step-info">
+              <strong>Konsultasi Kebutuhan &amp; Konsep (100% Gratis)</strong>
+              <p>Ceritakan ide website, aplikasi custom, atau kendala laptop Anda via chat WhatsApp atau AI Chatbot kami. Diskusi bebas biaya!</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-num">2</div>
+            <div class="step-info">
+              <strong>Estimasi Biaya &amp; Proposal Transparan (&lt; 24 Jam)</strong>
+              <p>Kami kirimkan rincian spesifikasi teknis, estimasi timeline, dan penawaran harga pasti tanpa biaya siluman.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-num">3</div>
+            <div class="step-info">
+              <strong>Development Kilat &amp; Live Staging Preview</strong>
+              <p>Proyek dikerjakan dengan standar teknologi modern (Next.js, Tailwind, Flutter). Anda bisa memantau progress secara berkala lewat link staging.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-num">4</div>
+            <div class="step-info">
+              <strong>Peluncuran, Training &amp; Garansi Maintenance 30 Hari</strong>
+              <p>Serah terima akun, domain, dan video panduan admin, ditambah pendampingan garansi maintenance 30 hari gratis.</p>
+            </div>
+          </div>
         </div>
-      </button>
+      </div>
+
+      <!-- Tab 2: FAQ Populer -->
+      <div class="help-tab-pane" id="helpTabFaq">
+        <div class="help-section-intro">
+          <h4>❓ Pertanyaan yang Sering Diajukan</h4>
+          <p>Jawaban cepat untuk hal-hal yang sering ditanyakan klien kami:</p>
+        </div>
+
+        <div class="help-accordion">
+          <details class="help-acc-item" open>
+            <summary class="help-acc-trigger">
+              <span>🌐 Berapa lama pengerjaan website sampai selesai?</span>
+              <span class="acc-chevron">›</span>
+            </summary>
+            <div class="help-acc-body">
+              Landing page kilat rata-rata selesai dalam <strong>3–5 hari kerja</strong>. Website Company Profile atau Toko Online berkisar <strong>7–14 hari</strong> tergantung kelengkapan konten dan fitur yang diminta.
+            </div>
+          </details>
+
+          <details class="help-acc-item">
+            <summary class="help-acc-trigger">
+              <span>💻 Laptop overheat dan sering mati sendiri, diapakan?</span>
+              <span class="acc-chevron">›</span>
+            </summary>
+            <div class="help-acc-body">
+              Kami lakukan pembersihan total debu exhaust fan dan pergantian <strong>thermal paste Grizzly Kryonaut premium</strong>. Pengerjaan <strong>bisa ditunggu (1–2 jam)</strong> dan suhu laptop kembali adem normal!
+            </div>
+          </details>
+
+          <details class="help-acc-item">
+            <summary class="help-acc-trigger">
+              <span>💳 Bagaimana sistem pembayaran proyek?</span>
+              <span class="acc-chevron">›</span>
+            </summary>
+            <div class="help-acc-body">
+              Sistem pembayaran sangat aman: <strong>DP 50%</strong> saat kesepakatan pengerjaan, dan pelunasan <strong>50%</strong> setelah website/aplikasi siap live dan Anda puas dengan hasilnya.
+            </div>
+          </details>
+
+          <details class="help-acc-item">
+            <summary class="help-acc-trigger">
+              <span>📱 Apakah aplikasi mendukung Android &amp; iOS?</span>
+              <span class="acc-chevron">›</span>
+            </summary>
+            <div class="help-acc-body">
+              Tentu! Kami menggunakan framework modern seperti Flutter dan React Native, sehingga satu basis kode siap dirilis di Google Play Store dan Apple App Store secara optimal.
+            </div>
+          </details>
+
+          <details class="help-acc-item">
+            <summary class="help-acc-trigger">
+              <span>🎁 Apakah sudah gratis domain dan hosting?</span>
+              <span class="acc-chevron">›</span>
+            </summary>
+            <div class="help-acc-body">
+              Ya! Seluruh paket pembuatan website sudah termasuk gratis domain pilihan (`.com` / `.my.id` / `.id`), server Cloud SSD super cepat, dan sertifikat SSL HTTPS selama 1 tahun pertama.
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Tab 3: Garansi & Biaya -->
+      <div class="help-tab-pane" id="helpTabWarranty">
+        <div class="help-section-intro">
+          <h4>🛡️ Jaminan Kualitas &amp; Estimasi Paket</h4>
+          <p>Komitmen keamanan, transparansi harga, dan layanan purna jual Nexus Diji:</p>
+        </div>
+
+        <div class="help-warranty-grid">
+          <div class="warranty-card">
+            <div class="warranty-badge-icon">🛡️</div>
+            <div class="warranty-meta">
+              <strong>Garansi Bebas Bug 30 Hari</strong>
+              <p>Revisi dan penanganan error pasca-launching gratis 100% tanpa biaya tambahan.</p>
+            </div>
+          </div>
+          <div class="warranty-card">
+            <div class="warranty-badge-icon">⚙️</div>
+            <div class="warranty-meta">
+              <strong>Garansi Servis Hardware (30–90 Hari)</strong>
+              <p>Jaminan kualitas sparepart SSD, RAM, baterai, dan kestabilan sistem OS.</p>
+            </div>
+          </div>
+          <div class="warranty-card">
+            <div class="warranty-badge-icon">🎁</div>
+            <div class="warranty-meta">
+              <strong>Gratis Domain &amp; Cloud Hosting</strong>
+              <p>Semua paket website sudah termasuk domain `.my.id`/`.com` dan server cloud 1 tahun pertama.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="help-price-summary">
+          <div class="price-row">
+            <span>Website Starter</span>
+            <strong>Rp 499.000</strong>
+          </div>
+          <div class="price-row">
+            <span>Company Profile Pro</span>
+            <strong>Rp 899.000 - Rp 1.499.000</strong>
+          </div>
+          <div class="price-row">
+            <span>Aplikasi Custom / POS</span>
+            <strong>Rp 1.499.000 - Rp 4.999.000</strong>
+          </div>
+          <div class="price-row">
+            <span>Servis &amp; Upgrade Laptop</span>
+            <strong>Mulai Rp 50.000</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Estimasi Kilat & Konsultasi Cepat -->
+      <div class="help-tab-pane" id="helpTabEstimator">
+        <div class="help-section-intro">
+          <h4>⚡ Kalkulator Estimasi Kilat</h4>
+          <p>Pilih kebutuhan Anda untuk estimasi durasi dan paket terbaik:</p>
+        </div>
+
+        <div class="help-estimator-box">
+          <div class="estimator-option-cards">
+            <button type="button" class="estimator-card active" data-service="Landing Page" data-time="3–5 Hari Kerja" data-price="Mulai Rp 499.000">
+              <span class="est-icon">🌐</span>
+              <div class="est-meta">
+                <strong>Landing Page</strong>
+                <span>3–5 Hari &bull; Mulai Rp 499rb</span>
+              </div>
+            </button>
+            <button type="button" class="estimator-card" data-service="Company Profile" data-time="7–10 Hari Kerja" data-price="Mulai Rp 899.000">
+              <span class="est-icon">🏢</span>
+              <div class="est-meta">
+                <strong>Company Profile</strong>
+                <span>7–10 Hari &bull; Mulai Rp 899rb</span>
+              </div>
+            </button>
+            <button type="button" class="estimator-card" data-service="Aplikasi Mobile" data-time="14–21 Hari Kerja" data-price="Mulai Rp 2.499.000">
+              <span class="est-icon">📱</span>
+              <div class="est-meta">
+                <strong>Aplikasi Mobile</strong>
+                <span>14–21 Hari &bull; Mulai Rp 2,49jt</span>
+              </div>
+            </button>
+            <button type="button" class="estimator-card" data-service="Servis & Tune-up Laptop" data-time="1–2 Jam (Bisa Ditunggu)" data-price="Mulai Rp 50.000">
+              <span class="est-icon">💻</span>
+              <div class="est-meta">
+                <strong>Servis &amp; Laptop</strong>
+                <span>1–2 Jam &bull; Mulai Rp 50rb</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="estimator-result-panel" id="estimatorResultPanel">
+            <div class="est-result-row">
+              <span>Layanan Terpilih:</span>
+              <strong id="estSelectedService">Landing Page</strong>
+            </div>
+            <div class="est-result-row">
+              <span>Estimasi Waktu:</span>
+              <span class="est-tag est-tag--time" id="estSelectedTime">⚡ 3–5 Hari Kerja</span>
+            </div>
+            <div class="est-result-row">
+              <span>Estimasi Budget:</span>
+              <span class="est-tag est-tag--price" id="estSelectedPrice">Mulai Rp 499.000</span>
+            </div>
+            <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20tertarik%20dengan%20estimasi%20layanan%20Landing%20Page" class="est-submit-btn" id="estConsultBtn" target="_blank" rel="noopener">
+              <span>Klaim Konsultasi &amp; Promo Sekarang</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Action Footer -->
+    <div class="help-footer">
+      <div class="help-direct-actions">
+        <button type="button" class="help-action-btn help-action-btn--chat" id="helpSwitchToChatBtn">
+          <img src="./assets/images/robot-nd.webp" alt="Nexus Mascot" width="22" height="22">
+          <span>Tanya Nexus AI</span>
+        </button>
+        <a href="https://wa.me/6285711171508?text=Halo%20Nexus%20Diji%2C%20saya%20butuh%20bantuan%20dan%20konsultasi" class="help-action-btn help-action-btn--wa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          <span>Chat via WhatsApp</span>
+        </a>
+      </div>
+      <div class="help-legal-note">
+        Konsultasi 100% Gratis &bull; Nexus Diji Official Support
+      </div>
     </div>
   </aside>
 
@@ -2010,7 +2256,7 @@
         </div>
         <div class="chat-header-meta">
           <div class="chat-name-row">
-            <strong class="chat-bot-name">Nexus AI Assistant</strong>
+            <strong class="chat-bot-name">Nexus AI</strong>
             <span class="chat-tag-pill">AI 2.0</span>
           </div>
           <span class="chat-subtitle">
@@ -2020,6 +2266,14 @@
         </div>
       </div>
       <div class="chat-header-ctrls">
+        <button id="chatSwitchToHelpBtn" class="chat-ctrl-btn chat-help-switch-btn" aria-label="Buka Pusat Bantuan &amp; FAQ"
+          title="Buka Pusat Bantuan &amp; Panduan">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
         <button id="chatResetBtn" class="chat-ctrl-btn" aria-label="Mulai Ulang Percakapan"
           title="Mulai Ulang Percakapan">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -2061,7 +2315,7 @@
     <div class="chat-footer">
       <form class="chat-form" id="chatForm" onsubmit="return false;">
         <div class="chat-input-wrapper">
-          <input type="text" id="chatInput" placeholder="Ketik pertanyaan anda disini..." autocomplete="off">
+          <input type="text" id="chatInput" placeholder="Ketik pertanyaan anda" autocomplete="off">
           <button type="submit" class="chat-send-btn" id="chatSendBtn" aria-label="Kirim Pesan" title="Kirim">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
               <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
