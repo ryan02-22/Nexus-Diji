@@ -1,0 +1,302 @@
+{
+  "generated": "2026-10-20",
+  "source": "assets/js/assistant.js",
+  "usage": "Rekam atau generate klip untuk tiap entri, lalu simpan dengan nama file yang sama di folder ini. Klip hanya diputar untuk jawaban tetap; jawaban dinamis memakai TTS browser.",
+  "format": "MP3 mono 44.1 kHz 96-128 kbps, tanpa musik latar, volume konsisten",
+  "clips": [
+    {
+      "key": "answer.greeting.id",
+      "intent": "greeting",
+      "lang": "id",
+      "file": "greeting-id.mp3",
+      "text": "Hai! Aku Robot ND, asisten Nexus Diji. Aku bisa jelasin layanan, harga, lama pengerjaan, sampai servis perangkat. Mau mulai dari mana?"
+    },
+    {
+      "key": "answer.greeting.en",
+      "intent": "greeting",
+      "lang": "en",
+      "file": "greeting-en.mp3",
+      "text": "Hi! I am Robot ND, the Nexus Diji assistant. I can explain our services, pricing, timelines, and device repair. Where should we start?"
+    },
+    {
+      "key": "answer.layanan.id",
+      "intent": "layanan",
+      "lang": "id",
+      "file": "layanan-id.mp3",
+      "text": "Ada tiga layanan utama: pembuatan website (landing page, company profile, toko online, blog), pembuatan aplikasi (web app, mobile app, dashboard), dan servis PC atau laptop (instalasi OS, upgrade RAM/SSD, virus removal, recovery data, optimasi). Mau aku jelaskan yang mana?"
+    },
+    {
+      "key": "answer.layanan.en",
+      "intent": "layanan",
+      "lang": "en",
+      "file": "layanan-en.mp3",
+      "text": "Three main services: website development (landing page, company profile, online store, blog), app development (web app, mobile app, dashboard), and PC or laptop repair (OS install, RAM/SSD upgrade, virus removal, data recovery, performance tuning). Which one should I explain?"
+    },
+    {
+      "key": "answer.jenis_website.id",
+      "intent": "jenis_website",
+      "lang": "id",
+      "file": "jenis_website-id.mp3",
+      "text": "Kami biasa mengerjakan empat jenis website: landing page untuk satu penawaran, company profile untuk profil bisnis, toko online untuk jualan, dan blog untuk konten. Kalau butuh fitur khusus seperti booking atau dashboard, bisa masuk paket Enterprise. Kira-kira butuh yang mana?"
+    },
+    {
+      "key": "answer.jenis_website.en",
+      "intent": "jenis_website",
+      "lang": "en",
+      "file": "jenis_website-en.mp3",
+      "text": "We usually build four kinds of sites: a landing page for one focused offer, a company profile for your business, an online store for selling, and a blog for content. Features like booking or dashboards go into the Enterprise plan. Which one fits you?"
+    },
+    {
+      "key": "answer.harga_website.id",
+      "intent": "harga_website",
+      "lang": "id",
+      "file": "harga_website-id.mp3",
+      "text": "Paket website: Starter Rp 500.000 (landing page 1 halaman, gratis 2x revisi, selesai 3-5 hari kerja), Profesional Rp 2.000.000 (multi-halaman, desain custom, CMS, SEO on-page, support 1 bulan), Enterprise custom (web app atau sistem, integrasi API dan database, support 3 bulan). Semua paket sudah termasuk revisi dan garansi."
+    },
+    {
+      "key": "answer.harga_website.en",
+      "intent": "harga_website",
+      "lang": "en",
+      "file": "harga_website-en.mp3",
+      "text": "Website plans: Starter IDR 500k (one landing page, 2 free revisions, ready in 3 to 5 working days), Professional IDR 2M (multi-page, custom design, CMS, on-page SEO, 1 month support), Enterprise custom (web app or system, API and database integration, 3 months support). Every plan includes revisions and a warranty."
+    },
+    {
+      "key": "answer.harga_servis.id",
+      "intent": "harga_servis",
+      "lang": "id",
+      "file": "harga_servis-id.mp3",
+      "text": "Tarif servis perangkat: instalasi OS mulai Rp 100.000, upgrade RAM atau SSD mulai Rp 150.000, virus removal mulai Rp 75.000, recovery data mulai Rp 200.000, optimasi performa mulai Rp 50.000, dan service lengkap mulai Rp 300.000. Perangkat dicek dulu sebelum dikerjakan, jadi tidak ada biaya tersembunyi."
+    },
+    {
+      "key": "answer.harga_servis.en",
+      "intent": "harga_servis",
+      "lang": "en",
+      "file": "harga_servis-en.mp3",
+      "text": "Repair rates: OS installation from IDR 100k, RAM or SSD upgrade from IDR 150k, virus removal from IDR 75k, data recovery from IDR 200k, performance tuning from IDR 50k, and a full service from IDR 300k. We inspect the device first, so there are no hidden fees."
+    },
+    {
+      "key": "answer.harga_umum.id",
+      "intent": "harga_umum",
+      "lang": "id",
+      "file": "harga_umum-id.mp3",
+      "text": "Ada dua area harga: pembuatan website mulai Rp 500.000 per proyek, dan servis PC atau laptop mulai Rp 50.000. Mau aku rincikan yang mana dulu?"
+    },
+    {
+      "key": "answer.harga_umum.en",
+      "intent": "harga_umum",
+      "lang": "en",
+      "file": "harga_umum-en.mp3",
+      "text": "There are two price areas: website development from IDR 500k per project, and PC or laptop repair from IDR 50k. Which one should I break down first?"
+    },
+    {
+      "key": "answer.durasi.id",
+      "intent": "durasi",
+      "lang": "id",
+      "file": "durasi-id.mp3",
+      "text": "Landing page selesai 3-5 hari kerja. Company profile atau toko online 7-14 hari kerja. Web app atau sistem custom 2-4 minggu atau lebih, tergantung scope. Timeline detail dibahas di awal setelah kebutuhannya jelas."
+    },
+    {
+      "key": "answer.durasi.en",
+      "intent": "durasi",
+      "lang": "en",
+      "file": "durasi-en.mp3",
+      "text": "A landing page takes 3 to 5 working days. A company profile or online store takes 7 to 14 working days. A web app or custom system takes 2 to 4 weeks or more, depending on scope. We agree on the detailed timeline once the scope is clear."
+    },
+    {
+      "key": "answer.garansi.id",
+      "intent": "garansi",
+      "lang": "id",
+      "file": "garansi-id.mp3",
+      "text": "Setiap proyek dapat garansi dan masa support: Starter 2 minggu, Profesional 1 bulan, Enterprise 3 bulan. Kalau ada bug atau kendala setelah launch, kami perbaiki tanpa biaya tambahan. Jumlah revisi juga sudah termasuk di tiap paket."
+    },
+    {
+      "key": "answer.garansi.en",
+      "intent": "garansi",
+      "lang": "en",
+      "file": "garansi-en.mp3",
+      "text": "Every project includes a warranty and support window: Starter 2 weeks, Professional 1 month, Enterprise 3 months. Bugs or issues after launch are fixed at no extra cost, and revisions are included in each plan."
+    },
+    {
+      "key": "answer.portofolio.id",
+      "intent": "portofolio",
+      "lang": "id",
+      "file": "portofolio-id.mp3",
+      "text": "Proyek yang sudah jalan: Faryta Studio (website portfolio fotografi), Yoga & Saylun (undangan pernikahan digital), Calvo Furniture (e-commerce furniture), Modern Living (company profile arsitektur), Paw & Petals (booking grooming hewan), Aeterna Fashion (toko online), dan Aether Technologies (portal enterprise)."
+    },
+    {
+      "key": "answer.portofolio.en",
+      "intent": "portofolio",
+      "lang": "en",
+      "file": "portofolio-en.mp3",
+      "text": "Projects we have shipped: Faryta Studio (photography portfolio), Yoga & Saylun (digital wedding invitation), Calvo Furniture (furniture e-commerce), Modern Living (architecture profile), Paw & Petals (pet grooming booking), Aeterna Fashion (online store), and Aether Technologies (enterprise portal)."
+    },
+    {
+      "key": "answer.konsultasi.id",
+      "intent": "konsultasi",
+      "lang": "id",
+      "file": "konsultasi-id.mp3",
+      "text": "Konsultasi pertama gratis dan tanpa komitmen. Ceritakan kebutuhanmu, tim kami balas kurang dari 24 jam, dan WhatsApp biasanya dijawab dalam hitungan menit pada jam kerja."
+    },
+    {
+      "key": "answer.konsultasi.en",
+      "intent": "konsultasi",
+      "lang": "en",
+      "file": "konsultasi-en.mp3",
+      "text": "The first consultation is free with no commitment. Tell us what you need and the team replies within 24 hours; on WhatsApp we usually answer within minutes during working hours."
+    },
+    {
+      "key": "answer.bayar.id",
+      "intent": "bayar",
+      "lang": "id",
+      "file": "bayar-id.mp3",
+      "text": "Pembayaran pakai DP 50% di awal, lalu pelunasan setelah proyek selesai. Untuk proyek besar bisa diangsur sesuai kesepakatan. Kami menerima transfer bank dan e-wallet."
+    },
+    {
+      "key": "answer.bayar.en",
+      "intent": "bayar",
+      "lang": "en",
+      "file": "bayar-en.mp3",
+      "text": "Payment is a 50% down payment at the start, settled after the project is finished. Larger projects can be paid in agreed installments. We accept bank transfer and e-wallets."
+    },
+    {
+      "key": "answer.teknologi.id",
+      "intent": "teknologi",
+      "lang": "id",
+      "file": "teknologi-id.mp3",
+      "text": "Untuk web app kami pakai React, Next.js, Laravel, atau Node.js. Mobile app pakai Flutter dan React Native. Website statis dibangun dengan HTML, CSS, dan JavaScript murni supaya ringan. Pilihan teknologi menyesuaikan kebutuhan dan skala bisnismu."
+    },
+    {
+      "key": "answer.teknologi.en",
+      "intent": "teknologi",
+      "lang": "en",
+      "file": "teknologi-en.mp3",
+      "text": "For web apps we use React, Next.js, Laravel, or Node.js. Mobile apps use Flutter and React Native. Static sites are built with plain HTML, CSS, and JavaScript to stay light. The stack follows your needs and scale."
+    },
+    {
+      "key": "answer.aplikasi.id",
+      "intent": "aplikasi",
+      "lang": "id",
+      "file": "aplikasi-id.mp3",
+      "text": "Kami bangun web app, mobile app, dashboard, dan API. Ini masuk paket Enterprise: integrasi API dan database, revisi unlimited, support 3 bulan, plus dokumentasi teknis. Timeline sistem custom umumnya 2-4 minggu atau lebih."
+    },
+    {
+      "key": "answer.aplikasi.en",
+      "intent": "aplikasi",
+      "lang": "en",
+      "file": "aplikasi-en.mp3",
+      "text": "We build web apps, mobile apps, dashboards, and APIs. These sit in the Enterprise plan: API and database integration, unlimited revisions, 3 months of support, and technical documentation. Custom systems usually take 2 to 4 weeks or more."
+    },
+    {
+      "key": "answer.lokasi.id",
+      "intent": "lokasi",
+      "lang": "id",
+      "file": "lokasi-id.mp3",
+      "text": "Kami di Bandung dan bisa ketemuan langsung di area Bandung atau Jakarta. Untuk kota lain, diskusi lewat video call. Peta lokasi ada di halaman kontak, dan semua proyek bisa dikerjakan remote."
+    },
+    {
+      "key": "answer.lokasi.en",
+      "intent": "lokasi",
+      "lang": "en",
+      "file": "lokasi-en.mp3",
+      "text": "We are based in Bandung and can meet in person around Bandung or Jakarta. For other cities we use video calls. The map is on the contact page, and every project can run remotely."
+    },
+    {
+      "key": "answer.tim.id",
+      "intent": "tim",
+      "lang": "id",
+      "file": "tim-id.mp3",
+      "text": "Nexus Diji dikelola langsung oleh dua founder: Adha dan Noval. Jadi kamu berkomunikasi dengan orang yang mengerjakan proyeknya, bukan lewat perantara."
+    },
+    {
+      "key": "answer.tim.en",
+      "intent": "tim",
+      "lang": "en",
+      "file": "tim-en.mp3",
+      "text": "Nexus Diji is run by two founders: Adha and Noval. You talk to the people who build your project, not a middle layer."
+    },
+    {
+      "key": "answer.promo.id",
+      "intent": "promo",
+      "lang": "id",
+      "file": "promo-id.mp3",
+      "text": "Ada promo diskon 20% untuk bulan ini. Kalau mau, aku arahkan ke WhatsApp supaya tim mencatat klaim promomu."
+    },
+    {
+      "key": "answer.promo.en",
+      "intent": "promo",
+      "lang": "en",
+      "file": "promo-en.mp3",
+      "text": "There is a 20% discount running this month. If you like, I can send you to WhatsApp so the team records your claim."
+    },
+    {
+      "key": "answer.proses.id",
+      "intent": "proses",
+      "lang": "id",
+      "file": "proses-id.mp3",
+      "text": "Alurnya empat langkah: konsultasi kebutuhan, perencanaan (timeline dan scope), pengerjaan dengan update rutin, lalu delivery dan support setelah launch. Mulainya dari konsultasi gratis."
+    },
+    {
+      "key": "answer.proses.en",
+      "intent": "proses",
+      "lang": "en",
+      "file": "proses-en.mp3",
+      "text": "Four steps: consultation, planning (timeline and scope), build with regular updates, then delivery and post-launch support. It starts with a free consultation."
+    },
+    {
+      "key": "answer.blog.id",
+      "intent": "blog",
+      "lang": "id",
+      "file": "blog-id.mp3",
+      "text": "Ada tiga artikel di blog: pentingnya website untuk UMKM di 2026, tips mempercepat loading web, dan tanda laptop butuh servis. Mau aku buka halaman blognya?"
+    },
+    {
+      "key": "answer.blog.en",
+      "intent": "blog",
+      "lang": "en",
+      "file": "blog-en.mp3",
+      "text": "Three articles are live: why MSMEs need a website in 2026, tips to speed up web loading, and signs your laptop needs servicing. Want me to open the blog?"
+    },
+    {
+      "key": "answer.kenapa.id",
+      "intent": "kenapa",
+      "lang": "id",
+      "file": "kenapa-id.mp3",
+      "text": "Tiga alasan: website, aplikasi, dan servis perangkat ditangani satu tim; harga transparan dengan titik awal Rp 500.000 untuk website dan Rp 50.000 untuk servis; dan komunikasi terbuka dengan update rutin plus garansi setelah proyek selesai."
+    },
+    {
+      "key": "answer.kenapa.en",
+      "intent": "kenapa",
+      "lang": "en",
+      "file": "kenapa-en.mp3",
+      "text": "Three reasons: websites, apps, and device repair are handled by one team; pricing is transparent starting at IDR 500k for a site and IDR 50k for repair; and communication stays open with regular updates plus a post-launch warranty."
+    },
+    {
+      "key": "answer.terima_kasih.id",
+      "intent": "terima_kasih",
+      "lang": "id",
+      "file": "terima_kasih-id.mp3",
+      "text": "Siap! Kalau ada pertanyaan lain, tanya saja. Kalau mau langsung ngobrol dengan tim, tombol WhatsApp ada di chat ini."
+    },
+    {
+      "key": "answer.terima_kasih.en",
+      "intent": "terima_kasih",
+      "lang": "en",
+      "file": "terima_kasih-en.mp3",
+      "text": "Anytime! Ask me anything else. If you want to talk to the team directly, the WhatsApp button is right here in the chat."
+    },
+    {
+      "key": "answer.fallback.id",
+      "intent": "fallback",
+      "lang": "id",
+      "file": "fallback-id.mp3",
+      "text": "Aku belum punya info itu, jadi biar akurat aku sambungkan ke tim Nexus Diji. Pertanyaanmu sudah aku isikan di tombol WhatsApp di bawah, tim balas kurang dari 24 jam."
+    },
+    {
+      "key": "answer.fallback.en",
+      "intent": "fallback",
+      "lang": "en",
+      "file": "fallback-en.mp3",
+      "text": "I do not have that detail yet, so I will hand you to the Nexus Diji team. Your question is pre-filled in the WhatsApp button below, and the team replies within 24 hours."
+    }
+  ]
+}

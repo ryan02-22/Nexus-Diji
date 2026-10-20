@@ -11,6 +11,7 @@
   const ROOT = scriptEl ? new URL('../../', scriptEl.src).href : './';
   const WA_NUMBER = '6285711171508';
   const VOICE_KEY = 'nexus-diji-assistant-voice';
+  const CLIP_ROOT = ROOT + 'assets/audio/assistant/';
   const HOME = /(\/|index\.html)$/i.test(location.pathname);
 
   /* ══════════════════════════════════════════════════════════════
@@ -738,7 +739,7 @@
     }
   }
 
-  function streamAnswer(text, onDone) {
+  function streamAnswer(text, onDone, clipKey) {
     const bubble = makeBubble({ from: 'bot', html: '' });
     const target = bubble.querySelector('.chat-msg-text');
     const words = text.split(/(\s+)/).filter((chunk) => chunk.length);
@@ -747,7 +748,7 @@
 
     conversation.busy = true;
     setState('speaking');
-    speak(text);
+    speak(text, clipKey);
 
     const finish = () => {
       clearInterval(conversation.streamTimer);
@@ -881,6 +882,13 @@
       }
     }
 
+    // A recorded clip is only safe when the spoken line is exactly the
+    // canonical answer: no personal tail and no repeat recap.
+    const canonical = t(intent.answer);
+    const clipKey = !options.repeat && text === canonical
+      ? 'answer.' + intent.id + '.' + lang()
+      : null;
+
     const wait = 320 + Math.min(520, text.split(' ').length * 6);
 
     setTimeout(() => {
@@ -897,10 +905,10 @@
           setMood('cheer', 1000);
         }
         renderFollowUps(intent.follow);
-        const stillTalking = voice.supported && window.speechSynthesis.speaking;
+        const stillTalking = voice.isSpeaking();
         setState(stillTalking ? 'speaking' : 'listening');
         if (els.input) els.input.focus({ preventScroll: true });
-      });
+      }, clipKey);
     }, wait);
   }
 
@@ -974,13 +982,70 @@
   }
 
   /* ══════════════════════════════════════════════════════════════
-     6. VOICE (Web Speech API)
+     6. VOICE (recorded clips, browser voice fallback)
      ══════════════════════════════════════════════════════════════ */
+
+  // Recorded answers in the brand voice. Only canonical answers are listed
+  // here; dynamic lines (personal tails, repeat recaps) always use the
+  // browser voice so a clip can never read the wrong script.
+  // Filenames follow <intent>-<lang>.mp3 in assets/audio/assistant/.
+  const VOICE_CLIPS = {
+    // 'answer.harga_website.id': 'harga_website-id.mp3',
+  };
+
   const voice = {
     enabled: true,
     supported: 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined',
-    speak(text) {
-      if (!this.supported || !this.enabled || !text) return;
+    clip: null,
+    utter: null,
+    active: false,
+    speak(text, clipKey) {
+      if (!text || !this.enabled) return;
+      this.stop();
+      if (clipKey && this.playClip(clipKey, text)) return;
+      this.speakText(text);
+    },
+    // Returns true when a clip takes over. A missing or broken file falls
+    // back to the browser voice with the same text, never silence.
+    playClip(key, fallbackText) {
+      const file = VOICE_CLIPS[key];
+      if (!file) return false;
+      const audio = new Audio(CLIP_ROOT + file);
+      this.clip = audio;
+      this.active = true;
+      audio.onended = () => {
+        if (this.clip !== audio) return;
+        this.clip = null;
+        this.active = false;
+        if (!conversation.busy) setState('listening');
+      };
+      audio.onerror = () => {
+        if (this.clip !== audio) return;
+        this.clip = null;
+        this.active = false;
+        this.speakText(fallbackText);
+      };
+      let started = null;
+      try {
+        started = audio.play();
+      } catch (error) {
+        this.clip = null;
+        this.active = false;
+        this.speakText(fallbackText);
+        return true;
+      }
+      if (started && typeof started.catch === 'function') {
+        started.catch(() => {
+          if (this.clip !== audio) return;
+          this.clip = null;
+          this.active = false;
+          this.speakText(fallbackText);
+        });
+      }
+      return true;
+    },
+    speakText(text) {
+      if (!this.supported) return;
       try {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text.replace(/\s+/g, ' '));
@@ -990,14 +1055,33 @@
         utter.pitch = 1.05;
         const match = pickVoice(target);
         if (match) utter.voice = match;
-        utter.onend = () => { if (!conversation.busy) setState('listening'); };
-        utter.onerror = () => { if (!conversation.busy) setState('listening'); };
+        utter.onend = () => this.finishSpeech(utter);
+        utter.onerror = () => this.finishSpeech(utter);
+        this.utter = utter;
+        this.active = true;
         window.speechSynthesis.speak(utter);
       } catch (error) {
-        /* Voice is optional: a failure must never block the text answer. */
+        this.utter = null;
+        this.active = false;
       }
     },
+    finishSpeech(utter) {
+      if (this.utter !== utter) return;
+      this.utter = null;
+      this.active = false;
+      if (!conversation.busy) setState('listening');
+    },
+    isSpeaking() {
+      if (this.active) return true;
+      return this.supported && window.speechSynthesis.speaking;
+    },
     stop() {
+      this.active = false;
+      this.utter = null;
+      if (this.clip) {
+        try { this.clip.pause(); } catch (error) { /* noop */ }
+        this.clip = null;
+      }
       if (!this.supported) return;
       try { window.speechSynthesis.cancel(); } catch (error) { /* noop */ }
     }
@@ -1042,8 +1126,8 @@
     window.speechSynthesis.addEventListener('voiceschanged', () => { /* voices arrive late in some browsers */ });
   }
 
-  function speak(text) {
-    voice.speak(text);
+  function speak(text, clipKey) {
+    voice.speak(text, clipKey);
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -1403,6 +1487,15 @@
       lastIntent: conversation.lastIntent ? conversation.lastIntent.id : null,
       hint: hintSection
     }),
+    answers: () => {
+      const out = {};
+      KB.concat([FALLBACK]).forEach((item) => {
+        out['answer.' + item.id + '.id'] = item.answer.id;
+        out['answer.' + item.id + '.en'] = item.answer.en;
+      });
+      return out;
+    },
+    clips: VOICE_CLIPS,
     resetMemory: () => memory.reset()
   };
 }());
