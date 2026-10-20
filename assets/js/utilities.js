@@ -198,7 +198,6 @@ export function lerp(start, end, t) {
 // ══════════════════════════════════════════════════════════════
 export function initToolsOverlay() {
   const toolsOverlay = document.getElementById('toolsOverlay');
-  const backToTop = document.getElementById('backToTop');
   const fabTrigger = document.getElementById('fabTrigger');
 
   if (!toolsOverlay || !fabTrigger) return;
@@ -213,72 +212,53 @@ export function initToolsOverlay() {
       autoHideTimer = setTimeout(() => {
         toolsOverlay.classList.remove('visible');
         toolsOverlay.classList.add('collapsed');
-      }, 4000);
+      }, 4500);
     }
   }
 
-  // Auto-hide on scroll
+  // Auto-hide when near footer
   window.addEventListener('scroll', () => {
     const nearFooter = isNearFooter(20);
-
-    if (window.innerWidth <= 768) {
-      if (nearFooter) {
-        toolsOverlay.classList.add('fab-hidden');
-        toolsOverlay.classList.remove('active');
-      } else {
-        toolsOverlay.classList.remove('fab-hidden');
-      }
-    } else {
-      if (nearFooter) {
-        toolsOverlay.classList.remove('visible', 'collapsed');
-      } else if (!toolsOverlay.classList.contains('visible') && !toolsOverlay.classList.contains('collapsed')) {
-        toolsOverlay.classList.add('visible');
-        resetAutoHideTimer();
-      }
+    if (nearFooter) {
+      toolsOverlay.classList.remove('visible');
+      toolsOverlay.classList.add('collapsed');
     }
   });
 
-  // Mouse events for desktop
-  if (window.innerWidth > 768) {
-    toolsOverlay.addEventListener('mouseenter', () => clearTimeout(autoHideTimer));
-    toolsOverlay.addEventListener('mouseleave', () => {
-      if (toolsOverlay.classList.contains('visible')) resetAutoHideTimer();
-    });
+  // Desktop mouse events
+  toolsOverlay.addEventListener('mouseenter', () => clearTimeout(autoHideTimer));
+  toolsOverlay.addEventListener('mouseleave', () => {
+    if (toolsOverlay.classList.contains('visible')) resetAutoHideTimer();
+  });
 
-    setTimeout(() => {
-      if (window.scrollY < 400) {
-        toolsOverlay.classList.add('visible');
-        resetAutoHideTimer();
-      }
-    }, 1000);
-  }
+  // Default state: keep dock collapsed so fabTrigger tab sits stably on screen edge
+  toolsOverlay.classList.remove('visible');
+  toolsOverlay.classList.add('collapsed');
 
-  // Toggle button
+  // Sliding dock toggle: click to slide out, click again to slide close
   fabTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
+    e.preventDefault();
+    manualOverlayControl = true;
+    clearTimeout(autoHideTimer);
 
-    if (window.innerWidth <= 768) {
-      const isActive = toolsOverlay.classList.toggle('active');
-      if (backToTop) backToTop.style.display = isActive ? 'none' : '';
-      closePopups();
+    const isVisible = toolsOverlay.classList.contains('visible');
+    if (isVisible) {
+      toolsOverlay.classList.remove('visible');
+      toolsOverlay.classList.add('collapsed');
+      fabTrigger.setAttribute('aria-expanded', 'false');
     } else {
-      manualOverlayControl = true;
-      clearTimeout(autoHideTimer);
-      if (toolsOverlay.classList.contains('visible')) {
-        toolsOverlay.classList.remove('visible');
-        toolsOverlay.classList.add('collapsed');
-      } else {
-        toolsOverlay.classList.add('visible');
-        toolsOverlay.classList.remove('collapsed');
-      }
+      toolsOverlay.classList.add('visible');
+      toolsOverlay.classList.remove('collapsed');
+      fabTrigger.setAttribute('aria-expanded', 'true');
     }
   });
 
-  // Close on outside click (mobile)
+  // Close dock on outside click
   document.addEventListener('click', (e) => {
-    if (!toolsOverlay.contains(e.target) && toolsOverlay.classList.contains('active')) {
-      toolsOverlay.classList.remove('active');
-      if (backToTop) backToTop.style.display = '';
+    if (toolsOverlay.classList.contains('visible') && !toolsOverlay.contains(e.target)) {
+      toolsOverlay.classList.remove('visible');
+      toolsOverlay.classList.add('collapsed');
     }
   });
 

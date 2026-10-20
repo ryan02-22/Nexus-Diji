@@ -403,41 +403,7 @@
   visibility: visible;
 }
 
-/* Mobile FAB behavior */
-@media (max-width: 768px) {
-  .tools-overlay {
-    right: 1rem;
-    bottom: 1rem;
-  }
-
-  .fab-trigger {
-    width: 48px;
-    height: 48px;
-  }
-
-  .tools-overlay.active .fab-actions {
-    position: fixed;
-    right: 1rem;
-    bottom: 5rem;
-    background: var(--surface);
-    padding: 1rem;
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  .tools-overlay.active .fab-actions .tool-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .tools-overlay.fab-hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
+/* Mobile FAB behavior consolidated on the left edge in site-polish.css */
 
 /* ═══════════════════════════════════════════════════════════════
    CHATBOT

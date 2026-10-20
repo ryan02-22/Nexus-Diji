@@ -2732,35 +2732,41 @@ footer p {
 /* Tooltips */
 .tool-tooltip {
   position: absolute;
-  left: calc(100% + 12px);
+  left: calc(100% + 54px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
   background: #111118;
-  border: 1px solid rgba(67, 97, 238, 0.2);
-  color: var(--accent);
-  padding: 4px 10px;
-  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+  padding: 5px 12px;
+  border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 600;
   pointer-events: none;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.2s, transform 0.2s;
+  visibility: hidden;
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
   white-space: nowrap;
+  z-index: 10005;
 }
 
 .tool-tooltip::before {
   content: '';
   position: absolute;
   top: 50%;
-  left: -4px;
-  transform: translateY(-50%);
-  border-width: 4px 4px 4px 0;
-  border-style: solid;
-  border-color: transparent rgba(67, 97, 238, 0.2) transparent transparent;
+  left: -5px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #111118;
+  border-left: 1px solid rgba(56, 189, 248, 0.4);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.4);
 }
 
 .tool-btn:hover .tool-tooltip {
   opacity: 1;
-  transform: translateX(0);
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
 }
 
 /* FAB Group Container */
@@ -2805,89 +2811,8 @@ footer p {
   background: var(--grad);
 }
 
-@media (max-width: 768px) {
-  .tools-overlay {
-    top: auto;
-    bottom: 24px;
-    left: auto;
-    right: 24px;
-    transform: none;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    align-items: flex-end;
-    border-radius: 0;
-    padding: 0;
-    z-index: 1001;
-  }
+/* Legacy mobile FAB relocation removed: tools-overlay stays anchored to the left dock cleanly */
 
-  .fab-trigger {
-    display: flex;
-  }
-
-  .fab-actions {
-    position: absolute;
-    bottom: 72px;
-    right: 0;
-    align-items: flex-end;
-    pointer-events: none;
-    gap: 12px;
-  }
-
-  .tool-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(63, 55, 201, 0.98), rgba(114, 9, 183, 0.98));
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .tool-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Active State */
-  .tools-overlay.active .fab-actions {
-    pointer-events: auto;
-  }
-
-  .tools-overlay.active .tool-btn {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  /* Staggered Timings for buttons (bottom to top) */
-  .tools-overlay.active .fab-actions .tool-btn:nth-child(3) {
-    transition-delay: 0.05s;
-  }
-
-  .tools-overlay.active .fab-actions .tool-btn:nth-child(2) {
-    transition-delay: 0.1s;
-  }
-
-  .tools-overlay.active .fab-actions .tool-btn:nth-child(1) {
-    transition-delay: 0.15s;
-  }
-
-  .tools-overlay.active .fab-trigger .icon-expand {
-    opacity: 0;
-    transform: scale(0.5) rotate(90deg);
-  }
-
-  .tools-overlay.active .fab-trigger .icon-collapse {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
-
-  .tool-tooltip {
-    display: none;
-  }
-}
 
 /* â”€â”€ HELP POPUP â”€â”€ */
 #helpPopup {
@@ -3483,42 +3408,7 @@ footer p {
     opacity: 1 !important;
   }
 
-  .fab-trigger {
-    display: flex !important;
-    position: absolute !important;
-    bottom: -60px !important;
-    left: 8px !important;
-    width: 44px !important;
-    height: 44px !important;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    pointer-events: auto !important;
-    z-index: 302 !important;
-  }
-
-  .tools-overlay.collapsed .fab-trigger {
-    left: calc(100% + 12px) !important;
-    transform: rotate(180deg) !important;
-  }
+  /* Mobile tools-overlay is consolidated and anchored to the left in site-polish.css */
 }
 
-/* Mobile: Ensure Visibility */
-@media (max-width: 768px) {
-  .tools-overlay {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    display: flex !important;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s !important;
-  }
-
-  .tools-overlay.fab-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transform: translateY(120px) !important;
-    pointer-events: none !important;
-  }
-
-  .fab-trigger {
-    display: flex !important;
-  }
-}
+/* Mobile tools-overlay is consolidated and anchored to the left in site-polish.css */

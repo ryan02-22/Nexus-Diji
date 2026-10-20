@@ -6,8 +6,9 @@
 import { initNavbar, initLanguageSwitch } from './navbar.js?v=auto-sync-20261018c';
 import { initMegaMenu } from './mega-menu.js';
 import { initAnimations } from './animations.js';
-import { initCursor, initToolsOverlay } from './utilities.js';
-import { initChatbot } from './chatbot.js?v=mascot-ai-20261018';
+import { initCursor, initToolsOverlay } from './utilities.js?v=cyber-window-20261019c';
+import { initChatbot } from './chatbot.js?v=cyber-window-20261019c';
+import { initWindowManager } from './window-manager.js?v=cyber-window-20261019c';
 import './site-effects.js';
 
 function bootstrapApp() {
@@ -28,8 +29,9 @@ function bootstrapApp() {
   try { initToolsOverlay(); } catch (e) { console.warn('initToolsOverlay error:', e); }
   try { if (typeof window.initPortfolioShowcase === 'function') window.initPortfolioShowcase(); } catch (e) { console.warn('initPortfolioShowcase error:', e); }
 
-  // Initialize chatbot functionality
+  // Initialize chatbot & draggable/resizable window manager
   try { initChatbot(); } catch (e) { console.warn('initChatbot error:', e); }
+  try { initWindowManager(); } catch (e) { console.warn('initWindowManager error:', e); }
   try { initContactCards(); } catch (e) { console.warn('initContactCards error:', e); }
   try { initHeroMascotParallax(); } catch (e) { console.warn('initHeroMascotParallax error:', e); }
 

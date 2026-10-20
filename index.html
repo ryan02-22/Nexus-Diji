@@ -167,8 +167,8 @@
   <link rel="stylesheet" href="./assets/css/pages.css">
 
   <!-- Legacy CSS - Keep for compatibility during transition -->
-  <link rel="stylesheet" href="./assets/css/main.css?v=footer-wrap-20261017d">
-  <link rel="stylesheet" href="./assets/css/site-polish.css?v=robot-ai-chatbot-20261018">
+  <link rel="stylesheet" href="./assets/css/main.css?v=cyber-window-20261020b">
+  <link rel="stylesheet" href="./assets/css/site-polish.css?v=cyber-window-20261020b">
 </head>
 
 
@@ -1933,20 +1933,14 @@
         <span class="tool-tooltip">WhatsApp</span>
       </a>
     </div>
-    <!-- FAB Trigger (Mobile Only) -->
-    <button class="fab-trigger" id="fabTrigger" aria-label="Toggle Menu">
-      <!-- Hamburger icon: shown when collapsed/hidden -->
-      <svg class="icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-      <!-- Left arrow icon: shown when panel is open -->
-      <svg class="icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
+    <!-- Compact Creative Sliding Dock Trigger -->
+    <button class="fab-trigger" id="fabTrigger" aria-label="Buka Menu Akses Cepat" title="Menu Akses Cepat (Klik untuk Buka/Tutup)" aria-expanded="false">
+      <div class="fab-trigger-inner">
+        <svg class="fab-toggle-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        <span class="fab-trigger-beacon" aria-hidden="true"></span>
+      </div>
     </button>
   </aside>
 
@@ -1956,6 +1950,9 @@
   <aside id="helpPopup" class="nexus-help-popup" role="dialog" aria-label="Pusat Bantuan &amp; FAQ Nexus Diji" aria-modal="true" aria-hidden="true">
     <!-- Header -->
     <div class="help-header">
+      <div class="window-drag-grip" title="Tahan &amp; geser window">
+        <span class="drag-bar-pill"></span>
+      </div>
       <div class="help-header-main">
         <div class="help-avatar-wrap">
           <div class="help-avatar-glow"></div>
@@ -1979,18 +1976,44 @@
           </span>
         </div>
       </div>
-      <button id="helpCloseBtn" class="help-ctrl-btn help-close-btn" aria-label="Tutup Bantuan" title="Tutup Bantuan">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+      <div class="window-ctrl-group">
+        <button id="helpResetPosBtn" class="help-ctrl-btn window-reset-btn" aria-label="Reset Posisi Window" title="Reset Ukuran &amp; Posisi Window">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </button>
+        <button id="helpMaximizeBtn" class="help-ctrl-btn window-maximize-btn" aria-label="Perbesar / Perkecil Ukuran" title="Perbesar / Perkecil Ukuran">
+          <svg class="icon-max" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2.5"></rect>
+          </svg>
+          <svg class="icon-restore" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="11" height="11" rx="2"></rect>
+            <path d="M9 4h9a2 2 0 0 1 2 2v9"></path>
+          </svg>
+        </button>
+        <button id="helpCloseBtn" class="help-ctrl-btn help-close-btn" aria-label="Tutup Bantuan" title="Tutup Bantuan">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Quick Info Ribbon -->
     <div class="help-notice-ribbon">
       <span class="ribbon-icon">💡</span>
       <span class="ribbon-text">Panduan praktis pembuatan website, aplikasi &amp; servis laptop/PC</span>
+    </div>
+
+    <!-- Interactive Workspace Hint -->
+    <div class="window-interactive-hint">
+      <span class="hint-dot"></span>
+      <span>Window &amp; kartu dapat digeser serta diatur ukurannya</span>
     </div>
 
     <!-- Category Nav Tabs -->
@@ -2240,6 +2263,13 @@
         Konsultasi 100% Gratis &bull; Nexus Diji Official Support
       </div>
     </div>
+
+    <!-- Corner Resize Grips -->
+    <div class="window-resize-grip window-resize-br" data-window="helpPopup" title="Tarik untuk mengubah ukuran window">
+      <svg viewBox="0 0 12 12" width="10" height="10" fill="currentColor">
+        <path d="M11 1L1 11M11 6L6 11M11 11L11 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
   </aside>
 
   <!-- ══ NEXUS AI ASSISTANT CHATBOT ══ -->
@@ -2247,6 +2277,9 @@
     aria-hidden="true">
     <!-- Header -->
     <div class="chat-header">
+      <div class="window-drag-grip" title="Tahan &amp; geser window">
+        <span class="drag-bar-pill"></span>
+      </div>
       <div class="chat-header-main">
         <div class="chat-avatar-wrap">
           <div class="chat-avatar-glow"></div>
@@ -2268,22 +2301,45 @@
       <div class="chat-header-ctrls">
         <button id="chatSwitchToHelpBtn" class="chat-ctrl-btn chat-help-switch-btn" aria-label="Buka Pusat Bantuan &amp; FAQ"
           title="Buka Pusat Bantuan &amp; Panduan">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
             <line x1="12" y1="17" x2="12.01" y2="17"></line>
           </svg>
         </button>
-        <button id="chatResetBtn" class="chat-ctrl-btn" aria-label="Mulai Ulang Percakapan"
-          title="Mulai Ulang Percakapan">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
+        <button id="chatResetBtn" class="chat-ctrl-btn chat-clear-history-btn" aria-label="Mulai Ulang Percakapan"
+          title="Mulai Ulang Percakapan (Bersihkan Chat)">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
             stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-            <polyline points="3 3 3 8 8 8"></polyline>
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+            <path d="M3 21v-5h5"></path>
+          </svg>
+        </button>
+        <button id="chatResetPosBtn" class="chat-ctrl-btn window-reset-btn" aria-label="Reset Posisi Window"
+          title="Reset Ukuran &amp; Posisi Window">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </button>
+        <button id="chatMaximizeBtn" class="chat-ctrl-btn window-maximize-btn" aria-label="Perbesar / Perkecil Ukuran"
+          title="Perbesar / Perkecil Ukuran">
+          <svg class="icon-max" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2.5"></rect>
+          </svg>
+          <svg class="icon-restore" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="11" height="11" rx="2"></rect>
+            <path d="M9 4h9a2 2 0 0 1 2 2v9"></path>
           </svg>
         </button>
         <button id="chatCloseBtn" class="chat-ctrl-btn chat-close-btn" aria-label="Tutup chat" title="Tutup Chat">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"
             stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -2296,6 +2352,12 @@
     <div class="chat-notice-ribbon">
       <span class="ribbon-icon">⚡</span>
       <span class="ribbon-text">Respon Cepat seputar Website, Aplikasi &amp; Servis PC/Laptop</span>
+    </div>
+
+    <!-- Interactive Workspace Hint -->
+    <div class="window-interactive-hint">
+      <span class="hint-dot"></span>
+      <span>Window &amp; kartu dapat digeser serta diatur ukurannya</span>
     </div>
 
     <!-- Chat Messages Body -->
@@ -2327,6 +2389,13 @@
         Konsultasi 100% Gratis &bull; Didukung Tim Ahli Nexus Diji
       </div>
     </div>
+
+    <!-- Corner Resize Grips -->
+    <div class="window-resize-grip window-resize-br" data-window="chatPopup" title="Tarik untuk mengubah ukuran window">
+      <svg viewBox="0 0 12 12" width="10" height="10" fill="currentColor">
+        <path d="M11 1L1 11M11 6L6 11M11 11L11 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
   </aside>
 
   <!-- Floating Mascot Chat Trigger (Always Accessible) -->
@@ -2353,7 +2422,7 @@
   <script src="./assets/js/marquee.js?v=3d-arc-20261017"></script>
   <script src="./assets/js/portfolio.js"></script>
   <script src="./assets/js/ui-utils.js"></script>
-  <script type="module" src="./assets/js/main.js?v=robot-ai-chatbot-20261018"></script>
+  <script type="module" src="./assets/js/main.js?v=cyber-window-20261020a"></script>
 
 </body>
 

@@ -229,16 +229,7 @@ pre {
     --page-gutter: 0.75rem;
   }
 
-  /* Keep the floating help control from covering the edge of the hero CTA. */
-  #toolsOverlay {
-    right: 0.25rem;
-  }
 
-  #toolsOverlay .fab-trigger {
-    width: 44px;
-    height: 44px;
-    min-height: 44px;
-  }
 
   body :is(h1, .about-hero__title, .hero-title, .cta-headline) {
     font-size: clamp(1.9rem, 9vw, 2.35rem);
@@ -5997,7 +5988,13 @@ footer .footer-links a[hidden] {
 #chatPopup.nexus-chat-popup.open {
   display: flex !important;
   opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
+  transform: translateY(0) scale(1);
+}
+
+#chatPopup.open.is-dragging,
+#chatPopup.open.is-resizing,
+#chatPopup.open[style*="top"] {
+  transform: none !important;
 }
 
 /* Chat Header */
@@ -6066,93 +6063,176 @@ footer .footer-links a[hidden] {
 }
 
 .chat-header-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  overflow: hidden !important;
 }
 
-.chat-name-row {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
+.chat-name-row,
+.help-name-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
 }
 
-.chat-bot-name {
-  font-size: 0.96rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+.chat-bot-name,
+.help-title-text {
+  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.01em !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
-.chat-tag-pill {
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  background: rgba(255, 255, 255, 0.2);
-  color: #e0f2fe;
-  padding: 0.15rem 0.45rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  white-space: nowrap;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1.2;
+.chat-tag-pill,
+.help-tag-pill {
+  font-size: 0.64rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: #38bdf8 !important;
+  padding: 2.5px 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(56, 189, 248, 0.45) !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1.2 !important;
+  margin-left: 2px !important;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.2) !important;
 }
 
-.chat-subtitle {
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.85);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.chat-subtitle,
+.help-subtitle {
+  font-size: 0.72rem !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-.chat-live-point {
-  width: 6px;
-  height: 6px;
-  background: #34d399;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #34d399;
+.chat-live-point,
+.help-live-point {
+  width: 6px !important;
+  height: 6px !important;
+  background: #34d399 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 6px #34d399 !important;
+  flex-shrink: 0 !important;
 }
 
-.chat-header-ctrls {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-left: 0.5rem;
+.chat-header-ctrls,
+.window-ctrl-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
-.chat-ctrl-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0;
+.chat-ctrl-btn,
+.help-ctrl-btn,
+.window-reset-btn,
+.window-maximize-btn,
+.help-close-btn,
+.chat-close-btn {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+  flex: 0 0 28px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #cbd5e1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  line-height: 1 !important;
+  font-size: 0 !important;
+  outline: none !important;
 }
 
-.chat-ctrl-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: scale(1.08);
+.chat-ctrl-btn svg,
+.help-ctrl-btn svg,
+.window-reset-btn svg,
+.window-maximize-btn svg,
+.help-close-btn svg,
+.chat-close-btn svg {
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+  pointer-events: none !important;
 }
 
-.chat-close-btn:hover {
-  background: rgba(239, 68, 68, 0.8);
-  border-color: rgba(239, 68, 68, 0.9);
+.chat-ctrl-btn:hover,
+.help-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) scale(1.06) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+.chat-help-switch-btn:hover {
+  background: rgba(56, 189, 248, 0.25) !important;
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4) !important;
+}
+
+.chat-clear-history-btn:hover {
+  background: rgba(245, 158, 11, 0.25) !important;
+  border-color: rgba(245, 158, 11, 0.6) !important;
+  color: #fbbf24 !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35) !important;
+}
+
+.window-reset-btn:hover {
+  background: rgba(168, 85, 247, 0.25) !important;
+  border-color: rgba(168, 85, 247, 0.6) !important;
+  color: #c084fc !important;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.35) !important;
+}
+
+.window-maximize-btn:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  color: #34d399 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.35) !important;
+}
+
+.chat-close-btn:hover,
+.help-close-btn:hover {
+  background: rgba(239, 68, 68, 0.3) !important;
+  border-color: rgba(239, 68, 68, 0.7) !important;
+  color: #f87171 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4) !important;
 }
 
 /* Notice Ribbon */
@@ -6437,34 +6517,37 @@ footer .footer-links a[hidden] {
 
 /* Quick Reply Chips Tray */
 .chat-options-tray {
-  padding: 0.6rem 0.95rem 0.4rem;
-  background: rgba(15, 20, 36, 0.95);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  padding: 0.65rem 1rem 0.6rem !important;
+  background: rgba(15, 20, 36, 0.95) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .tray-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #94a3b8;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #94a3b8 !important;
 }
 
 .nexus-chat-popup .chat-options,
 #chatOptions {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  flex-direction: row !important;
-  gap: 0.45rem !important;
-  max-height: 110px !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)) !important;
+  gap: 0.55rem !important;
+  max-height: 140px !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
   padding: 4px 2px !important;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(99, 102, 241, 0.4) transparent;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(99, 102, 241, 0.4) transparent !important;
 }
 
 .nexus-chat-popup .chat-options::-webkit-scrollbar,
@@ -6484,29 +6567,37 @@ footer .footer-links a[hidden] {
 }
 
 .nexus-chat-popup .chat-opt-chip {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 100px;
-  padding: 0.42rem 0.8rem;
-  font-size: 0.77rem;
-  font-weight: 600;
-  color: #e0e7ff;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-  user-select: none;
+  background: rgba(99, 102, 241, 0.12) !important;
+  border: 1px solid rgba(99, 102, 241, 0.35) !important;
+  border-radius: 12px !important;
+  padding: 0.55rem 0.8rem !important;
+  min-height: 42px !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  color: #e0e7ff !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  user-select: none !important;
+  box-sizing: border-box !important;
 }
 
 .nexus-chat-popup .chat-opt-chip:hover {
-  background: linear-gradient(135deg, rgba(58, 86, 232, 0.3), rgba(124, 58, 237, 0.3));
-  border-color: #818cf8;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, rgba(58, 86, 232, 0.35), rgba(124, 58, 237, 0.35)) !important;
+  border-color: #818cf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35) !important;
 }
 
 .nexus-chat-popup .chat-opt-chip:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0) scale(0.97) !important;
 }
 
 /* Chat Footer Form */
@@ -6852,6 +6943,628 @@ body.help-active .nexus-floating-chat-trigger {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   UNIFIED LEFT TOOLS DOCK (#toolsOverlay) & BOOKMARK TAB HANDLE
+   Anchored strictly to left edge on Desktop, Tablet, and Mobile.
+   Zero Bottom-Right Overlaps / Zero Collision across all viewports.
+   ═══════════════════════════════════════════════════════════════ */
+#toolsOverlay.tools-overlay,
+.tools-overlay {
+  position: fixed !important;
+  left: 0 !important;
+  right: auto !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) translateX(-100%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  padding: 12px 8px !important;
+  background: linear-gradient(135deg, rgba(13, 17, 34, 0.96) 0%, rgba(24, 20, 60, 0.96) 100%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.35) !important;
+  border-left: none !important;
+  border-radius: 0 16px 16px 0 !important;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.45), 0 0 18px rgba(99, 102, 241, 0.15) !important;
+  z-index: 9970 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
+}
+
+#toolsOverlay.tools-overlay.visible,
+.tools-overlay.visible {
+  transform: translateY(-50%) translateX(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#toolsOverlay.tools-overlay.collapsed,
+.tools-overlay.collapsed {
+  transform: translateY(-50%) translateX(-100%) !important;
+  opacity: 1 !important;
+}
+
+.tools-overlay .fab-actions {
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  align-items: center !important;
+  pointer-events: auto !important;
+}
+
+.tools-overlay .tool-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  opacity: 1 !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: auto !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.tools-overlay .tool-btn:hover {
+  background: rgba(99, 102, 241, 0.25) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  transform: scale(1.08) !important;
+}
+
+/* ══ TOOLTIP WITH PERFECT CLEARANCE FROM SLIDING HANDLE ("teks tidak tertutup") ══ */
+.tools-overlay .tool-tooltip,
+.tool-tooltip {
+  position: absolute !important;
+  left: calc(100% + 54px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) translateX(-6px) !important;
+  background: linear-gradient(135deg, rgba(13, 17, 34, 0.98) 0%, rgba(24, 20, 60, 0.98) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 16px rgba(56, 189, 248, 0.25) !important;
+  color: #38bdf8 !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease !important;
+  white-space: nowrap !important;
+  z-index: 10005 !important;
+  line-height: 1.3 !important;
+}
+
+.tools-overlay .tool-btn:hover .tool-tooltip,
+.tool-btn:hover .tool-tooltip {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(-50%) translateX(0) !important;
+}
+
+.tools-overlay .tool-tooltip::before,
+.tool-tooltip::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: -5px !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: rgba(13, 17, 34, 0.98) !important;
+  border-left: 1px solid rgba(56, 189, 248, 0.5) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.5) !important;
+  border-top: none !important;
+  border-right: none !important;
+}
+
+@media (max-width: 768px) {
+  .tools-overlay .tool-tooltip,
+  .tool-tooltip {
+    left: calc(100% + 42px) !important;
+    font-size: 0.72rem !important;
+    padding: 5px 10px !important;
+  }
+}
+
+/* ══ COMPACT CREATIVE SLIDING DOCK TRIGGER (Hugs Screen Edge) ══ */
+#toolsOverlay .fab-trigger,
+.fab-trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 100% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  width: 28px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  background: linear-gradient(135deg, rgba(13, 17, 34, 0.96) 0%, rgba(30, 27, 75, 0.96) 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.5) !important;
+  border-left: none !important;
+  border-radius: 0 12px 12px 0 !important;
+  color: #38bdf8 !important;
+  cursor: pointer !important;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(56, 189, 248, 0.25) !important;
+  z-index: 9975 !important;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+#toolsOverlay .fab-trigger:hover,
+.fab-trigger:hover {
+  width: 34px !important;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
+  border-color: rgba(56, 189, 248, 0.85) !important;
+  color: #ffffff !important;
+  box-shadow: 6px 0 24px rgba(56, 189, 248, 0.45), 0 0 16px rgba(99, 102, 241, 0.5) !important;
+}
+
+#toolsOverlay .fab-trigger:active,
+.fab-trigger:active {
+  transform: translateY(-50%) scale(0.92) !important;
+}
+
+#toolsOverlay .fab-trigger:focus-visible,
+.fab-trigger:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 2px !important;
+}
+
+.fab-trigger-inner {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Sleding Icon with 180° rotation when open */
+.fab-toggle-svg {
+  width: 15px !important;
+  height: 15px !important;
+  stroke: #38bdf8 !important;
+  fill: none !important;
+  filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.6)) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.25s ease !important;
+}
+
+#toolsOverlay.visible .fab-trigger .fab-toggle-svg,
+.fab-trigger[aria-expanded="true"] .fab-toggle-svg {
+  transform: rotate(180deg) !important;
+  stroke: #a5f3fc !important;
+}
+
+.fab-trigger-beacon {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 6px #38bdf8, 0 0 10px rgba(56, 189, 248, 0.8) !important;
+  animation: fabBeaconPulse 2s infinite ease-in-out !important;
+  pointer-events: none !important;
+}
+
+@keyframes fabBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+/* Mobile: super compact & non-intrusive */
+@media (max-width: 768px) {
+  #toolsOverlay .fab-trigger,
+  .fab-trigger {
+    width: 22px !important;
+    height: 34px !important;
+    min-height: 0 !important;
+    max-height: 34px !important;
+    border-radius: 0 9px 9px 0 !important;
+  }
+
+  #toolsOverlay .fab-trigger:hover,
+  .fab-trigger:hover {
+    width: 26px !important;
+  }
+
+  .fab-toggle-svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .fab-trigger-beacon {
+    width: 4px !important;
+    height: 4px !important;
+    top: 3px !important;
+    right: 3px !important;
+  }
+}
+
+/* Hide dock when mobile menu is open */
+body.menu-open #toolsOverlay {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DRAGGABLE & RESIZABLE WINDOW WORKSPACE SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Window Header Drag Handle */
+.nexus-help-popup .help-header,
+.nexus-chat-popup .chat-header {
+  cursor: grab !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: none !important;
+}
+
+.nexus-help-popup.is-dragging .help-header,
+.nexus-chat-popup.is-dragging .chat-header {
+  cursor: grabbing !important;
+}
+
+.nexus-help-popup.is-dragging,
+.nexus-chat-popup.is-dragging {
+  box-shadow: 0 35px 85px rgba(0, 0, 0, 0.8), 0 0 45px rgba(56, 189, 248, 0.45) !important;
+  transition: box-shadow 0.2s ease, opacity 0.2s ease !important;
+}
+
+/* Window Drag Grip Bar (Cyber Pill) */
+.window-drag-grip {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 5;
+  padding: 4px;
+}
+
+.window-drag-grip .drag-bar-pill {
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+}
+
+.window-drag-grip:hover .drag-bar-pill,
+.is-dragging .window-drag-grip .drag-bar-pill {
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  height: 4px;
+}
+
+/* Window Header Controls Group */
+.window-ctrl-group,
+.chat-header-ctrls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Maximize / Restore Icon Toggling */
+.window-maximize-btn .icon-restore {
+  display: none !important;
+}
+
+.is-maximized .window-maximize-btn .icon-max {
+  display: none !important;
+}
+
+.is-maximized .window-maximize-btn .icon-restore {
+  display: block !important;
+}
+
+/* Maximized Window Mode (Desktop & Tablet) */
+.nexus-help-popup.is-maximized,
+.nexus-chat-popup.is-maximized {
+  top: 14px !important;
+  left: 14px !important;
+  width: calc(100vw - 28px) !important;
+  height: calc(100vh - 28px) !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 18px !important;
+  transform: none !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Maximized Window Inner Container & Grids (Prevents Wide "Gepeng" Stretching) */
+.nexus-help-popup.is-maximized .help-body,
+.nexus-chat-popup.is-maximized .chat-body {
+  max-width: 1060px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+  padding: 1.5rem 2rem !important;
+}
+
+.nexus-help-popup.is-maximized .help-section-intro {
+  max-width: 1060px !important;
+  margin: 0 auto 1.25rem auto !important;
+  text-align: center !important;
+}
+
+.nexus-help-popup.is-maximized .help-section-intro h4 {
+  font-size: 1.25rem !important;
+}
+
+.nexus-help-popup.is-maximized .help-section-intro p {
+  font-size: 0.92rem !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-option-cards {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.2rem !important;
+  max-width: 1060px !important;
+  margin: 0 auto 1.25rem auto !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-card {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 1.5rem 1rem !important;
+  min-height: 140px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-card .est-icon {
+  font-size: 2.4rem !important;
+  margin-bottom: 0.5rem !important;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-card .est-meta {
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.35rem !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-card .est-meta strong {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-card .est-meta span {
+  font-size: 0.8rem !important;
+  line-height: 1.4 !important;
+}
+
+.nexus-help-popup.is-maximized .estimator-result-panel {
+  max-width: 1060px !important;
+  margin: 0 auto !important;
+  padding: 1.25rem 1.5rem !important;
+  border-radius: 16px !important;
+}
+
+.nexus-help-popup.is-maximized .est-result-row {
+  font-size: 0.92rem !important;
+  padding: 0.35rem 0 !important;
+}
+
+.nexus-help-popup.is-maximized .est-submit-btn {
+  max-width: 480px !important;
+  margin: 0.75rem auto 0 auto !important;
+  padding: 0.85rem 1.5rem !important;
+  font-size: 0.92rem !important;
+}
+
+.nexus-help-popup.is-maximized .help-warranty-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.2rem !important;
+  max-width: 1060px !important;
+  margin: 0 auto 1.5rem auto !important;
+}
+
+.nexus-help-popup.is-maximized .warranty-card {
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 1.5rem 1.2rem !important;
+  min-height: 145px !important;
+  border-radius: 16px !important;
+}
+
+.nexus-help-popup.is-maximized .warranty-badge-icon {
+  font-size: 2.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.nexus-help-popup.is-maximized .help-price-summary {
+  max-width: 1060px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.85rem 1.5rem !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+.nexus-help-popup.is-maximized .help-timeline {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.2rem !important;
+  max-width: 1060px !important;
+  margin: 0 auto !important;
+}
+
+.nexus-help-popup.is-maximized .timeline-step {
+  padding: 1.2rem !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.nexus-help-popup.is-maximized .help-accordion {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+.nexus-chat-popup.is-maximized .chat-options-tray {
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+.nexus-chat-popup.is-maximized .chat-options {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0.85rem !important;
+}
+
+.nexus-chat-popup.is-maximized .chat-opt-chip {
+  min-height: 52px !important;
+  font-size: 0.85rem !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.nexus-chat-popup.is-maximized .chat-footer {
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* Corner Resize Handle */
+.window-resize-grip {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 22px !important;
+  height: 22px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+  padding: 3px !important;
+  cursor: nwse-resize !important;
+  z-index: 20 !important;
+  color: rgba(56, 189, 248, 0.55) !important;
+  touch-action: none !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.window-resize-grip:hover,
+.is-resizing .window-resize-grip {
+  color: #38bdf8 !important;
+  transform: scale(1.2) !important;
+  filter: drop-shadow(0 0 6px #38bdf8) !important;
+}
+
+/* Interactive Workspace Hint */
+.window-interactive-hint {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  padding: 4px 10px !important;
+  margin: 4px 12px 0 12px !important;
+  background: rgba(56, 189, 248, 0.06) !important;
+  border: 1px dashed rgba(56, 189, 248, 0.25) !important;
+  border-radius: 8px !important;
+  font-size: 10px !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.window-interactive-hint .hint-dot {
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 6px #38bdf8 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DRAGGABLE & REORDERABLE GRID CARDS ("bisa digeser geser")
+   ═══════════════════════════════════════════════════════════════ */
+.estimator-card,
+.chat-opt-chip,
+.warranty-card {
+  cursor: grab !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: none !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.2s ease !important;
+}
+
+.estimator-card:hover,
+.chat-opt-chip:hover,
+.warranty-card:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Card in Dragging State */
+.estimator-card.is-card-dragging,
+.chat-opt-chip.is-card-dragging,
+.warranty-card.is-card-dragging {
+  z-index: 999 !important;
+  cursor: grabbing !important;
+  opacity: 0.94 !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 24px rgba(56, 189, 248, 0.5) !important;
+  border-color: #38bdf8 !important;
+  pointer-events: none !important;
+}
+
+/* Placeholder where card will be dropped */
+.card-drag-placeholder {
+  border: 2px dashed rgba(56, 189, 248, 0.6) !important;
+  border-radius: 14px !important;
+  background: rgba(56, 189, 248, 0.08) !important;
+  box-shadow: inset 0 0 14px rgba(56, 189, 248, 0.15) !important;
+  min-height: 44px !important;
+  animation: placeholderPulse 1.5s infinite ease-in-out !important;
+}
+
+@keyframes placeholderPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Settle Spring Pop */
+.card-settle-pop {
+  animation: cardSpringSettle 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes cardSpringSettle {
+  0% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* Body Dragging Lock */
+body.window-dragging-active,
+body.window-resizing-active,
+body.card-dragging-active {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    TOOLS DOCK: ENHANCED BANTUAN BUTTON
    ═══════════════════════════════════════════════════════════════ */
 .tool-btn--help {
@@ -6933,7 +7646,13 @@ body.help-active .nexus-floating-chat-trigger {
 #helpPopup.open {
   display: flex !important;
   opacity: 1 !important;
-  transform: translateY(-50%) scale(1) !important;
+  transform: translateY(-50%) scale(1);
+}
+
+#helpPopup.open.is-dragging,
+#helpPopup.open.is-resizing,
+#helpPopup.open[style*="top"] {
+  transform: none !important;
 }
 
 /* Header */
@@ -7320,38 +8039,52 @@ body.help-active .nexus-floating-chat-trigger {
 
 /* Warranty Grid & Price Summary */
 .help-warranty-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 0.9rem;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)) !important;
+  gap: 0.65rem !important;
+  margin-bottom: 0.9rem !important;
 }
 
 .warranty-card {
-  display: flex;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: rgba(22, 27, 46, 0.7);
-  border: 1px solid rgba(99, 102, 241, 0.22);
-  border-radius: 12px;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem 0.85rem !important;
+  background: rgba(22, 27, 46, 0.7) !important;
+  border: 1px solid rgba(99, 102, 241, 0.22) !important;
+  border-radius: 12px !important;
+  box-sizing: border-box !important;
+  white-space: normal !important;
 }
 
 .warranty-badge-icon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  font-size: 1.35rem !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+.warranty-meta {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
 }
 
 .warranty-meta strong {
-  display: block;
-  font-size: 0.82rem;
-  color: #f8fafc;
-  margin-bottom: 0.15rem;
+  display: block !important;
+  font-size: 0.82rem !important;
+  color: #f8fafc !important;
+  margin-bottom: 0.2rem !important;
+  white-space: normal !important;
+  line-height: 1.3 !important;
+  word-break: break-word !important;
 }
 
 .warranty-meta p {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  margin: 0;
-  line-height: 1.4;
+  font-size: 0.74rem !important;
+  color: #94a3b8 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
 }
 
 .help-price-summary {
@@ -7580,75 +8313,125 @@ body.help-active .nexus-floating-chat-trigger {
    ESTIMATOR QUICK TAB & CHAT HEADER INTEGRATION
    ═══════════════════════════════════════════════════════════════ */
 .help-estimator-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.9rem !important;
 }
 
 .estimator-option-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.55rem;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)) !important;
+  gap: 0.65rem !important;
 }
 
 .estimator-card {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.65rem 0.75rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.25s ease;
-  color: #ffffff;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem 0.85rem !important;
+  min-height: 64px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  color: #ffffff !important;
+  white-space: normal !important;
+  box-sizing: border-box !important;
 }
 
 .estimator-card:hover {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.4);
-  transform: translateY(-2px);
+  background: rgba(99, 102, 241, 0.15) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  transform: translateY(-2px) !important;
 }
 
 .estimator-card.active {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%);
-  border-color: #38bdf8;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
 .est-icon {
-  font-size: 1.35rem;
-  flex-shrink: 0;
+  font-size: 1.45rem !important;
+  flex-shrink: 0 !important;
 }
 
 .est-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
 }
 
 .est-meta strong {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: normal !important;
+  line-height: 1.25 !important;
+  word-break: break-word !important;
 }
 
 .est-meta span {
-  font-size: 0.68rem;
-  color: #94a3b8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.7rem !important;
+  color: #94a3b8 !important;
+  white-space: normal !important;
+  line-height: 1.25 !important;
+  word-break: break-word !important;
 }
 
 .estimator-card.active .est-meta span {
-  color: #38bdf8;
-  font-weight: 600;
+  color: #38bdf8 !important;
+  font-weight: 600 !important;
+}
+
+/* Chat Options Dynamic Grid */
+.chat-options {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)) !important;
+  gap: 0.55rem !important;
+}
+
+.chat-opt-chip {
+  min-height: 44px !important;
+  padding: 0.55rem 0.85rem !important;
+  font-size: 0.78rem !important;
+  white-space: normal !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(99, 102, 241, 0.28) !important;
+  background: rgba(30, 41, 59, 0.6) !important;
+  color: #e2e8f0 !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-sizing: border-box !important;
+}
+
+.chat-opt-chip:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Auto single column when popup width is very compact (< 380px) */
+@media (max-width: 400px) {
+  .estimator-option-cards {
+    grid-template-columns: 1fr !important;
+    gap: 0.55rem !important;
+  }
+  .estimator-card {
+    min-height: 58px !important;
+    padding: 0.65rem 0.85rem !important;
+  }
 }
 
 .estimator-result-panel {

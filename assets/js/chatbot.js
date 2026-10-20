@@ -9,6 +9,8 @@
  *  - Responsive bottom-sheet / floating drawer design
  */
 
+import { initWindowManager, initDraggableCardGrids } from './window-manager.js?v=cyber-window-20261019c';
+
 const WA_NUMBER = '6285711171508';
 
 function getMascotPath() {
@@ -361,20 +363,33 @@ export function initChatbot() {
     const helpPopup = document.getElementById('helpPopup');
     if (helpPopup && helpPopup.classList.contains('open')) {
       helpPopup.classList.remove('open');
-      setTimeout(() => { helpPopup.style.display = 'none'; }, 250);
+      helpPopup.setAttribute('aria-hidden', 'true');
+      helpPopup.style.display = 'none';
+      document.body.classList.remove('help-active');
+    }
+
+    // Auto-collapse toolsOverlay dock so screen is clean
+    const toolsOverlay = document.getElementById('toolsOverlay');
+    if (toolsOverlay) {
+      toolsOverlay.classList.remove('visible');
+      toolsOverlay.classList.add('collapsed');
+      const fabTrigger = document.getElementById('fabTrigger');
+      if (fabTrigger) fabTrigger.setAttribute('aria-expanded', 'false');
     }
 
     chatPopup.style.display = 'flex';
     document.body.classList.add('chat-active');
     const bubble = document.getElementById('mascotSpeechBubble');
     if (bubble) bubble.style.opacity = '0';
-    requestAnimationFrame(() => {
-      chatPopup.classList.add('open');
-      chatPopup.setAttribute('aria-hidden', 'false');
-    });
+    void chatPopup.offsetWidth; // Force immediate layout reflow for zero-delay transition
+    chatPopup.classList.add('open');
+    chatPopup.setAttribute('aria-hidden', 'false');
 
     const scrollUp = document.getElementById('backToTop');
     if (scrollUp) scrollUp.classList.add('hidden-by-chat');
+
+    try { initWindowManager(); } catch (_) {}
+    try { initDraggableCardGrids(); } catch (_) {}
 
     // If chat is empty, initialize with welcome screen
     if (!chatBody.children.length) {
@@ -528,13 +543,15 @@ export function initChatbot() {
     chipsList.forEach(chip => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'chat-opt-chip';
+      btn.className = 'chat-opt-chip option-btn';
       btn.textContent = chip.label;
       btn.addEventListener('click', () => {
         handleUserSelectOption(chip);
       });
       chatOptions.appendChild(btn);
     });
+
+    try { initDraggableCardGrids(); } catch (_) {}
   }
 
   function renderWelcome() {
@@ -693,7 +710,8 @@ export function initChatbot() {
   // Initial welcome message
   renderWelcome();
 
-  // 6. Help Popup Coordination & Interactivity
+  // 6. Help Popup Coordination & Interactivity (Zero Lag)
+  const fabTrigger = document.getElementById('fabTrigger');
   const overlayHelpBtn = document.getElementById('overlayHelpBtn');
   const helpCloseBtn = document.getElementById('helpCloseBtn');
   const helpPopup = document.getElementById('helpPopup');
@@ -703,7 +721,11 @@ export function initChatbot() {
     helpPopup.classList.remove('open');
     helpPopup.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('help-active');
-    setTimeout(() => { helpPopup.style.display = 'none'; }, 280);
+    setTimeout(() => { 
+      if (!helpPopup.classList.contains('open')) {
+        helpPopup.style.display = 'none'; 
+      }
+    }, 280);
     const scrollUp = document.getElementById('backToTop');
     if (scrollUp && !chatPopup.classList.contains('open')) {
       scrollUp.classList.remove('hidden-by-chat');
@@ -712,22 +734,45 @@ export function initChatbot() {
 
   function openHelp() {
     if (!helpPopup) return;
-    if (chatPopup.classList.contains('open')) closeChat();
+    if (chatPopup && chatPopup.classList.contains('open')) closeChat();
+
+    // Auto-collapse dock so user focus is entirely on Help Hub
+    const toolsOverlay = document.getElementById('toolsOverlay');
+    if (toolsOverlay) {
+      toolsOverlay.classList.remove('visible');
+      toolsOverlay.classList.add('collapsed');
+      const fabTrigger = document.getElementById('fabTrigger');
+      if (fabTrigger) fabTrigger.setAttribute('aria-expanded', 'false');
+    }
+
     helpPopup.style.display = 'flex';
     document.body.classList.add('help-active');
-    requestAnimationFrame(() => {
-      helpPopup.classList.add('open');
-      helpPopup.setAttribute('aria-hidden', 'false');
-    });
+    void helpPopup.offsetWidth; // Force synchronous reflow for instant render
+    helpPopup.classList.add('open');
+    helpPopup.setAttribute('aria-hidden', 'false');
+
     const scrollUp = document.getElementById('backToTop');
     if (scrollUp) scrollUp.classList.add('hidden-by-chat');
+
+    try { initWindowManager(); } catch (_) {}
+    try { initDraggableCardGrids(); } catch (_) {}
   }
 
-  if (overlayHelpBtn && helpCloseBtn) {
-    overlayHelpBtn.addEventListener('click', (e) => {
+  function toggleHelp(e) {
+    if (e) {
+      e.preventDefault();
       e.stopPropagation();
-      helpPopup && helpPopup.classList.contains('open') ? closeHelp() : openHelp();
-    });
+    }
+    if (!helpPopup) return;
+    helpPopup.classList.contains('open') ? closeHelp() : openHelp();
+  }
+
+  // fabTrigger click is now dedicated to the sliding dock in utilities.js
+  if (overlayHelpBtn) {
+    overlayHelpBtn.addEventListener('click', toggleHelp);
+  }
+
+  if (helpCloseBtn) {
     helpCloseBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       closeHelp();
@@ -791,11 +836,12 @@ export function initChatbot() {
       });
     }
 
-    // Close on click outside
+    // Close on click outside (safeguarding triggers)
     document.addEventListener('click', (e) => {
       if (helpPopup.classList.contains('open') &&
           !helpPopup.contains(e.target) &&
-          (!overlayHelpBtn || !overlayHelpBtn.contains(e.target))) {
+          (!overlayHelpBtn || !overlayHelpBtn.contains(e.target)) &&
+          (!fabTrigger || !fabTrigger.contains(e.target))) {
         closeHelp();
       }
     });
@@ -848,6 +894,14 @@ function ensureChatbotDOM(mascotSrc) {
             <span class="tool-tooltip">WhatsApp</span>
           </a>
         </div>
+        <button class="fab-trigger" id="fabTrigger" aria-label="Buka Menu Akses Cepat" title="Menu Akses Cepat (Klik untuk Buka/Tutup)" aria-expanded="false">
+          <div class="fab-trigger-inner">
+            <svg class="fab-toggle-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <span class="fab-trigger-beacon" aria-hidden="true"></span>
+          </div>
+        </button>
       `;
       document.body.appendChild(toolsOverlay);
     }
@@ -904,20 +958,46 @@ function ensureChatbotDOM(mascotSrc) {
         <div class="chat-header-ctrls">
           <button id="chatSwitchToHelpBtn" class="chat-ctrl-btn chat-help-switch-btn" aria-label="Buka Pusat Bantuan &amp; FAQ"
             title="Buka Pusat Bantuan &amp; Panduan">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
               <line x1="12" y1="17" x2="12.01" y2="17"></line>
             </svg>
           </button>
-          <button id="chatResetBtn" class="chat-ctrl-btn" aria-label="Mulai Ulang Percakapan" title="Mulai Ulang Percakapan">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-              <polyline points="3 3 3 8 8 8"></polyline>
+          <button id="chatResetBtn" class="chat-ctrl-btn chat-clear-history-btn" aria-label="Mulai Ulang Percakapan"
+            title="Mulai Ulang Percakapan (Bersihkan Chat)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+              <path d="M3 21v-5h5"></path>
+            </svg>
+          </button>
+          <button id="chatResetPosBtn" class="chat-ctrl-btn window-reset-btn" aria-label="Reset Posisi Window"
+            title="Reset Ukuran &amp; Posisi Window">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3.5"></circle>
+              <line x1="12" y1="2" x2="12" y2="6"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+              <line x1="2" y1="12" x2="6" y2="12"></line>
+              <line x1="18" y1="12" x2="22" y2="12"></line>
+            </svg>
+          </button>
+          <button id="chatMaximizeBtn" class="chat-ctrl-btn window-maximize-btn" aria-label="Perbesar / Perkecil Ukuran"
+            title="Perbesar / Perkecil Ukuran">
+            <svg class="icon-max" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2.5"></rect>
+            </svg>
+            <svg class="icon-restore" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="8" width="11" height="11" rx="2"></rect>
+              <path d="M9 4h9a2 2 0 0 1 2 2v9"></path>
             </svg>
           </button>
           <button id="chatCloseBtn" class="chat-ctrl-btn chat-close-btn" aria-label="Tutup chat" title="Tutup Chat">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -963,6 +1043,9 @@ function ensureChatbotDOM(mascotSrc) {
     helpPopup.setAttribute('aria-hidden', 'true');
     helpPopup.innerHTML = `
       <div class="help-header">
+        <div class="window-drag-grip" title="Tahan &amp; geser window">
+          <span class="drag-bar-pill"></span>
+        </div>
         <div class="help-header-main">
           <div class="help-avatar-wrap">
             <div class="help-avatar-glow"></div>
@@ -986,12 +1069,32 @@ function ensureChatbotDOM(mascotSrc) {
             </span>
           </div>
         </div>
-        <button id="helpCloseBtn" class="help-ctrl-btn help-close-btn" aria-label="Tutup Bantuan" title="Tutup Bantuan">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        <div class="window-ctrl-group">
+          <button id="helpResetPosBtn" class="help-ctrl-btn window-reset-btn" aria-label="Reset Posisi Window" title="Reset Ukuran &amp; Posisi Window">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3.5"></circle>
+              <line x1="12" y1="2" x2="12" y2="6"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+              <line x1="2" y1="12" x2="6" y2="12"></line>
+              <line x1="18" y1="12" x2="22" y2="12"></line>
+            </svg>
+          </button>
+          <button id="helpMaximizeBtn" class="help-ctrl-btn window-maximize-btn" aria-label="Perbesar / Perkecil Ukuran" title="Perbesar / Perkecil Ukuran">
+            <svg class="icon-max" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2.5"></rect>
+            </svg>
+            <svg class="icon-restore" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="8" width="11" height="11" rx="2"></rect>
+              <path d="M9 4h9a2 2 0 0 1 2 2v9"></path>
+            </svg>
+          </button>
+          <button id="helpCloseBtn" class="help-ctrl-btn help-close-btn" aria-label="Tutup Bantuan" title="Tutup Bantuan">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div class="help-notice-ribbon">
