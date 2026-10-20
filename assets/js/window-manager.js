@@ -72,10 +72,11 @@ function setupWindowInteractions(win, options) {
   // ── A. DRAGGING ──
   if (header) {
     header.addEventListener('pointerdown', (e) => {
-      // Don't drag if clicking buttons inside the header
+      // Don't drag if clicking buttons inside the header or on mobile/tablet screens
       if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) {
         return;
       }
+      if (window.innerWidth <= 768) return;
       if (win.classList.contains('is-maximized')) return;
 
       isDragging = true;

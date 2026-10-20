@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="../assets/css/pages.css">
   <link rel="stylesheet" href="../assets/css/about.css">
   <link rel="stylesheet" href="../assets/css/main.css?v=footer-wrap-20261017d">
-  <link rel="stylesheet" href="../assets/css/site-polish.css?v=footer-wrap-20261017d">
+  <link rel="stylesheet" href="../assets/css/site-polish.css?v=tech-3d-ecosystem-20261020e">
 </head>
 
 <body class="page-services">
@@ -444,105 +444,273 @@
       </div>
     </section>
 
-    <!-- TECHNOLOGIES -->
-    <section class="services-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-label">Teknologi</span>
-          <h2 class="section-title">Stack Teknologi<br>yang Kami Kuasai</h2>
-          <p class="section-desc">
-            Kami menggunakan teknologi modern dan terbaik di kelasnya untuk memastikan hasil yang berkualitas.
-          </p>
-        </div>
+    <!-- ══ TECH ECOSYSTEM SHOWCASE (MATCHING IMAGE 2) ══ -->
+    <section id="teknologi" class="tech-ecosystem-section">
+      <div class="tech-ecosystem-ambient-bg" aria-hidden="true"></div>
+      <div class="container tech-ecosystem-container">
+        
+        <!-- Header Bar -->
+        <header class="tech-ecosystem-header">
+          <div class="tech-header-title-col">
+            <span class="tech-kicker-tag">Tech Ecosystem</span>
+            <h2 class="tech-main-headline">
+              <span class="headline-primary">Solusi Digital untuk</span>
+              <span class="headline-gradient">Pertumbuhan Bisnis Anda</span>
+            </h2>
+          </div>
 
-        <div class="services-grid">
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
+          <div class="tech-header-divider-col" aria-hidden="true">
+            <span class="tech-vertical-rule"></span>
+          </div>
+
+          <div class="tech-header-desc-col">
+            <p class="tech-main-description">
+              Kami menyediakan layanan pengembangan sistem digital yang modern, terpercaya, dan sesuai dengan kebutuhan bisnis Anda.
+            </p>
+          </div>
+
+          <div class="tech-header-doodle-col" aria-hidden="true">
+            <div class="tech-doodle-wrap">
+              <span class="tech-doodle-text">Dari ide<br>menjadi solusi nyata</span>
+              <svg class="tech-doodle-arrow" viewBox="0 0 100 55" fill="none">
+                <path d="M12 15 C 45 4, 75 14, 92 42" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 4" />
+                <path d="M78 40 L 92 42 L 91 28" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <h3 class="service-card__title">Frontend</h3>
-            <p class="service-card__desc">
-              React, Next.js, Vue.js, HTML5, CSS3, JavaScript ES6+, TailwindCSS, Bootstrap
-            </p>
+          </div>
+        </header>
+
+        <!-- 3D Cards Grid -->
+        <div class="tech-cards-grid">
+          
+          <!-- CARD 01: FRONTEND -->
+          <article class="tech-card tech-card--frontend" data-category="frontend">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">01</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Frontend</h3>
+                <p class="tech-card__desc">
+                  Tampilan web modern, responsif, dan interaktif untuk pengalaman pengguna yang optimal.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">React</span>
+                  <span class="tech-chip">Next.js</span>
+                  <span class="tech-chip">Vue.js</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat teknologi frontend tambahan: HTML5, CSS3, JavaScript ES6+, TailwindCSS, Bootstrap">
+                    +3
+                    <div class="tech-chip-tooltip">HTML5, CSS3, JavaScript ES6+, TailwindCSS, Bootstrap</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#website" class="tech-card__action-btn" aria-label="Lihat Layanan Frontend">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Desain modern dengan teknologi terdepan</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--blue"></div>
+                <img src="../assets/images/tech/tech-frontend-3d.jpg" alt="3D Ilustrasi Frontend Architecture" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
+            </div>
           </article>
 
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-              </svg>
+          <!-- CARD 02: BACKEND -->
+          <article class="tech-card tech-card--backend" data-category="backend">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">02</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Backend</h3>
+                <p class="tech-card__desc">
+                  API dan sistem backend yang aman, scalable, dan berkinerja tinggi untuk mendukung bisnis.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">Node.js</span>
+                  <span class="tech-chip">Express</span>
+                  <span class="tech-chip">Laravel</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat teknologi backend tambahan: PHP, Python, Go">
+                    +3
+                    <div class="tech-chip-tooltip">PHP, Python, Go, Fastify, REST &amp; GraphQL</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#aplikasi" class="tech-card__action-btn" aria-label="Lihat Layanan Backend">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Arsitektur backend yang fleksibel dan aman</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--cyan"></div>
+                <img src="../assets/images/tech/tech-backend-3d.jpg" alt="3D Ilustrasi Backend Server" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
             </div>
-            <h3 class="service-card__title">Backend</h3>
-            <p class="service-card__desc">
-              Node.js, Express, Laravel, PHP, Python, Go untuk API dan sistem backend
-            </p>
           </article>
 
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                <line x1="12" y1="18" x2="12.01" y2="18"></line>
-              </svg>
+          <!-- CARD 03: MOBILE -->
+          <article class="tech-card tech-card--mobile" data-category="mobile">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">03</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Mobile</h3>
+                <p class="tech-card__desc">
+                  Aplikasi mobile cepat, stabil, dan user-friendly untuk Android dan iOS.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">Flutter</span>
+                  <span class="tech-chip">React Native</span>
+                  <span class="tech-chip">Kotlin</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat teknologi mobile tambahan: Swift (iOS)">
+                    +1
+                    <div class="tech-chip-tooltip">Swift (iOS), Expo, Capacitor, Progressive Web App</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#aplikasi" class="tech-card__action-btn" aria-label="Lihat Layanan Mobile">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Solusi mobile untuk masa depan bisnis Anda</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--purple"></div>
+                <img src="../assets/images/tech/tech-mobile-3d.jpg" alt="3D Ilustrasi Mobile App" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
             </div>
-            <h3 class="service-card__title">Mobile</h3>
-            <p class="service-card__desc">
-              Flutter, React Native, Swift (iOS), Kotlin (Android) untuk aplikasi mobile
-            </p>
           </article>
 
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                <path d="M2 17l10 5 10-5"></path>
-                <path d="M2 12l10 5 10-5"></path>
-              </svg>
+          <!-- CARD 04: DATABASE -->
+          <article class="tech-card tech-card--database" data-category="database">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">04</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Database</h3>
+                <p class="tech-card__desc">
+                  Pengelolaan dan desain database yang aman, efisien, dan siap untuk berkembang.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">PostgreSQL</span>
+                  <span class="tech-chip">MySQL</span>
+                  <span class="tech-chip">MongoDB</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat database tambahan: Firebase, Supabase">
+                    +2
+                    <div class="tech-chip-tooltip">Firebase, Supabase, Redis Cache, Prisma ORM</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#aplikasi" class="tech-card__action-btn" aria-label="Lihat Layanan Database">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Struktur data yang terorganisir dan mudah dikelola</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--blue"></div>
+                <img src="../assets/images/tech/tech-database-3d.jpg" alt="3D Ilustrasi Database Core" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
             </div>
-            <h3 class="service-card__title">Database</h3>
-            <p class="service-card__desc">
-              PostgreSQL, MySQL, MongoDB, Firebase, Supabase untuk storage dan data
-            </p>
           </article>
 
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-              </svg>
+          <!-- CARD 05: CLOUD & DEVOPS -->
+          <article class="tech-card tech-card--cloud" data-category="cloud">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">05</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Cloud &amp; DevOps</h3>
+                <p class="tech-card__desc">
+                  Deployment otomatis, infrastruktur cloud, dan sistem yang selalu siap untuk berkembang.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">Vercel</span>
+                  <span class="tech-chip">Netlify</span>
+                  <span class="tech-chip">AWS</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat cloud devops tambahan: Google Cloud, Docker, CI/CD">
+                    +2
+                    <div class="tech-chip-tooltip">Google Cloud Platform, Docker, Kubernetes, CI/CD Pipeline</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#aplikasi" class="tech-card__action-btn" aria-label="Lihat Layanan Cloud DevOps">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Infrastruktur modern untuk performa maksimal</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--cyan"></div>
+                <img src="../assets/images/tech/tech-cloud-3d.jpg" alt="3D Ilustrasi Cloud Infrastructure" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
             </div>
-            <h3 class="service-card__title">Cloud & DevOps</h3>
-            <p class="service-card__desc">
-              Vercel, Netlify, AWS, Google Cloud, Docker, CI/CD untuk deployment
-            </p>
           </article>
 
-          <article class="service-card reveal">
-            <div class="service-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path
-                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-                </path>
-              </svg>
+          <!-- CARD 06: TOOLS & CMS -->
+          <article class="tech-card tech-card--tools" data-category="tools">
+            <div class="tech-card__inner">
+              <div class="tech-card__content">
+                <div class="tech-card__meta">
+                  <span class="tech-card__index">06</span>
+                  <span class="tech-card__rule"></span>
+                </div>
+                <h3 class="tech-card__title">Tools &amp; CMS</h3>
+                <p class="tech-card__desc">
+                  Implementasi dan kustomisasi tools modern untuk manajemen konten dan bisnis.
+                </p>
+                <div class="tech-card__chips">
+                  <span class="tech-chip">WordPress</span>
+                  <span class="tech-chip">Shopify</span>
+                  <span class="tech-chip">Strapi</span>
+                  <div class="tech-chip tech-chip--more" tabindex="0" role="button" aria-haspopup="true" aria-label="Lihat tools tambahan: Sanity, Prisma, Figma">
+                    +3
+                    <div class="tech-chip-tooltip">Sanity CMS, Prisma, Figma UI/UX, GitHub, Postman</div>
+                  </div>
+                </div>
+                <div class="tech-card__footer">
+                  <a href="#website" class="tech-card__action-btn" aria-label="Lihat Layanan Tools &amp; CMS">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <span class="tech-card__action-label">Kelola konten dan bisnis dengan lebih mudah</span>
+                </div>
+              </div>
+              <div class="tech-card__visual">
+                <div class="tech-visual-glow tech-visual-glow--orange"></div>
+                <img src="../assets/images/tech/tech-tools-3d.jpg" alt="3D Ilustrasi CMS and Tools" class="tech-card__img" loading="lazy" width="300" height="300">
+              </div>
             </div>
-            <h3 class="service-card__title">Tools & CMS</h3>
-            <p class="service-card__desc">
-              WordPress, Shopify, Strapi, Sanity, Prisma, Figma untuk design dan management
-            </p>
           </article>
+
         </div>
       </div>
     </section>

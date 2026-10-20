@@ -951,7 +951,8 @@ function ensureChatbotDOM(mascotSrc) {
             </div>
             <span class="chat-subtitle">
               <span class="chat-live-point"></span>
-              Online &bull; Siap Bantu Solusi Digital
+              <span class="chat-subtitle-text chat-sub-desktop">Online &bull; Siap Bantu Solusi Digital</span>
+              <span class="chat-subtitle-text chat-sub-mobile">Online &bull; Siap Bantu</span>
             </span>
           </div>
         </div>
@@ -1065,7 +1066,8 @@ function ensureChatbotDOM(mascotSrc) {
             </div>
             <span class="help-subtitle">
               <span class="help-live-point"></span>
-              Siaga &bull; Panduan Layanan &amp; FAQ Cepat
+              <span class="help-subtitle-text help-sub-desktop">Siaga &bull; Panduan Layanan &amp; FAQ Cepat</span>
+              <span class="help-subtitle-text help-sub-mobile">Siaga &bull; Panduan &amp; FAQ</span>
             </span>
           </div>
         </div>
