@@ -21,3 +21,6 @@ __pycache__/
 # Environment
 .env
 .env.local
+
+# Scratch & QA Test artifacts
+scratch/

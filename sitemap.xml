@@ -1,9 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
     <loc>https://nexus-diji.vercel.app/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Core Services -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/layanan.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/harga.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Portfolio -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/portfolio.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact & Consultation -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/kontak.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- About Company -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/tentang-kami.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founders & Team -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/tim-kami.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/blog.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/blog-1.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/blog-2.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/blog-3.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://nexus-diji.vercel.app/pages/privacy.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

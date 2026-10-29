@@ -30,9 +30,17 @@ body :is(h1, h2, h3, h4, h5, h6, .section-title, .about-hero__title, .story-titl
   text-wrap: balance;
 }
 
-body :is(h1, .about-hero__title, .hero-title, .cta-headline) {
+body :is(h1, .about-hero__title, .hero-title) {
   font-size: clamp(2.1rem, 5.8vw, 5.5rem);
   line-height: 1.04;
+}
+
+/* CTA/Contact headline — intentionally smaller than the hero h1 */
+.cta-headline {
+  font-size: clamp(2.875rem, 4.5vw, 3.5rem); /* 46–56px */
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  font-weight: 750;
 }
 
 body :is(h2, .section-title, .story-title, .about-cta__title) {
@@ -231,8 +239,12 @@ pre {
 
 
 
-  body :is(h1, .about-hero__title, .hero-title, .cta-headline) {
+  body :is(h1, .about-hero__title, .hero-title) {
     font-size: clamp(1.9rem, 9vw, 2.35rem);
+  }
+
+  .cta-headline {
+    font-size: clamp(1.875rem, 8.5vw, 2.125rem); /* 30–34px at tiny screens */
   }
 }
 
@@ -9182,6 +9194,29 @@ body.card-dragging-active {
   .tech-chip-tooltip::after {
     left: auto;
     right: 20px;
+  }
+}
+
+/* Keep the collapsed quick-access tab clear of body copy on small screens. */
+@media (max-width: 768px) {
+  #toolsOverlay.tools-overlay {
+    top: auto !important;
+    bottom: calc(var(--space-3xl) + env(safe-area-inset-bottom, 0px)) !important;
+    transform: translateY(0) translateX(-100%) !important;
+  }
+
+  #toolsOverlay.tools-overlay.collapsed {
+    transform: translateY(0) translateX(-100%) !important;
+  }
+
+  #toolsOverlay.tools-overlay.visible {
+    transform: translateY(0) translateX(0) !important;
+  }
+
+  #toolsOverlay .fab-trigger {
+    top: auto !important;
+    bottom: var(--space-sm) !important;
+    transform: none !important;
   }
 }
 

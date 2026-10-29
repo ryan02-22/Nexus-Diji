@@ -317,9 +317,64 @@ export function initNavbar() {
 
 export default initNavbar;
 
+// ══════════════════════════════════════════════════════════════
+// DYNAMIC BIDIRECTIONAL TRANSLATION ENGINE (ID <-> EN)
+// ══════════════════════════════════════════════════════════════
+
 let currentLanguage = 'id';
 let isApplyingLanguage = false;
 let mutationDebounceTimer = null;
+
+const CACHE_STORAGE_KEY = 'nexus-diji-dynamic-translations-v1';
+const BRAND_NAME = 'Nexus Diji';
+const BRAND_TOKEN = '__NEXUS_DIJI__';
+
+// In-memory dynamic translation cache
+let dynamicCache = {};
+let dynamicReverseCache = {};
+let isCacheLoaded = false;
+
+function loadDynamicCache() {
+  if (isCacheLoaded) return;
+  try {
+    const raw = localStorage.getItem(CACHE_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      dynamicCache = parsed.id_to_en || {};
+      dynamicReverseCache = parsed.en_to_id || {};
+    }
+  } catch (e) {
+    dynamicCache = {};
+    dynamicReverseCache = {};
+  }
+  isCacheLoaded = true;
+}
+
+let saveCacheTimer = null;
+function scheduleSaveCache() {
+  clearTimeout(saveCacheTimer);
+  saveCacheTimer = setTimeout(() => {
+    try {
+      const keys = Object.keys(dynamicCache);
+      if (keys.length > 1200) {
+        const prunedId = {};
+        const prunedRev = {};
+        for (const k of keys.slice(keys.length - 1000)) {
+          prunedId[k] = dynamicCache[k];
+          if (dynamicCache[k]) prunedRev[dynamicCache[k]] = k;
+        }
+        dynamicCache = prunedId;
+        dynamicReverseCache = prunedRev;
+      }
+      localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
+        id_to_en: dynamicCache,
+        en_to_id: dynamicReverseCache
+      }));
+    } catch {
+      // Storage quota or sandbox fallback
+    }
+  }, 250);
+}
 
 // Vocabulary map for dynamic / untranslated phrase & word fallback
 const VOCABULARY_DICTIONARY = {
@@ -371,17 +426,254 @@ function normalizeText(str) {
   return str
     .replace(/&amp;/g, '&')
     .replace(/&mdash;/g, '—')
+    .replace(/&ndash;/g, '–')
     .replace(/&bull;/g, '•')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+// Text & Element Exclusions
+const EXCLUDED_TAGS = new Set(['SCRIPT', 'STYLE', 'SVG', 'NOSCRIPT', 'TEXTAREA', 'CODE', 'PRE']);
+
+function shouldExcludeElement(el) {
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+  if (EXCLUDED_TAGS.has(el.tagName)) return true;
+  if (el.closest('script, style, svg, noscript, textarea, code, pre, .nav-language, [translate="no"], .notranslate, [data-no-translate]')) {
+    return true;
+  }
+  return false;
+}
+
+function shouldExcludeText(str) {
+  if (!str) return true;
+  const trimmed = str.trim();
+  if (!trimmed || trimmed.length <= 1) return true;
+
+  // Exact Brand
+  if (trimmed === 'Nexus Diji' || trimmed === 'Nexus Diji.') return true;
+
+  // Pure numbers, currencies, dates, version codes (e.g. "Rp 500.000", "2026", "© 2025", "100+", "10:00 - 18:00")
+  if (!/[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF]/.test(trimmed)) return true;
+
+  // URLs, Emails
+  if (/^(https?:\/\/|www\.|mailto:|[\w.-]+@[\w.-]+\.\w+)/i.test(trimmed)) return true;
+
+  // HTML fragments
+  if (/^<[\s\S]+>$/.test(trimmed)) return true;
+
+  return false;
+}
+
+// Free client-side translation APIs with CORS and fallbacks
+async function requestApiTranslation(text) {
+  const maskedText = text.replace(/Nexus\s+Diji/gi, BRAND_TOKEN);
+
+  // Provider 1: Google GTX (Public CORS endpoint, fast & reliable)
+  try {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=id&tl=en&dt=t&q=${encodeURIComponent(maskedText)}`;
+    const ctrl = new AbortController();
+    const timeout = setTimeout(() => ctrl.abort(), 5500);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timeout);
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && Array.isArray(data[0])) {
+        let result = data[0].map((item) => (item && item[0]) || '').join('').trim();
+        if (result) {
+          result = result.replace(new RegExp(BRAND_TOKEN, 'gi'), BRAND_NAME);
+          return result;
+        }
+      }
+    }
+  } catch {
+    // GTX failed, try fallback
+  }
+
+  // Provider 2: MyMemory Translated (Public CORS endpoint)
+  try {
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(maskedText)}&langpair=id|en`;
+    const ctrl = new AbortController();
+    const timeout = setTimeout(() => ctrl.abort(), 6000);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timeout);
+    if (res.ok) {
+      const data = await res.json();
+      let result = data?.responseData?.translatedText?.trim();
+      if (result && !result.includes('MYMEMORY WARNING')) {
+        result = result.replace(new RegExp(BRAND_TOKEN, 'gi'), BRAND_NAME);
+        return result;
+      }
+    }
+  } catch {
+    // MyMemory failed, try fallback
+  }
+
+  // Provider 3: LibreTranslate CORS instances
+  const libreInstances = [
+    'https://libretranslate.de/translate',
+    'https://translate.terraprint.co/translate'
+  ];
+  for (const inst of libreInstances) {
+    try {
+      const ctrl = new AbortController();
+      const timeout = setTimeout(() => ctrl.abort(), 5000);
+      const res = await fetch(inst, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ q: maskedText, source: 'id', target: 'en', format: 'text' }),
+        signal: ctrl.signal
+      });
+      clearTimeout(timeout);
+      if (res.ok) {
+        const data = await res.json();
+        let result = data?.translatedText?.trim();
+        if (result) {
+          result = result.replace(new RegExp(BRAND_TOKEN, 'gi'), BRAND_NAME);
+          return result;
+        }
+      }
+    } catch {
+      // Continue to next
+    }
+  }
+
+  // All failed: return null for graceful degradation
+  return null;
+}
+
+// Translation Queue & Batching
+const pendingSubscribers = new Map(); // cleanText -> Array<(translated) => void>
+const inFlightRequests = new Set();
+const queuedTexts = new Set();
+let queueFlushTimer = null;
+
+function queueTranslation(cleanText, callback) {
+  loadDynamicCache();
+
+  if (!pendingSubscribers.has(cleanText)) {
+    pendingSubscribers.set(cleanText, []);
+  }
+  if (callback) {
+    pendingSubscribers.get(cleanText).push(callback);
+  }
+
+  queuedTexts.add(cleanText);
+
+  clearTimeout(queueFlushTimer);
+  queueFlushTimer = setTimeout(() => {
+    flushTranslationQueue();
+  }, 45);
+}
+
+async function flushTranslationQueue() {
+  if (!queuedTexts.size) return;
+  const textsToProcess = [...queuedTexts];
+  queuedTexts.clear();
+
+  const concurrency = 3;
+  let index = 0;
+
+  async function worker() {
+    while (index < textsToProcess.length) {
+      const text = textsToProcess[index++];
+      if (inFlightRequests.has(text)) continue;
+
+      // Check if cache or static dictionary satisfied it in meantime
+      if (dynamicCache[text] || TRANSLATIONS[text]) {
+        const hit = dynamicCache[text] || TRANSLATIONS[text];
+        notifySubscribers(text, hit);
+        continue;
+      }
+
+      inFlightRequests.add(text);
+      try {
+        let translated = await requestApiTranslation(text);
+        if (!translated && VOCABULARY_DICTIONARY[text]) {
+          translated = VOCABULARY_DICTIONARY[text];
+        }
+        if (translated) {
+          dynamicCache[text] = translated;
+          dynamicReverseCache[translated] = text;
+          scheduleSaveCache();
+          notifySubscribers(text, translated);
+        } else {
+          // Failure: clear pending subscribers without modifying DOM
+          pendingSubscribers.delete(text);
+        }
+      } catch {
+        pendingSubscribers.delete(text);
+      } finally {
+        inFlightRequests.delete(text);
+      }
+    }
+  }
+
+  const workers = [];
+  for (let i = 0; i < Math.min(concurrency, textsToProcess.length); i++) {
+    workers.push(worker());
+  }
+  await Promise.allSettled(workers);
+}
+
+function notifySubscribers(cleanText, translated) {
+  const subs = pendingSubscribers.get(cleanText);
+  pendingSubscribers.delete(cleanText);
+  if (subs && subs.length) {
+    subs.forEach((cb) => {
+      try { cb(translated); } catch {}
+    });
+  }
+}
+
+function applyTranslationToNode(node, originalRaw, translated) {
+  if (currentLanguage !== 'en') return;
+  const match = originalRaw.match(/^(\s*)([\s\S]*?)(\s*)$/);
+  const formatted = match ? match[1] + translated + match[3] : translated;
+
+  isApplyingLanguage = true;
+  try {
+    node.nodeValue = formatted;
+    node._ndLastAppliedText = formatted;
+    node._ndCurrentLang = 'en';
+  } finally {
+    isApplyingLanguage = false;
+  }
+}
+
+// Record original text for all unrecorded DOM nodes
+function recordOriginalTexts() {
+  const walker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || shouldExcludeElement(parent)) return NodeFilter.FILTER_REJECT;
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node._ndOrigText === undefined) {
+      node._ndOrigText = node.nodeValue;
+      node._ndCurrentLang = 'id';
+      node._ndLastAppliedText = node.nodeValue;
+    }
+  }
 }
 
 export function applyLanguage(targetLang) {
   if (isApplyingLanguage) return;
   isApplyingLanguage = true;
+
+  loadDynamicCache();
 
   const isEnglish = targetLang === 'en';
   currentLanguage = isEnglish ? 'en' : 'id';
@@ -410,7 +702,7 @@ export function applyLanguage(targetLang) {
       }
     });
 
-    // 3. Translate DOM text nodes
+    // 3. Translate or restore DOM text nodes
     const dict = isEnglish ? TRANSLATIONS : REVERSE_TRANSLATIONS;
     const walker = document.createTreeWalker(
       document.body,
@@ -419,12 +711,9 @@ export function applyLanguage(targetLang) {
         acceptNode(node) {
           const parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
-          if (parent.closest('script, style, svg, noscript, textarea, code, pre, .nav-language, [data-i18n-en-html]')) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          if (!node.nodeValue.trim()) {
-            return NodeFilter.FILTER_REJECT;
-          }
+          if (shouldExcludeElement(parent)) return NodeFilter.FILTER_REJECT;
+          if (parent.closest('[data-i18n-en-html]')) return NodeFilter.FILTER_REJECT;
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
           return NodeFilter.FILTER_ACCEPT;
         }
       }
@@ -434,39 +723,66 @@ export function applyLanguage(targetLang) {
     while ((node = walker.nextNode())) {
       const rawVal = node.nodeValue;
       const trimmed = rawVal.trim();
-      const normalized = trimmed.replace(/\s+/g, ' ');
-      const cleanEntity = normalizeText(trimmed);
 
-      // Check primary dictionary
-      let translated = dict[normalized] || dict[cleanEntity];
-
-      // Fallback: Check vocabulary replacement if in English and not found
-      if (!translated && isEnglish && cleanEntity.length > 2) {
-        let candidate = cleanEntity;
-        let hasReplacement = false;
-        for (const [idWord, enWord] of Object.entries(VOCABULARY_DICTIONARY)) {
-          const reg = new RegExp(`\\b${idWord}\\b`, 'gi');
-          if (reg.test(candidate)) {
-            hasReplacement = true;
-            candidate = candidate.replace(reg, (match) => {
-              if (match[0] === match[0].toUpperCase()) {
-                return enWord.charAt(0).toUpperCase() + enWord.slice(1);
-              }
-              return enWord.toLowerCase();
-            });
-          }
-        }
-        if (hasReplacement) {
-          translated = candidate;
-        }
+      // Always save original text if not yet recorded
+      if (node._ndOrigText === undefined) {
+        node._ndOrigText = rawVal;
       }
 
-      if (translated) {
-        const match = rawVal.match(/^(\s*)([\s\S]*?)(\s*)$/);
-        if (match) {
-          node.nodeValue = match[1] + translated + match[3];
+      if (shouldExcludeText(trimmed)) {
+        continue;
+      }
+
+      const normalized = trimmed.replace(/\s+/g, ' ');
+      const cleanEntity = normalizeText(trimmed);
+      const match = rawVal.match(/^(\s*)([\s\S]*?)(\s*)$/);
+
+      if (isEnglish) {
+        // Already applied English to this node
+        if (node._ndCurrentLang === 'en' && node.nodeValue === node._ndLastAppliedText) {
+          continue;
+        }
+
+        // Check primary static dictionary
+        let translated = dict[normalized] || dict[cleanEntity];
+
+        // Check dynamic persistent cache
+        if (!translated) {
+          translated = dynamicCache[cleanEntity] || dynamicCache[normalized];
+        }
+
+        // Check exact single vocabulary word
+        if (!translated && VOCABULARY_DICTIONARY[cleanEntity]) {
+          translated = VOCABULARY_DICTIONARY[cleanEntity];
+        }
+
+        if (translated) {
+          const newVal = match ? match[1] + translated + match[3] : translated;
+          node.nodeValue = newVal;
+          node._ndLastAppliedText = newVal;
+          node._ndCurrentLang = 'en';
         } else {
-          node.nodeValue = translated;
+          // Untranslated text: Queue for automatic background translation
+          const capturedNode = node;
+          const capturedRaw = rawVal;
+          queueTranslation(cleanEntity, (apiTranslated) => {
+            applyTranslationToNode(capturedNode, capturedRaw, apiTranslated);
+          });
+        }
+      } else {
+        // RESTORE TO ID
+        if (node._ndOrigText !== undefined) {
+          node.nodeValue = node._ndOrigText;
+          node._ndLastAppliedText = node._ndOrigText;
+          node._ndCurrentLang = 'id';
+        } else {
+          let restored = dynamicReverseCache[cleanEntity] || dynamicReverseCache[normalized] || dict[normalized] || dict[cleanEntity];
+          if (restored) {
+            const newVal = match ? match[1] + restored + match[3] : restored;
+            node.nodeValue = newVal;
+            node._ndLastAppliedText = newVal;
+            node._ndCurrentLang = 'id';
+          }
         }
       }
     }
@@ -481,8 +797,32 @@ export function applyLanguage(targetLang) {
     document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach((el) => {
       const current = el.getAttribute('placeholder');
       if (!current) return;
-      const target = isEnglish ? placeholderMap[current] : reversePlaceholderMap[current];
-      if (target) el.setAttribute('placeholder', target);
+
+      if (el._ndOrigPlaceholder === undefined) {
+        el._ndOrigPlaceholder = current;
+      }
+
+      if (isEnglish) {
+        let target = placeholderMap[current] || dynamicCache[current];
+        if (target) {
+          el.setAttribute('placeholder', target);
+        } else {
+          const capturedEl = el;
+          const cleanP = normalizeText(current);
+          queueTranslation(cleanP, (trans) => {
+            if (currentLanguage === 'en') {
+              capturedEl.setAttribute('placeholder', trans);
+            }
+          });
+        }
+      } else {
+        if (el._ndOrigPlaceholder) {
+          el.setAttribute('placeholder', el._ndOrigPlaceholder);
+        } else {
+          const target = reversePlaceholderMap[current] || dynamicReverseCache[current];
+          if (target) el.setAttribute('placeholder', target);
+        }
+      }
     });
 
     // 5. Accessibility aria-labels
@@ -496,18 +836,49 @@ export function applyLanguage(targetLang) {
       if (el.classList.contains('nav-language__option')) return;
       const current = el.getAttribute('aria-label');
       if (!current) return;
-      const target = isEnglish ? ariaMap[current] : reverseAriaMap[current];
-      if (target) el.setAttribute('aria-label', target);
+
+      if (el._ndOrigAriaLabel === undefined) {
+        el._ndOrigAriaLabel = current;
+      }
+
+      if (isEnglish) {
+        let target = ariaMap[current] || dynamicCache[current];
+        if (target) {
+          el.setAttribute('aria-label', target);
+        } else {
+          const capturedEl = el;
+          const cleanA = normalizeText(current);
+          queueTranslation(cleanA, (trans) => {
+            if (currentLanguage === 'en') {
+              capturedEl.setAttribute('aria-label', trans);
+            }
+          });
+        }
+      } else {
+        if (el._ndOrigAriaLabel) {
+          el.setAttribute('aria-label', el._ndOrigAriaLabel);
+        } else {
+          const target = reverseAriaMap[current] || dynamicReverseCache[current];
+          if (target) el.setAttribute('aria-label', target);
+        }
+      }
     });
 
     // 6. Document title
+    if (document._ndOrigTitle === undefined) {
+      document._ndOrigTitle = document.title;
+    }
     const currentTitle = document.title.trim();
     if (isEnglish) {
       if (TITLE_TRANSLATIONS[currentTitle]) {
         document.title = TITLE_TRANSLATIONS[currentTitle];
+      } else if (dynamicCache[currentTitle]) {
+        document.title = dynamicCache[currentTitle];
       }
     } else {
-      if (REVERSE_TITLES[currentTitle]) {
+      if (document._ndOrigTitle) {
+        document.title = document._ndOrigTitle;
+      } else if (REVERSE_TITLES[currentTitle]) {
         document.title = REVERSE_TITLES[currentTitle];
       }
     }
@@ -538,38 +909,48 @@ function initAutoTranslateObserver() {
 
   const observer = new MutationObserver((mutations) => {
     if (isApplyingLanguage) return;
-    if (currentLanguage !== 'en') return;
 
-    let shouldUpdate = false;
+    let hasRelevantChanges = false;
     for (const m of mutations) {
       if (m.type === 'childList' && m.addedNodes.length > 0) {
         for (const node of m.addedNodes) {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.closest && node.closest('script, style, svg, .nav-language')) continue;
-            shouldUpdate = true;
+            if (shouldExcludeElement(node)) continue;
+            hasRelevantChanges = true;
             break;
-          } else if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
-            shouldUpdate = true;
-            break;
+          } else if (node.nodeType === Node.TEXT_NODE) {
+            if (shouldExcludeElement(node.parentElement)) continue;
+            if (node._ndLastAppliedText && node.nodeValue === node._ndLastAppliedText) continue;
+            if (node.nodeValue && node.nodeValue.trim()) {
+              hasRelevantChanges = true;
+              break;
+            }
           }
         }
       } else if (m.type === 'characterData') {
-        const parent = m.target.parentElement;
-        if (!parent || !parent.closest('script, style, svg, .nav-language')) {
-          shouldUpdate = true;
+        const node = m.target;
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (shouldExcludeElement(node.parentElement)) continue;
+          if (node._ndLastAppliedText && node.nodeValue === node._ndLastAppliedText) continue;
+          if (node.nodeValue && node.nodeValue.trim()) {
+            hasRelevantChanges = true;
+          }
         }
       }
-      if (shouldUpdate) break;
+      if (hasRelevantChanges) break;
     }
 
-    if (shouldUpdate) {
-      clearTimeout(mutationDebounceTimer);
-      mutationDebounceTimer = setTimeout(() => {
-        if (currentLanguage === 'en' && !isApplyingLanguage) {
-          applyLanguage('en');
-        }
-      }, 70);
-    }
+    if (!hasRelevantChanges) return;
+
+    clearTimeout(mutationDebounceTimer);
+    mutationDebounceTimer = setTimeout(() => {
+      if (isApplyingLanguage) return;
+      if (currentLanguage === 'en') {
+        applyLanguage('en');
+      } else if (currentLanguage === 'id') {
+        recordOriginalTexts();
+      }
+    }, 60);
   });
 
   observer.observe(document.body, {
@@ -623,3 +1004,4 @@ export function initLanguageSwitch() {
     });
   });
 }
+

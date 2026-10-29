@@ -864,7 +864,7 @@ function ensureChatbotDOM(mascotSrc) {
     let toolsOverlay = document.getElementById('toolsOverlay');
     if (!toolsOverlay) {
       toolsOverlay = document.createElement('aside');
-      toolsOverlay.className = 'tools-overlay visible';
+      toolsOverlay.className = 'tools-overlay collapsed';
       toolsOverlay.id = 'toolsOverlay';
       toolsOverlay.innerHTML = `
         <div class="fab-actions">

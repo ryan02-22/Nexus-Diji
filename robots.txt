@@ -1,12 +1,11 @@
 User-agent: *
 Allow: /
 
-# Block admin/private paths (add if needed)
-# Disallow: /admin/
-# Disallow: /private/
+# Disallow internal and dev paths
+Disallow: /scratch/
 
 # Sitemap location
-Sitemap: https://nexus-diji.com/sitemap.xml
+Sitemap: https://nexus-diji.vercel.app/sitemap.xml
 
-# Crawl delay (optional - be respectful to crawlers)
+# Crawl delay (optional)
 Crawl-delay: 1

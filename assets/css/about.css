@@ -125,7 +125,9 @@
 
 .section-header {
   text-align: center;
+  width: 100%;
   max-width: 600px;
+  box-sizing: border-box;
   margin: 0 auto 4rem;
 }
 
@@ -135,22 +137,39 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: var(--space-md);
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  line-height: 1.25;
+  margin: 0 auto var(--space-md);
 }
 
 .section-header .section-title {
+  width: 100%;
+  max-width: 24ch;
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 900;
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-md);
+  margin: 0 auto var(--space-md);
+  text-wrap: balance;
   line-height: 1.15;
 }
 
 .section-header .section-desc {
+  width: 100%;
+  max-width: 58ch;
   color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.7;
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: pretty;
 }
 
 /* ═══════════════════════════════════════════════════════════════
