@@ -1,0 +1,41 @@
+# Nexus Diji
+
+> Solusi Digital Terpercaya: Jasa Pembuatan Website Profesional, Pengembangan Aplikasi Custom, dan Servis PC/Laptop di Indonesia.
+
+## Profil Bisnis
+Nexus Diji adalah penyedia solusi teknologi digital terpercaya di Indonesia yang dikelola oleh Adha Adnan Febryan dan Noval Suprayoga. Nexus Diji menyediakan layanan digital terpadu mulai dari perancangan website profesional, rekayasa perangkat lunak aplikasi custom, hingga perawatan dan reparasi perangkat keras komputer/laptop.
+
+- Website Resmi: https://nexus-diji.vercel.app
+- WhatsApp Konsultasi: +62 857-1117-1508 (https://wa.me/6285711171508)
+- Email: nexusdiji@gmail.com
+- Cakupan Layanan: Seluruh Indonesia (Online untuk Web/App Development) & Layanan Servis Perangkat
+
+## Layanan Utama & Spesifikasi
+
+### 1. Jasa Pembuatan Website Profesional
+- **Kategori**: Landing Page, Company Profile, Toko Online (E-Commerce), Blog Profesional, Web Portal.
+- **Keunggulan**: Desain modern (Glassmorphic & Cyber Clean), 100% responsif di desktop/tablet/mobile, teroptimasi SEO Google & Core Web Vitals, navigasi cepat.
+- **Biaya**: Mulai dari Rp 500.000 untuk landing page hingga paket enterprise custom.
+- **Waktu Pengerjaan**: 3 hingga 7 hari kerja.
+- **Detail**: https://nexus-diji.vercel.app/pages/layanan.html#website
+
+### 2. Jasa Pembuatan Aplikasi Custom (Web & Mobile)
+- **Kategori**: Web Application, Mobile Apps (Android & iOS), Sistem Kasir/POS, Dashboard Manajemen Bisnis, SaaS.
+- **Stack Teknologi**: React, Next.js, Node.js, Laravel, Flutter, React Native, Tailwind CSS, PostgreSQL, RESTful API.
+- **Keunggulan**: Skalabilitas tinggi, arsitektur database aman, antarmuka intuitif (UI/UX modern).
+- **Detail**: https://nexus-diji.vercel.app/pages/layanan.html#aplikasi
+
+### 3. Servis PC dan Laptop Profesional
+- **Layanan**: Instalasi ulang Windows, upgrade SSD & RAM, penggantian pasta termal & pembersihan kipas, pembersihan virus/malware, perbaikan hardware, data recovery harddisk rusak.
+- **Keunggulan**: Diagnosa transparan, pengerjaan presisi, garansi servis.
+- **Detail**: https://nexus-diji.vercel.app/pages/layanan.html#servis
+
+## Halaman Penting
+- Beranda: https://nexus-diji.vercel.app/
+- Layanan Lengkap: https://nexus-diji.vercel.app/pages/layanan.html
+- Paket Harga: https://nexus-diji.vercel.app/pages/harga.html
+- Portfolio Proyek: https://nexus-diji.vercel.app/pages/portfolio.html
+- Kontak & Konsultasi: https://nexus-diji.vercel.app/pages/kontak.html
+- Tentang Kami: https://nexus-diji.vercel.app/pages/tentang-kami.html
+- Tim Pendiri: https://nexus-diji.vercel.app/pages/tim-kami.html
+- Blog & Edukasi: https://nexus-diji.vercel.app/pages/blog.html
